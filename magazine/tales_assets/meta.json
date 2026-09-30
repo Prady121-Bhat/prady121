@@ -1,0 +1,32 @@
+{
+ "tortoise1": {
+  "file": "Contes de Jataka, La tortue bavarde - 1.jpg",
+  "artist": "Ellsworth Young",
+  "lic": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Contes_de_Jataka%2C_La_tortue_bavarde_-_1.jpg",
+  "size": [
+   900,
+   613
+  ]
+ },
+ "tortoise2": {
+  "file": "Contes de Jataka, La tortue bavarde - 2.jpg",
+  "artist": "Ellsworth Young",
+  "lic": "Public domain",
+  "page": "https://commons.wikimedia.org/wiki/File:Contes_de_Jataka%2C_La_tortue_bavarde_-_2.jpg",
+  "size": [
+   900,
+   470
+  ]
+ },
+ "camel": {
+  "file": "\"The Attack on the Camel by the Lion, Crow, Wolf, and Jackal\", Folio from a Kalila wa Dimna MET DP300742.jpg",
+  "artist": null,
+  "lic": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:%22The_Attack_on_the_Camel_by_the_Lion%2C_Crow%2C_Wolf%2C_and_Jackal%22%2C_Folio_from_a_Kalila_wa_Dimna_MET_DP300742.jpg",
+  "size": [
+   640,
+   867
+  ]
+ }
+}
