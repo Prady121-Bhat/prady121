@@ -1,0 +1,234 @@
+{
+ "plants": [
+  {
+   "name": "Udupi Mallige",
+   "kn": "ಮಲ್ಲಿಗೆ",
+   "latin": "Jasminum sambac",
+   "tags": [
+    "Local pride",
+    "GI tagged",
+    "Fragrant"
+   ],
+   "about": "Also called Shankarpura mallige, after the villages near Udupi where it is grown in home gardens. The laterite soil and humid air of this coast give it a strong scent, white colour and large flowers, which is why it carries a Geographical Indication tag. Buds open within five to six hours, so they are picked and strung before they bloom.",
+   "spec": [
+    [
+     "Light",
+     "Full sun for steady flowering."
+    ],
+    [
+     "Water",
+     "Regular, but never standing in water. Let excess rain drain away."
+    ],
+    [
+     "Soil",
+     "Rich, well-drained laterite soil suits it best."
+    ],
+    [
+     "Feed",
+     "Organic manure through the growing months."
+    ],
+    [
+     "Harvest",
+     "Wrap the flowers in banana leaf and sprinkle with water. They keep for up to 10 days, though the scent fades."
+    ],
+    [
+     "Watch out",
+     "Waterlogged roots in heavy rain. Raise pots on bricks."
+    ]
+   ]
+  },
+  {
+   "name": "Aboli",
+   "kn": "ಕನಕಾಂಬರ",
+   "latin": "Crossandra infundibuliformis",
+   "tags": [
+    "Udupi favourite",
+    "Flowers all year"
+   ],
+   "about": "Firecracker flower in English, Kanakambara in Kannada and Aboli in Konkani and Marathi. Its orange and coral blooms are strung into garlands across the coast.",
+   "spec": [
+    [
+     "Light",
+     "Bright morning sun, with cover from harsh afternoon sun."
+    ],
+    [
+     "Water",
+     "Thoroughly, whenever the top few inches of soil are dry. Under-watering harms it."
+    ],
+    [
+     "Soil",
+     "Fertile, well-drained red loam, pH 6 to 7.5."
+    ],
+    [
+     "Climate",
+     "Warm and humid, 20 to 30 degrees C. It suits Mangaluru."
+    ],
+    [
+     "Feed",
+     "Liquid fertiliser every two weeks in the growing season."
+    ]
+   ]
+  },
+  {
+   "name": "Hibiscus",
+   "kn": "ದಾಸವಾಳ",
+   "latin": "Hibiscus rosa-sinensis",
+   "tags": [
+    "Blooms most of the year",
+    "Easy"
+   ],
+   "about": "The coast's everyday flower, seen on temple offerings and garden fences. It blooms through most of the year in warm, humid weather and grows well in pots or beds.",
+   "spec": [
+    [
+     "Light",
+     "Full sun, five to six hours. It drops buds in deep shade."
+    ],
+    [
+     "Water",
+     "When the top inch is dry. In heavy rain, let it dry between waterings."
+    ],
+    [
+     "Soil",
+     "Well-drained. Mix coarse sand into lateritic garden soil."
+    ],
+    [
+     "Feed",
+     "A light feed every two to three weeks while it flowers."
+    ],
+    [
+     "Prune",
+     "Trim leggy stems after a flush of flowers."
+    ]
+   ]
+  },
+  {
+   "name": "Tulsi",
+   "kn": "ತುಳಸಿ",
+   "latin": "Ocimum tenuiflorum",
+   "tags": [
+    "Sacred",
+    "Herb",
+    "Easy"
+   ],
+   "about": "Holy basil, native to India and kept in a raised tulasi katte outside many coastal homes. It is a leafy herb as much as a sacred plant.",
+   "spec": [
+    [
+     "Light",
+     "Full sun or partial sun."
+    ],
+    [
+     "Water",
+     "Light watering, like a shower. Daily in summer, every other day in cooler weather. Do not flood the pot."
+    ],
+    [
+     "Soil",
+     "Porous, well-drained, with added organic manure."
+    ],
+    [
+     "Prune",
+     "Pinch the growing tip for a bushier plant and remove flower heads early to keep it leafy."
+    ],
+    [
+     "Watch out",
+     "Mealybugs, aphids, mites and whitefly. Spray a neem-based solution."
+    ]
+   ]
+  },
+  {
+   "name": "Curry leaf",
+   "kn": "ಕರಿಬೇವು",
+   "latin": "Murraya koenigii",
+   "tags": [
+    "Kitchen garden",
+    "Evergreen"
+   ],
+   "about": "The kitchen tree behind every tempering. It loves warmth, so it settles in easily on the coast and needs no protection from cold.",
+   "spec": [
+    [
+     "Light",
+     "Full sun."
+    ],
+    [
+     "Water",
+     "Deeply but not often. Let the top 3 to 5 cm dry between waterings to avoid root rot."
+    ],
+    [
+     "Soil",
+     "Well-drained soil that is rich in compost."
+    ],
+    [
+     "Feed",
+     "Compost or organic manure every two to three months. Nitrogen-rich feed gives lush leaves."
+    ],
+    [
+     "Harvest",
+     "Pick leaves regularly from the tips so it keeps branching."
+    ]
+   ]
+  },
+  {
+   "name": "Monstera",
+   "kn": "",
+   "latin": "Monstera deliciosa",
+   "tags": [
+    "Indoor",
+    "Loves humidity"
+   ],
+   "about": "The split-leaf climber that enjoys Mangaluru's humid air. It grows impressively through the monsoon months.",
+   "spec": [
+    [
+     "Light",
+     "Bright spot, away from direct afternoon sun."
+    ],
+    [
+     "Water",
+     "Moderate. Water only when the top of the soil starts to dry."
+    ],
+    [
+     "Soil",
+     "Mix in coarse sand or perlite for drainage."
+    ],
+    [
+     "Air",
+     "Give it airflow and watch for fungal spots in wet weather."
+    ]
+   ]
+  },
+  {
+   "name": "Canna lily",
+   "kn": "",
+   "latin": "Canna indica",
+   "tags": [
+    "Monsoon proof",
+    "Flowering"
+   ],
+   "about": "A sturdy flowering plant that handles the monsoon better than almost any other. A good choice for a bed that stays wet.",
+   "spec": [
+    [
+     "Light",
+     "Full sun for the most flowers."
+    ],
+    [
+     "Water",
+     "Generous in dry spells. It copes with heavy rain."
+    ],
+    [
+     "Soil",
+     "Rich soil that drains, with compost worked in."
+    ],
+    [
+     "Prune",
+     "Cut spent flower stalks and old leaves at the base."
+    ]
+   ]
+  }
+ ],
+ "month": [
+  "Check every pot has drainage holes, and clear the saucers after rain.",
+  "Mulch bare soil to stop splash and keep roots steady.",
+  "Give ferns and balcony plants airflow to avoid fungus.",
+  "Sow spinach, amaranth and fenugreek, which enjoy the humidity.",
+  "Shield young plants from strong wind and heavy downpours.",
+  "Mix coarse sand into laterite soil so roots do not sit wet."
+ ]
+}

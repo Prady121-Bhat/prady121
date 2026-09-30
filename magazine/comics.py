@@ -1,20 +1,13 @@
 #!/usr/bin/env python3
-"""Fill the Tales section: one Panchatantra and one Jataka episode a day, drawn as four comic panels.
+"""Comic panels for the Tales page: original SVG drawings of Panchatantra and Jataka episodes.
 
-Usage: build_tales.py PAGE.html [YYYY-MM-DD]
-
-Also fills the quiz slot: the moral of each of today's two tales and one plant or coast fact read from the page.
-
-Stories are traditional (public domain) and retold here. Panels are original drawings made in SVG.
-Where a public-domain / CC0 illustration exists (tales_assets/), it is shown as a plate with credit.
-Episode number = days since 2026-09-30, cycling through the list.
+Each panel is a layered scene (sky, hills, ground, trees, characters). A shared set of SVG filters gives the
+flat shapes soft lighting, a ground shadow, slightly hand-inked edges and paper grain.
+Stories are traditional (public domain) and retold in original words.
 """
-import base64, datetime, html, json, os, re, sys
+import html, json
 
-LAUNCH = datetime.date(2026, 9, 30)
-HERE = os.path.dirname(os.path.abspath(__file__))
 E = html.escape
-
 # ---------------------------------------------------------------- drawing
 def g(x, y, s, flip, inner):
     sx = -s if flip else s
@@ -115,9 +108,19 @@ def crane():
 def fish():
     return ('<ellipse cx="0" cy="-8" rx="16" ry="8" fill="#5DA9E9"/><path d="M-14 -8 l-12 -8 v16z" fill="#5DA9E9"/>' + eye(8,-10,2))
 
-def drum():
+def drum(torn=False):
+    hole = ('<path d="M-16 -48 l7 -8 l6 7 l7 -9 l6 9 l7 -5 l-2 9 l-10 5 l-9 -3 l-8 5z" fill="#2b1a0a" stroke-width="1"/>' if torn else '')
     return ('<ellipse cx="0" cy="-8" rx="26" ry="9" fill="#7A4A25"/><path d="M-26 -8 v-40 a26 9 0 0 0 52 0 v40 a26 9 0 0 1 -52 0z" fill="#A9652F"/>'
-            '<ellipse cx="0" cy="-48" rx="26" ry="9" fill="#F2DDB0"/><path d="M-26 -30 h52" fill="none" stroke="#7A4A25"/>')
+            '<ellipse cx="0" cy="-48" rx="26" ry="9" fill="#F2DDB0"/><path d="M-26 -30 h52" fill="none" stroke="#7A4A25"/>' + hole)
+
+def camel(body="#C99B5C", dark="#A67B3F"):
+    return (f'<rect x="-28" y="-46" width="8" height="46" rx="3" fill="{dark}"/><rect x="-16" y="-46" width="8" height="46" rx="3" fill="{body}"/>'
+            f'<rect x="10" y="-46" width="8" height="46" rx="3" fill="{dark}"/><rect x="22" y="-46" width="8" height="46" rx="3" fill="{body}"/>'
+            f'<path d="M-34 -62 q-14 4 -12 24" fill="none" stroke-width="3"/>'
+            f'<ellipse cx="-2" cy="-62" rx="38" ry="21" fill="{body}"/><ellipse cx="-8" cy="-88" rx="15" ry="17" fill="{body}"/>'
+            f'<path d="M26 -70 q22 -6 24 -40" fill="none" stroke-width="15"/><path d="M26 -70 q22 -6 24 -40" fill="none" stroke="{body}" stroke-width="12"/>'
+            f'<ellipse cx="58" cy="-118" rx="15" ry="9" fill="{body}"/><path d="M68 -116 q10 4 6 10 q-8 2 -12 -4z" fill="{dark}"/>'
+            f'<path d="M52 -128 l-3 -9 l8 6z" fill="{body}"/>{eye(58,-121,2.4)}<path d="M66 -113 q4 2 8 0" fill="none" stroke-width="1.2"/>')
 
 def baby():
     return ('<rect x="-22" y="-14" width="44" height="14" rx="7" fill="#7FB3D5"/><circle cx="-8" cy="-22" r="10" fill="#E9B98C"/>' + eye(-11,-23,1.8) + eye(-4,-23,1.8))
@@ -137,40 +140,92 @@ def feather():
     return '<path d="M0 0 q-14 -6 -6 -22 q14 8 6 22z" fill="#F2C230"/>'
 
 def tree(x, y, s=1, fruit=False):
-    f = ''.join(f'<circle cx="{x+dx*s}" cy="{y-100*s+dy*s}" r="{3.5*s}" fill="#7B3F9E" stroke="none"/>' for dx, dy in ((-16, 4), (14, -6), (2, 16))) if fruit else ''
-    return (f'<rect x="{x-7*s}" y="{y-70*s}" width="{14*s}" height="{70*s}" fill="#7A4E2A"/>'
-            f'<circle cx="{x}" cy="{y-100*s}" r="{40*s}" fill="#3F8F3F"/><circle cx="{x-26*s}" cy="{y-82*s}" r="{26*s}" fill="#4CA24C"/><circle cx="{x+28*s}" cy="{y-84*s}" r="{26*s}" fill="#4CA24C"/>{f}')
+    f = ''.join(f'<circle cx="{x+dx*s}" cy="{y-100*s+dy*s}" r="{3.6*s}" fill="#7B3F9E" stroke="#3b1d4d" stroke-width=".8"/>' for dx, dy in ((-16, 4), (14, -6), (2, 16), (-4, -14))) if fruit else ''
+    return (f'<g filter="url(#lit)" stroke="#2b2118" stroke-width="1.3" stroke-linejoin="round">'
+            f'<path d="M{x-8*s} {y} q2 -40 -1 -72 h{16*s} q-3 32 1 72z" fill="url(#trunk)"/>'
+            f'<circle cx="{x}" cy="{y-100*s}" r="{40*s}" fill="#2F7A36"/><circle cx="{x-26*s}" cy="{y-82*s}" r="{27*s}" fill="#3B8F3F"/>'
+            f'<circle cx="{x+28*s}" cy="{y-84*s}" r="{27*s}" fill="#3B8F3F"/><circle cx="{x-8*s}" cy="{y-116*s}" r="{26*s}" fill="#4DA84B"/>'
+            f'<circle cx="{x+16*s}" cy="{y-108*s}" r="{18*s}" fill="#5DB859"/>{f}</g>')
 
-CHARS = dict(lion=lion, hare=hare, monkey=monkey, croc=croc, crow=crow, cobra=cobra, jackal=jackal, tortoise=tortoise, swan=swan,
+CHARS = dict(camel=camel, lion=lion, hare=hare, monkey=monkey, croc=croc, crow=crow, cobra=cobra, jackal=jackal, tortoise=tortoise, swan=swan,
              deer=deer, man=man, mongoose=mongoose, crab=crab, crane=crane, fish=fish, drum=drum, baby=baby, flame=flame,
              stick=stick, necklace=necklace, feather=feather)
 
+# Shared filters and gradients. Put COMIC_DEFS once in the page; every panel refers to it by id.
+COMIC_DEFS = """<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<filter id="lit" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+  <feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="4" result="n"/>
+  <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G" result="w"/>
+  <feGaussianBlur in="w" stdDeviation="2.4" result="b"/>
+  <feDiffuseLighting in="b" surfaceScale="3.2" diffuseConstant="1.05" lighting-color="#fff8ec" result="d"><feDistantLight azimuth="235" elevation="52"/></feDiffuseLighting>
+  <feComposite in="w" in2="d" operator="arithmetic" k1="1.32" k2="0" k3="0" k4="0" result="m"/>
+  <feComposite in="m" in2="w" operator="in"/>
+</filter>
+<filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7"/><feColorMatrix values="0 0 0 0 .35  0 0 0 0 .28  0 0 0 0 .2  0 0 0 .55 0"/></filter>
+<linearGradient id="trunk" x1="0" x2="1"><stop offset="0" stop-color="#5A3A1E"/><stop offset=".5" stop-color="#8A5A31"/><stop offset="1" stop-color="#5A3A1E"/></linearGradient>
+<linearGradient id="sky-day" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6FB6E3"/><stop offset=".7" stop-color="#CDEBF6"/><stop offset="1" stop-color="#F6F1D3"/></linearGradient>
+<linearGradient id="sky-warm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0A86A"/><stop offset=".65" stop-color="#F8D9A0"/><stop offset="1" stop-color="#FCEFC8"/></linearGradient>
+<linearGradient id="sky-night" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0B1230"/><stop offset=".7" stop-color="#1B2C57"/><stop offset="1" stop-color="#2B3F6E"/></linearGradient>
+<linearGradient id="ground-grass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#86BF5C"/><stop offset="1" stop-color="#4C8534"/></linearGradient>
+<linearGradient id="ground-dust" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2C494"/><stop offset="1" stop-color="#B8925C"/></linearGradient>
+<linearGradient id="ground-night" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2C5238"/><stop offset="1" stop-color="#16301F"/></linearGradient>
+<linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6CC0E8"/><stop offset="1" stop-color="#2F7DB5"/></linearGradient>
+<radialGradient id="sun"><stop offset="0" stop-color="#FFF6C2"/><stop offset=".35" stop-color="#FFD54F"/><stop offset="1" stop-color="#FFD54F" stop-opacity="0"/></radialGradient>
+<radialGradient id="moonglow"><stop offset="0" stop-color="#FFF8DC"/><stop offset=".4" stop-color="#F7EFC2"/><stop offset="1" stop-color="#F7EFC2" stop-opacity="0"/></radialGradient>
+<radialGradient id="vig" cx=".5" cy=".5" r=".75"><stop offset=".55" stop-color="#2b1a0a" stop-opacity="0"/><stop offset="1" stop-color="#2b1a0a" stop-opacity=".38"/></radialGradient>
+<linearGradient id="rays" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF3B0" stop-opacity=".55"/><stop offset="1" stop-color="#FFF3B0" stop-opacity="0"/></linearGradient>
+</defs></svg>"""
+
+def hills(kind):
+    col1, col2 = ("#1D2D4A", "#16243C") if kind in ("night", "moon") else (("#A9C79A", "#8DB37D") if kind != "palace" else ("#D7B679", "#C4A05F"))
+    return (f'<path d="M0 205 C40 170 80 178 120 192 C170 208 210 165 260 175 C310 185 350 168 400 190 V240 H0z" fill="{col1}"/>'
+            f'<path d="M0 220 C50 200 100 210 150 214 C220 222 280 196 340 206 C370 212 390 208 400 210 V250 H0z" fill="{col2}"/>')
+
+def grass(kind, ground_y=225):
+    if kind in ("river", "pond", "palace"):
+        return ''
+    col = "#3F7A2C" if kind not in ("night", "moon") else "#22422C"
+    o = []
+    for i in range(0, 400, 19):
+        h = 7 + (i * 7) % 6
+        o.append(f'<path d="M{i} {ground_y+2+(i*3)%9} q2 -{h} 4 0 q2 -{h+2} 4 0 q2 -{h} 4 0" fill="none" stroke="{col}" stroke-width="1.6" stroke-linecap="round"/>')
+    return ''.join(o)
+
 def bg(kind):
-    sky = {"forest": "#BFE3F0", "river": "#C9E8F4", "night": "#17233F", "village": "#CFE8F5", "palace": "#EAD9A8", "well": "#BFE3F0",
-           "moon": "#0E1830", "fire": "#F6C990", "pond": "#CFE8F5"}[kind]
-    o = [f'<rect width="400" height="300" fill="{sky}"/>']
-    if kind in ("night", "moon"):
-        o.append('<g fill="#fff" stroke="none">' + ''.join(f'<circle cx="{x}" cy="{y}" r="1.6"/>' for x, y in ((30,30),(90,60),(160,24),(240,50),(310,28),(360,70),(60,100),(210,90),(340,120))) + '</g>')
-        o.append('<circle cx="330" cy="50" r="' + ('34' if kind == "moon" else '20') + '" fill="#F7EFC2"/>')
-    elif kind != "palace":
-        o.append('<circle cx="350" cy="44" r="22" fill="#FFD54F"/>')
+    night = kind in ("night", "moon")
+    sky = "url(#sky-night)" if night else ("url(#sky-warm)" if kind in ("fire", "village") else "url(#sky-day)")
     if kind == "palace":
-        o.append('<rect y="210" width="400" height="90" fill="#B5651D"/>' + ''.join(f'<rect x="{x}" y="20" width="24" height="200" fill="#F5E8C1" stroke="#2b2118" stroke-width="1.5"/>' for x in (20, 356)))
-        o.append('<rect x="150" y="70" width="100" height="80" fill="#7FB3D5" stroke="#2b2118" stroke-width="1.5"/>')
+        sky = "#F3E2B4"
+    o = [f'<rect width="400" height="300" fill="{sky}"/>']
+    if night:
+        o.append('<g fill="#fff">' + ''.join(f'<circle cx="{x}" cy="{y}" r="{r}" opacity=".9"/>' for x, y, r in ((30,30,1.6),(90,60,1.2),(160,24,1.8),(240,50,1.3),(310,28,1.6),(360,70,1.2),(60,100,1.4),(210,90,1.1),(340,120,1.5),(120,120,1.1))) + '</g>')
+        r = 44 if kind == "moon" else 28
+        o.append(f'<circle cx="330" cy="52" r="{r*1.8:.0f}" fill="url(#moonglow)" opacity=".7"/><circle cx="330" cy="52" r="{r}" fill="#F7EFC2"/>')
+        if kind == "moon":
+            o.append('<g fill="#E1D59E" opacity=".8"><circle cx="318" cy="44" r="7"/><circle cx="342" cy="66" r="9"/><circle cx="336" cy="38" r="4"/></g>')
+    elif kind != "palace":
+        o.append('<circle cx="350" cy="44" r="66" fill="url(#sun)"/><circle cx="350" cy="44" r="19" fill="#FFE47A"/>')
+        o.append('<path d="M350 44 L60 300 L170 300z M350 44 L210 300 L300 300z" fill="url(#rays)" opacity=".5"/>')
+        o.append('<g fill="#fff" opacity=".85"><ellipse cx="70" cy="50" rx="34" ry="9"/><ellipse cx="94" cy="44" rx="24" ry="9"/><ellipse cx="260" cy="30" rx="28" ry="7"/></g>')
+    if kind == "palace":
+        o.append('<rect y="210" width="400" height="90" fill="#B5651D"/><rect y="210" width="400" height="14" fill="#C97A32"/>' + ''.join(f'<g stroke="#2b2118" stroke-width="1.5"><rect x="{x}" y="20" width="24" height="200" fill="#F5E8C1"/><rect x="{x-4}" y="14" width="32" height="10" fill="#E2CD98"/><rect x="{x-4}" y="208" width="32" height="10" fill="#E2CD98"/></g>' for x in (20, 356)))
+        o.append('<g stroke="#2b2118" stroke-width="1.5"><rect x="150" y="70" width="100" height="80" fill="#7FB3D5"/><path d="M150 70 q50 -40 100 0" fill="#E2CD98"/></g>')
         return ''.join(o)
-    ground = {"night": "#1F3D2B", "moon": "#1F3D2B", "village": "#D8B98A", "fire": "#8A5A2B"}.get(kind, "#6DAA4F")
+    o.append(hills(kind))
+    ground = "url(#ground-night)" if night else ("url(#ground-dust)" if kind in ("village", "fire") else "url(#ground-grass)")
     o.append(f'<rect y="225" width="400" height="75" fill="{ground}"/>')
+    o.append(grass(kind))
     if kind in ("river", "pond"):
-        o.append('<rect y="200" width="400" height="60" fill="#4A9BD4"/><path d="M0 214 q20 -8 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="#fff" stroke-width="2" opacity=".7"/>')
+        o.append('<rect y="200" width="400" height="60" fill="url(#water)"/>' + ''.join(f'<path d="M{x} {y} q12 -5 24 0 t24 0" fill="none" stroke="#fff" stroke-width="1.8" opacity=".6" stroke-linecap="round"/>' for x, y in ((10,214),(150,222),(270,212),(60,240),(200,246),(330,236))))
     if kind == "village":
-        o.append('<rect x="40" y="150" width="90" height="75" fill="#E9C9A0" stroke="#2b2118" stroke-width="1.5"/><path d="M30 152 l55 -42 l55 42z" fill="#B5651D" stroke="#2b2118" stroke-width="1.5"/><rect x="72" y="182" width="24" height="43" fill="#7A4E2A"/>')
+        o.append('<g filter="url(#lit)" stroke="#2b2118" stroke-width="1.5" stroke-linejoin="round"><rect x="40" y="150" width="90" height="75" fill="#E9C9A0"/><path d="M28 152 l57 -44 l57 44z" fill="#B5651D"/><rect x="72" y="182" width="26" height="43" fill="#7A4E2A"/><rect x="52" y="164" width="14" height="14" fill="#7FB3D5"/><rect x="104" y="164" width="14" height="14" fill="#7FB3D5"/></g>')
     if kind == "well":
-        o.append('<ellipse cx="200" cy="232" rx="46" ry="14" fill="#7B7B7B" stroke="#2b2118" stroke-width="1.5"/><ellipse cx="200" cy="230" rx="34" ry="9" fill="#2B4B63"/>')
+        o.append('<g stroke="#2b2118" stroke-width="1.5"><ellipse cx="200" cy="232" rx="46" ry="14" fill="#8A8A88"/><ellipse cx="200" cy="230" rx="34" ry="9" fill="#2B4B63"/><path d="M168 232 v14 q32 10 64 0 v-14" fill="#9C9A96"/></g>')
     if kind in ("forest", "night", "moon", "well", "fire"):
         o.append(tree(30, 235, 1.0) + tree(372, 240, 0.9))
     return ''.join(o)
 
-def panel(scene):
+def panel(scene, uid=""):
     parts = [bg(scene["bg"])]
     for item in scene.get("items", []):
         if item[0] == "tree":
@@ -178,13 +233,15 @@ def panel(scene):
             parts.append(tree(x, y, s, fruit)); continue
         if item[0] == "text":
             _, x, y, t = item
-            parts.append(f'<text x="{x}" y="{y}" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="26" fill="#C62828" stroke="#fff" stroke-width="1.2" paint-order="stroke" transform="rotate(-6 {x} {y})">{E(t)}</text>'); continue
+            parts.append(f'<text x="{x}" y="{y}" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="28" fill="#D32F2F" stroke="#fff" stroke-width="3" paint-order="stroke" transform="rotate(-6 {x} {y})">{E(t)}</text>'); continue
         if item[0] == "water":
             _, y = item
-            parts.append(f'<rect y="{y}" width="400" height="{300-y}" fill="#4A9BD4" opacity=".92"/><path d="M0 {y+8} q20 -8 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="#fff" stroke-width="2" opacity=".7"/>'); continue
+            parts.append(f'<rect y="{y}" width="400" height="{300-y}" fill="url(#water)" opacity=".94"/>' + ''.join(f'<path d="M{x} {y+10+k*9} q12 -5 24 0 t24 0" fill="none" stroke="#fff" stroke-width="1.8" opacity=".55" stroke-linecap="round"/>' for k, x in enumerate((10, 120, 250, 60, 190, 320)))); continue
         name, x, y, s, flip = item[:5]
         kw = item[5] if len(item) > 5 else {}
-        parts.append(g(x, y, s, flip, CHARS[name](**kw)))
+        parts.append(f'<ellipse cx="{x}" cy="{y+2}" rx="{34*s:.0f}" ry="{7*s:.0f}" fill="#1b2a10" opacity=".28"/>')
+        parts.append(f'<g filter="url(#lit)">{g(x, y, s, flip, CHARS[name](**kw))}</g>')
+    parts.append('<rect width="400" height="300" fill="url(#vig)"/><rect width="400" height="300" filter="url(#grain)" opacity=".22" style="mix-blend-mode:multiply"/>')
     return f'<svg viewBox="0 0 400 300" role="img" aria-label="{E(scene["alt"])}" xmlns="http://www.w3.org/2000/svg">{"".join(parts)}</svg>'
 
 # ---------------------------------------------------------------- stories
@@ -244,21 +301,21 @@ PANCHATANTRA = [
   dict(bg="night", alt="A hungry jackal listens", cap="A hungry jackal wandered near an old battlefield and heard a great booming sound. 'Something huge is here,' he thought.",
        items=[("jackal", 150, 245, 1.2, False), ("text", 240, 80, "BOOM!")]),
   dict(bg="forest", alt="A jackal hears a drum among trees", cap="He crept closer, trembling. The sound came again and again, louder than thunder.",
-       items=[("jackal", 130, 245, 1.2, False), ("drum", 300, 245, 1.0, False), ("tree", 350, 240, 1.0, False), ("text", 235, 70, "BOOM!")]),
-  dict(bg="forest", alt="A jackal looks at a drum with a branch tapping it", cap="It was a drum. Branches blew against its skin each time the wind rose. The jackal tore it open, hoping to find meat.",
-       items=[("jackal", 130, 245, 1.2, False), ("drum", 300, 245, 1.0, False)]),
+       items=[("jackal", 110, 246, 1.0, False), ("tree", 350, 240, 1.1, False), ("drum", 262, 246, .8, False), ("text", 200, 62, "BOOM!")]),
+  dict(bg="forest", alt="A jackal tears open the drum", cap="It was a drum. Branches blew against its skin each time the wind rose. The jackal tore it open, hoping to find meat.",
+       items=[("drum", 250, 246, 1.5, False, dict(torn=True)), ("jackal", 120, 246, 1.5, False), ("text", 150, 66, "RIP!")]),
   dict(bg="forest", alt="A jackal looks inside an empty drum", cap="The drum was hollow. 'So much noise, and nothing inside,' he sighed. And he learned to look before he ran.",
-       items=[("jackal", 130, 245, 1.3, False), ("drum", 300, 245, 1.0, False)]),
+       items=[("drum", 290, 246, 1.4, False, dict(torn=True)), ("jackal", 130, 246, 1.3, False), ("text", 60, 62, "Nothing!")]),
  ]),
  dict(title="The Lion's Courtiers and the Camel", moral="Beware of those who flatter you into harming others.", plate="camel", panels=[
   dict(bg="forest", alt="A camel meets a lion", cap="A camel lost his caravan and wandered into the forest. The lion took him in as a friend.",
-       items=[("lion", 130, 245, 1.3, False), ("jackal", 290, 246, .8, True)]),
+       items=[("lion", 110, 246, 1.3, False), ("camel", 300, 246, 1.05, True)]),
   dict(bg="forest", alt="A hungry lion and his courtiers", cap="One hard season, the lion could not hunt. His courtiers, a crow, a jackal and a wolf, were hungry too.",
-       items=[("lion", 110, 245, 1.2, False), ("jackal", 250, 246, .8, True), ("crow", 330, 245, .8, True)]),
-  dict(bg="forest", alt="Courtiers speak to the lion", cap="They plotted. Each offered himself as a meal, and the lion refused each in turn. Then the camel, trusting, offered too.",
-       items=[("lion", 120, 245, 1.2, False), ("jackal", 240, 246, .8, True), ("crow", 300, 245, .8, True), ("text", 240, 60, "PLEASE!")]),
+       items=[("lion", 100, 246, 1.25, False), ("jackal", 225, 246, .7, True), ("jackal", 280, 246, .75, True, dict(col="#7F848B", belly="#D5D8DC")), ("crow", 345, 246, .8, True)]),
+  dict(bg="forest", alt="The courtiers plot while the camel bows", cap="They plotted. Each offered himself as a meal, and the lion refused each in turn. Then the camel, trusting, offered too.",
+       items=[("lion", 95, 246, 1.2, False), ("camel", 250, 246, .95, True), ("jackal", 350, 246, .7, True), ("text", 190, 62, "PLEASE!")]),
   dict(bg="forest", alt="The courtiers turn on the camel", cap="'Yes!' cried the courtiers, and the trap closed. The camel learned too late: never trust those who agree only to please.",
-       items=[("lion", 110, 245, 1.2, False), ("jackal", 240, 246, .8, True), ("crow", 310, 245, .8, True)]),
+       items=[("camel", 110, 246, 1.0, False), ("lion", 250, 246, 1.05, True), ("jackal", 320, 246, .65, True, dict(col="#7F848B", belly="#D5D8DC")), ("crow", 365, 246, .7, True)]),
  ]),
 ]
 
@@ -324,156 +381,3 @@ JATAKA = [
        items=[("crane", 170, 245, 1.4, False), ("crab", 240, 200, .9, False)]),
  ]),
 ]
-
-
-def plate_html(key, credit_story):
-    meta = json.load(open(os.path.join(HERE, "tales_assets", "meta.json")))
-    keys = ["tortoise1", "tortoise2"] if key == "tortoise" else ["camel"]
-    figs = []
-    for k in keys:
-        m = meta[k]
-        data = base64.b64encode(open(os.path.join(HERE, "tales_assets", k + ".jpg"), "rb").read()).decode()
-        who = m["artist"] or ("The Metropolitan Museum of Art" if k == "camel" else "Unknown")
-        if k.startswith("tortoise"):
-            who = "Ellsworth Young, 1912"
-        figs.append(f'<figure class="plate"><img src="data:image/jpeg;base64,{data}" alt="Historic illustration for this tale" loading="lazy" width="{m["size"][0]}" height="{m["size"][1]}">'
-                    f'<figcaption>Old illustration: {E(who)}, <a href="{m["page"]}" target="_blank" rel="noopener">Wikimedia Commons</a>, {E(m["lic"])}</figcaption></figure>')
-    return ''.join(figs)
-
-
-def episode_html(series, label, ep, n, day):
-    panels = ''.join(f'<figure class="panel">{panel(p)}<figcaption><b>{i}</b>{E(p["cap"])}</figcaption></figure>' for i, p in enumerate(ep["panels"], 1))
-    plate = plate_html(ep["plate"], None) if ep["plate"] else ""
-    return (f'<article class="tale"><span class="kicker">{E(label)} &middot; Episode {day % n + 1} of {n}</span>'
-            f'<h3 class="hl-2">{E(ep["title"])}</h3>'
-            f'<div class="panels">{panels}</div>'
-            f'<p class="moral"><span class="lab">Moral</span> {E(ep["moral"])}</p>{plate}</article>')
-
-
-# ---------------------------------------------------------------- quiz
-# Morals of the full 33-episode list, grouped by theme. A wrong answer is never taken from the
-# same theme as the right one, so two options cannot both be defensible.
-MORAL_GROUPS = [
-    ["Cleverness can do what strength cannot.", "Keep a calm mind in danger. A quick thought can save you.", "Where force fails, a clever plan works.",
-     "A brave tongue can turn a large danger away.", "Make a plan when danger is near, but do not despair.", "A sly mind can trick a simple one.",
-     "A wise mind can make something of nothing."],
-    ["Small friends together are stronger than a great bully.", "When we quarrel, we all lose.", "United, we can lift what alone we cannot.",
-     "We become like those we keep company with.", "Do not let a third party settle your quarrels."],
-    ["A true leader thinks of others before himself.", "Kindness can open even a hard heart.", "The greatest gift is the one you give freely.",
-     "Even a small act of love can move the heavens.", "Patience is the sign of a strong heart.", "Kind words win where harsh words fail.",
-     "Honesty is worth more than gold.", "Truth and love hold great power."],
-    ["Borrowed glory does not last. Be yourself.", "A loud sound does not mean there is much inside.", "A disguise is only as good as the voice behind it.",
-     "Do not befriend an enemy who has a reason to lie.", "Beware of those who flatter you into harming others.", "Cheats are caught by their own cunning."],
-    ["Never act in anger before you know the truth.", "Do not meddle in what is not your business.", "Check the facts before you run.",
-     "Think before you speak.", "Do not build castles in the air.", "Each of us sees only part of the truth.", "Greed loses everything."],
-]
-
-
-def _rot(items, k):
-    k %= len(items)
-    return items[k:] + items[:k]
-
-
-def _options(right, wrong, day, qi):
-    """Right answer at a position that varies with the date and the question."""
-    opts = list(wrong)
-    pos = (day + qi) % (len(wrong) + 1)
-    opts.insert(pos, right)
-    return opts, pos
-
-
-def moral_question(ep, day, qi):
-    group = next(i for i, gr in enumerate(MORAL_GROUPS) if ep["moral"] in gr)
-    others = _rot([i for i in range(len(MORAL_GROUPS)) if i != group], day + qi)[:2]
-    wrong = [_rot(MORAL_GROUPS[i], day)[0] for i in others]
-    opts, pos = _options(ep["moral"], wrong, day, qi)
-    return dict(q=f"What is the moral of “{ep['title']}”?", a=opts, c=pos,
-                w=f"The moral is: {ep['moral']}")
-
-
-def _plants(page):
-    out = []
-    for art in page.split('<article class="plant')[1:]:
-        m = re.search(r'<h3>([^<]+)</h3>.*?<span class="kn-name" lang="kn">([^<]+)</span><span class="latin">([^<]+)</span>', art, re.S)
-        a = re.search(r'<p class="about">(.*?)</p>', art, re.S)
-        if m and a:
-            out.append(dict(name=html.unescape(m[1]), kn=html.unescape(m[2]), latin=html.unescape(m[3]),
-                            about=html.unescape(re.sub(r"<[^>]+>", "", a[1]))))
-    return out
-
-
-GRIM = re.compile(r"\b(die[sd]?|dead|death|kill\w*|murder\w*|suicide|rape\w*|assault\w*|body|bodies|accident|collapse\w*|drown\w*|arrest\w*|burglar\w*|theft|stolen|injur\w*)\b", re.I)
-
-
-def _stories(page):
-    out = []
-    for li in re.findall(r'<li class="story">(.*?)</li>', page, re.S):
-        m = re.search(r'<span class="place">([^<]+)</span><h3[^>]*>([^<]+)</h3>', li)
-        a = re.search(r'<span class="age">([^<]*)</span>', li)
-        if m and not GRIM.search(li):
-            out.append(dict(place=html.unescape(m[1]), head=html.unescape(m[2]), age=html.unescape(a[1]) if a else ""))
-    return out
-
-
-def fact_question(page, day):
-    plants, stories = _plants(page), _stories(page)
-    places = sorted({s["place"] for s in stories})
-    if (day // 1) % 2 == 1 and stories and len(places) >= 2:
-        st = stories[(day // 2) % len(stories)]
-        wrong = [p for p in _rot(places, day) if p != st["place"]][:2]
-        if len(wrong) == 1:
-            wrong.append(next(t for t in ("Mangaluru", "Udupi", "Kundapur") if t not in (st["place"], wrong[0])))
-        opts, pos = _options(st["place"], wrong, day, 2)
-        return dict(q=f"Coast: which place was this story reported from? “{st['head']}”", a=opts, c=pos,
-                    w=f"It was reported from {st['place']}" + (f", {st['age']}." if st["age"] else "."))
-    if len(plants) >= 3:
-        pl = plants[day % len(plants)]
-        wrong = [p for p in _rot(plants, day + 1) if p["name"] != pl["name"]][:2]
-        if (day // 2) % 2 == 0:
-            q, right, ws = f"Garden: which plant is called “{pl['kn']}” in Kannada?", pl["name"], [p["name"] for p in wrong]
-        else:
-            q, right, ws = f"Garden: what is the botanical name of {pl['name']}?", pl["latin"], [p["latin"] for p in wrong]
-        opts, pos = _options(right, ws, day, 2)
-        first = re.split(r"(?<=[.!?])\s", pl["about"])[0]
-        return dict(q=q, a=opts, c=pos, w=f"{pl['name']} ({pl['latin']}). {first}")
-    return None
-
-
-def quiz_html(day, pan, jat, page):
-    qs = [moral_question(pan, day, 0), moral_question(jat, day, 1)]
-    f = fact_question(page, day)
-    if f:
-        qs.append(f)
-    data = json.dumps(qs, ensure_ascii=False).replace("<", "\\u003c")
-    return ('<section class="quiz" id="quiz" aria-labelledby="h-quiz"><span class="kicker">Quiz</span>'
-            f'<h3 class="hl-2" id="h-quiz">{len(qs)} questions from today’s paper</h3>'
-            f'<script type="application/json" id="quiz-data">{data}</script>'
-            '<div id="quiz-body"></div><p class="score" id="quiz-score" aria-live="polite"></p>'
-            '<noscript><p>The quiz needs JavaScript.</p></noscript></section>')
-
-
-def main():
-    page = sys.argv[1]
-    d = datetime.date.fromisoformat(sys.argv[2]) if len(sys.argv) > 2 else datetime.date.today()
-    day = (d - LAUNCH).days
-    pan = PANCHATANTRA[day % len(PANCHATANTRA)]
-    jat = JATAKA[day % len(JATAKA)]
-    inner = (episode_html("panchatantra", "Panchatantra", pan, len(PANCHATANTRA), day) +
-             episode_html("jataka", "Jataka tales", jat, len(JATAKA), day))
-    s = open(page, encoding="utf-8").read()
-    new = f'<!--tales:start--><div class="tales">{inner}</div><!--tales:end-->'
-    s2, n = re.subn(r'<!--tales:start-->.*?<!--tales:end-->', lambda m: new, s, count=1, flags=re.S)
-    if n != 1:
-        sys.exit("tales slot not found")
-    qz = quiz_html(day, pan, jat, s2)
-    s3, n = re.subn(r'<!--quiz:start-->.*?<!--quiz:end-->', lambda m: f'<!--quiz:start-->{qz}<!--quiz:end-->', s2, count=1, flags=re.S)
-    if n != 1:
-        print("Quiz slot not found: run add_interactive.py first", file=sys.stderr)
-        s3 = s2
-    open(page, "w", encoding="utf-8").write(s3)
-    print("Tales:", pan["title"], "|", jat["title"])
-    print("Quiz:", [q["q"] for q in json.loads(re.search(r'id="quiz-data">(.*?)</script>', qz, re.S)[1])])
-
-
-if __name__ == "__main__":
-    main()

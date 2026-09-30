@@ -1,0 +1,20 @@
+{
+ "desk_note": "Private edition only. Written from the owner's Gmail on 30 Sep 2026 and kept as-is until the Gmail connector is available again. Never copied into the shareable edition.",
+ "notice": {"title":"Payment declined for miniTV","text":"Google Play could not charge your GPay UPI on 29 or 30 September. Change the payment method or the subscription will be cancelled."},
+ "desk": [
+  {"tag":"Action","act":true,"title":"Payment declined for miniTV","text":"Google Play could not charge your GPay UPI for the Amazon India Shop, Pay, miniTV subscription. It failed on 29 and again on 30 September. Change the payment method or the subscription will be cancelled.","link":"Open in Gmail","url":"https://mail.google.com/mail/?authuser=pradyumnabhat45@gmail.com#all/thread-f:1877740725386204878|msg-f:1877740725386204878"},
+  {"tag":"Waiting on you","act":false,"title":"Outskill course dashboard invite","text":"You are enrolled and the invite to the course dashboard is waiting to be accepted. The WhatsApp community was full when you tried, and GrowthSchool support says it has passed that to the relevant team.","link":"Open the invite","url":"https://mail.google.com/mail/?authuser=pradyumnabhat45@gmail.com#all/thread-f:1877680645821394311|msg-f:1877680645821394311"},
+  {"tag":"Heads up","act":false,"title":"Google noted Claude's Gmail access","text":"A security alert says you allowed Claude for Gmail to reach some account data. That matches the connection you made today. If it wasn't you, review permissions in your Google Account.","link":"Open the alert","url":"https://mail.google.com/mail/?authuser=pradyumnabhat45@gmail.com#all/thread-f:1877754278499591340|msg-f:1877754278499591340"}
+ ],
+ "also": [
+  {"title":"Hacktoberfest starts Thursday","tag":"DEV","text":"The DEV newsletter lists events near you for 1 October."},
+  {"title":"Claude 101 and GPT-6 Astra workshops","tag":"Zoom","text":"Both ran yesterday. Registrations are confirmed in your mail."},
+  {"title":"Mann Ki Baat highlights","tag":"Newsletter","text":"Stories of change from across India."}
+ ],
+ "cleanup": {"n":"290+","text":"old promotional threads moved to Trash today. They stay recoverable for 30 days."},
+ "classifieds": [
+  {"title":"QA Automation Test Engineer","text":"Toyota Automated Logistics, plus an on-site fresher role at JobBricks.","from":"via LinkedIn"},
+  {"title":"Founding Voice AI Engineer","text":"Libera, one of nine new matches this week.","from":"via Wellfound"},
+  {"title":"Jr. Product Engineer","text":"Venh Technologies, Pune, up to 8 LPA.","from":"via Cutshort"}
+ ]
+}

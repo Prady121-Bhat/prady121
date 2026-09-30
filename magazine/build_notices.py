@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-"""Fill the Kullangal notices block and the "Send us your news" box.
-
-Usage: build_notices.py PAGE.html [YYYY-MM-DD]
+"""Notices for the Local page and the "Send us your news" box (used by build_paper.py).
 
 Notices come from kullangal_notices.json and, if kullangal_config.json has a sheet_csv_url, from
 that published Google Sheet (CSV columns: title, text, place, date_from, date_to, approved).
@@ -77,25 +75,6 @@ def send_html(cfg):
         btns.append(f'<a class="btn" href="https://wa.me/{num}?text={urllib.parse.quote(TEMPLATE)}" target="_blank" rel="noopener">Send on WhatsApp</a>')
     if not btns:
         return '<p class="empty">The submission form is being set up. Until it opens, the editor cannot take notices.</p>'
-    return ('<pre id="tpl-text">' + E(TEMPLATE) + '</pre><div class="tools" style="border:0;padding:0">' + "".join(btns)
+    return ('<pre id="tpl-text">' + E(TEMPLATE) + '</pre><div class="btns">' + "".join(btns)
             + '<button class="btn" type="button" id="copy-tpl">Copy the template</button></div>'
             '<p class="prog">Every notice is read by the editor before it is printed.</p>')
-
-
-def main():
-    page = sys.argv[1]
-    d = datetime.date.fromisoformat(sys.argv[2]) if len(sys.argv) > 2 else datetime.date.today()
-    cfg = load_json("kullangal_config.json")
-    rows = list(load_json("kullangal_notices.json").get("notices", [])) + sheet_rows(cfg.get("sheet_csv_url"))
-    items = todays(rows, d)
-    s = open(page, encoding="utf-8").read()
-    for tag, body in (("notices", notices_html(items)), ("send", send_html(cfg))):
-        s, n = re.subn(rf"<!--{tag}:start-->.*?<!--{tag}:end-->", lambda m: f"<!--{tag}:start-->{body}<!--{tag}:end-->", s, count=1, flags=re.S)
-        if n != 1:
-            sys.exit(f"{tag} slot not found: run add_interactive.py first")
-    open(page, "w", encoding="utf-8").write(s)
-    print(f"Notices: {len(items)} approved for {d}")
-
-
-if __name__ == "__main__":
-    main()

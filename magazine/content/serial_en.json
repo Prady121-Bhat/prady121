@@ -1,0 +1,233 @@
+{
+ "title": "The Tide Ledger",
+ "subtitle": "A serial for Kullangal Vaarte",
+ "blurb": "A junior reporter in Mangaluru is handed a ledger and a warning. Original fiction, written for this paper: all people and companies in it are invented.",
+ "bible": "SERIAL: 'The Tide Ledger', a cosy-but-tense coastal mystery. ORIGINAL FICTION written for Kullangal Vaarte. All characters, companies and events are invented; never use real people or real companies.\nSETTING: Mangaluru (old port, Bunder, Hampankatta), Malpe harbour (Udupi), Kundapura. Monsoon turning to post-monsoon October.\nCAST: Ira Rao (26, junior reporter, The Coastal Courier, sharp, impatient, gets seasick). Anthony Pinto (68, retired clerk of the Sasi Fishermen's Cooperative, gave her the ledger, then vanished). Deepak Nayak (30, Sub-Inspector, Ira's college friend, careful, funny). Leela Kamath (58, editor, cautious, secretly proud of Ira). Yusuf Beary (45, boat mechanic and source, knows every engine sound). Ramachandra 'R.K.' Hegde (60s, chairman of Sea Crest Marine Pvt Ltd and president of the cooperative, charming, generous, dangerous). Nirmala (Pinto's sister in Kundapura).\nCORE MYSTERY: The ledger shows payments for 'ice and diesel' to Sea Crest Marine for 114 boats. Boat 114 and many others do not exist. Subsidised diesel meant for fishermen is being diverted and sold. Pinto kept the true record and hid it.\nTONE: short scenes, sensory coast detail (rain, diesel, fish, chai), each episode 260-320 words, ends on a hook. Plain English, no gore, no real-world crime tutorials.\nEPISODES SO FAR: 1-14 published (see episodes list). Ep14 ends with Hegde arriving at the newsroom with a lawyer and a court injunction against publishing.\nNEXT ARC (write episodes 15 onward in this order, one per day, adjusting if needed): 15 The injunction fight: Mrs Kamath is tempted to fold; Ira finds the injunction covers only 'unverified claims'. 16 Ira and Deepak trace the boat registrations to a clerk at the Fisheries office, Suma. 17 Suma refuses, then leaves a locker key. 18 The locker: a second, older ledger showing Pinto helped set up the scheme years ago (his secret). 19 Ira confronts Pinto in Kundapura; he explains he was pressured, kept records as insurance. 20 A cyclone warning; harbour empties; Hegde offers Pinto safety in exchange for the ledger. 21 Yusuf's workshop is set on fire; he is fine, angry. 22 Deepak's senior officer transfers him; he chooses to help off the books. 23 Ira gets a fisherman's union leader, Kalappa, to speak on record. 24 Storm night: the three copies of the ledger; one lost to water, one to Hegde's man, one survives with Ira. 25 Chase through the flooded Bunder lanes by auto-rickshaw. 26 The story runs on the front page after all the injunction is lifted by a judge who reads the raw ledger. 27 Raid on the ice plant and the Sea Crest office. 28 Hegde's charm cracks; he tries to bribe Ira with a Bengaluru job. 29 Cooperative election: Kalappa wins. Pinto testifies. 30 Ending: Ira turns down Bengaluru, chooses to stay, and gets seasick on her first ride with the fishermen. Then start a NEW cosy case with the same cast.\n",
+ "episodes": [
+  {
+   "n": 1,
+   "title": "The Man with the Wet Umbrella",
+   "recap": "Ira Rao is at her desk when a stranger drops off a cloth-bound ledger and a warning.",
+   "text": [
+    "The monsoon had been sulking over Mangaluru for a week, and by six o'clock the newsroom of The Coastal Courier smelled of wet paper and stale tea. Ira Rao was typing up a story about a pothole that had swallowed an auto-rickshaw. It was, she thought, the most exciting thing that would happen to her that day.",
+    "Then the door opened, and an old man walked in with an umbrella that had lost the argument with the wind. Water ran off his shirt onto the floor. He looked around the room the way a person looks in a bus station, checking every face.",
+    "'Miss Rao?' he said. 'Ira Rao? You wrote about the diesel queue at Malpe.'",
+    "'Three months ago,' said Ira. 'Nobody read it.'",
+    "'I did.' He set a plastic bag on her desk. Inside was a ledger with a cloth cover, the corners soft as bread. 'My name is Anthony Pinto. I was a clerk at the Sasi Fishermen's Cooperative for thirty-one years. Do not read this here.'",
+    "'Where should I read it?'",
+    "'Somewhere the sea cannot hear.' He tried to smile and did not manage it. Then he picked up his broken umbrella and left, leaving a small lake behind him.",
+    "Ira looked at the ledger. Then she looked at the clock. Then, because she was twenty-six and curious and had never once done what she was told, she slid it into her bag and went home."
+   ]
+  },
+  {
+   "n": 2,
+   "title": "Column Seven",
+   "recap": "At home, with the rain drumming, Ira finds the number that does not add up.",
+   "text": [
+    "Ira's flat was above a tailor's shop in Kodialbail, and the sewing machines had gone quiet for the night. She made a cup of ginger tea, spread a towel over the table for no reason, and opened the ledger.",
+    "It was a plain accounts book, with names, dates and boat numbers in a careful blue hand. Page after page of diesel purchases, ice supplies, repairs. She almost closed it. Anyone who has ever tried to read an accounts book will understand.",
+    "But Mr Pinto had not chosen this ledger by accident. Halfway through, she found a line drawn in pencil under column seven, headed simply 'Ice and diesel, Sea Crest Marine'. The amounts were large. They were larger than large. In three years the cooperative had paid Sea Crest more for ice than the whole of Karnataka spent on it.",
+    "She added a page twice. The total did not change. The total was simply impossible.",
+    "In the margin, in pencil, so faint she had to tilt the lamp, someone had written four words: 'Boat 114 does not exist.'",
+    "Ira sat very still. Outside, a scooter passed through a puddle with a long sigh. Downstairs, the tailor's cat knocked something off a shelf.",
+    "'Boat one-fourteen,' she said aloud, to nobody. She reached for her phone and began to search the harbour registry. It was half past midnight, and she had never been more awake."
+   ]
+  },
+  {
+   "n": 3,
+   "title": "Boat 114",
+   "recap": "The harbour office has no record of the boat, and a mechanic has a strange story.",
+   "text": [
+    "The Fisheries office at the old port opened at ten, and Ira was on its steps at a quarter to. She carried a folder, a smile and a lie: that she was writing a feature about traditional boat numbers.",
+    "The clerk on duty, a thin man with a pen in each pocket, ran a finger down a register. He ran it down again. 'One-fourteen,' he said. 'Hmm.' He turned the register over, which is not a thing that helps.",
+    "'It is not here,' he said at last. 'The numbers go up to one hundred and six. And then they start again from two hundred.'",
+    "'What happened to the ones in between?'",
+    "He looked at her, and then at the door, and then at a calendar with a picture of a smiling fish. 'You will have to ask the cooperative,' he said, in the voice of a man who had just decided to become deaf.",
+    "She found Yusuf Beary at the boat yard behind the fish market. Yusuf was a mechanic who could tell a boat's age from the sound of its engine, and a boat's secrets from the way its owner refused to talk about it. He was lying under a hull, and only his feet spoke first.",
+    "'One-fourteen?' The feet went still. 'Madam, some boats go out at night without lights. I fix the engines, I do not ask where they go.' He slid out, wiped his hands, and looked at her properly. 'But if you ask about them again, ask quietly. Sound carries over water.'"
+   ]
+  },
+  {
+   "n": 4,
+   "title": "Missing",
+   "recap": "Ira goes to thank Mr Pinto and finds his door locked and his neighbours worried.",
+   "text": [
+    "On Thursday morning Ira tried Mr Pinto's number and got a polite recording telling her that the person she was calling was not available. She tried again at noon, and again at four. By evening she was on a bus to Bolar, where the address on his cooperative card led her to a small blue house with a jasmine creeper and a padlock.",
+    "An old woman leaned out from the next verandah. 'He is not here, beta.'",
+    "'When did he leave?'",
+    "'Yesterday, before sunrise. I saw him from my window. He had a small bag and no umbrella.' She pursed her lips. 'That man has carried an umbrella every day for thirty years. Something is wrong.'",
+    "'Did anyone come to see him?'",
+    "'Two young men on a scooter, last week. They did not knock. They stood at the gate and looked at the house. Then they left.'",
+    "Ira thanked her and stood in the lane while the streetlight flickered on. The ledger was heavy in her bag. She felt, suddenly and unpleasantly, like someone carrying an egg through a crowd.",
+    "She took out her phone and scrolled to a name she had not used since college. Deepak Nayak, Sub-Inspector. The last message from him was a photo of a very sad samosa.",
+    "She pressed call."
+   ]
+  },
+  {
+   "n": 5,
+   "title": "The Sub-Inspector",
+   "recap": "Deepak agrees to help, as long as nobody ever finds out he did.",
+   "text": [
+    "They met at a tea stall near the police lines, because Deepak said that police stations had ears and walls that repeated things. He was thinner than she remembered, and had a moustache that he had clearly grown as a decision rather than a habit.",
+    "'A missing person,' he said, stirring sugar into his tea. 'Adult male, retired, went away with a bag on his own. Ira, do you know how many of those I have?'",
+    "'I know how many of those had a visit from two men on a scooter.'",
+    "He stopped stirring. She told him about the ledger, column seven, the margin note, the registrar with the smiling-fish calendar. She watched his face do what faces do when a small problem becomes a bigger problem.",
+    "'Sea Crest Marine,' he said at last. 'Owned by R K Hegde. Ira, that man opened the hospital wing at Kunjibettu. He paid for the school bus in my village.'",
+    "'That does not make him honest.'",
+    "'It does not make him dishonest either.' Deepak looked at his tea. Then he sighed and took out a notebook that was clearly not police property. 'I will make one call. Unofficial. If anyone asks, we discussed cricket.'",
+    "He was gone twenty minutes. When he returned, he sat down slowly, as if the stool had become fragile.",
+    "'Mr Pinto took the six-fifteen bus to Udupi,' he said. 'And his phone last woke up near Malpe.'"
+   ]
+  },
+  {
+   "n": 6,
+   "title": "Malpe at Dawn",
+   "recap": "Ira goes to the harbour before sunrise and sees a boat that is not what it says it is.",
+   "text": [
+    "Nobody had warned Ira that a fishing harbour at five in the morning is the loudest place in the world. Engines coughed. Gulls screamed at each other about property. Somewhere a man was selling tea and shouting about it.",
+    "The harbour was full of boats, packed so tightly that a person could walk across the whole bay without touching water. They were painted blue, green, orange, each with a number on the bow and a name in letters that leaned into the wind. She pulled her scarf higher and pretended to be interested in ice.",
+    "Then she noticed a boat at the far end, one that sat a little too low in the water. Its number had been painted over with fresh white paint, and someone, in a hurry, had not painted the second coat. Under the white, faint as a bruise, she could read: 114.",
+    "Her heart did something enthusiastic. She raised her phone and took a picture.",
+    "'Madam.'",
+    "A man stood at her elbow. He was not tall, but he had the sort of stillness that is more frightening than height. He wore a clean white shirt, which nobody wore at Malpe at five in the morning.",
+    "'This area is for fishermen,' he said politely. 'For your safety.'",
+    "'Of course,' said Ira. 'I was just leaving.'",
+    "She walked away at exactly the speed of someone who has nothing to hide. Behind her, she heard the click of a phone camera."
+   ]
+  },
+  {
+   "n": 7,
+   "title": "Mrs Kamath Says No",
+   "recap": "The editor wants proof, not a hunch. She gives Ira three days.",
+   "text": [
+    "Leela Kamath had run The Coastal Courier for eleven years, through two floods, one strike and a printing press that had once caught fire in the middle of a cricket special. She was not a woman who was easily impressed. She read Ira's notes with her glasses on her nose and her eyebrows on holiday.",
+    "'A ledger,' she said, 'from a retired clerk who has disappeared. A margin note in pencil. A boat number under some paint. And a man in a white shirt.'",
+    "'And a scooter,' said Ira.",
+    "'And a scooter. Ira, if I print that, Mr Hegde's lawyers will stand on this table.' Mrs Kamath took off her glasses. 'Do you know how many advertisements he places with us each month?'",
+    "'No.'",
+    "'Neither do I. That is what worries me.' She rubbed her eyes. 'You do not have a story. You have the beginning of a story, and it is a good beginning. Get me a second source. Get me paper I can hold. Three days.'",
+    "Ira nodded, and turned to go.",
+    "'Ira.' Mrs Kamath did not look up. 'The white-shirt man. Did he see your face?'",
+    "'Yes.'",
+    "'Then from now on, you do not go alone.'",
+    "It was, Ira realised, the kindest thing anyone had said to her all week."
+   ]
+  },
+  {
+   "n": 8,
+   "title": "The Chairman",
+   "recap": "R K Hegde invites Ira to lunch, and is far nicer than she expected.",
+   "text": [
+    "The invitation came on thick cream paper. 'R K Hegde, Chairman, requests the pleasure of Miss Ira Rao's company at lunch.' Ira showed it to Deepak, who read it twice and said, 'Nobody has ever invited me to lunch on cream paper. I would be afraid.'",
+    "She went anyway, with her phone recording in her pocket, and Deepak's number on speed dial.",
+    "Mr Hegde's office had a view of the sea and a fish tank that took up an entire wall. He was a broad, silver-haired man with a laugh that made people feel they had said something clever. He served her a lunch of sukka and neer dosa and asked whether she liked her tea with cardamom.",
+    "'You are the young lady who wrote about our diesel queues,' he said. 'Good piece. Fair. I have been trying to fix that queue for ten years.'",
+    "'You are the president of the cooperative,' said Ira.",
+    "'And its oldest friend.' He smiled. 'I hear you have been asking about boat numbers. Ask me. I can save you a great deal of walking.'",
+    "For a moment, she almost liked him. Then she noticed the small silver frame on his desk: a photograph of a boat, very old, with a number on its bow. Someone had painted it out of the picture with correction fluid.",
+    "'You have a lovely office,' said Ira.",
+    "'And you have a very steady voice,' said Mr Hegde. 'You should be careful with it, Miss Rao. It might carry a long way.'"
+   ]
+  },
+  {
+   "n": 9,
+   "title": "A Message in the Margin",
+   "recap": "Ira reads the ledger again, and finds pencil notes where she has never looked.",
+   "text": [
+    "She had been reading the ledger like a story, from the front to the back. Deepak, in a rare moment of wisdom, said that clerks do not think like that. Clerks think in corners.",
+    "So on Saturday night, with the rain gone thin and silvery on the window, Ira turned the ledger over and began at the last page.",
+    "There was nothing in the last column. Nothing on the inside cover either. But on the thick cardboard flap at the back, where the cloth had lifted, someone had written in pencil and then carefully rubbed most of it away.",
+    "She held the page to the lamp and tilted it. The graphite caught the light in tiny silver ridges. Three words. Then a number. Then a fourth word.",
+    "'Ice plant. Back shed. 9.'",
+    "Below that, in a smaller hand, as if the writer had thought better of it: 'They think I burned the old book. I did not.'",
+    "Ira read that line six times. Then she sat back in her chair. There was another ledger. An older one. And Mr Pinto was still alive enough to lie about it.",
+    "She wrote three names on a sheet of paper and drew a ring around the word 'ice'. Somewhere across the water, a ship sounded its horn, long and low.",
+    "It sounded, she thought, like someone clearing their throat before a confession."
+   ]
+  },
+  {
+   "n": 10,
+   "title": "The Ice Plant",
+   "recap": "Ira and Deepak go looking in the dark, against every rule of sensible people.",
+   "text": [
+    "The Sasi ice plant stood at the end of a lane that smelled of old fish and new ambition. It had been shut since the previous monsoon. The board on the gate said 'Under Renovation', but nothing had been renovated in a very long time, unless you counted the cobwebs.",
+    "'Explain to me again,' whispered Deepak, 'why this is not a bad idea.'",
+    "'Because it is a good idea that looks bad.'",
+    "'I am a police officer. Bad ideas are my whole profession.'",
+    "They went round the back. The shed door had a padlock that had been broken and hung back on to look whole. Inside, the air was cold in a way that had nothing to do with ice. Ira swept her phone light along the wall.",
+    "Drums. Dozens of them, stacked in rows, blue steel, each with a paper label stuck on the side: 'ICE, DO NOT OPEN.' Deepak put his palm on one. He knocked twice. It rang like a bell.",
+    "'Ice does not ring,' he said quietly.",
+    "He unscrewed the cap and smelled it. His face changed. 'Diesel,' he said. 'Hundreds of litres of diesel. Subsidised marine diesel. The kind that is only for boats with a fisherman's card.'",
+    "A car door slammed outside. Then another.",
+    "Ira turned off the torch. In the darkness, both of them heard the same thing: footsteps, and the soft, patient jingle of a bunch of keys."
+   ]
+  },
+  {
+   "n": 11,
+   "title": "Locked In",
+   "recap": "The door shuts, the storm arrives, and help comes from an unexpected engine.",
+   "text": [
+    "The shed door closed with a sound like a dropped anvil. The keys turned outside. A voice said something in Tulu that Ira understood only by its tone, and then boots went away over the gravel.",
+    "'We are locked in,' said Deepak, in the calm tone of a man who is not calm.",
+    "'Yes.'",
+    "'In a shed full of illegal diesel.'",
+    "'Yes.'",
+    "'And a storm is coming.' Rain had started to drum on the roof, first politely, then like a thousand fingers. The wind found every gap in the tin and whistled through it.",
+    "They tried the door. They tried the window, which was barred. Deepak tried to call his station and got a screen that said 'No service'. Ira tried to call Mrs Kamath and got the same. It was the least helpful phone company in the history of India.",
+    "It was Ira who heard it first, under the roar of the rain. An engine, very close. Not a car. A low, uneven chug, like a heart with a cold. She knew that sound. She had heard it in a boat yard, from underneath a hull.",
+    "The door shook. There was a scrape of metal, a crack, and the padlock fell off in two pieces. Yusuf Beary stood in the doorway with a crowbar over his shoulder and rain pouring off his cap.",
+    "'Madam,' he said. 'I told you to ask quietly. Now quickly. Get in the auto.'"
+   ]
+  },
+  {
+   "n": 12,
+   "title": "Pinto Speaks",
+   "recap": "Ira finds the missing clerk at last, and he is more frightened of himself than of them.",
+   "text": [
+    "Nirmala Pinto's house in Kundapura had a courtyard, a tulsi plant and a very large black dog named Sultan, who accepted Ira after examining her shoes for one full minute. Inside, at the kitchen table, sat Mr Anthony Pinto. He was thinner than she remembered, and he was holding a cup of tea as if it might try to escape.",
+    "'You read it,' he said.",
+    "'I read it, and I nearly died in an ice plant because of it.'",
+    "He winced. 'Then you know I was right to leave.' He turned the cup in his hands. 'Miss Rao, I am not a hero. I am a clerk. For thirty-one years I wrote what I was told and called it my job. When they started adding boats that did not exist, I told myself it was accounting. It was only when I saw the diesel being loaded at night that I understood.'",
+    "'You wrote the margin note.'",
+    "'I wrote everything down. That is what clerks do when they are afraid: they write things down.' He looked up. 'The white-shirt man is called Prabhakar. He works for Mr Hegde. I heard him say that the old book was ashes. I let him believe it.'",
+    "'Where is the old book?'",
+    "He was quiet for a long moment. Sultan sighed under the table.",
+    "'It is somewhere safe,' said Mr Pinto. 'And it says things about me too. I have not told you everything. When I do, you may not want to protect me.'"
+   ]
+  },
+  {
+   "n": 13,
+   "title": "The Scanner",
+   "recap": "A stationery shop, a rented scanner and one very tense afternoon.",
+   "text": [
+    "Ira did what every reporter should do before anything else: she made copies. There was a stationery shop near the Kundapura bus stand run by a man named Ganesh, who owned one scanner and an unshakeable faith in the goodness of people who bought expensive envelopes.",
+    "'Ledger pages?' he said. 'Two rupees a page. Three for the colour.'",
+    "'Black and white is fine.'",
+    "'Nobody wants the colour of an accounts book, Madam,' said Ganesh, with sadness. He scanned all seventy pages while Ira watched the door, and Deepak watched the road, and Sultan the dog, who had followed them for reasons of his own, watched Ganesh's samosa.",
+    "By four o'clock, the files were on three memory cards, two email accounts and one very old laptop belonging to Nirmala. Ira put the first card inside her shoe. The second she posted to Mrs Kamath, in a plain envelope, with a note that said only, 'In case.' The third she gave to Deepak, who looked at it as if he had been handed a small, warm animal.",
+    "'What do I do with this?'",
+    "'Keep it. Do not use it. If I vanish, you use it.'",
+    "'That is not funny.'",
+    "'It is a little funny.'",
+    "'It is a little funny,' Deepak admitted, and put the card in his wallet, behind a photograph of his mother, where nobody would think to look.",
+    "Then his phone rang. He listened. His face went grey. 'They are at your office,' he said. 'Mr Hegde is at The Coastal Courier. With a lawyer.'"
+   ]
+  },
+  {
+   "n": 14,
+   "title": "Deadline",
+   "recap": "Ira writes the story of her life, and the story of her life gets a very official reply.",
+   "text": [
+    "By the time Ira reached the newsroom, the sun had set and the rain had come back, apologising. She ran up the stairs two at a time. The lights were on in Mrs Kamath's glass office, and inside she could see three people: the editor, a nervous man in a black coat holding a briefcase, and R K Hegde.",
+    "He was not smiling. That was the worst part. Without the smile, he looked like a man who owned a large, quiet piece of the sea.",
+    "Mrs Kamath opened the door. 'Ira,' she said. 'Come in. Mr Hegde has something to show us.'",
+    "The lawyer cleared his throat and laid a sheet of paper on the desk. It was stamped. It was signed. It said, in language that only lawyers and tax officers can love, that the Honourable Court had granted an interim order restraining The Coastal Courier from publishing certain statements concerning Sea Crest Marine Private Limited and its directors.",
+    "'It was granted this afternoon,' said the lawyer. 'You are all served.'",
+    "Ira looked at the paper. Then she looked at Mr Hegde. 'You knew what I was going to write before I did.'",
+    "'I know a great many things, Miss Rao,' said Mr Hegde, gently. 'For example, I know that a story printed in a hurry can ruin an honest man. It would be a pity for a bright young woman to make that mistake.'",
+    "Mrs Kamath said nothing. She looked at the injunction for a long time. Then she looked at Ira, and Ira could not read her face at all.",
+    "'Everyone please leave the room,' said Mrs Kamath. 'Except Ira.'"
+   ]
+  }
+ ]
+}
