@@ -3,6 +3,8 @@
 
 Usage: build_tales.py PAGE.html [YYYY-MM-DD]
 
+Also fills the quiz slot: the moral of each of today's two tales and one plant or coast fact read from the page.
+
 Stories are traditional (public domain) and retold here. Panels are original drawings made in SVG.
 Where a public-domain / CC0 illustration exists (tales_assets/), it is shown as a plate with credit.
 Episode number = days since 2026-09-30, cycling through the list.
@@ -348,6 +350,108 @@ def episode_html(series, label, ep, n, day):
             f'<p class="moral"><span class="lab">Moral</span> {E(ep["moral"])}</p>{plate}</article>')
 
 
+# ---------------------------------------------------------------- quiz
+# Morals of the full 33-episode list, grouped by theme. A wrong answer is never taken from the
+# same theme as the right one, so two options cannot both be defensible.
+MORAL_GROUPS = [
+    ["Cleverness can do what strength cannot.", "Keep a calm mind in danger. A quick thought can save you.", "Where force fails, a clever plan works.",
+     "A brave tongue can turn a large danger away.", "Make a plan when danger is near, but do not despair.", "A sly mind can trick a simple one.",
+     "A wise mind can make something of nothing."],
+    ["Small friends together are stronger than a great bully.", "When we quarrel, we all lose.", "United, we can lift what alone we cannot.",
+     "We become like those we keep company with.", "Do not let a third party settle your quarrels."],
+    ["A true leader thinks of others before himself.", "Kindness can open even a hard heart.", "The greatest gift is the one you give freely.",
+     "Even a small act of love can move the heavens.", "Patience is the sign of a strong heart.", "Kind words win where harsh words fail.",
+     "Honesty is worth more than gold.", "Truth and love hold great power."],
+    ["Borrowed glory does not last. Be yourself.", "A loud sound does not mean there is much inside.", "A disguise is only as good as the voice behind it.",
+     "Do not befriend an enemy who has a reason to lie.", "Beware of those who flatter you into harming others.", "Cheats are caught by their own cunning."],
+    ["Never act in anger before you know the truth.", "Do not meddle in what is not your business.", "Check the facts before you run.",
+     "Think before you speak.", "Do not build castles in the air.", "Each of us sees only part of the truth.", "Greed loses everything."],
+]
+
+
+def _rot(items, k):
+    k %= len(items)
+    return items[k:] + items[:k]
+
+
+def _options(right, wrong, day, qi):
+    """Right answer at a position that varies with the date and the question."""
+    opts = list(wrong)
+    pos = (day + qi) % (len(wrong) + 1)
+    opts.insert(pos, right)
+    return opts, pos
+
+
+def moral_question(ep, day, qi):
+    group = next(i for i, gr in enumerate(MORAL_GROUPS) if ep["moral"] in gr)
+    others = _rot([i for i in range(len(MORAL_GROUPS)) if i != group], day + qi)[:2]
+    wrong = [_rot(MORAL_GROUPS[i], day)[0] for i in others]
+    opts, pos = _options(ep["moral"], wrong, day, qi)
+    return dict(q=f"What is the moral of “{ep['title']}”?", a=opts, c=pos,
+                w=f"The moral is: {ep['moral']}")
+
+
+def _plants(page):
+    out = []
+    for art in page.split('<article class="plant')[1:]:
+        m = re.search(r'<h3>([^<]+)</h3>.*?<span class="kn-name" lang="kn">([^<]+)</span><span class="latin">([^<]+)</span>', art, re.S)
+        a = re.search(r'<p class="about">(.*?)</p>', art, re.S)
+        if m and a:
+            out.append(dict(name=html.unescape(m[1]), kn=html.unescape(m[2]), latin=html.unescape(m[3]),
+                            about=html.unescape(re.sub(r"<[^>]+>", "", a[1]))))
+    return out
+
+
+GRIM = re.compile(r"\b(die[sd]?|dead|death|kill\w*|murder\w*|suicide|rape\w*|assault\w*|body|bodies|accident|collapse\w*|drown\w*|arrest\w*|burglar\w*|theft|stolen|injur\w*)\b", re.I)
+
+
+def _stories(page):
+    out = []
+    for li in re.findall(r'<li class="story">(.*?)</li>', page, re.S):
+        m = re.search(r'<span class="place">([^<]+)</span><h3[^>]*>([^<]+)</h3>', li)
+        a = re.search(r'<span class="age">([^<]*)</span>', li)
+        if m and not GRIM.search(li):
+            out.append(dict(place=html.unescape(m[1]), head=html.unescape(m[2]), age=html.unescape(a[1]) if a else ""))
+    return out
+
+
+def fact_question(page, day):
+    plants, stories = _plants(page), _stories(page)
+    places = sorted({s["place"] for s in stories})
+    if (day // 1) % 2 == 1 and stories and len(places) >= 2:
+        st = stories[(day // 2) % len(stories)]
+        wrong = [p for p in _rot(places, day) if p != st["place"]][:2]
+        if len(wrong) == 1:
+            wrong.append(next(t for t in ("Mangaluru", "Udupi", "Kundapur") if t not in (st["place"], wrong[0])))
+        opts, pos = _options(st["place"], wrong, day, 2)
+        return dict(q=f"Coast: which place was this story reported from? “{st['head']}”", a=opts, c=pos,
+                    w=f"It was reported from {st['place']}" + (f", {st['age']}." if st["age"] else "."))
+    if len(plants) >= 3:
+        pl = plants[day % len(plants)]
+        wrong = [p for p in _rot(plants, day + 1) if p["name"] != pl["name"]][:2]
+        if (day // 2) % 2 == 0:
+            q, right, ws = f"Garden: which plant is called “{pl['kn']}” in Kannada?", pl["name"], [p["name"] for p in wrong]
+        else:
+            q, right, ws = f"Garden: what is the botanical name of {pl['name']}?", pl["latin"], [p["latin"] for p in wrong]
+        opts, pos = _options(right, ws, day, 2)
+        first = re.split(r"(?<=[.!?])\s", pl["about"])[0]
+        return dict(q=q, a=opts, c=pos, w=f"{pl['name']} ({pl['latin']}). {first}")
+    return None
+
+
+def quiz_html(day, pan, jat, page):
+    qs = [moral_question(pan, day, 0), moral_question(jat, day, 1)]
+    f = fact_question(page, day)
+    if f:
+        qs.append(f)
+    data = json.dumps(qs, ensure_ascii=False).replace("<", "\\u003c")
+    return ('<section class="quiz" id="quiz" aria-labelledby="h-quiz"><span class="kicker">Quiz</span>'
+            f'<h3 class="hl-2" id="h-quiz">{len(qs)} questions from today’s paper</h3>'
+            f'<script type="application/json" id="quiz-data">{data}</script>'
+            '<div id="quiz-body"></div><p class="score" id="quiz-score" aria-live="polite"></p>'
+            '<noscript><p>The quiz needs JavaScript.</p></noscript></section>')
+
+
 def main():
     page = sys.argv[1]
     d = datetime.date.fromisoformat(sys.argv[2]) if len(sys.argv) > 2 else datetime.date.today()
@@ -361,8 +465,14 @@ def main():
     s2, n = re.subn(r'<!--tales:start-->.*?<!--tales:end-->', lambda m: new, s, count=1, flags=re.S)
     if n != 1:
         sys.exit("tales slot not found")
-    open(page, "w", encoding="utf-8").write(s2)
+    qz = quiz_html(day, pan, jat, s2)
+    s3, n = re.subn(r'<!--quiz:start-->.*?<!--quiz:end-->', lambda m: f'<!--quiz:start-->{qz}<!--quiz:end-->', s2, count=1, flags=re.S)
+    if n != 1:
+        print("Quiz slot not found: run add_interactive.py first", file=sys.stderr)
+        s3 = s2
+    open(page, "w", encoding="utf-8").write(s3)
     print("Tales:", pan["title"], "|", jat["title"])
+    print("Quiz:", [q["q"] for q in json.loads(re.search(r'id="quiz-data">(.*?)</script>', qz, re.S)[1])])
 
 
 if __name__ == "__main__":

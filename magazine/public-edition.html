@@ -229,6 +229,57 @@ img { display: block; max-width: 100%; }
 @media (max-width: 960px) { .tale { padding: 0; border-left: 0; } .tale + .tale { border-top: 4px solid var(--rule); padding-top: 20px; } }
 @media (max-width: 520px) { .panels { grid-template-columns: minmax(0, 1fr); } }
 
+/* Reader tools, notices, quiz */
+.tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding-block: 8px; border-bottom: 1px solid var(--hair); }
+.tools .lab { color: var(--ink-2); margin-right: 4px; }
+.btn { font: 600 13px/1 var(--label); letter-spacing: .12em; text-transform: uppercase; padding: 10px 13px; border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; text-decoration: none; display: inline-block; }
+.btn:hover { background: var(--ink); color: var(--paper); }
+.btn:focus-visible { outline: 3px solid var(--red); outline-offset: 2px; }
+.btn.pri { background: var(--red); border-color: var(--red); color: #fff; }
+.btn.pri:hover { filter: brightness(.9); }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.chips .btn[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.kn { margin-top: 30px; border-top: 4px solid var(--rule); padding-top: 12px; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 0; }
+.kn > * { padding-inline: 22px; min-width: 0; }
+.kn > *:first-child { padding-left: 0; }
+.kn > *:last-child { padding-right: 0; border-left: 1px solid var(--rule); }
+.kn .note { border-left: 4px solid var(--red); padding: 8px 12px; margin-top: 10px; }
+.kn .note h4 { font: 700 19px/1.2 var(--head); }
+.kn .note p { font-size: 15.5px; margin-top: 4px; }
+.kn .empty { color: var(--ink-2); font-style: italic; }
+.send-box { display: flex; flex-direction: column; gap: 10px; }
+.send-box pre { white-space: pre-wrap; margin: 0; font: 400 14px/1.45 var(--text); background: var(--paper-2); padding: 10px 12px; }
+.quiz { margin-top: 30px; border-top: 4px solid var(--rule); padding-top: 12px; }
+.q { padding-block: 14px; border-top: 1px solid var(--hair); }
+.q:first-of-type { border-top: 0; }
+.q h4 { font: 700 19px/1.25 var(--head); margin-bottom: 8px; }
+.q .opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.q .opts .btn { text-transform: none; letter-spacing: 0; font: 500 15px/1.3 var(--text); text-align: left; }
+.q .opts .btn.right { background: var(--green); border-color: var(--green); color: var(--paper); }
+.q .opts .btn.wrong { background: var(--red); border-color: var(--red); color: #fff; }
+.q .why { margin-top: 8px; font-size: 15px; color: var(--ink-2); }
+.score { font: 800 22px/1.2 var(--head); margin-top: 10px; }
+.check-li { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 10px; }
+.check-li input { width: 20px; height: 20px; margin-top: 3px; accent-color: var(--green); }
+.check-li.done span { text-decoration: line-through; color: var(--ink-2); }
+.prog { font: 600 13px/1 var(--label); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 6px; }
+body { zoom: var(--zoom, 1); }
+@media (max-width: 960px) { .kn { grid-template-columns: minmax(0, 1fr); } .kn > * { padding-inline: 0; } .kn > *:last-child { border-left: 0; border-top: 1px solid var(--rule); padding-top: 16px; margin-top: 16px; } }
+
+/* Weather */
+.wx { margin-top: 30px; border-top: 4px solid var(--rule); padding-top: 12px; }
+.wx-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; margin-top: 10px; }
+.wx-day { padding: 8px 12px; border-left: 1px solid var(--hair); }
+.wx-day:first-child { border-left: 0; padding-left: 0; }
+.wx-day b { display: block; font: 700 13px/1.2 var(--label); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
+.wx-day .t { font: 800 26px/1.15 var(--head); margin: 4px 0; }
+.wx-day .t small { font: 500 17px/1 var(--head); color: var(--ink-2); }
+.wx-day .c { font: 600 15px/1.3 var(--text); }
+.wx-day .r { font: 400 14px/1.35 var(--text); color: var(--ink-2); margin-top: 2px; }
+.wx-src { font: 500 12.5px/1.4 var(--label); letter-spacing: .05em; color: var(--ink-2); margin-top: 10px; }
+.wx-src a { color: inherit; }
+@media (max-width: 720px) { .wx-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .wx-day:nth-child(odd) { border-left: 0; padding-left: 0; } }
+
 /* Colophon */
 .colophon { margin-top: clamp(40px, 6vw, 72px); padding-block: 16px 48px; border-top: 4px solid var(--rule); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 30px; color: var(--ink-2); }
 .colophon p { max-width: 64ch; font-size: 14.5px; }
@@ -273,6 +324,14 @@ img { display: block; max-width: 100%; }
     <span>Four sections, about ten minutes</span>
   </div>
 </div>
+
+<div class="sheet"><div class="tools" role="toolbar" aria-label="Reader tools">
+    <span class="lab">Reader tools</span>
+    <button class="btn" type="button" id="zoom-out" aria-label="Smaller text">A&minus;</button>
+    <button class="btn" type="button" id="zoom-in" aria-label="Larger text">A+</button>
+    <button class="btn" type="button" id="theme-toggle">Light / dark</button>
+    <a class="btn pri" id="wa-share" href="#" target="_blank" rel="noopener">Share on WhatsApp</a>
+  </div></div>
 
 <nav class="nav" aria-label="Sections">
   <div class="sheet nav-in">
@@ -367,6 +426,19 @@ img { display: block; max-width: 100%; }
         </p>
       </div>
     </div>
+  
+    <!--weather:start--><div class="wx" id="weather"><span class="kicker">Weather &middot; Mangaluru, next five days</span><div class="wx-grid"><div class="wx-day"><b>Today</b><div class="t">33&deg;<small> / 25&deg;</small></div><div class="c">Overcast</div><div class="r">Rain chance 67%, 0 mm</div></div><div class="wx-day"><b>Thu 1 Oct</b><div class="t">32&deg;<small> / 25&deg;</small></div><div class="c">Light drizzle</div><div class="r">Rain chance 76%, 0.3 mm</div></div><div class="wx-day"><b>Fri 2 Oct</b><div class="t">32&deg;<small> / 26&deg;</small></div><div class="c">Thunderstorm</div><div class="r">Rain chance 97%, 3.6 mm</div></div><div class="wx-day"><b>Sat 3 Oct</b><div class="t">30&deg;<small> / 25&deg;</small></div><div class="c">Light showers</div><div class="r">Rain chance 100%, 7.7 mm</div></div><div class="wx-day"><b>Sun 4 Oct</b><div class="t">30&deg;<small> / 24&deg;</small></div><div class="c">Light drizzle</div><div class="r">Rain chance 100%, 2.5 mm</div></div></div><p class="wx-src">High / low in &deg;C. Forecast from <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a>, a computer model for 12.91&deg;N 74.86&deg;E, fetched 30 September 2026, 20:45 India time. It is a forecast, not an observation, and can change.</p></div><!--weather:end-->
+    <div class="kn" id="kullangal">
+      <div>
+        <span class="kicker">Kullangal &amp; nearby &middot; notices for the day</span>
+        <!--notices:start--><p class="empty">No notices for today. If something is happening in Kullangal or nearby, send it in.</p><!--notices:end-->
+      </div>
+      <aside class="send-box" aria-label="Send your news">
+        <h3 class="hl-3">Send us your news</h3>
+        <p>Events, lost and found, road works, temple and school notices, shop openings. Send it by 8 pm and it can go in tomorrow's paper.</p>
+        <!--send:start--><p class="empty">The submission form is being set up. Until it opens, the editor cannot take notices.</p><!--send:end-->
+      </aside>
+    </div>
   </section>
 
   <section class="sec" id="garden" aria-labelledby="h-garden">
@@ -408,6 +480,7 @@ img { display: block; max-width: 100%; }
     <div class="sec-head"><span class="letter">D</span><h2 id="h-tales">Tales</h2><span class="lab">One episode a day &middot; Panchatantra and Jataka</span></div>
     <p class="guide-intro tales-intro">Two old Indian story books, one episode of each every morning, drawn as four panels with the moral at the end.</p>
 <!--tales:start--><div class="tales"><article class="tale"><span class="kicker">Panchatantra &middot; Episode 1 of 7</span><h3 class="hl-2">The Lion and the Clever Hare</h3><div class="panels"><figure class="panel"><svg viewBox="0 0 400 300" role="img" aria-label="A big lion roars while animals hide" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#BFE3F0"/><circle cx="350" cy="44" r="22" fill="#FFD54F"/><rect y="225" width="400" height="75" fill="#6DAA4F"/><rect x="23.0" y="165.0" width="14.0" height="70.0" fill="#7A4E2A"/><circle cx="30" cy="135.0" r="40.0" fill="#3F8F3F"/><circle cx="4.0" cy="153.0" r="26.0" fill="#4CA24C"/><circle cx="58.0" cy="151.0" r="26.0" fill="#4CA24C"/><rect x="365.7" y="177.0" width="12.6" height="63.0" fill="#7A4E2A"/><circle cx="372" cy="150.0" r="36.0" fill="#3F8F3F"/><circle cx="348.6" cy="166.2" r="23.400000000000002" fill="#4CA24C"/><circle cx="397.2" cy="164.39999999999998" r="23.400000000000002" fill="#4CA24C"/><g transform="translate(150 245) scale(1.5 1.5)" stroke="#2b2118" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M-34 -36 q-18 -6 -20 -26" fill="none" stroke-width="3"/><circle cx="-54" cy="-64" r="5" fill="#8A4B12"/><rect x="-28" y="-20" width="9" height="20" fill="#C98A3B"/><rect x="14" y="-20" width="9" height="20" fill="#C98A3B"/><ellipse cx="-2" cy="-36" rx="38" ry="24" fill="#C98A3B"/><circle cx="34" cy="-58" r="31" fill="#8A4B12"/><circle cx="34" cy="-56" r="20" fill="#E3AE55"/><circle cx="22" cy="-76" r="6" fill="#E3AE55"/><circle cx="46" cy="-76" r="6" fill="#E3AE55"/><circle cx="28" cy="-60" r="2.6" fill="#fff" stroke-width="1"/><circle cx="28.7" cy="-60" r="1.3" fill="#111" stroke="none"/><circle cx="42" cy="-60" r="2.6" fill="#fff" stroke-width="1"/><circle cx="42.7" cy="-60" r="1.3" fill="#111" stroke="none"/><path d="M31 -52 l6 0 l-3 5z" fill="#5a2d0c"/><path d="M28 -44 q6 6 12 0" fill="none"/></g><g transform="translate(320 250) scale(-0.8 0.8)" stroke="#2b2118" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><circle cx="-24" cy="-26" r="8" fill="#fff"/><ellipse cx="0" cy="-24" rx="24" ry="17" fill="#F4F1EA"/><rect x="8" y="-14" width="8" height="14" rx="4" fill="#F4F1EA"/><rect x="-14" y="-10" width="16" height="10" rx="5" fill="#F4F1EA"/><ellipse cx="17" cy="-58" rx="4.5" ry="17" fill="#F4F1EA"/><ellipse cx="27" cy="-57" rx="4.5" ry="16" fill="#F4F1EA"/><circle cx="24" cy="-38" r="12" fill="#F4F1EA"/><circle cx="28" cy="-40" r="2.4" fill="#fff" stroke-width="1"/><circle cx="28.7" cy="-40" r="1.2" fill="#111" stroke="none"/><circle cx="35" cy="-37" r="2.2" fill="#e88"/></g><text x="40" y="60" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="26" fill="#C62828" stroke="#fff" stroke-width="1.2" paint-order="stroke" transform="rotate(-6 40 60)">ROAR!</text></svg><figcaption><b>1</b>A greedy lion hunted every animal in the forest, day after day. The animals feared they would all be gone.</figcaption></figure><figure class="panel"><svg viewBox="0 0 400 300" role="img" aria-label="Animals bow before the lion" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#BFE3F0"/><circle cx="350" cy="44" r="22" fill="#FFD54F"/><rect y="225" width="400" height="75" fill="#6DAA4F"/><rect x="23.0" y="165.0" width="14.0" height="70.0" fill="#7A4E2A"/><circle cx="30" cy="135.0" r="40.0" fill="#3F8F3F"/><circle cx="4.0" cy="153.0" r="26.0" fill="#4CA24C"/><circle cx="58.0" cy="151.0" r="26.0" fill="#4CA24C"/><rect x="365.7" y="177.0" width="12.6" height="63.0" fill="#7A4E2A"/><circle cx="372" cy="150.0" r="36.0" fill="#3F8F3F"/><circle cx="348.6" cy="166.2" r="23.400000000000002" fill="#4CA24C"/><circle cx="397.2" cy="164.39999999999998" r="23.400000000000002" fill="#4CA24C"/><g transform="translate(120 245) scale(1.4 1.4)" stroke="#2b2118" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M-34 -36 q-18 -6 -20 -26" fill="none" stroke-width="3"/><circle cx="-54" cy="-64" r="5" fill="#8A4B12"/><rect x="-28" y="-20" width="9" height="20" fill="#C98A3B"/><rect x="14" y="-20" width="9" height="20" fill="#C98A3B"/><ellipse cx="-2" cy="-36" rx="38" ry="24" fill="#C98A3B"/><circle cx="34" cy="-58" r="31" fill="#8A4B12"/><circle cx="34" cy="-56" r="20" fill="#E3AE55"/><circle cx="22" cy="-76" r="6" fill="#E3AE55"/><circle cx="46" cy="-76" r="6" fill="#E3AE55"/><circle cx="28" cy="-60" r="2.6" fill="#fff" stroke-width="1"/><circle cx="28.7" cy="-60" r="1.3" fill="#111" stroke="none"/><circle cx="42" cy="-60" r="2.6" fill="#fff" stroke-width="1"/><circle cx="42.7" cy="-60" r="1.3" fill="#111" stroke="none"/><path d="M31 -52 l6 0 l-3 5z" fill="#5a2d0c"/><path d="M28 -44 q6 6 12 0" fill="none"/></g><g transform="translate(290 250) scale(-0.8 0.8)" stroke="#2b2118" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><rect x="-26" y="-32" width="6" height="32" fill="#C99A5B"/><rect x="-14" y="-32" width="6" height="32" fill="#C99A5B"/><rect x="12" y="-32" width="6" height="32" fill="#C99A5B"/><rect x="24" y="-32" width="6" height="32" fill="#C99A5B"/><ellipse cx="0" cy="-46" rx="34" ry="16" fill="#C99A5B"/><path d="M26 -52 l14 -30 l14 6 l-12 34z" fill="#C99A5B"/><ellipse cx="52" cy="-82" rx="14" ry="10" fill="#C99A5B"/><path d="M40 -90 q-6 -18 4 -26 M50 -90 q2 -16 12 -22" fill="none" stroke="#6B4A2A" stroke-width="3"/><circle cx="54" cy="-84" r="2.2" fill="#fff" stroke-width="1"/><circle cx="54.7" cy="-84" r="1.1" fill="#111" stroke="none"/><circle cx="-10" cy="-50" r="2" fill="#fff" stroke="none"/><circle cx="6" cy="-42" r="2" fill="#fff" stroke="none"/><circle cx="-20" cy="-42" r="2" fill="#fff" stroke="none"/></g><g transform="translate(360 250) scale(-0.6 0.6)" stroke="#2b2118" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><circle cx="-24" cy="-26" r="8" fill="#fff"/><ellipse cx="0" cy="-24" rx="24" ry="17" fill="#F4F1EA"/><rect x="8" y="-14" width="8" height="14" rx="4" fill="#F4F1EA"/><rect x="-14" y="-10" width="16" height="10" rx="5" fill="#F4F1EA"/><ellipse cx="17" cy="-58" rx="4.5" ry="17" fill="#F4F1EA"/><ellipse cx="27" cy="-57" rx="4.5" ry="16" fill="#F4F1EA"/><circle cx="24" cy="-38" r="12" fill="#F4F1EA"/><circle cx="28" cy="-40" r="2.4" fill="#fff" stroke-width="1"/><circle cx="28.7" cy="-40" r="1.2" fill="#111" stroke="none"/><circle cx="35" cy="-37" r="2.2" fill="#e88"/></g></svg><figcaption><b>2</b>They made a deal. One animal would go to the lion each day, so he would not have to hunt.</figcaption></figure><figure class="panel"><svg viewBox="0 0 400 300" role="img" aria-label="The hare points into a well" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#BFE3F0"/><circle cx="350" cy="44" r="22" fill="#FFD54F"/><rect y="225" width="400" height="75" fill="#6DAA4F"/><ellipse cx="200" cy="232" rx="46" ry="14" fill="#7B7B7B" stroke="#2b2118" stroke-width="1.5"/><ellipse cx="200" cy="230" rx="34" ry="9" fill="#2B4B63"/><rect x="23.0" y="165.0" width="14.0" height="70.0" fill="#7A4E2A"/><circle cx="30" cy="135.0" r="40.0" fill="#3F8F3F"/><circle cx="4.0" cy="153.0" r="26.0" fill="#4CA24C"/><circle cx="58.0" cy="151.0" r="26.0" fill="#4CA24C"/><rect x="365.7" y="177.0" width="12.6" height="63.0" fill="#7A4E2A"/><circle cx="372" cy="150.0" r="36.0" fill="#3F8F3F"/><circle cx="348.6" cy="166.2" r="23.400000000000002" fill="#4CA24C"/><circle cx="397.2" cy="164.39999999999998" r="23.400000000000002" fill="#4CA24C"/><g transform="translate(150 250) scale(1.2 1.2)" stroke="#2b2118" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><circle cx="-24" cy="-26" r="8" fill="#fff"/><ellipse cx="0" cy="-24" rx="24" ry="17" fill="#F4F1EA"/><rect x="8" y="-14" width="8" height="14" rx="4" fill="#F4F1EA"/><rect x="-14" y="-10" width="16" height="10" rx="5" fill="#F4F1EA"/><ellipse cx="17" cy="-58" rx="4.5" ry="17" fill="#F4F1EA"/><ellipse cx="27" cy="-57" rx="4.5" ry="16" fill="#F4F1EA"/><circle cx="24" cy="-38" r="12" fill="#F4F1EA"/><circle cx="28" cy="-40" r="2.4" fill="#fff" stroke-width="1"/><circle cx="28.7" cy="-40" r="1.2" fill="#111" stroke="none"/><circle cx="35" cy="-37" r="2.2" fill="#e88"/></g><g transform="translate(340 245) scale(-1.2 1.2)" stroke="#2b2118" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M-34 -36 q-18 -6 -20 -26" fill="none" stroke-width="3"/><circle cx="-54" cy="-64" r="5" fill="#8A4B12"/><rect x="-28" y="-20" width="9" height="20" fill="#C98A3B"/><rect x="14" y="-20" width="9" height="20" fill="#C98A3B"/><ellipse cx="-2" cy="-36" rx="38" ry="24" fill="#C98A3B"/><circle cx="34" cy="-58" r="31" fill="#8A4B12"/><circle cx="34" cy="-56" r="20" fill="#E3AE55"/><circle cx="22" cy="-76" r="6" fill="#E3AE55"/><circle cx="46" cy="-76" r="6" fill="#E3AE55"/><circle cx="28" cy="-60" r="2.6" fill="#fff" stroke-width="1"/><circle cx="28.7" cy="-60" r="1.3" fill="#111" stroke="none"/><circle cx="42" cy="-60" r="2.6" fill="#fff" stroke-width="1"/><circle cx="42.7" cy="-60" r="1.3" fill="#111" stroke="none"/><path d="M31 -52 l6 0 l-3 5z" fill="#5a2d0c"/><path d="M28 -44 q6 6 12 0" fill="none"/></g></svg><figcaption><b>3</b>One day it was the little hare&#x27;s turn. He walked slowly, then told the hungry lion that another lion had stopped him on the way.</figcaption></figure><figure class="panel"><svg viewBox="0 0 400 300" role="img" aria-label="The lion looks down at his reflection in the well" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#BFE3F0"/><circle cx="350" cy="44" r="22" fill="#FFD54F"/><rect y="225" width="400" height="75" fill="#6DAA4F"/><ellipse cx="200" cy="232" rx="46" ry="14" fill="#7B7B7B" stroke="#2b2118" stroke-width="1.5"/><ellipse cx="200" cy="230" rx="34" ry="9" fill="#2B4B63"/><rect x="23.0" y="165.0" width="14.0" height="70.0" fill="#7A4E2A"/><circle cx="30" cy="135.0" r="40.0" fill="#3F8F3F"/><circle cx="4.0" cy="153.0" r="26.0" fill="#4CA24C"/><circle cx="58.0" cy="151.0" r="26.0" fill="#4CA24C"/><rect x="365.7" y="177.0" width="12.6" height="63.0" fill="#7A4E2A"/><circle cx="372" cy="150.0" r="36.0" fill="#3F8F3F"/><circle cx="348.6" cy="166.2" r="23.400000000000002" fill="#4CA24C"/><circle cx="397.2" cy="164.39999999999998" r="23.400000000000002" fill="#4CA24C"/><g transform="translate(120 240) scale(1.4 1.4)" stroke="#2b2118" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M-34 -36 q-18 -6 -20 -26" fill="none" stroke-width="3"/><circle cx="-54" cy="-64" r="5" fill="#8A4B12"/><rect x="-28" y="-20" width="9" height="20" fill="#C98A3B"/><rect x="14" y="-20" width="9" height="20" fill="#C98A3B"/><ellipse cx="-2" cy="-36" rx="38" ry="24" fill="#C98A3B"/><circle cx="34" cy="-58" r="31" fill="#8A4B12"/><circle cx="34" cy="-56" r="20" fill="#E3AE55"/><circle cx="22" cy="-76" r="6" fill="#E3AE55"/><circle cx="46" cy="-76" r="6" fill="#E3AE55"/><circle cx="28" cy="-60" r="2.6" fill="#fff" stroke-width="1"/><circle cx="28.7" cy="-60" r="1.3" fill="#111" stroke="none"/><circle cx="42" cy="-60" r="2.6" fill="#fff" stroke-width="1"/><circle cx="42.7" cy="-60" r="1.3" fill="#111" stroke="none"/><path d="M31 -52 l6 0 l-3 5z" fill="#5a2d0c"/><path d="M28 -44 q6 6 12 0" fill="none"/></g><g transform="translate(310 250) scale(-1.0 1.0)" stroke="#2b2118" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><circle cx="-24" cy="-26" r="8" fill="#fff"/><ellipse cx="0" cy="-24" rx="24" ry="17" fill="#F4F1EA"/><rect x="8" y="-14" width="8" height="14" rx="4" fill="#F4F1EA"/><rect x="-14" y="-10" width="16" height="10" rx="5" fill="#F4F1EA"/><ellipse cx="17" cy="-58" rx="4.5" ry="17" fill="#F4F1EA"/><ellipse cx="27" cy="-57" rx="4.5" ry="16" fill="#F4F1EA"/><circle cx="24" cy="-38" r="12" fill="#F4F1EA"/><circle cx="28" cy="-40" r="2.4" fill="#fff" stroke-width="1"/><circle cx="28.7" cy="-40" r="1.2" fill="#111" stroke="none"/><circle cx="35" cy="-37" r="2.2" fill="#e88"/></g><text x="220" y="70" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="26" fill="#C62828" stroke="#fff" stroke-width="1.2" paint-order="stroke" transform="rotate(-6 220 70)">SPLASH!</text></svg><figcaption><b>4</b>The hare led him to a deep well. The lion saw his own reflection, roared at the &#x27;rival&#x27;, and leapt in. The forest was safe again.</figcaption></figure></div><p class="moral"><span class="lab">Moral</span> Cleverness can do what strength cannot.</p></article><article class="tale"><span class="kicker">Jataka tales &middot; Episode 1 of 6</span><h3 class="hl-2">The Monkey King&#x27;s Bridge</h3><div class="panels"><figure class="panel"><svg viewBox="0 0 400 300" role="img" aria-label="Monkeys eat mangoes beside a river" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#C9E8F4"/><circle cx="350" cy="44" r="22" fill="#FFD54F"/><rect y="225" width="400" height="75" fill="#6DAA4F"/><rect y="200" width="400" height="60" fill="#4A9BD4"/><path d="M0 214 q20 -8 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="#fff" stroke-width="2" opacity=".7"/><rect x="80.2" y="137.0" width="19.599999999999998" height="98.0" fill="#7A4E2A"/><circle cx="90" cy="95.0" r="56.0" fill="#3F8F3F"/><circle cx="53.6" cy="120.2" r="36.4" fill="#4CA24C"/><circle cx="129.2" cy="117.4" r="36.4" fill="#4CA24C"/><circle cx="67.6" cy="100.6" r="4.8999999999999995" fill="#7B3F9E" stroke="none"/><circle cx="109.6" cy="86.6" r="4.8999999999999995" fill="#7B3F9E" stroke="none"/><circle cx="92.8" cy="117.4" r="4.8999999999999995" fill="#7B3F9E" stroke="none"/><g transform="translate(150 190) scale(0.9 0.9)" stroke="#2b2118" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M-12 -30 q-30 6 -26 -30 q2 -10 10 -8" fill="none" stroke-width="4"/><rect x="-10" y="-16" width="8" height="16" fill="#8B5A2B"/><rect x="4" y="-16" width="8" height="16" fill="#8B5A2B"/><ellipse cx="0" cy="-42" rx="16" ry="26" fill="#8B5A2B"/><ellipse cx="2" cy="-38" rx="9" ry="16" fill="#E8C39A"/><path d="M12 -50 q16 6 18 -8" fill="none" stroke-width="5"/><circle cx="0" cy="-78" r="14" fill="#8B5A2B"/><circle cx="-14" cy="-80" r="5" fill="#E8C39A"/><circle cx="14" cy="-80" r="5" fill="#E8C39A"/><ellipse cx="1" cy="-75" rx="9" ry="8" fill="#E8C39A"/><circle cx="-3" cy="-80" r="2.2" fill="#fff" stroke-width="1"/><circle cx="-2.3" cy="-80" r="1.1" fill="#111" stroke="none"/><circle cx="6" cy="-80" r="2.2" fill="#fff" stroke-width="1"/><circle cx="6.7" cy="-80" r="1.1" fill="#111" stroke="none"/><path d="M-3 -71 q4 3 8 0" fill="none"/></g><g transform="translate(230 245) scale(-0.8 0.8)" stroke="#2b2118" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M-12 -30 q-30 6 -26 -30 q2 -10 10 -8" fill="none" stroke-width="4"/><rect x="-10" y="-16" width="8" height="16" fill="#8B5A2B"/><rect x="4" y="-16" width="8" height="16" fill="#8B5A2B"/><ellipse cx="0" cy="-42" rx="16" ry="26" fill="#8B5A2B"/><ellipse cx="2" cy="-38" rx="9" ry="16" fill="#E8C39A"/><path d="M12 -50 q16 6 18 -8" fill="none" stroke-width="5"/><circle cx="0" cy="-78" r="14" fill="#8B5A2B"/><circle cx="-14" cy="-80" r="5" fill="#E8C39A"/><circle cx="14" cy="-80" r="5" fill="#E8C39A"/><ellipse cx="1" cy="-75" rx="9" ry="8" fill="#E8C39A"/><circle cx="-3" cy="-80" r="2.2" fill="#fff" stroke-width="1"/><circle cx="-2.3" cy="-80" r="1.1" fill="#111" stroke="none"/><circle cx="6" cy="-80" r="2.2" fill="#fff" stroke-width="1"/><circle cx="6.7" cy="-80" r="1.1" fill="#111" stroke="none"/><path d="M-3 -71 q4 3 8 0" fill="none"/></g></svg><figcaption><b>1</b>A monkey king led eighty thousand monkeys in a great mango tree beside the river. Everyone ate happily.</figcaption></figure><figure class="panel"><svg viewBox="0 0 400 300" role="img" aria-label="Soldiers shoot arrows at monkeys" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#C9E8F4"/><circle cx="350" cy="44" r="22" fill="#FFD54F"/><rect y="225" width="400" height="75" fill="#6DAA4F"/><rect y="200" width="400" height="60" fill="#4A9BD4"/><path d="M0 214 q20 -8 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="#fff" stroke-width="2" opacity=".7"/><g transform="translate(330 245) scale(-1.0 1.0)" stroke="#2b2118" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M-18 0 l6 -70 h24 l6 70z" fill="#8E44AD"/><path d="M-14 -66 l-16 26 M14 -66 l16 26" fill="none" stroke-width="6" stroke="#C68E5E"/><circle cx="0" cy="-82" r="13" fill="#C68E5E"/><path d="M-13 -92 l4 -12 l5 8 l4 -12 l4 12 l5 -8 l4 12z" fill="#F2C230"/><circle cx="-4" cy="-84" r="2" fill="#fff" stroke-width="1"/><circle cx="-3.3" cy="-84" r="1.0" fill="#111" stroke="none"/><circle cx="6" cy="-84" r="2" fill="#fff" stroke-width="1"/><circle cx="6.7" cy="-84" r="1.0" fill="#111" stroke="none"/><path d="M-3 -76 q4 3 8 0" fill="none" stroke-width="1.2"/></g><g transform="translate(150 245) scale(0.9 0.9)" stroke="#2b2118" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M-12 -30 q-30 6 -26 -30 q2 -10 10 -8" fill="none" stroke-width="4"/><rect x="-10" y="-16" width="8" height="16" fill="#8B5A2B"/><rect x="4" y="-16" width="8" height="16" fill="#8B5A2B"/><ellipse cx="0" cy="-42" rx="16" ry="26" fill="#8B5A2B"/><ellipse cx="2" cy="-38" rx="9" ry="16" fill="#E8C39A"/><path d="M12 -50 q16 6 18 -8" fill="none" stroke-width="5"/><circle cx="0" cy="-78" r="14" fill="#8B5A2B"/><circle cx="-14" cy="-80" r="5" fill="#E8C39A"/><circle cx="14" cy="-80" r="5" fill="#E8C39A"/><ellipse cx="1" cy="-75" rx="9" ry="8" fill="#E8C39A"/><circle cx="-3" cy="-80" r="2.2" fill="#fff" stroke-width="1"/><circle cx="-2.3" cy="-80" r="1.1" fill="#111" stroke="none"/><circle cx="6" cy="-80" r="2.2" fill="#fff" stroke-width="1"/><circle cx="6.7" cy="-80" r="1.1" fill="#111" stroke="none"/><path d="M-3 -71 q4 3 8 0" fill="none"/></g></svg><figcaption><b>2</b>A king of men heard about the tree and sent his archers. Monkeys leapt in terror. The only way out was across the river.</figcaption></figure><figure class="panel"><svg viewBox="0 0 400 300" role="img" aria-label="The monkey king stretches across the river" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#C9E8F4"/><circle cx="350" cy="44" r="22" fill="#FFD54F"/><rect y="225" width="400" height="75" fill="#6DAA4F"/><rect y="200" width="400" height="60" fill="#4A9BD4"/><path d="M0 214 q20 -8 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="#fff" stroke-width="2" opacity=".7"/><rect y="200" width="400" height="100" fill="#4A9BD4" opacity=".92"/><path d="M0 208 q20 -8 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="#fff" stroke-width="2" opacity=".7"/><g transform="translate(120 190) scale(1.2 1.2)" stroke="#2b2118" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M-12 -30 q-30 6 -26 -30 q2 -10 10 -8" fill="none" stroke-width="4"/><rect x="-10" y="-16" width="8" height="16" fill="#8B5A2B"/><rect x="4" y="-16" width="8" height="16" fill="#8B5A2B"/><ellipse cx="0" cy="-42" rx="16" ry="26" fill="#8B5A2B"/><ellipse cx="2" cy="-38" rx="9" ry="16" fill="#E8C39A"/><path d="M12 -50 q16 6 18 -8" fill="none" stroke-width="5"/><circle cx="0" cy="-78" r="14" fill="#8B5A2B"/><circle cx="-14" cy="-80" r="5" fill="#E8C39A"/><circle cx="14" cy="-80" r="5" fill="#E8C39A"/><ellipse cx="1" cy="-75" rx="9" ry="8" fill="#E8C39A"/><circle cx="-3" cy="-80" r="2.2" fill="#fff" stroke-width="1"/><circle cx="-2.3" cy="-80" r="1.1" fill="#111" stroke="none"/><circle cx="6" cy="-80" r="2.2" fill="#fff" stroke-width="1"/><circle cx="6.7" cy="-80" r="1.1" fill="#111" stroke="none"/><path d="M-3 -71 q4 3 8 0" fill="none"/></g><g transform="translate(260 190) scale(-0.6 0.6)" stroke="#2b2118" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M-12 -30 q-30 6 -26 -30 q2 -10 10 -8" fill="none" stroke-width="4"/><rect x="-10" y="-16" width="8" height="16" fill="#8B5A2B"/><rect x="4" y="-16" width="8" height="16" fill="#8B5A2B"/><ellipse cx="0" cy="-42" rx="16" ry="26" fill="#8B5A2B"/><ellipse cx="2" cy="-38" rx="9" ry="16" fill="#E8C39A"/><path d="M12 -50 q16 6 18 -8" fill="none" stroke-width="5"/><circle cx="0" cy="-78" r="14" fill="#8B5A2B"/><circle cx="-14" cy="-80" r="5" fill="#E8C39A"/><circle cx="14" cy="-80" r="5" fill="#E8C39A"/><ellipse cx="1" cy="-75" rx="9" ry="8" fill="#E8C39A"/><circle cx="-3" cy="-80" r="2.2" fill="#fff" stroke-width="1"/><circle cx="-2.3" cy="-80" r="1.1" fill="#111" stroke="none"/><circle cx="6" cy="-80" r="2.2" fill="#fff" stroke-width="1"/><circle cx="6.7" cy="-80" r="1.1" fill="#111" stroke="none"/><path d="M-3 -71 q4 3 8 0" fill="none"/></g></svg><figcaption><b>3</b>The monkey king stretched his body from the tree to the far bank and made a living bridge. The monkeys crossed over his back.</figcaption></figure><figure class="panel"><svg viewBox="0 0 400 300" role="img" aria-label="The king of men bows to the monkey king" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="300" fill="#C9E8F4"/><circle cx="350" cy="44" r="22" fill="#FFD54F"/><rect y="225" width="400" height="75" fill="#6DAA4F"/><rect y="200" width="400" height="60" fill="#4A9BD4"/><path d="M0 214 q20 -8 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="#fff" stroke-width="2" opacity=".7"/><g transform="translate(130 245) scale(1.2 1.2)" stroke="#2b2118" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M-12 -30 q-30 6 -26 -30 q2 -10 10 -8" fill="none" stroke-width="4"/><rect x="-10" y="-16" width="8" height="16" fill="#8B5A2B"/><rect x="4" y="-16" width="8" height="16" fill="#8B5A2B"/><ellipse cx="0" cy="-42" rx="16" ry="26" fill="#8B5A2B"/><ellipse cx="2" cy="-38" rx="9" ry="16" fill="#E8C39A"/><path d="M12 -50 q16 6 18 -8" fill="none" stroke-width="5"/><circle cx="0" cy="-78" r="14" fill="#8B5A2B"/><circle cx="-14" cy="-80" r="5" fill="#E8C39A"/><circle cx="14" cy="-80" r="5" fill="#E8C39A"/><ellipse cx="1" cy="-75" rx="9" ry="8" fill="#E8C39A"/><circle cx="-3" cy="-80" r="2.2" fill="#fff" stroke-width="1"/><circle cx="-2.3" cy="-80" r="1.1" fill="#111" stroke="none"/><circle cx="6" cy="-80" r="2.2" fill="#fff" stroke-width="1"/><circle cx="6.7" cy="-80" r="1.1" fill="#111" stroke="none"/><path d="M-3 -71 q4 3 8 0" fill="none"/></g><g transform="translate(290 245) scale(-1.2 1.2)" stroke="#2b2118" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M-18 0 l6 -70 h24 l6 70z" fill="#8E44AD"/><path d="M-14 -66 l-16 26 M14 -66 l16 26" fill="none" stroke-width="6" stroke="#C68E5E"/><circle cx="0" cy="-82" r="13" fill="#C68E5E"/><path d="M-13 -92 l4 -12 l5 8 l4 -12 l4 12 l5 -8 l4 12z" fill="#F2C230"/><circle cx="-4" cy="-84" r="2" fill="#fff" stroke-width="1"/><circle cx="-3.3" cy="-84" r="1.0" fill="#111" stroke="none"/><circle cx="6" cy="-84" r="2" fill="#fff" stroke-width="1"/><circle cx="6.7" cy="-84" r="1.0" fill="#111" stroke="none"/><path d="M-3 -76 q4 3 8 0" fill="none" stroke-width="1.2"/></g></svg><figcaption><b>4</b>The king of men watched, moved. He put down his bow and cared for the monkey king. He said, &#x27;You are the true king of this forest.&#x27;</figcaption></figure></div><p class="moral"><span class="lab">Moral</span> A true leader thinks of others before himself.</p></article></div><!--tales:end-->
+    <!--quiz:start--><section class="quiz" id="quiz" aria-labelledby="h-quiz"><span class="kicker">Quiz</span><h3 class="hl-2" id="h-quiz">3 questions from today’s paper</h3><script type="application/json" id="quiz-data">[{"q": "What is the moral of “The Lion and the Clever Hare”?", "a": ["Cleverness can do what strength cannot.", "Small friends together are stronger than a great bully.", "A true leader thinks of others before himself."], "c": 0, "w": "The moral is: Cleverness can do what strength cannot."}, {"q": "What is the moral of “The Monkey King's Bridge”?", "a": ["Small friends together are stronger than a great bully.", "A true leader thinks of others before himself.", "Borrowed glory does not last. Be yourself."], "c": 1, "w": "The moral is: A true leader thinks of others before himself."}, {"q": "Garden: which plant is called “ಮಲ್ಲಿಗೆ” in Kannada?", "a": ["Aboli", "Hibiscus", "Udupi Mallige"], "c": 2, "w": "Udupi Mallige (Jasminum sambac). Also called Shankarpura mallige, after the villages near Udupi where it is grown in home gardens."}]</script><div id="quiz-body"></div><p class="score" id="quiz-score" aria-live="polite"></p><noscript><p>The quiz needs JavaScript.</p></noscript></section><!--quiz:end-->
     <p class="srcs" style="margin-top:22px"><span class="by">The stories are traditional and in the public domain, retold for this paper. The four-panel drawings are original. Older illustrations are credited under their episode.</span></p>
   </section>
 
@@ -416,3 +489,97 @@ img { display: block; max-width: 100%; }
     <p>Built on 30 September 2026 from the sources linked in each section. Plant photographs are from Wikimedia Commons and change every day. A new edition replaces this one each morning.</p>
   </footer>
 </main>
+<script>
+(function () {
+  var root = document.documentElement;
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+  // zoom
+  var z = parseFloat(store('kv-zoom')) || 1;
+  function setZoom(v) { z = Math.max(.85, Math.min(1.4, v)); root.style.setProperty('--zoom', z); store('kv-zoom', String(z)); }
+  setZoom(z);
+  var zi = document.getElementById('zoom-in'), zo = document.getElementById('zoom-out');
+  if (zi) zi.onclick = function () { setZoom(z + .1); };
+  if (zo) zo.onclick = function () { setZoom(z - .1); };
+  // theme
+  var saved = store('kv-theme');
+  if (saved === 'dark' || saved === 'light') root.setAttribute('data-theme', saved);
+  var tt = document.getElementById('theme-toggle');
+  if (tt) tt.onclick = function () {
+    var dark = root.getAttribute('data-theme') === 'dark' || (!root.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    var next = dark ? 'light' : 'dark';
+    root.setAttribute('data-theme', next); store('kv-theme', next);
+  };
+  // share
+  var wa = document.getElementById('wa-share');
+  if (wa) wa.href = 'https://wa.me/?text=' + encodeURIComponent('Kullangal Vaarte, the daily paper of the Mangaluru and Udupi coast: https://claude.ai/artifact/7voAxG4qkUxsec11FZmraw');
+  // coast filter
+  var list = document.querySelector('#coast ul');
+  if (list) {
+    var items = Array.prototype.slice.call(list.querySelectorAll('.story'));
+    var places = [];
+    items.forEach(function (li) { var p = li.querySelector('.place'); if (p && places.indexOf(p.textContent) < 0) places.push(p.textContent); });
+    if (places.length > 1) {
+      var bar = document.createElement('div'); bar.className = 'chips'; bar.setAttribute('role', 'group'); bar.setAttribute('aria-label', 'Filter stories by place');
+      ['All'].concat(places).forEach(function (name, i) {
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'btn'; b.textContent = name; b.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+        b.onclick = function () {
+          Array.prototype.forEach.call(bar.children, function (c) { c.setAttribute('aria-pressed', c === b ? 'true' : 'false'); });
+          items.forEach(function (li) { var p = li.querySelector('.place'); li.hidden = !(i === 0 || (p && p.textContent === name)); });
+        };
+        bar.appendChild(b);
+      });
+      list.parentNode.insertBefore(bar, list);
+    }
+  }
+  // garden checklist
+  var lis = document.querySelectorAll('#garden .month li');
+  if (lis.length) {
+    var box = document.querySelector('#garden .month');
+    var prog = document.createElement('div'); prog.className = 'prog'; box.insertBefore(prog, box.querySelector('ul'));
+    var key = 'kv-garden-' + (box.textContent.length);
+    var done = {}; try { done = JSON.parse(store(key) || '{}') || {}; } catch (e) { done = {}; }
+    function update() { var n = 0; lis.forEach(function (li, i) { if (done[i]) n++; }); prog.textContent = n + ' of ' + lis.length + ' done this month'; }
+    lis.forEach(function (li, i) {
+      var text = li.textContent; li.textContent = ''; li.className = 'check-li' + (done[i] ? ' done' : '');
+      var cb = document.createElement('input'); cb.type = 'checkbox'; cb.id = 'gc' + i; cb.checked = !!done[i];
+      var sp = document.createElement('span'); sp.textContent = text;
+      var lab = document.createElement('label'); lab.htmlFor = cb.id; lab.appendChild(sp);
+      cb.onchange = function () { done[i] = cb.checked; li.className = 'check-li' + (cb.checked ? ' done' : ''); store(key, JSON.stringify(done)); update(); };
+      li.appendChild(cb); li.appendChild(lab);
+    });
+    update();
+  }
+  // quiz
+  var qd = document.getElementById('quiz-data');
+  var qb = document.getElementById('quiz-body');
+  if (qd && qb) {
+    var qs = []; try { qs = JSON.parse(qd.textContent); } catch (e) { qs = []; }
+    var score = 0, answered = 0, out = document.getElementById('quiz-score');
+    qs.forEach(function (q, qi) {
+      var wrap = document.createElement('div'); wrap.className = 'q';
+      var h = document.createElement('h4'); h.textContent = (qi + 1) + '. ' + q.q; wrap.appendChild(h);
+      var opts = document.createElement('div'); opts.className = 'opts';
+      var why = document.createElement('p'); why.className = 'why'; why.hidden = true; why.setAttribute('aria-live', 'polite');
+      q.a.forEach(function (text, ai) {
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'btn'; b.textContent = text;
+        b.onclick = function () {
+          if (wrap.getAttribute('data-done')) return; wrap.setAttribute('data-done', '1');
+          answered++; var ok = ai === q.c; if (ok) score++;
+          Array.prototype.forEach.call(opts.children, function (c, ci) { c.disabled = true; if (ci === q.c) c.classList.add('right'); else if (c === b) c.classList.add('wrong'); });
+          why.hidden = false; why.textContent = (ok ? 'Correct. ' : 'Not quite. ') + (q.w || '');
+          if (answered === qs.length && out) out.textContent = 'You scored ' + score + ' out of ' + qs.length + '.';
+        };
+        opts.appendChild(b);
+      });
+      wrap.appendChild(opts); wrap.appendChild(why); qb.appendChild(wrap);
+    });
+  }
+  // copy template
+  var cp = document.getElementById('copy-tpl');
+  if (cp) cp.onclick = function () {
+    var t = document.getElementById('tpl-text').textContent;
+    try { navigator.clipboard.writeText(t).then(function () { cp.textContent = 'Copied'; }, function () { cp.textContent = 'Select the text and copy'; }); } catch (e) { cp.textContent = 'Select the text and copy'; }
+  };
+})();
+</script>
+

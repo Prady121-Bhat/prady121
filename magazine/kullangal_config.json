@@ -1,0 +1,6 @@
+{
+  "form_url": "",
+  "whatsapp_number": "",
+  "sheet_csv_url": "",
+  "_help": "form_url: link of the free Google Form readers fill in. whatsapp_number: editor's WhatsApp number in international form, digits only (for example 919876543210). sheet_csv_url: 'Publish to web' CSV link of the Form's response sheet, with a column 'approved' that the editor sets to yes. Empty values are simply left out of the paper."
+}
