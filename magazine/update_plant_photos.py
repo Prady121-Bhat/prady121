@@ -27,13 +27,13 @@ BAD = re.compile(r"drawing|illustration|plate|herbarium|specimen|painting|lithog
 OKLIC = re.compile(r"^(CC0|CC BY|CC BY-SA|Public domain|PD)", re.I)
 
 
-def fetch(url, tries=6):
+def fetch(url, tries=10):
     for i in range(tries):
         try:
             return urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": UA}), timeout=40).read()
         except Exception as e:
             print("retry:", e, file=sys.stderr)
-            time.sleep(4 * (i + 1))
+            time.sleep(min(60, 5 * (i + 1)))
     raise RuntimeError("could not fetch " + url)
 
 
@@ -88,13 +88,14 @@ def main():
     day = datetime.date.fromisoformat(sys.argv[2]) if len(sys.argv) > 2 else datetime.date.today()
     src = open(page, encoding="utf-8").read()
     src = re.sub(r'<figure class="photo">.*?</figure>', "", src, flags=re.S)
+    figs = {}
     for name, terms in PLANTS.items():
         cands = candidates(terms)
         if not cands:
             print("no photo for", name); continue
         c = cands[day.toordinal() % len(cands)]
         print(f"{name}: {c['title']} ({c['lic']}, {c['artist']}) [{len(cands)} candidates]")
-        fig = figure(name, c, photo(c))
+        fig = figs[name] = figure(name, c, photo(c))
         marker = f'<h3>{name}</h3>'
         head = re.search(r'<article class="plant[^"]*"><div class="plant-body">' + re.escape(marker), src)
         if not head:
@@ -102,6 +103,9 @@ def main():
         pos = head.start() + len('<article class="plant')
         pos = src.index('>', pos) + 1
         src = src[:pos] + fig + src[pos:]
+    # Front-page photo slots reuse the same figure as the plant's own card.
+    src = re.sub(r'(<div class="front-photo" data-plant="([^"]+)">)</div>',
+                 lambda m: m.group(1) + figs.get(m.group(2), "") + "</div>", src)
     open(page, "w", encoding="utf-8").write(src)
 
 
