@@ -1,105 +1,106 @@
 {
- "date": "2026-09-30",
+ "date": "2026-10-01",
  "note": "Facts come from web-search results on the date shown; each item names its source. Rewrite in original words; never invent details.",
  "lead": {
   "place": "Mangaluru",
   "kicker": "Coast · Mangaluru",
-  "headline": "Blast and fire at MRPL refinery near Jokatte: one dead, nine hurt",
-  "deck": "A high-pressure cold separator ruptured in the Coker Hydrotreater Unit around noon on Wednesday, MRPL said.",
+  "headline": "MRPL blast: police register case against two officials as refinery inquiry begins",
+  "deck": "One worker died and nine were hurt when a cold separator ruptured at the Jokatte refinery on Wednesday.",
   "body": [
-   "A blast followed by a fire hit the Coker Hydrotreater Unit of Mangalore Refinery and Petrochemicals Limited (MRPL) near Jokatte at about 12.15 pm on Wednesday, 30 September, while testing was under way, according to news reports. MRPL said a high-pressure cold separator had ruptured, causing the fire.",
-   "Reports say one person died and nine were injured. The person who died was a 30-year-old contract worker from Mulki who was first reported missing; his body was found later. Rajesh Baptist, from Surathkal, suffered burns over about 35 per cent of his body and is in the intensive care unit at Srinivas Hospital, where doctors say he is out of danger. The other injured were given outpatient treatment and medical checks.",
-   "Early reports quoted the Police Commissioner as saying eight people were hurt and the fire was under control; later reports raised the count to nine injured and one death. Nearby areas felt the impact of the explosion. This paper will follow official statements as they come."
+   "A day after the blast and fire at the Coker Hydrotreater Unit of Mangalore Refinery and Petrochemicals Limited (MRPL) near Jokatte, reports say the police have registered a case against two MRPL officials following a complaint. MRPL said a high-pressure cold separator ruptured around midday on Wednesday, 30 September, and a fire followed.",
+   "One person died and nine were injured, according to the reports. The man who died was a 30-year-old worker from Mulki. One report says the fire was fully put out by about 2.45 pm. Early counts differed (eight injured in the first reports, nine later), so the paper uses the later figure.",
+   "Reports on the condition of the injured differ, so this paper does not give a verdict on any one patient. Official statements from MRPL and the police will be followed in the coming days."
   ],
   "sources": [
    [
-    "Deccan Herald",
-    "https://www.deccanherald.com/india/karnataka/mangaluru/one-killed-9-others-injured-in-blast-at-mrpl-unit-in-mangaluru-fear-grips-locals-4165110"
+    "UNI",
+    "https://www.uniindia.com/south-india/lead-karnataka-mrpl-fire/198668"
+   ],
+   [
+    "ThePrint",
+    "https://theprint.in/india/one-killed-eight-injured-in-mrpl-oil-refinery-explosion-fir-registered/3058471/"
    ],
    [
     "Deccan Chronicle",
     "https://www.deccanchronicle.com/southern-states/karnataka/major-blast-fire-at-mrpl-in-mangaluru-1991854"
    ],
    [
-    "ANI",
-    "https://www.aninews.in/news/national/general-news/karnataka-eight-injured-in-blast-and-fire-at-mrpl-facility-in-mangaluru-top-officials-rush-to-spot20260930172053/"
-   ],
-   [
-    "Organiser",
-    "https://organiser.org/2026/09/30/383674/bharat/mrpl-blast-rattles-mangaluru-nine-workers-injured-in-massive-explosion-at-hydro-treating-unit/"
+    "Deccan Herald",
+    "https://www.deccanherald.com/india/karnataka/mangaluru/one-killed-9-others-injured-in-blast-at-mrpl-unit-in-mangaluru-fear-grips-locals-4165110"
    ]
   ]
  },
  "stories": [
   {
+   "place": "Mangaluru",
+   "title": "Mangaluru railway area moves to Mysuru division from 1 October",
+   "text": "The railway network up to and including Ullal passes from the Palakkad Division of Southern Railway to the Mysuru Division of South Western Railway from 1 October. Reports say the region accounts for nearly 90 per cent of the Palakkad division's freight revenue, and the change is expected to help rake availability for industry.",
+   "age": "1 Oct",
+   "source": "Daijiworld",
+   "url": "https://www.daijiworld.com/news/newsDisplay?newsID=1323427"
+  },
+  {
    "place": "Udupi & Dakshina Kannada",
-   "title": "Heavy rain forecast for the coast",
-   "text": "The Meteorological Department has forecast heavy rain in the coastal districts of Udupi and Dakshina Kannada. The five-day forecast on this page gives a rain chance of at least 67 per cent every day, rising to 100 per cent on Saturday and Sunday.",
-   "age": "Forecast, 30 Sep",
-   "source": "News reports",
-   "url": "https://www.deccanherald.com/india/karnataka/mangaluru/blast-at-mrpl-unit-near-mangaluru-thick-smoke-fills-the-sky-4165110"
+   "title": "Yellow alert for heavy rain on the coast",
+   "text": "A yellow alert covering 12 districts of coastal, Malnad and south interior Karnataka was issued for Wednesday 30 September and Thursday 1 October, with heavy downpours and thunderstorms likely at isolated places in Dakshina Kannada and Udupi. The five-day forecast on this page shows how the week looks.",
+   "age": "1 Oct",
+   "source": "Daijiworld",
+   "url": "https://daijiworld.com/news/newsDisplay?newsID=1328201"
+  },
+  {
+   "place": "Malpe",
+   "title": "Fisherman missing after falling into the sea",
+   "text": "A 28-year-old fisherman from Chhattisgarh, Dwarika Shikar, is reported missing after falling overboard from a Persian fishing boat that left Malpe harbour with other boats on 25 September.",
+   "age": "1 Oct",
+   "source": "Daijiworld",
+   "url": "https://daijiworld.com/news/newsDisplay?newsID=1328209"
+  },
+  {
+   "place": "Dharmasthala / Mangaluru",
+   "title": "SIT to begin fresh probe in the Soujanya case",
+   "text": "The Special Investigation Team set up by the Karnataka government to reinvestigate the 2012 Soujanya case is to start its probe in Mangaluru on Thursday. It has been given three months to complete the work and report to the competent court.",
+   "age": "1 Oct",
+   "source": "Social News XYZ",
+   "url": "https://www.socialnews.xyz/2026/10/01/soujanya-case-ktaka-sit-to-begin-fresh-probe-in-mangaluru-from-today"
+  },
+  {
+   "place": "Udupi",
+   "title": "Tulu film 'Bellada Gatti': Udupi premiere sold out",
+   "text": "Tickets for the Udupi premiere show of Raja Katapady's Tulu film 'Bellada Gatti' sold out. The show is on 1 October at 6.15 pm at Bharat Mall, Times Square Mall.",
+   "age": "1 Oct",
+   "source": "Daijiworld",
+   "url": "https://daijiworld.com/news/newsDisplay?newsID=1328167"
+  },
+  {
+   "place": "Kallianpur",
+   "title": "Foreign tourist found in distress, handed to Goa police",
+   "text": "A Russian national found collapsed on the Kallianpur-Santhekatte service road was produced before the district court and handed over to the Goa police. Police found his entry permit had expired and a case against him was pending in Goa.",
+   "age": "1 Oct",
+   "source": "Daijiworld",
+   "url": "https://daijiworld.com/news/newsDisplay?newsID=1328210"
   },
   {
    "place": "Mangaluru",
    "title": "Mangalore University drops 16 postgraduate programmes",
-   "text": "Mangalore University has temporarily discontinued 16 postgraduate programmes for the 2026-27 academic year after they failed to attract the minimum number of students needed to run the courses.",
+   "text": "Mangalore University has temporarily discontinued 16 postgraduate programmes for 2026-27 because they did not attract the minimum number of students.",
    "age": "30 Sep",
    "source": "Mangalore Today",
    "url": "https://www.mangaloretoday.com/main/Mangalore-University-temporarily-discontinues-16-PG-programmes-over-low-enrolment.html"
   },
   {
    "place": "Bantwal / Bajpe",
-   "title": "Credit society opens Bajpe branch on 2 October",
+   "title": "Credit society opens Bajpe branch tomorrow",
    "text": "The Bantwal Catholic Credit Co-operative Society's Bajpe branch is scheduled to open on 2 October.",
    "age": "Announced 30 Sep",
    "source": "Daijiworld",
    "url": "https://daijiworld.com/news/newsDisplay?newsID=1327139"
-  },
-  {
-   "place": "Mangaluru",
-   "title": "Student dies in balcony collapse",
-   "text": "A 16-year-old student died after a balcony collapse. Two people have been booked in connection with the incident.",
-   "age": "Earlier this week",
-   "source": "Daijiworld",
-   "url": "https://www.daijiworld.com/news"
-  },
-  {
-   "place": "Udupi",
-   "title": "Gang members arrested in burglary case",
-   "text": "Two members of a gang from Uttar Pradesh were arrested in a house burglary case in Udupi.",
-   "age": "Earlier this week",
-   "source": "UdupiLive",
-   "url": "https://udupilivenews.com/"
-  },
-  {
-   "place": "Mangaluru",
-   "title": "Sax replica reported stolen from park",
-   "text": "A replica of Kadri Gopalanath's saxophone has reportedly been stolen from Mallikatta Park.",
-   "age": "Earlier this week",
-   "source": "Mangalore Today",
-   "url": "https://www.mangaloretoday.com/main/Main-news.html"
-  },
-  {
-   "place": "Mangaluru",
-   "title": "Youth drug awareness campaign",
-   "text": "Srinivas University and IPSLM ran a 'Nasha Mukta Yuva' campaign for youth drug awareness.",
-   "age": "Earlier this week",
-   "source": "Daijiworld",
-   "url": "https://www.daijiworld.com/news"
-  },
-  {
-   "place": "Udupi",
-   "title": "Four cars damaged at Katapady",
-   "text": "Four cars were damaged in a serial accident at Katapady.",
-   "age": "Earlier this week",
-   "source": "UdupiLive",
-   "url": "https://udupilivenews.com/"
   }
  ],
  "briefly": [
-  "Bajpe: the Bantwal Catholic Credit Co-operative Society opens its Bajpe branch on 2 October, Gandhi Jayanti.",
-  "Mangaluru: Mangalore University has paused 16 postgraduate programmes for lack of students.",
-  "Coast: heavy rain is forecast for Udupi and Dakshina Kannada, with rain expected on all five forecast days."
+  "Mangaluru: the railway area up to Ullal moves to Mysuru division of South Western Railway from today.",
+  "Konkan route: Mangaluru Central-Madgaon passenger (56616) leaving on 1 October is short-terminated at Karwar.",
+  "Udupi: yellow alert for heavy rain and thunderstorms in isolated places.",
+  "Bajpe: the Bantwal Catholic Credit Co-operative Society opens a branch tomorrow, 2 October."
  ],
  "coming_up": [
   {
@@ -130,21 +131,21 @@
   ]
  ],
  "sports": {
-  "headline": "West Indies pile up 405 in Guwahati; India strike four golds at the Asian Games",
+  "headline": "India chase 406 to win the second ODI; hockey semifinal against Pakistan today",
   "items": [
    {
     "sport": "Cricket",
-    "title": "2nd ODI: West Indies make 405 for 7",
-    "text": "West Indies scored 405 for 7 in the second one-day international against India at Guwahati on 30 September, with centuries from Jangoo (114), Hope (104) and Campbell (101). Reports call it West Indies' first total of 400 in ODI cricket. India began their chase afterwards; the result was not in when this page was prepared.",
-    "source": "ESPNcricinfo match report",
-    "url": "https://www.cricinfo.com/series/west-indies-in-india-2026-27-1529215/india-vs-west-indies-2nd-odi-1529228/match-report"
+    "title": "2nd ODI: India chase 406 to win by 8 wickets",
+    "text": "India reached 406 for 2 in 43.3 overs, with 39 balls to spare, after West Indies made 405 for 7 at Guwahati on 30 September. Shubman Gill scored 223 off 133 balls and Rohit Sharma 101 off 75; Ruturaj Gaikwad was not out on 31. West Indies' innings had centuries from Jangoo (114), Hope (104) and Campbell (101). India lead the three-match series 2-0.",
+    "source": "ESPNcricinfo and Outlook India match reports",
+    "url": "https://www.outlookindia.com/sports/cricket/india-vs-west-indies-2nd-odi-second-highest-odi-chase-406-guwahati-records-match-report"
    },
    {
     "sport": "Asian Games",
-    "title": "India's best day yet: four golds",
-    "text": "On Day 12 in Aichi-Nagoya, India won gold in the women's team, mixed team and men's team compound archery events, and in the mixed trap team shooting event. India also took four bronze medals in boxing and wrestling, including the first wrestling medal of the Games.",
-    "source": "Outlook India, Day 12 highlights",
-    "url": "https://www.outlookindia.com/sports/others/asian-games-2026-live-updates-september-30-commentary-highlights-indians-in-action-aichi-nagoya"
+    "title": "Day 13: hockey and cricket semifinals",
+    "text": "India's men play Pakistan in the hockey semifinal and Sri Lanka in the cricket semifinal on 1 October. After Day 12, India had 10 gold, 21 silver and 28 bronze medals and stood seventh in the table. Archery, shooting, cycling and squash offer medal chances today.",
+    "source": "Outlook India, Day 13 preview",
+    "url": "https://www.outlookindia.com/sports/others/asian-games-2026-day-13-preview-full-october-1-schedule-match-timings-medal-events-india-in-action-live-streaming-details"
    },
    {
     "sport": "Hockey",

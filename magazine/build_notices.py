@@ -10,7 +10,18 @@ import csv, datetime, html, io, json, os, re, sys, urllib.parse, urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 E = html.escape
-EMPTY = "No notices for today. If something is happening in Kullangal or nearby, send it in."
+EMPTY = "No reader notices today. If something is happening in Kullangal or nearby, send it in."
+NOT_OPEN = ("Reader notices are not open yet. Until the form is ready the editor cannot take notices, "
+            "so please do not send them anywhere for now.")
+# Google Form columns carry the question text; these aliases map them to our fields
+ALIASES = dict(
+    title=("title", "heading", "what", "notice", "headline"),
+    text=("text", "details", "description", "more details", "notice details"),
+    place=("place", "where", "location", "village", "town"),
+    date_from=("date_from", "date", "when", "from", "event date", "date of event"),
+    date_to=("date_to", "to", "until", "last date", "show until"),
+    approved=("approved", "ok", "editor", "editor approval"),
+)
 TEMPLATE = ("Kullangal Vaarte notice\nWhat:\nWhere:\nWhen (date and time):\nContact for questions (optional):")
 
 
@@ -26,10 +37,23 @@ def truthy(v):
 
 
 def day(v):
-    try:
-        return datetime.date.fromisoformat(str(v).strip())
-    except ValueError:
-        return None
+    """ISO (2026-10-05) or day/month/year (5/10/2026, 05-10-2026, 5 Oct 2026); None otherwise."""
+    v = str(v).strip()
+    for fmt in ("%Y-%m-%d", "%d/%m/%Y", "%d-%m-%Y", "%d.%m.%Y", "%d %b %Y", "%d %B %Y", "%d/%m/%y"):
+        try:
+            return datetime.datetime.strptime(v[:20] if fmt != "%Y-%m-%d" else v[:10], fmt).date()
+        except ValueError:
+            continue
+    return None
+
+
+def pick(row, field):
+    """First non-empty cell whose header (lower-cased, question text allowed) starts with an alias."""
+    for head, val in row.items():
+        h = head.strip().lower()
+        if val and any(h == a or h.startswith(a + " ") or h.startswith(a + ":") or h.startswith(a + "(") for a in ALIASES[field]):
+            return val
+    return ""
 
 
 def sheet_rows(url):
@@ -38,7 +62,7 @@ def sheet_rows(url):
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "KullangalVaarte/1.0"})
         text = urllib.request.urlopen(req, timeout=30).read().decode("utf-8-sig")
-        return [{(k or "").strip().lower(): (v or "") for k, v in r.items()} for r in csv.DictReader(io.StringIO(text))]
+        return [dict(r) for r in csv.DictReader(io.StringIO(text))]
     except Exception as e:  # sheet unreachable: use the JSON file only and say so
         print("Sheet not read:", e, file=sys.stderr)
         return []
@@ -47,14 +71,18 @@ def sheet_rows(url):
 def todays(rows, d):
     out = []
     for r in rows:
-        if not truthy(r.get("approved")):
+        r = {(k or ""): (v or "") for k, v in r.items()}
+        if not truthy(pick(r, "approved")):
             continue
-        a, b = day(r.get("date_from")), day(r.get("date_to") or r.get("date_from"))
+        a = day(pick(r, "date_from"))
+        b = day(pick(r, "date_to")) or a
         if not a or not b or not (a <= d <= b):
             continue
-        title, text = (r.get("title") or "").strip()[:120], (r.get("text") or "").strip()[:500]
+        title, text = pick(r, "title").strip()[:120], pick(r, "text").strip()[:500]
+        if title and not text:
+            title, text = title[:60], title
         if title and text:
-            out.append(dict(title=title, text=text, place=(r.get("place") or "").strip()[:60]))
+            out.append(dict(title=title, text=text, place=pick(r, "place").strip()[:60]))
     return out
 
 
@@ -66,6 +94,10 @@ def notices_html(items):
                    + f'<p>{E(n["text"])}</p></div>' for n in items)
 
 
+def is_open(cfg):
+    return str(cfg.get("form_url", "")).startswith("https://") or bool(re.sub(r"\D", "", cfg.get("whatsapp_number") or ""))
+
+
 def send_html(cfg):
     btns = []
     if str(cfg.get("form_url", "")).startswith("https://"):
@@ -74,7 +106,7 @@ def send_html(cfg):
     if num:
         btns.append(f'<a class="btn" href="https://wa.me/{num}?text={urllib.parse.quote(TEMPLATE)}" target="_blank" rel="noopener">Send on WhatsApp</a>')
     if not btns:
-        return '<p class="empty">The submission form is being set up. Until it opens, the editor cannot take notices.</p>'
+        return f'<p class="empty">{E(NOT_OPEN)}</p>'
     return ('<pre id="tpl-text">' + E(TEMPLATE) + '</pre><div class="btns">' + "".join(btns)
             + '<button class="btn" type="button" id="copy-tpl">Copy the template</button></div>'
             '<p class="prog">Every notice is read by the editor before it is printed.</p>')

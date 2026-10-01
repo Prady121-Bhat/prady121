@@ -118,7 +118,12 @@ def photo_for(key, terms, day, files=None):
         return json.load(open(os.path.join(CACHE, old[-1]), encoding="utf-8")) if old else None
     c = cands[day.toordinal() % len(cands)]
     print(f"{key}: {c['title']} ({c['lic']}, {c['artist']}) [{len(cands)} candidates]")
-    out = dict(uri=to_uri(c), artist=c["artist"], lic=c["lic"], page=c["page"], title=c["title"])
+    try:
+        out = dict(uri=to_uri(c), artist=c["artist"], lic=c["lic"], page=c["page"], title=c["title"])
+    except Exception as e:  # download refused (HTTP 429): reuse the newest photo we already hold
+        print("Photo download failed for", key, "-", str(e)[:60], file=sys.stderr)
+        old = sorted((f for f in os.listdir(CACHE) if f.startswith(slug + "-") and f.endswith(".json")), key=lambda f: (not f.endswith("-seed.json"), f))
+        return json.load(open(os.path.join(CACHE, old[-1]), encoding="utf-8")) if old else None
     json.dump(out, open(path, "w", encoding="utf-8"))
     # keep the cache small: only the last few days
     for f in sorted(os.listdir(CACHE)):

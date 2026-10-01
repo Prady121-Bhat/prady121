@@ -156,8 +156,9 @@ def local_page(P, news, wx, sun, moon, cfg, notices_items):
         wxbox = '<p class="empty">The five-day forecast could not be fetched this morning. Source: <a href="https://open-meteo.com/">Open-Meteo.com</a>.</p>'
     up = "".join(f'<li><b>{E(u["when"])}</b><span>{E(u["what"])}</span></li>' for u in news["coming_up"])
     nums = "".join(f'<div><b>{E(n)}</b><span>{E(t)}</span></div>' for n, t in news["helplines"])
+    by8 = " Send it by 8 pm and it can go in tomorrow's paper." if bn.is_open(cfg) else ""
     notes = (f'<div class="notes"><div><span class="kicker">Kullangal &amp; nearby &middot; notices for the day</span>{bn.notices_html(notices_items)}</div>'
-             f'<aside class="sendbox"><h3 class="hl3">Send us your news</h3><p>Events, lost and found, road works, temple and school notices, shop openings, club and school sports results. Send it by 8 pm and it can go in tomorrow\'s paper.</p>{bn.send_html(cfg)}</aside></div>')
+             f'<aside class="sendbox"><h3 class="hl3">Send us your news</h3><p>Events, lost and found, road works, temple and school notices, shop openings, club and school sports results.{by8}</p>{bn.send_html(cfg)}</aside></div>')
     return ('<div class="cols2"><div>'
             f'<h3 class="sub">More stories from the coast</h3><ul id="story-list">{"".join(stories)}</ul></div>'
             f'<aside><h3 class="sub">Five days ahead in Mangaluru</h3>{wxbox}'
@@ -185,6 +186,11 @@ def feature_page(P, feats, cache_ok=True):
             '<p class="wxsrc" style="margin-top:20px">One feature every day, on a different subject each weekday: food, art, places, tradition, the sea, nature and temples.</p>')
 
 
+def render_paras(texts):
+    """Paragraphs of a serial; a paragraph that is just *** becomes a scene break."""
+    return "".join('<p class="sb" aria-hidden="true">* * *</p>' if t.strip() == "***" else "<p>" + E(t) + "</p>" for t in texts)
+
+
 def serial_page(P, name, lang):
     s = load(f"serial_{name}.json")
     eps = s["episodes"]
@@ -192,7 +198,7 @@ def serial_page(P, name, lang):
     latest = max(1, min(idx, len(eps)))
     e = eps[latest - 1]
     kn = lang == "kn"
-    paras = "".join(f"<p>{E(x)}</p>" for x in e["text"])
+    paras = render_paras(e["text"])
     recap_lab = "ಹಿಂದಿನ ಸಂಚಿಕೆಯಲ್ಲಿ" if kn else "Previously"
     recap = f'<div class="recap"><b>{recap_lab}</b>{E(e["recap"])}</div>' if latest > 1 else ""
     ep_lab = f"ಸಂಚಿಕೆ {str(e['n']).translate(KN_DIGITS)}" if kn else f"Episode {e['n']}"
@@ -202,7 +208,7 @@ def serial_page(P, name, lang):
     if latest > 1:
         items = "".join(
             f'<details><summary>{"ಸಂಚಿಕೆ " + str(x["n"]).translate(KN_DIGITS) if kn else "Episode " + str(x["n"])}: {E(x["title"])}</summary>'
-            f'<div class="story-text {"kn" if kn else "en"}"{" lang=kn" if kn else ""}>{"".join("<p>" + E(t) + "</p>" for t in x["text"])}</div></details>'
+            f'<div class="story-text {"kn" if kn else "en"}"{" lang=kn" if kn else ""}>{render_paras(x["text"])}</div></details>'
             for x in reversed(eps[:latest - 1]))
         arch = f'<details class="arch"><summary>{"ಹಿಂದಿನ ಸಂಚಿಕೆಗಳು" if kn else "Earlier episodes"} ({latest - 1})</summary>{items}</details>'
     return (f'<div class="ser"><span class="epi">{ep_lab} &middot; {E(s["title"])}</span>'
@@ -216,39 +222,63 @@ def pz_json(pid, obj):
     return f'<script type="application/json" id="{pid}">{body}</script>'
 
 
+def yesterday_block(day):
+    """Yesterday's answers, printed at the end of the puzzle pages. Answers appear only the day after."""
+    y = day - datetime.timedelta(days=1)
+    if y < LAUNCH:
+        return ('<section class="yest"><h3>Yesterday\'s answers</h3><p class="muted">This is the first edition, so there are no answers to print yet. '
+                'Tomorrow\'s paper carries the answers to today\'s puzzles.</p></section>')
+    pz = puzzles.get(y, save=False)
+    su, cw, ws, cr = pz["sudoku"], pz["crossword"], pz["wordsearch"], pz["cryptogram"]
+    sg = "".join("<tr>" + "".join("<td>" + su["solution"][r * 9 + c] + "</td>" for c in range(9)) + "</tr>" for r in range(9))
+    cg = "".join("<tr>" + "".join('<td class="b"></td>' if ch == "." else "<td>" + ch + "</td>" for ch in row) + "</tr>" for row in cw["grid"])
+    hit = set()
+    for w in ws["words"]:
+        for k in range(len(w["w"])):
+            hit.add((w["r"] + w["dr"] * k, w["c"] + w["dc"] * k))
+    wg = "".join("<tr>" + "".join(('<td class="h">' if (r, c) in hit else "<td>") + ch + "</td>" for c, ch in enumerate(row)) + "</tr>" for r, row in enumerate(ws["grid"]))
+    acr = "".join(f'<li><b>{w["n"]}.</b> {E(w["ans"])}</li>' for w in cw["across"])
+    dwn = "".join(f'<li><b>{w["n"]}.</b> {E(w["ans"])}</li>' for w in cw["down"])
+    who = f' <span class="muted">Attributed to {E(cr["who"])}.</span>' if cr["who"] else ""
+    return (f'<section class="yest"><h3>Yesterday\'s answers</h3><p class="muted">{E(y.strftime("%A, %-d %B"))}. Check your work against these.</p>'
+            f'<p class="sub2">Sudoku</p><table class="grid9">{sg}</table>'
+            f'<p class="sub2">Crossword, across</p><ul class="ans">{acr}</ul><p class="sub2">Crossword, down</p><ul class="ans">{dwn}</ul>'
+            f'<table class="grid9 cwg">{cg}</table>'
+            f'<p class="sub2">Word search: {E(ws["title"])}</p><table class="grid9 wsg">{wg}</table>'
+            f'<p class="sub2">Cryptogram</p><p class="quote">{E(cr["plain"].capitalize())}</p>{who}</section>')
+
+
 def puzzle_pages(P, pz):
     day = P.day.isoformat()
     su, cw, ws, cr = pz["sudoku"], pz["crossword"], pz["wordsearch"], pz["cryptogram"]
-    sol_rows = []
-    for r in range(9):
-        sol_rows.append("<tr>" + "".join("<td>" + su["solution"][r * 9 + c] + "</td>" for c in range(9)) + "</tr>")
-    sol = "".join(sol_rows)
+    # Only what a printed puzzle shows goes into the page: no solutions, no answers, no word positions.
+    mask = ["".join("." if ch == "." else "#" for ch in row) for row in cw["grid"]]
+    strip = lambda items: [{k: v for k, v in w.items() if k != "ans"} for w in items]
     p1 = (
         f'<section class="puz"><h3>Sudoku <span class="lvl">{su["level"]}</span></h3>'
-        '<p class="how">Fill every row, column and 3 by 3 box with the digits 1 to 9. Tap a square, then a number. Your progress is saved on this device.</p>'
-        '<div id="sudoku"></div><p class="pmsg" id="sudoku-msg" aria-live="polite"></p>'
-        + pz_json("pz-sudoku", dict(puzzle=su["puzzle"], solution=su["solution"], day=day))
-        + f'<div class="answers"><b>Sudoku answer</b><table style="border-collapse:collapse;margin-top:4px">{sol}</table></div></section>'
+        '<p class="how">Fill every row, column and 3 by 3 box with the digits 1 to 9, once each. Tap a square, then write a number. '
+        'Like a printed puzzle, it will not check your work or give hints. Your pencil marks stay on this device. The answer is in tomorrow\'s paper.</p>'
+        '<div id="sudoku"></div>'
+        + pz_json("pz-sudoku", dict(puzzle=su["puzzle"], day=day)) + '</section>'
         '<section class="puz"><h3>Cryptogram <span class="lvl">Decode</span></h3>'
-        '<p class="how">Every letter of a well-known saying has been swapped for another letter, always the same swap. Type your guess under a letter and it fills every copy. No letter stands for itself.</p>'
-        '<div id="cryptogram"></div><p class="pmsg" id="cry-msg" aria-live="polite"></p>'
-        + pz_json("pz-cryptogram", dict(plain=cr["plain"], cipher=cr["cipher"], who=cr["who"], day=day))
-        + f'<div class="answers"><b>Cryptogram answer</b> {E(cr["plain"].capitalize())}{" (attributed to " + E(cr["who"]) + ")" if cr["who"] else ""}</div></section>')
-    across = "".join(f'<li id="cl-A{w["n"]}" data-w="A,{w["r"]},{w["c"]}"><b>{w["n"]}</b><span>{E(w["clue"])} ({w["len"]})</span></li>' for w in cw["across"])
-    down = "".join(f'<li id="cl-D{w["n"]}" data-w="D,{w["r"]},{w["c"]}"><b>{w["n"]}</b><span>{E(w["clue"])} ({w["len"]})</span></li>' for w in cw["down"])
-    cwans = ", ".join(f'{w["n"]}A {w["ans"]}' for w in cw["across"]) + "; " + ", ".join(f'{w["n"]}D {w["ans"]}' for w in cw["down"])
+        '<p class="how">Every letter of a well-known saying has been swapped for another letter, always the same swap, and no letter stands for itself. '
+        'Write your guess above each coded letter. The answer is in tomorrow\'s paper.</p>'
+        '<div id="cryptogram"></div>'
+        + pz_json("pz-cryptogram", dict(cipher=cr["cipher"], day=day)) + '</section>')
+    across = "".join(f'<li data-w="A,{w["r"]},{w["c"]}"><b>{w["n"]}</b><span>{E(w["clue"])} ({w["len"]})</span></li>' for w in cw["across"])
+    down = "".join(f'<li data-w="D,{w["r"]},{w["c"]}"><b>{w["n"]}</b><span>{E(w["clue"])} ({w["len"]})</span></li>' for w in cw["down"])
     p2 = (
         '<section class="puz"><h3>Mini crossword <span class="lvl">Coast &amp; India</span></h3>'
-        '<p class="how">Tap a square to see its clue. Tap it again to switch between across and down. The clue list also works as a way in.</p>'
-        '<div class="cwbar" id="cw-bar" aria-live="polite"></div><div id="crossword"></div><div class="pbtns" id="cw-btns"></div><p class="pmsg" id="cw-msg" aria-live="polite"></p>'
+        '<p class="how">Tap a square and type. Tap the same square again to turn the direction from across to down. The answers are in tomorrow\'s paper.</p>'
+        '<div id="crossword"></div><div class="pbtns" id="cw-btns"></div>'
         f'<div class="clues"><div><h4>Across</h4><ul>{across}</ul></div><div><h4>Down</h4><ul>{down}</ul></div></div>'
-        + pz_json("pz-crossword", dict(rows=cw["rows"], cols=cw["cols"], grid=cw["grid"], across=cw["across"], down=cw["down"], day=day))
-        + f'<div class="answers"><b>Crossword answers</b> {E(cwans)}</div></section>'
+        + pz_json("pz-crossword", dict(rows=cw["rows"], cols=cw["cols"], grid=mask, across=strip(cw["across"]), down=strip(cw["down"]), day=day)) + '</section>'
         f'<section class="puz"><h3>Word search <span class="lvl">{E(ws["title"])}</span></h3>'
-        f'<p class="how">Find {len(ws["words"])} words. Tap the first letter and then the last letter of a word. Words run across, down or diagonally{", and this weekend some run backwards too" if ws["hard"] else ""}.</p>'
-        '<div id="wordsearch"></div><p class="pmsg" id="ws-msg" aria-live="polite"></p>'
-        + pz_json("pz-wordsearch", dict(size=ws["size"], grid=ws["grid"], words=ws["words"], day=day))
-        + f'<div class="answers"><b>Word search words</b> {", ".join(E(w["w"]) + " (row " + str(w["r"] + 1) + ", column " + str(w["c"] + 1) + ")" for w in ws["words"])}</div></section>')
+        f'<p class="how">Find these {len(ws["words"])} words in the grid. Words run across, down or diagonally{", and this weekend some run backwards too" if ws["hard"] else ""}. '
+        'Tap letters to mark them with a highlighter, and tap a word in the list to cross it off. Nothing is checked for you.</p>'
+        '<div id="wordsearch"></div>'
+        + pz_json("pz-wordsearch", dict(size=ws["size"], grid=ws["grid"], words=[{"w": w["w"]} for w in ws["words"]], day=day)) + '</section>'
+        + yesterday_block(P.day))
     return p1, p2
 
 
@@ -286,17 +316,19 @@ def plate_html(key):
 
 
 def tales_page(P):
+    """One tale a day, Panchatantra and Jataka on alternate days."""
     day = (P.day - LAUNCH).days
-    pan = comics.PANCHATANTRA[day % len(comics.PANCHATANTRA)]
-    jat = comics.JATAKA[day % len(comics.JATAKA)]
-    out = []
-    for label, ep, n in (("Panchatantra", pan, len(comics.PANCHATANTRA)), ("Jataka tales", jat, len(comics.JATAKA))):
-        panels = "".join(f'<figure class="panel">{comics.panel(p)}<figcaption><b>{i}</b>{E(p["cap"])}</figcaption></figure>' for i, p in enumerate(ep["panels"], 1))
-        plate = plate_html(ep["plate"]) if ep["plate"] else ""
-        out.append(f'<article class="tale"><span class="kicker">{E(label)} &middot; Episode {day % n + 1} of {n}</span><h3 class="hl2" style="margin-top:6px">{E(ep["title"])}</h3>'
-                   f'<div class="panels">{panels}</div><p class="moral"><span class="lab">Moral</span> {E(ep["moral"])}</p>{plate}</article>')
-    return (comics.COMIC_DEFS + '<p class="deck" style="margin-bottom:20px">Two old Indian story books, one episode of each every morning, drawn as four panels with the moral at the end. The stories are traditional and retold here in original words; the drawings are original.</p>'
-            f'<div class="tales">{"".join(out)}</div>'), pan["title"], jat["title"]
+    series = comics.PANCHATANTRA if day % 2 == 0 else comics.JATAKA
+    label = "Panchatantra" if day % 2 == 0 else "Jataka tales"
+    ep = series[(day // 2) % len(series)]
+    panels = "".join(f'<figure class="panel">{comics.panel(p)}<figcaption><b>{i}</b>{E(p["cap"])}</figcaption></figure>' for i, p in enumerate(ep["panels"], 1))
+    plate = plate_html(ep["plate"]) if ep["plate"] else ""
+    art = (f'<article class="tale"><span class="kicker">{E(label)} &middot; today\'s tale</span><h3 class="hl2" style="margin-top:6px">{E(ep["title"])}</h3>'
+           f'<div class="panels">{panels}</div><p class="moral"><span class="lab">Moral</span> {E(ep["moral"])}</p>{plate}</article>')
+    other = "Jataka" if day % 2 == 0 else "Panchatantra"
+    return (comics.COMIC_DEFS + f'<p class="deck" style="margin-bottom:20px">One old Indian tale a day, drawn as four panels with the moral at the end. Tomorrow: a {other} tale. '
+            'The stories are traditional and retold here in original words; the drawings are original.</p>'
+            f'<div class="tales">{art}</div>'), ep["title"], None
 
 
 def sports_page(news):
@@ -341,7 +373,7 @@ def assemble(day, private, ctx):
     P.add("puz1", "Puzzles I", "ಒಗಟುಗಳು ೧", p1, "Sudoku and a cryptogram")
     P.add("puz2", "Puzzles II", "ಒಗಟುಗಳು ೨", p2, "A mini crossword and a word search")
     P.add("garden", "Garden", "ತೋಟ", garden_page(P, garden), "Three plants for a coastal home")
-    P.add("tales", "Tales", "ಕತೆಗಳು", tales_html, f"{t1} and {t2}")
+    P.add("tales", "Tales", "ಕತೆಗಳು", tales_html, f"Today: {t1}")
     P.add("sports", "Sports", "ಕ್ರೀಡೆ", sports_page(news), "Cricket, the Asian Games, hockey and kabaddi")
     P.pages[0]["body"] = front_page(P, news, wx, sun, moon, priv if private else None)
     P.joke_after = {"local": joke_break(day, 0, jokes), "serial": joke_break(day, 1, jokes), "puz2": joke_break(day, 2, jokes), "garden": joke_break(day, 3, jokes)}
@@ -383,7 +415,7 @@ def main():
         else:
             day = datetime.date.fromisoformat(a); i += 1
     ctx = dict(news=load("news.json"), garden=load("garden.json"), jokes=load("jokes.json"), feats=load("features.json"), priv=load("private.json"))
-    ctx["pz"] = puzzles.make_all(day)
+    ctx["pz"] = puzzles.get(day)
     ctx["pz_pages"] = puzzle_pages(Paper(day, False), ctx["pz"])
     ctx["wx"] = weather.forecast()
     ctx["sun"], ctx["moon"] = astro.sun_times(day), astro.moon(day)
@@ -404,7 +436,7 @@ def main():
             assert not bad, f"private content leaked into the shareable edition: {bad}"
         open(path, "w", encoding="utf-8").write(doc)
         print(("private" if private else "public"), path, round(len(doc) / 1e6, 2), "MB")
-    print("Tales:", t1, "|", t2)
+    print("Tale:", t1)
 
 
 if __name__ == "__main__":

@@ -270,6 +270,28 @@ def make_all(day):
                 wordsearch=make_wordsearch(day), cryptogram=make_cryptogram(day))
 
 
+def get(day, save=True):
+    """Today's puzzles, stored in content/puzzles/<date>.json so tomorrow's answers match exactly what was printed,
+    even if the word banks change in between."""
+    folder = os.path.join(HERE, "content", "puzzles")
+    path = os.path.join(folder, day.isoformat() + ".json")
+    if os.path.exists(path):
+        with open(path, encoding="utf-8") as f:
+            return json.load(f)
+    data = make_all(day)
+    if save:
+        os.makedirs(folder, exist_ok=True)
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False)
+        for name in sorted(os.listdir(folder)):  # keep two weeks
+            try:
+                if (day - datetime.date.fromisoformat(name[:10])).days > 14:
+                    os.remove(os.path.join(folder, name))
+            except ValueError:
+                pass
+    return data
+
+
 if __name__ == "__main__":
     import sys, time
     d = datetime.date.fromisoformat(sys.argv[1]) if len(sys.argv) > 1 else datetime.date.today()

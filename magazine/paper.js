@@ -82,61 +82,41 @@
 
   /* ---- button helper ---- */
   function btn(label, fn, cls) { var b = el('button', 'btn' + (cls ? ' ' + cls : ''), label); b.type = 'button'; b.onclick = fn; return b; }
+  /* "Rub out all": two taps, like deciding to scrub the whole page. Nothing else is offered: no hints, no checking. */
+  function rubber(fn) {
+    var b = btn('Rub out all', function () {
+      if (b.getAttribute('data-arm') === '1') { fn(); b.textContent = 'Rub out all'; b.setAttribute('data-arm', '0'); return; }
+      b.setAttribute('data-arm', '1'); b.textContent = 'Tap again to rub out';
+      setTimeout(function () { b.setAttribute('data-arm', '0'); b.textContent = 'Rub out all'; }, 3500);
+    });
+    return b;
+  }
+
+  /* The puzzles work like pencil and paper. You fill them in yourself; the page never checks, hints or completes
+     anything. Yesterday's answers are printed at the end of the second puzzle page. */
 
   /* ================= SUDOKU ================= */
   (function () {
     var host = $('#sudoku'), d = data('pz-sudoku'); if (!host || !d) return;
-    var giv = d.puzzle.split('').map(Number), sol = d.solution.split('').map(Number);
-    var key = 'kv-sudoku-' + d.day, val = giv.slice(), sel = -1, cells = [], msg = $('#sudoku-msg');
+    var giv = d.puzzle.split('').map(Number), key = 'kv-sudoku-' + d.day, val = giv.slice(), sel = -1, cells = [];
     try { var sv = JSON.parse(store(key) || 'null'); if (sv && sv.length === 81) val = sv.map(function (v, i) { return giv[i] ? giv[i] : v; }); } catch (e) {}
     var grid = el('div', 'sud'); grid.setAttribute('role', 'grid'); grid.setAttribute('aria-label', 'Sudoku grid');
-    for (var i = 0; i < 81; i++) {
-      (function (i) {
-        var c = el('button', 'sc'); c.type = 'button';
-        c.onclick = function () { sel = i; paint(); };
-        cells.push(c); grid.appendChild(c);
-      })(i);
-    }
+    for (var i = 0; i < 81; i++) (function (i) {
+      var c = el('button', 'sc'); c.type = 'button'; c.onclick = function () { sel = i; paint(); }; cells.push(c); grid.appendChild(c);
+    })(i);
     host.appendChild(grid);
     var pad = el('div', 'pad');
-    for (var n = 1; n <= 9; n++) (function (n) { var b = el('button', '', String(n)); b.type = 'button'; b.setAttribute('aria-label', 'Enter ' + n); b.onclick = function () { put(n); }; pad.appendChild(b); })(n);
+    for (var n = 1; n <= 9; n++) (function (n) { var b = el('button', '', String(n)); b.type = 'button'; b.setAttribute('aria-label', 'Write ' + n); b.onclick = function () { put(n); }; pad.appendChild(b); })(n);
     var er = el('button', 'w', 'Erase'); er.type = 'button'; er.onclick = function () { put(0); }; pad.appendChild(er);
     host.appendChild(pad);
-    var pb = el('div', 'pbtns');
-    pb.appendChild(btn('Check', function () { check(true); }));
-    pb.appendChild(btn('Hint', hint));
-    pb.appendChild(btn('Show answer', function () { val = sol.slice(); save(); paint(); say('Here is the solution. Reset to try again.'); }));
-    pb.appendChild(btn('Reset', function () { val = giv.slice(); sel = -1; save(); paint(); say(''); }));
-    host.appendChild(pb);
-    function say(t) { if (msg) msg.textContent = t; }
+    var pb = el('div', 'pbtns'); pb.appendChild(rubber(function () { val = giv.slice(); sel = -1; save(); paint(); })); host.appendChild(pb);
     function save() { store(key, JSON.stringify(val)); }
-    function put(n) {
-      if (sel < 0 || giv[sel]) { if (sel < 0) say('Tap a square first.'); return; }
-      val[sel] = n; save(); paint(); check(false);
-    }
-    function hint() {
-      var t = sel >= 0 && !giv[sel] && val[sel] !== sol[sel] ? sel : val.findIndex(function (v, i) { return v !== sol[i]; });
-      if (t < 0) { say('Nothing left to hint. It is solved.'); return; }
-      sel = t; val[t] = sol[t]; save(); paint(); check(false);
-    }
-    function check(mark) {
-      var wrong = 0, empty = 0;
-      val.forEach(function (v, i) { if (!v) empty++; else if (v !== sol[i]) wrong++; });
-      cells.forEach(function (c, i) { c.classList.toggle('bad', mark && val[i] && val[i] !== sol[i]); });
-      if (!wrong && !empty) say('Solved. Well done.');
-      else if (mark) say(wrong ? wrong + ' square' + (wrong > 1 ? 's look' : ' looks') + ' wrong.' : 'No mistakes so far. ' + empty + ' to go.');
-    }
+    function put(n) { if (sel < 0 || giv[sel]) return; val[sel] = n; save(); paint(); }
     function paint() {
       cells.forEach(function (c, i) {
         var v = val[i]; c.textContent = v || '';
-        c.className = 'sc' + (giv[i] ? ' g' : (v ? ' u' : ''));
+        c.className = 'sc' + (giv[i] ? ' g' : (v ? ' u' : '')) + (i === sel ? ' sel' : '');
         c.setAttribute('aria-label', 'Row ' + (Math.floor(i / 9) + 1) + ' column ' + (i % 9 + 1) + (v ? ', ' + v : ', empty'));
-        if (sel >= 0) {
-          var r = Math.floor(sel / 9), cc = sel % 9, r2 = Math.floor(i / 9), c2 = i % 9;
-          if (i === sel) c.classList.add('sel');
-          else if (r === r2 || cc === c2 || (Math.floor(r / 3) === Math.floor(r2 / 3) && Math.floor(cc / 3) === Math.floor(c2 / 3))) c.classList.add('pe');
-          if (v && val[sel] === v && i !== sel) c.classList.add('same');
-        }
       });
     }
     grid.addEventListener('keydown', function (e) {
@@ -149,204 +129,111 @@
         e.preventDefault();
       }
     });
-    paint(); check(false);
+    paint();
   })();
 
   /* ================= CROSSWORD ================= */
   (function () {
     var host = $('#crossword'), d = data('pz-crossword'); if (!host || !d) return;
-    var R = d.rows, C = d.cols, g = d.grid, key = 'kv-cross-' + d.day, bar = $('#cw-bar'), msg = $('#cw-msg');
-    var letters = []; for (var i = 0; i < R * C; i++) letters.push('');
-    try { var sv = JSON.parse(store(key) || 'null'); if (sv && sv.length === R * C) letters = sv; } catch (e) {}
+    var R = d.rows, C = d.cols, g = d.grid, key = 'kv-cross-' + d.day;
+    var saved = []; try { saved = JSON.parse(store(key) || '[]') || []; } catch (e) { saved = []; }
     var num = {}; d.across.concat(d.down).forEach(function (w) { num[w.r + ',' + w.c] = w.n; });
     var isBlock = function (r, c) { return r < 0 || c < 0 || r >= R || c >= C || g[r][c] === '.'; };
     var grid = el('div', 'cw'); grid.style.gridTemplateColumns = 'repeat(' + C + ', minmax(0, 1fr))';
-    var cells = {}, inputs = {};
+    var cells = {}, inputs = {}, act = { r: -1, c: -1, dir: 'A' };
     for (var r = 0; r < R; r++) for (var c = 0; c < C; c++) {
       var cell = el('div', 'cwc' + (isBlock(r, c) ? ' blk' : ''));
       if (!isBlock(r, c)) {
         var inp = el('input'); inp.type = 'text'; inp.maxLength = 1; inp.autocomplete = 'off'; inp.autocapitalize = 'characters'; inp.spellcheck = false;
-        inp.setAttribute('aria-label', 'Row ' + (r + 1) + ' column ' + (c + 1));
-        inp.setAttribute('data-r', r); inp.setAttribute('data-c', c); inp.value = letters[r * C + c] || '';
-        cell.appendChild(inp); inputs[r + ',' + c] = inp;
+        inp.setAttribute('aria-label', 'Row ' + (r + 1) + ' column ' + (c + 1)); inp.setAttribute('data-r', r); inp.setAttribute('data-c', c);
+        inp.value = saved[r * C + c] || ''; cell.appendChild(inp); inputs[r + ',' + c] = inp;
         if (num[r + ',' + c]) cell.appendChild(el('i', '', String(num[r + ',' + c])));
       }
       cells[r + ',' + c] = cell; grid.appendChild(cell);
     }
     host.appendChild(grid);
-    var act = { r: -1, c: -1, dir: 'A' };
-    function run(r, c, dir) {
-      var dr = dir === 'D' ? 1 : 0, dc = dir === 'A' ? 1 : 0, out = [];
-      var rr = r, cc = c; while (!isBlock(rr - dr, cc - dc)) { rr -= dr; cc -= dc; }
-      while (!isBlock(rr, cc)) { out.push([rr, cc]); rr += dr; cc += dc; }
-      return out;
+    function nextCell(r, c, k) {
+      var dr = act.dir === 'D' ? k : 0, dc = act.dir === 'A' ? k : 0, rr = r + dr, cc = c + dc;
+      return isBlock(rr, cc) ? null : [rr, cc];
     }
-    function entry(r, c, dir) { var cs = run(r, c, dir); if (cs.length < 2) return null; var s = cs[0]; var list = dir === 'A' ? d.across : d.down; return list.filter(function (w) { return w.r === s[0] && w.c === s[1]; })[0] || null; }
-    function paint() {
-      Object.keys(cells).forEach(function (k) { cells[k].classList.remove('pe', 'sel'); });
-      $$('.clues li').forEach(function (li) { li.classList.remove('on'); });
-      if (act.r < 0) { if (bar) bar.innerHTML = '<b>Tap a square</b> to see its clue.'; return; }
-      var w = entry(act.r, act.c, act.dir);
-      run(act.r, act.c, act.dir).forEach(function (p) { cells[p[0] + ',' + p[1]].classList.add('pe'); });
-      cells[act.r + ',' + act.c].classList.add('sel');
-      if (w) {
-        if (bar) { bar.textContent = ''; var b = el('b', '', w.n + (act.dir === 'A' ? ' ACROSS' : ' DOWN')); bar.appendChild(b); bar.appendChild(document.createTextNode(w.clue + ' (' + w.len + ')')); }
-        var li = $('#cl-' + act.dir + w.n); if (li) li.classList.add('on');
-      }
-    }
-    function select(r, c, toggle) {
-      var same = act.r === r && act.c === c;
-      if (same && toggle) act.dir = act.dir === 'A' ? 'D' : 'A';
-      else if (!same && !entry(r, c, act.dir)) act.dir = act.dir === 'A' ? 'D' : 'A';
-      act.r = r; act.c = c;
-      if (!entry(r, c, act.dir)) act.dir = act.dir === 'A' ? 'D' : 'A';
-      paint();
-    }
-    function step(r, c, k) {
-      var cs = run(r, c, act.dir), i = cs.findIndex(function (p) { return p[0] === r && p[1] === c; }), n = cs[i + k];
-      if (n) { act.r = n[0]; act.c = n[1]; inputs[n[0] + ',' + n[1]].focus(); paint(); }
+    function mark(r, c) {
+      Object.keys(cells).forEach(function (k) { cells[k].classList.remove('sel', 'dA', 'dD'); });
+      if (r >= 0) cells[r + ',' + c].classList.add('sel', act.dir === 'A' ? 'dA' : 'dD');
     }
     function save() { var arr = []; for (var r = 0; r < R; r++) for (var c = 0; c < C; c++) arr.push(inputs[r + ',' + c] ? inputs[r + ',' + c].value : ''); store(key, JSON.stringify(arr)); }
-    function doneClues() {
-      d.across.concat(d.down).forEach(function (w) {
-        var dir = d.across.indexOf(w) >= 0 ? 'A' : 'D', ok = true;
-        run(w.r, w.c, dir).forEach(function (p, i) { if ((inputs[p[0] + ',' + p[1]].value || '').toUpperCase() !== w.ans[i]) ok = false; });
-        var li = $('#cl-' + dir + w.n); if (li) li.classList.toggle('done', ok);
-      });
-      var all = true; Object.keys(inputs).forEach(function (k) { var p = k.split(','); if ((inputs[k].value || '').toUpperCase() !== g[+p[0]][+p[1]]) all = false; });
-      if (all && msg) msg.textContent = 'Solved. Well done.';
-    }
     Object.keys(inputs).forEach(function (k) {
       var inp = inputs[k], r = +inp.getAttribute('data-r'), c = +inp.getAttribute('data-c');
-      inp.addEventListener('focus', function () { if (!(act.r === r && act.c === c)) select(r, c, false); inp.select(); });
-      inp.addEventListener('click', function () { if (act.r === r && act.c === c && inp.getAttribute('data-was') === '1') select(r, c, true); inp.setAttribute('data-was', '1'); });
+      inp.addEventListener('focus', function () { act.r = r; act.c = c; mark(r, c); inp.select(); });
+      inp.addEventListener('click', function () { if (inp.getAttribute('data-was') === '1') { act.dir = act.dir === 'A' ? 'D' : 'A'; mark(r, c); } inp.setAttribute('data-was', '1'); });
       inp.addEventListener('blur', function () { inp.setAttribute('data-was', '0'); });
       inp.addEventListener('input', function () {
-        var v = (inp.value || '').replace(/[^a-zA-Z]/g, '').slice(-1).toUpperCase(); inp.value = v;
-        cells[k].classList.remove('bad', 'ok'); save(); doneClues();
-        if (v) step(r, c, 1);
+        var v = (inp.value || '').replace(/[^a-zA-Z]/g, '').slice(-1).toUpperCase(); inp.value = v; save();
+        if (v) { var n = nextCell(r, c, 1); if (n) inputs[n[0] + ',' + n[1]].focus(); }
       });
       inp.addEventListener('keydown', function (e) {
-        if (e.key === 'Backspace' && !inp.value) { step(r, c, -1); e.preventDefault(); }
-        else if (e.key === 'ArrowRight' || e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        if (e.key === 'Backspace' && !inp.value) { var p = nextCell(r, c, -1); if (p) inputs[p[0] + ',' + p[1]].focus(); e.preventDefault(); }
+        else if (e.key.indexOf('Arrow') === 0) {
           var dr = e.key === 'ArrowDown' ? 1 : e.key === 'ArrowUp' ? -1 : 0, dc = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0, rr = r + dr, cc = c + dc;
           while (rr >= 0 && cc >= 0 && rr < R && cc < C && isBlock(rr, cc)) { rr += dr; cc += dc; }
-          if (inputs[rr + ',' + cc]) { inputs[rr + ',' + cc].focus(); }
+          if (inputs[rr + ',' + cc]) inputs[rr + ',' + cc].focus();
           e.preventDefault();
-        } else if (e.key === ' ') { select(r, c, true); e.preventDefault(); }
+        } else if (e.key === ' ') { act.dir = act.dir === 'A' ? 'D' : 'A'; mark(r, c); e.preventDefault(); }
       });
     });
     $$('.clues li').forEach(function (li) {
-      li.onclick = function () { var w = li.getAttribute('data-w').split(','); act.dir = w[0]; act.r = +w[1]; act.c = +w[2]; paint(); var i = inputs[w[1] + ',' + w[2]]; if (i) i.focus(); };
+      li.onclick = function () { var w = li.getAttribute('data-w').split(','); act.dir = w[0]; var i = inputs[w[1] + ',' + w[2]]; if (i) i.focus(); mark(+w[1], +w[2]); };
     });
-    var pb = $('#cw-btns');
-    if (pb) {
-      pb.appendChild(btn('Check', function () {
-        var wrong = 0; Object.keys(inputs).forEach(function (k) {
-          var p = k.split(','), v = (inputs[k].value || '').toUpperCase(), ok = v === g[+p[0]][+p[1]];
-          cells[k].classList.toggle('bad', !!v && !ok); if (v && !ok) wrong++;
-        });
-        if (msg) msg.textContent = wrong ? wrong + ' letter' + (wrong > 1 ? 's look' : ' looks') + ' wrong.' : 'No wrong letters so far.';
-      }));
-      pb.appendChild(btn('Reveal word', function () {
-        if (act.r < 0) { if (msg) msg.textContent = 'Tap a square first.'; return; }
-        run(act.r, act.c, act.dir).forEach(function (p) { inputs[p[0] + ',' + p[1]].value = g[p[0]][p[1]]; }); save(); doneClues();
-      }));
-      pb.appendChild(btn('Show answers', function () { Object.keys(inputs).forEach(function (k) { var p = k.split(','); inputs[k].value = g[+p[0]][+p[1]]; }); save(); doneClues(); }));
-      pb.appendChild(btn('Reset', function () { Object.keys(inputs).forEach(function (k) { inputs[k].value = ''; cells[k].classList.remove('bad'); }); save(); doneClues(); if (msg) msg.textContent = ''; }));
-    }
-    paint(); doneClues();
+    var pb = $('#cw-btns'); if (pb) pb.appendChild(rubber(function () { Object.keys(inputs).forEach(function (k) { inputs[k].value = ''; }); save(); }));
   })();
 
   /* ================= WORD SEARCH ================= */
   (function () {
     var host = $('#wordsearch'), d = data('pz-wordsearch'); if (!host || !d) return;
-    var n = d.size, key = 'kv-ws-' + d.day, cells = [], found = {}, start = -1, msg = $('#ws-msg');
-    try { found = JSON.parse(store(key) || '{}') || {}; } catch (e) { found = {}; }
+    var n = d.size, key = 'kv-ws-' + d.day, marks = {}, cut = {}, cells = [];
+    try { var sv = JSON.parse(store(key) || '{}') || {}; marks = sv.m || {}; cut = sv.c || {}; } catch (e) {}
     var grid = el('div', 'ws'); grid.style.gridTemplateColumns = 'repeat(' + n + ', 1fr)';
     for (var i = 0; i < n * n; i++) (function (i) {
-      var b = el('button', 'wc', d.grid[Math.floor(i / n)][i % n]); b.type = 'button'; b.setAttribute('aria-label', 'Row ' + (Math.floor(i / n) + 1) + ' column ' + (i % n + 1) + ' ' + b.textContent);
-      b.onclick = function () { tap(i); }; cells.push(b); grid.appendChild(b);
+      var b = el('button', 'wc', d.grid[Math.floor(i / n)][i % n]); b.type = 'button';
+      b.setAttribute('aria-label', 'Row ' + (Math.floor(i / n) + 1) + ' column ' + (i % n + 1) + ' ' + b.textContent);
+      b.onclick = function () { marks[i] = marks[i] ? 0 : 1; b.classList.toggle('mk', !!marks[i]); save(); };
+      b.classList.toggle('mk', !!marks[i]); cells.push(b); grid.appendChild(b);
     })(i);
     host.appendChild(grid);
     var wl = el('div', 'wlist'); host.appendChild(wl);
-    var spans = {}; d.words.forEach(function (w) { var s = el('span', found[w.w] ? 'found' : '', w.w); spans[w.w] = s; wl.appendChild(s); });
+    d.words.forEach(function (w) {
+      var s = el('button', 'wd' + (cut[w.w] ? ' cut' : ''), w.w); s.type = 'button';
+      s.onclick = function () { cut[w.w] = cut[w.w] ? 0 : 1; s.classList.toggle('cut', !!cut[w.w]); save(); }; wl.appendChild(s);
+    });
+    function save() { store(key, JSON.stringify({ m: marks, c: cut })); }
     var pb = el('div', 'pbtns'); host.appendChild(pb);
-    pb.appendChild(btn('Show answers', function () { d.words.forEach(function (w) { line(w).forEach(function (i) { cells[i].classList.add('rv'); }); }); }));
-    pb.appendChild(btn('Reset', function () { found = {}; store(key, '{}'); start = -1; paint(); if (msg) msg.textContent = ''; cells.forEach(function (c) { c.classList.remove('rv'); }); }));
-    function line(w) { var out = []; for (var k = 0; k < w.w.length; k++) out.push((w.r + w.dr * k) * n + (w.c + w.dc * k)); return out; }
-    function paint() {
-      cells.forEach(function (c) { c.classList.remove('fd', 'st'); });
-      d.words.forEach(function (w) { spans[w.w].className = found[w.w] ? 'found' : ''; if (found[w.w]) line(w).forEach(function (i) { cells[i].classList.add('fd'); }); });
-      if (start >= 0) cells[start].classList.add('st');
-      var left = d.words.filter(function (w) { return !found[w.w]; }).length;
-      if (msg) msg.textContent = left ? left + ' word' + (left > 1 ? 's' : '') + ' to find.' : 'Found them all. Well done.';
-    }
-    function tap(i) {
-      if (start < 0) { start = i; paint(); return; }
-      if (start === i) { start = -1; paint(); return; }
-      var r1 = Math.floor(start / n), c1 = start % n, r2 = Math.floor(i / n), c2 = i % n, dr = r2 - r1, dc = c2 - c1;
-      if (dr === 0 || dc === 0 || Math.abs(dr) === Math.abs(dc)) {
-        var len = Math.max(Math.abs(dr), Math.abs(dc)) + 1, sr = Math.sign(dr), sc = Math.sign(dc), s = '';
-        for (var k = 0; k < len; k++) s += d.grid[r1 + sr * k][c1 + sc * k];
-        var rev = s.split('').reverse().join('');
-        d.words.forEach(function (w) { if (w.w === s || w.w === rev) found[w.w] = 1; });
-        store(key, JSON.stringify(found));
-      }
-      start = -1; paint();
-    }
-    paint();
+    pb.appendChild(rubber(function () { marks = {}; cut = {}; save(); cells.forEach(function (c) { c.classList.remove('mk'); }); $$('.wd', wl).forEach(function (s) { s.classList.remove('cut'); }); }));
   })();
 
   /* ================= CRYPTOGRAM ================= */
   (function () {
     var host = $('#cryptogram'), d = data('pz-cryptogram'); if (!host || !d) return;
-    var key = 'kv-cry-' + d.day, guess = {}, msg = $('#cry-msg');
-    try { guess = JSON.parse(store(key) || '{}') || {}; } catch (e) { guess = {}; }
-    var map = {}; for (var i = 0; i < d.plain.length; i++) { var p = d.plain[i]; if (/[A-Z]/.test(p)) map[d.cipher[i]] = p; }
-    var wrap = el('div', 'cry'), boxes = [];
-    d.cipher.split(' ').forEach(function (word, wi) {
+    var key = 'kv-cry-' + d.day, guess = [];
+    try { guess = JSON.parse(store(key) || '[]') || []; } catch (e) { guess = []; }
+    var wrap = el('div', 'cry'), boxes = [], idx = 0;
+    d.cipher.split(' ').forEach(function (word) {
       var w = el('div', 'cw-word');
       word.split('').forEach(function (ch) {
         if (/[A-Z]/.test(ch)) {
-          var c = el('div', 'cl'), inp = el('input'); inp.type = 'text'; inp.maxLength = 1; inp.autocomplete = 'off'; inp.autocapitalize = 'characters'; inp.spellcheck = false;
-          inp.setAttribute('data-c', ch); inp.setAttribute('aria-label', 'Cipher letter ' + ch); inp.value = guess[ch] || '';
-          c.appendChild(inp); c.appendChild(el('small', '', ch)); boxes.push({ box: c, inp: inp, ch: ch }); w.appendChild(c);
-          inp.addEventListener('focus', function () { inp.select(); mark(ch); });
+          var my = idx++, c = el('div', 'cl'), inp = el('input'); inp.type = 'text'; inp.maxLength = 1; inp.autocomplete = 'off'; inp.autocapitalize = 'characters'; inp.spellcheck = false;
+          inp.setAttribute('aria-label', 'Letter ' + (my + 1) + ', coded as ' + ch); inp.value = guess[my] || '';
+          c.appendChild(inp); c.appendChild(el('small', '', ch)); boxes.push(inp); w.appendChild(c);
+          inp.addEventListener('focus', function () { inp.select(); });
           inp.addEventListener('input', function () {
-            var v = (inp.value || '').replace(/[^a-zA-Z]/g, '').slice(-1).toUpperCase(); inp.value = v; guess[ch] = v; store(key, JSON.stringify(guess)); sync(); if (v) next(inp);
+            var v = (inp.value || '').replace(/[^a-zA-Z]/g, '').slice(-1).toUpperCase(); inp.value = v; guess[my] = v; store(key, JSON.stringify(guess));
+            if (v && boxes[my + 1]) boxes[my + 1].focus();
           });
-          inp.addEventListener('keydown', function (e) { if (e.key === 'Backspace' && !inp.value) { prev(inp); e.preventDefault(); } });
+          inp.addEventListener('keydown', function (e) { if (e.key === 'Backspace' && !inp.value && boxes[my - 1]) { boxes[my - 1].focus(); e.preventDefault(); } });
         } else w.appendChild(el('span', 'punct', ch));
       });
       wrap.appendChild(w);
     });
     host.appendChild(wrap);
     var pb = el('div', 'pbtns'); host.appendChild(pb);
-    pb.appendChild(btn('Hint', function () {
-      var t = boxes.filter(function (b) { return (guess[b.ch] || '') !== map[b.ch]; })[0];
-      if (!t) return; guess[t.ch] = map[t.ch]; store(key, JSON.stringify(guess)); sync();
-    }));
-    pb.appendChild(btn('Check', function () { sync(true); }));
-    pb.appendChild(btn('Show answer', function () { Object.keys(map).forEach(function (k) { guess[k] = map[k]; }); store(key, JSON.stringify(guess)); sync(); }));
-    pb.appendChild(btn('Reset', function () { guess = {}; store(key, '{}'); sync(); if (msg) msg.textContent = ''; }));
-    function mark(ch) { boxes.forEach(function (b) { b.box.classList.toggle('same', b.ch === ch); }); }
-    function next(inp) { var i = boxes.findIndex(function (b) { return b.inp === inp; }); if (boxes[i + 1]) boxes[i + 1].inp.focus(); }
-    function prev(inp) { var i = boxes.findIndex(function (b) { return b.inp === inp; }); if (boxes[i - 1]) boxes[i - 1].inp.focus(); }
-    function sync(check) {
-      var used = {}; Object.keys(guess).forEach(function (k) { if (guess[k]) used[guess[k]] = (used[guess[k]] || 0) + 1; });
-      var wrong = 0, filled = 0, right = 0, total = Object.keys(map).length;
-      boxes.forEach(function (b) {
-        b.inp.value = guess[b.ch] || '';
-        var dup = guess[b.ch] && used[guess[b.ch]] > 1, bad = check && guess[b.ch] && guess[b.ch] !== map[b.ch];
-        b.box.classList.toggle('bad', !!(dup || bad));
-      });
-      Object.keys(map).forEach(function (k) { if (guess[k]) { filled++; if (guess[k] === map[k]) right++; else wrong++; } });
-      if (msg) {
-        if (right === total) msg.textContent = 'Solved. ' + (d.who ? 'Attributed to ' + d.who + '.' : 'A well-known saying.');
-        else if (check) msg.textContent = wrong ? wrong + ' letter' + (wrong > 1 ? 's look' : ' looks') + ' wrong.' : 'No wrong letters so far.';
-      }
-    }
-    sync();
+    pb.appendChild(rubber(function () { guess = []; store(key, '[]'); boxes.forEach(function (b) { b.value = ''; }); }));
   })();
 })();
