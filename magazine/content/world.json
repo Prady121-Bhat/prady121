@@ -1,0 +1,102 @@
+{
+ "date": "2026-10-01",
+ "note": "One World page a day. Facts come from web-search results on the date shown; each item names its source. Rewrite in original words; never invent details; say 'reports say' where sources are secondary; treat casualty numbers with care; no graphic detail.",
+ "lead": {
+  "region": "Middle East",
+  "headline": "US formally ends its military mission in Iraq after twelve years",
+  "deck": "Operation Inherent Resolve was declared complete on 30 September, closing the latest chapter of American troop presence that began with the 2003 invasion.",
+  "body": [
+   "The United States and its coalition partners formally ended Operation Inherent Resolve in Iraq on Wednesday, 30 September, according to the Pentagon. The mission, launched in August 2014 to fight the Islamic State group, ended with the departure of coalition forces and equipment from Erbil Air Base, reports say.",
+   "The pull-out completes a phased withdrawal agreed between Washington and Baghdad in September 2024. Reports describe it as the close of a presence that began with the invasion of Iraq in March 2003; about 4,500 American service members died in Iraq over those two decades.",
+   "President Trump called the withdrawal a victory, according to a regional live blog. Iraq remains close to the wider Middle East conflict, where reports say indirect talks between Washington and Tehran resumed last week."
+  ],
+  "sources": [
+   [
+    "The National",
+    "https://www.thenationalnews.com/news/us/2026/09/30/isis-mission-ends-iraq-us/"
+   ],
+   [
+    "NPR",
+    "https://www.npr.org/2026/09/30/nx-s1-5983426/u-s-withdraws-final-troops-from-iraq"
+   ],
+   [
+    "Stars and Stripes",
+    "https://www.stripes.com/theaters/middle_east/2026-09-30/iraq-us-troop-withdrawal-23012651.html"
+   ],
+   [
+    "PBS NewsHour",
+    "https://www.pbs.org/newshour/world/u-s-military-says-its-withdrawal-of-troops-from-iraq-for-islamic-state-fight-is-complete"
+   ]
+  ]
+ },
+ "items": [
+  {
+   "region": "Middle East",
+   "title": "Iran says it has the US reply to its proposal",
+   "text": "Iran confirmed that it received Washington's response, passed on through Qatari mediators, to its seven-day proposal on the Strait of Hormuz. Reports describe the dispute as one of sequencing rather than of the points themselves. Indirect talks between the two sides resumed last week on the sidelines of the UN General Assembly. President Trump said the war would end 'very soon'. Iran's currency has fallen to a new record low, reports say.",
+   "source": "Khaleej Times live updates",
+   "url": "https://www.khaleejtimes.com/world/mena/us-israel-iran-lebanon-war-live-updates-september-30-2026"
+  },
+  {
+   "region": "Europe",
+   "title": "Russia sends NATO a nuclear warning over Kaliningrad",
+   "text": "Russia delivered an informal diplomatic note to NATO saying it would be ready to use its full arsenal, nuclear weapons included, if NATO countries tried to cut off the Kaliningrad region from the rest of Russia. The note claims NATO is preparing an air and naval blockade. NATO Secretary-General Mark Rutte replied that NATO is a defensive alliance and that Russia should stop its nuclear threats.",
+   "source": "Al Jazeera",
+   "url": "https://www.aljazeera.com/news/2026/9/30/russia-warns-nato-of-possible-nuclear-response-if-kaliningrad-is-cut-off"
+  },
+  {
+   "region": "Europe",
+   "title": "Russia hits Kyiv's power grid in a mass attack",
+   "text": "Reports call it Russia's first mass assault on the grid since last autumn. Air-raid alerts sounded over Kyiv for more than twenty hours on 30 September. Ukraine's air force said Russia launched 188 drones along with missiles overnight; reports say four people were killed and eight injured. Separately, Ukraine's president said Belgium will transfer three F-16 fighter jets by the end of the year.",
+   "source": "FDD overnight brief",
+   "url": "https://www.fdd.org/overnight-brief/september-30-2026/"
+  },
+  {
+   "region": "Europe",
+   "title": "The Brexit debate is back in Britain",
+   "text": "The Irish Times asked this week whether Britain could rejoin the European Union, as the question returned to British politics. Earlier reports say the government is seeking closer ties with the EU while still ruling out a return to the single market. Any move to rejoin would first need a general election win on that promise.",
+   "source": "The Irish Times",
+   "url": "https://www.irishtimes.com/world/uk/2026/09/30/the-brexit-debate-is-back-could-britain-rejoin-the-eu/"
+  },
+  {
+   "region": "United Nations",
+   "title": "The race to succeed the UN Secretary-General",
+   "text": "The general debate of the UN's 81st session ended on 28 September. Speeches dwelt on the wars in the Middle East and Ukraine, artificial intelligence and the UN's funding squeeze, while diplomats watched the contest to succeed Secretary-General Antonio Guterres, whose term ends on 31 December.",
+   "source": "Crisis Group, UNGA updates",
+   "url": "https://www.crisisgroup.org/sco/global/updates-un-general-assembly-2026"
+  },
+  {
+   "region": "Economy",
+   "title": "Oil stays far above last year's level",
+   "text": "Brent crude traded at about 96.8 dollars a barrel and US crude at about 90 dollars on 1 October, each roughly half as high again as a year earlier, according to Trading Economics data. Brent briefly topped 110 dollars this year as Middle East producers cut output amid security threats. For India, higher crude prices matter for fuel and transport costs.",
+   "source": "Trading Economics",
+   "url": "https://tradingeconomics.com/commodity/brent-crude-oil"
+  },
+  {
+   "region": "Asia",
+   "title": "China's factory index edges above 50",
+   "text": "China's official manufacturing PMI was reported at 50.1 for September, back above the 50 mark that separates growth from contraction. Japan's Nikkei rose on Wednesday, and reports say some EU members are weighing firmer trade measures against China.",
+   "source": "Financial and forex market recap, BabyPips",
+   "url": "https://www.babypips.com/news/financial-forex-market-recap-2026-09-30"
+  },
+  {
+   "region": "Space",
+   "title": "NASA's Crew-13 launches today for the space station",
+   "text": "Four astronauts are scheduled to lift off from Cape Canaveral at 11.10 am US Eastern time on 1 October: NASA's Jessica Watkins and Luke Delaney, Canada's Joshua Kutryk and Russia's Sergey Teteryatnikov. The Dragon capsule could dock in under eight hours, which would be the fastest US trip to the station. Forecasters gave the weather a 55 to 60 per cent chance of being good enough; the outcome was not known when this page was prepared.",
+   "source": "Space.com and NASA",
+   "url": "https://www.space.com/news/live/spacex-nasa-crew-13-astronauts-launch-to-iss-september-30-2026"
+  },
+  {
+   "region": "Science",
+   "title": "Curiosity reaches 5,000 Martian days",
+   "text": "NASA's Curiosity rover marked 5,000 Martian days on Mars and blended morning and afternoon views into a postcard-style image. Separately, researchers reported that conventional measurements underestimate the total heat exposure of marine heatwaves by more than 150 per cent, because the warm spells can linger for months.",
+   "source": "ScienceDaily",
+   "url": "https://www.sciencedaily.com/"
+  }
+ ],
+ "briefly": [
+  "Dubai-Tel Aviv: a flydubai flight made an emergency landing in Saudi Arabia after an incident in the cockpit; the airline suspended its Israel flights while it investigates.",
+  "Ukraine: Putin's envoy Kirill Dmitriev held what were described as constructive talks with US officials.",
+  "South Korea's September exports were forecast to rise for a sixteenth straight month."
+ ]
+}

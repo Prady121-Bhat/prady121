@@ -34,7 +34,7 @@ KN_MONTHS = ["ಜನವರಿ", "ಫೆಬ್ರವರಿ", "ಮಾರ್ಚ್"
 
 PAGE_COLOURS = dict(front=("#c4361f", "#fff"), desk=("#6b6f76", "#fff"), classifieds=("#8a5a00", "#fff"), local=("#0b7a75", "#fff"),
                     feature=("#e0a100", "#15171c"), kadambari=("#8e2c6b", "#fff"), serial=("#2f4fb0", "#fff"),
-                    puz1=("#1f7a3a", "#fff"), puz2=("#d2571a", "#fff"), garden=("#4d7a1b", "#fff"),
+                    world=("#5b3fa8", "#fff"), puz1=("#1f7a3a", "#fff"), puz2=("#d2571a", "#fff"), garden=("#4d7a1b", "#fff"),
                     tales=("#c72a66", "#fff"), sports=("#0f5fa8", "#fff"))
 PLANT_TERMS = {
     "Udupi Mallige": ["Jasminum sambac flower", "Jasminum sambac"],
@@ -287,21 +287,28 @@ def puzzle_pages(P, pz):
     return p1, p2
 
 
+GARDEN_KINDS = (("herb", "Herb of the day", 0), ("flower", "Flower of the day", 3), ("indoor", "Indoor and garden plant", 5))
+
+
 def garden_page(P, garden):
-    pl = garden["plants"]
-    start = ((P.day - LAUNCH).days * 3) % len(pl)
-    picks = [pl[(start + k) % len(pl)] for k in range(3)]
+    """One herb, one flower and one indoor or garden plant (sometimes a bonsai) a day, rotating inside each group."""
+    d = (P.day - LAUNCH).days
+    picks = []
+    for cat, label, off in GARDEN_KINDS:
+        grp = [p for p in garden["plants"] if p.get("category") == cat]
+        p = grp[(d + off) % len(grp)]
+        picks.append((("Bonsai of the day" if "Bonsai" in p["tags"] else label), p))
     cards = []
-    for k, p in enumerate(picks):
+    for k, (label, p) in enumerate(picks):
         ph = photos.photo_for(p["name"], PLANT_TERMS.get(p["name"], [p["latin"]]), P.day)
         fig = (f'<figure class="fig"><img src="{ph["uri"]}" alt="{E(p["name"], quote=True)}, photograph" width="800" height="600" loading="lazy"><figcaption>{photos.credit_html(ph)}</figcaption></figure>' if ph else "")
         kn = f'<span class="knn" lang="kn">{E(p["kn"])}</span>' if p["kn"] else ""
         tags = "".join(f"<span>{E(t)}</span>" for t in p["tags"])
         spec = "".join(f"<dt>{E(a)}</dt><dd>{E(b)}</dd>" for a, b in p["spec"])
-        cards.append(f'<article class="plant{" first" if k == 0 else ""}">{fig}<div><h3>{E(p["name"])}</h3><div class="names">{kn}<span class="lat">{E(p["latin"])}</span></div>'
+        cards.append(f'<article class="plant{" first" if k == 0 else ""}">{fig}<div><span class="kicker">{E(label)}</span><h3>{E(p["name"])}</h3><div class="names">{kn}<span class="lat">{E(p["latin"])}</span></div>'
                      f'<div class="tags">{tags}</div><p class="about">{E(p["about"])}</p><dl class="spec">{spec}</dl></div></article>')
     month = "".join(f"<li>{E(x)}</li>" for x in garden["month"])
-    return (f'<p class="deck" style="margin-bottom:22px">Three plants a day for a home on the coast: laterite soil, salty air and months of rain.</p><div class="plants">{"".join(cards)}</div>'
+    return (f'<p class="deck" style="margin-bottom:22px">Every day a herb, a flower and an indoor or garden plant (now and then a bonsai), chosen for a home on the coast: laterite soil, salty air and months of rain.</p><div class="plants">{"".join(cards)}</div>'
             f'<div class="month"><h3 class="sub">This month in the garden</h3><p class="prog" id="garden-prog"></p><ul id="garden-list">{month}</ul></div>')
 
 
@@ -334,6 +341,19 @@ def tales_page(P):
     return (comics.COMIC_DEFS + f'<p class="deck" style="margin-bottom:20px">One old Indian tale a day, drawn as four panels with the moral at the end. Tomorrow: a {other} tale. '
             'The stories are traditional and retold here in original words; the drawings are original.</p>'
             f'<div class="tales">{art}</div>'), ep["title"], None
+
+
+def world_page(world):
+    ld = world["lead"]
+    body = "".join(f"<p>{E(t)}</p>" for t in ld["body"])
+    cards = "".join(f'<article><span class="sport">{E(i["region"])}</span><h3>{E(i["title"])}</h3><p>{E(i["text"])}</p>'
+                    f'<p class="src"><a href="{E(i["url"], quote=True)}" target="_blank" rel="noopener">{E(i["source"])}</a></p></article>' for i in world["items"])
+    brief = "".join(f"<li>{E(x)}</li>" for x in world.get("briefly", []))
+    return (f'<span class="kicker">{E(ld["region"])}</span><h3 class="hl1" style="margin:8px 0 0">{E(ld["headline"])}</h3><p class="deck">{E(ld["deck"])}</p>'
+            f'<div class="body drop rule">{body}</div>{sources(ld["sources"])}'
+            f'<div class="rule"><h3 class="sub">Around the world</h3><div class="sp">{cards}</div></div>'
+            + (f'<div class="rule"><h3 class="sub">Briefly</h3><ul class="brief">{brief}</ul></div>' if brief else "")
+            + '<p class="wxsrc" style="margin-top:18px">World news is gathered from the sources named under each item by web search and rewritten in our own words. Where reports differ or are secondary, the text says so.</p>')
 
 
 def sports_page(news):
@@ -372,12 +392,13 @@ def assemble(day, private, ctx):
         P.add("desk", "Desk", "ಡೆಸ್ಕ್", desk, "Your inbox, edited (private)")
         P.add("classifieds", "Classifieds", "ಪ್ರಕಟಣೆಗಳು", ads, "Situations vacant matched to you (private)")
     P.add("local", "Coast & Local", "ಕರಾವಳಿ ಮತ್ತು ಸ್ಥಳೀಯ", local_page(P, news, wx, sun, moon, cfg, notices_items), "More stories, five-day weather, notices, useful numbers")
+    P.add("world", "World", "ಜಗತ್ತು", world_page(ctx["world"]), "The day's world news: lead story, regions, economy, space and science")
     P.add("feature", "Coast Feature", "ವಿಶೇಷ ಲೇಖನ", ctx["feature"], "One feature a day: food, art, places, tradition, sea, nature, temples")
     P.add("kadambari", "Kannada Kadambari", "ಕನ್ನಡ ಕಾದಂಬರಿ", serial_page(P, "kn", "kn"), "ಸಮುದ್ರ ನಿಲಯ: ಧಾರಾವಾಹಿ ಕಾದಂಬರಿ, ಪ್ರತಿದಿನ ಒಂದು ಸಂಚಿಕೆ")
     P.add("serial", "English Serial", "ಇಂಗ್ಲಿಷ್ ಕಾದಂಬರಿ", serial_page(P, "en", "en"), "The Tide Ledger: a coastal mystery, one episode a day")
     P.add("puz1", "Puzzles I", "ಒಗಟುಗಳು ೧", p1, "Sudoku and a cryptogram")
     P.add("puz2", "Puzzles II", "ಒಗಟುಗಳು ೨", p2, "A mini crossword and a word search")
-    P.add("garden", "Garden", "ತೋಟ", garden_page(P, garden), "Three plants for a coastal home")
+    P.add("garden", "Garden", "ತೋಟ", garden_page(P, garden), "A herb, a flower and an indoor or bonsai plant, every day")
     P.add("tales", "Tales", "ಕತೆಗಳು", tales_html, f"Today: {t1}")
     P.add("sports", "Sports", "ಕ್ರೀಡೆ", sports_page(news), "Cricket, the Asian Games, hockey and kabaddi")
     P.pages[0]["body"] = front_page(P, news, wx, sun, moon, priv if private else None)
@@ -419,7 +440,7 @@ def main():
             outs["public"] = args[i + 1]; i += 2
         else:
             day = datetime.date.fromisoformat(a); i += 1
-    ctx = dict(news=load("news.json"), garden=load("garden.json"), jokes=load("jokes.json"), feats=load("features.json"), priv=load("private.json"))
+    ctx = dict(news=load("news.json"), garden=load("garden.json"), jokes=load("jokes.json"), feats=load("features.json"), priv=load("private.json"), world=load("world.json"))
     ctx["pz"] = puzzles.get(day)
     ctx["pz_pages"] = puzzle_pages(Paper(day, False), ctx["pz"])
     ctx["wx"] = weather.forecast()
@@ -430,6 +451,8 @@ def main():
     ctx["notices"] = bn.todays(rows, day)
     if ctx["news"]["date"] != day.isoformat():
         print(f"WARNING: content/news.json is dated {ctx['news']['date']}, not {day}. Refresh the news first.", file=sys.stderr)
+    if ctx["world"]["date"] != day.isoformat():
+        print(f"WARNING: content/world.json is dated {ctx['world']['date']}, not {day}. Refresh the world news first.", file=sys.stderr)
     tp = Paper(day, False)
     ctx["tales"] = tales_page(tp)
     ctx["feature"] = feature_page(tp, ctx["feats"])

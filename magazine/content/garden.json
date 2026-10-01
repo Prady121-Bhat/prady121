@@ -1,6 +1,446 @@
 {
  "plants": [
   {
+   "name": "Tulsi",
+   "kn": "ತುಳಸಿ",
+   "latin": "Ocimum tenuiflorum",
+   "tags": [
+    "Sacred",
+    "Herb",
+    "Easy"
+   ],
+   "about": "Holy basil, native to India and kept in a raised tulasi katte outside many coastal homes. It is a leafy herb as much as a sacred plant.",
+   "spec": [
+    [
+     "Light",
+     "Full sun or partial sun."
+    ],
+    [
+     "Water",
+     "Light watering, like a shower. Daily in summer, every other day in cooler weather. Do not flood the pot."
+    ],
+    [
+     "Soil",
+     "Porous, well-drained, with added organic manure."
+    ],
+    [
+     "Prune",
+     "Pinch the growing tip for a bushier plant and remove flower heads early to keep it leafy."
+    ],
+    [
+     "Watch out",
+     "Mealybugs, aphids, mites and whitefly. Spray a neem-based solution."
+    ]
+   ],
+   "category": "herb"
+  },
+  {
+   "name": "Curry leaf",
+   "kn": "ಕರಿಬೇವು",
+   "latin": "Murraya koenigii",
+   "tags": [
+    "Kitchen garden",
+    "Evergreen"
+   ],
+   "about": "The kitchen tree behind every tempering. It loves warmth, so it settles in easily on the coast and needs no protection from cold.",
+   "spec": [
+    [
+     "Light",
+     "Full sun."
+    ],
+    [
+     "Water",
+     "Deeply but not often. Let the top 3 to 5 cm dry between waterings to avoid root rot."
+    ],
+    [
+     "Soil",
+     "Well-drained soil that is rich in compost."
+    ],
+    [
+     "Feed",
+     "Compost or organic manure every two to three months. Nitrogen-rich feed gives lush leaves."
+    ],
+    [
+     "Harvest",
+     "Pick leaves regularly from the tips so it keeps branching."
+    ]
+   ],
+   "category": "herb"
+  },
+  {
+   "category": "herb",
+   "name": "Mint",
+   "kn": "ಪುದೀನ",
+   "latin": "Mentha spicata",
+   "tags": [
+    "Herb",
+    "Spreads fast",
+    "Pot only"
+   ],
+   "about": "Spearmint, the herb behind chutneys, buttermilk and pulao. It spreads by runners, so keep it in its own pot or it will take over the bed. On the coast it grows nonstop in the monsoon.",
+   "spec": [
+    [
+     "Light",
+     "Bright light with some shade from the hot afternoon sun."
+    ],
+    [
+     "Water",
+     "Keep the soil evenly moist; it sulks if it dries out completely."
+    ],
+    [
+     "Soil",
+     "Rich, loose soil with compost, in a pot with drainage holes."
+    ],
+    [
+     "Pinch",
+     "Nip the tips often for a bushy plant and to stop flowering."
+    ],
+    [
+     "Grow more",
+     "A stem cutting in a glass of water roots in about a week."
+    ]
+   ]
+  },
+  {
+   "category": "herb",
+   "name": "Coriander",
+   "kn": "ಕೊತ್ತಂಬರಿ",
+   "latin": "Coriandrum sativum",
+   "tags": [
+    "Herb",
+    "Cool season",
+    "Sow from seed"
+   ],
+   "about": "Fresh coriander leaves flavour almost every coastal kitchen. It prefers cooler months, so on the coast it does best from October to February and runs to seed in hot weather.",
+   "spec": [
+    [
+     "Sow",
+     "Scatter split seeds straight into the pot or bed. Coriander dislikes being transplanted."
+    ],
+    [
+     "Light",
+     "Morning sun; light shade in the afternoon."
+    ],
+    [
+     "Water",
+     "Light, regular watering. Never let the pot sit in standing water."
+    ],
+    [
+     "Soil",
+     "Loose, well-drained soil with compost."
+    ],
+    [
+     "Harvest",
+     "First cuttings in four to six weeks. Sow a fresh pot every two weeks for a steady supply."
+    ]
+   ]
+  },
+  {
+   "category": "herb",
+   "name": "Lemongrass",
+   "kn": "ನಿಂಬೆ ಹುಲ್ಲು",
+   "latin": "Cymbopogon citratus",
+   "tags": [
+    "Herb",
+    "Tea plant",
+    "Easy"
+   ],
+   "about": "A tall, scented grass that gives tea and many curries their lemony smell. It loves warm, wet weather, which makes it a good match for Mangaluru and Udupi.",
+   "spec": [
+    [
+     "Light",
+     "Full sun."
+    ],
+    [
+     "Water",
+     "Generous in the monsoon; regular in dry weather."
+    ],
+    [
+     "Soil",
+     "Any fertile, well-drained soil; a large pot or a corner of the garden."
+    ],
+    [
+     "Harvest",
+     "Cut the thick lower stalks at the base and leave the rest to grow."
+    ],
+    [
+     "Grow more",
+     "Divide a clump or root a stalk bought from the market."
+    ]
+   ]
+  },
+  {
+   "category": "herb",
+   "name": "Aloe vera",
+   "kn": "ಲೋಳೆಸರ",
+   "latin": "Aloe vera",
+   "tags": [
+    "Succulent herb",
+    "Low water",
+    "Easy"
+   ],
+   "about": "A fleshy plant whose clear gel is used on the skin in many homes. It stores water in its leaves, so it needs far less care than most herbs, but it rots in constant wet.",
+   "spec": [
+    [
+     "Light",
+     "Bright light or full sun."
+    ],
+    [
+     "Water",
+     "Only when the soil is dry right through. In heavy rain move the pot under cover."
+    ],
+    [
+     "Soil",
+     "Gritty, fast-draining mix with coarse sand."
+    ],
+    [
+     "Use",
+     "Test a little gel on the inside of your arm first; the yellow sap near the skin can irritate."
+    ],
+    [
+     "Grow more",
+     "Separate the small pups at the base and pot them up."
+    ]
+   ]
+  },
+  {
+   "category": "herb",
+   "name": "Brahmi",
+   "kn": "ಬ್ರಾಹ್ಮಿ",
+   "latin": "Bacopa monnieri",
+   "tags": [
+    "Herb",
+    "Loves wet soil",
+    "Creeper"
+   ],
+   "about": "A small creeping herb of damp ground that is used in traditional Ayurvedic preparations. It is one of the few herbs that is happiest when its roots stay wet, so it suits a tray or a pot kept standing in a shallow dish of water.",
+   "spec": [
+    [
+     "Light",
+     "Sun or partial shade."
+    ],
+    [
+     "Water",
+     "Keep constantly moist; a saucer of water under the pot is fine for this plant."
+    ],
+    [
+     "Soil",
+     "Loamy, rich in compost."
+    ],
+    [
+     "Spread",
+     "Stems root where they touch the soil. Trim to keep it tidy."
+    ],
+    [
+     "Note",
+     "Check with a qualified practitioner before using any herb as medicine."
+    ]
+   ]
+  },
+  {
+   "category": "herb",
+   "name": "Doddapatre",
+   "kn": "ದೊಡ್ಡಪತ್ರೆ",
+   "latin": "Coleus amboinicus",
+   "tags": [
+    "Herb",
+    "Aromatic",
+    "Cuttings"
+   ],
+   "about": "Indian borage, a thick, soft, strongly scented leaf used in tambuli, bajji and home remedies across Karnataka. It is one of the easiest herbs to grow, rooting from a leaf or stem cutting.",
+   "spec": [
+    [
+     "Light",
+     "Bright light; a little shade in harsh afternoon sun."
+    ],
+    [
+     "Water",
+     "When the top of the soil is dry. The fleshy leaves store water."
+    ],
+    [
+     "Soil",
+     "Well-drained mix in a pot or bed."
+    ],
+    [
+     "Grow more",
+     "Push a cutting into moist soil; it roots in a couple of weeks."
+    ],
+    [
+     "Prune",
+     "Pinch the tips for a bushier plant."
+    ]
+   ]
+  },
+  {
+   "category": "flower",
+   "name": "Marigold",
+   "kn": "ಚೆಂಡು ಹೂ",
+   "latin": "Tagetes erecta",
+   "tags": [
+    "Flower",
+    "Festival garlands",
+    "Sow from seed"
+   ],
+   "about": "The orange and yellow pom-pom flower of Ganesh Chaturthi, Dasara and Deepavali garlands. It is often planted among vegetables because its flowers draw pollinators.",
+   "spec": [
+    [
+     "Sow",
+     "Seed at the end of the monsoon for flowers in about two months."
+    ],
+    [
+     "Light",
+     "Full sun, at least five to six hours."
+    ],
+    [
+     "Water",
+     "At the base, not over the flowers, to avoid mould in humid weather."
+    ],
+    [
+     "Soil",
+     "Well-drained garden soil with compost."
+    ],
+    [
+     "Prune",
+     "Pinch young plants once for more branches and pick spent flowers to keep it blooming."
+    ]
+   ]
+  },
+  {
+   "category": "flower",
+   "name": "Rose",
+   "kn": "ಗುಲಾಬಿ",
+   "latin": "Rosa species",
+   "tags": [
+    "Flower",
+    "Needs attention",
+    "Fragrant"
+   ],
+   "about": "Roses can do well in pots on the coast if they get sun, air and good drainage. The humid monsoon invites black spot, so airflow and clean leaves matter more than anything else.",
+   "spec": [
+    [
+     "Light",
+     "Five to six hours of direct sun."
+    ],
+    [
+     "Water",
+     "Deeply at the base, then let the top soil dry. Avoid wetting leaves."
+    ],
+    [
+     "Soil",
+     "Rich, loose, well-drained mix with plenty of compost, in a pot at least 30 cm deep."
+    ],
+    [
+     "Prune",
+     "Cut back hard after the rains, around October, and remove dead or crossing stems."
+    ],
+    [
+     "Watch out",
+     "Spots on leaves: remove them and spray a neem solution; give the plant more air."
+    ]
+   ]
+  },
+  {
+   "category": "flower",
+   "name": "Ixora",
+   "kn": "",
+   "latin": "Ixora coccinea",
+   "tags": [
+    "Flower",
+    "Butterfly plant",
+    "Evergreen"
+   ],
+   "about": "A compact evergreen shrub with round clusters of red, orange or yellow flowers all year in warm places. The acidic laterite soil of the coast suits it naturally.",
+   "spec": [
+    [
+     "Light",
+     "Full sun to light shade; the more sun, the more flowers."
+    ],
+    [
+     "Water",
+     "Regular. It does not like to dry out completely."
+    ],
+    [
+     "Soil",
+     "Slightly acidic, well-drained soil with compost; laterite suits it."
+    ],
+    [
+     "Prune",
+     "Shape it lightly after a flush of flowers."
+    ],
+    [
+     "Watch out",
+     "Yellowing leaves between the veins can mean the soil is too alkaline."
+    ]
+   ]
+  },
+  {
+   "category": "flower",
+   "name": "Periwinkle",
+   "kn": "ಸದಾಪುಷ್ಪ",
+   "latin": "Catharanthus roseus",
+   "tags": [
+    "Flower",
+    "Hardy",
+    "Low care"
+   ],
+   "about": "Sadapushpa, the 'ever-blooming flower', thrives in heat and in poor soil and flowers nearly every day. Handle it with care: all parts of the plant are poisonous if eaten.",
+   "spec": [
+    [
+     "Light",
+     "Full sun, five or more hours."
+    ],
+    [
+     "Water",
+     "Sparingly; it dislikes wet roots. In heavy rain keep it in a pot with a gap under it."
+    ],
+    [
+     "Soil",
+     "Any soil with good drainage."
+    ],
+    [
+     "Care",
+     "Pinch the tips while young. Keep children and pets from chewing it."
+    ],
+    [
+     "Seeds",
+     "It self-seeds; pot up the seedlings that appear."
+    ]
+   ]
+  },
+  {
+   "name": "Aboli",
+   "kn": "ಕನಕಾಂಬರ",
+   "latin": "Crossandra infundibuliformis",
+   "tags": [
+    "Udupi favourite",
+    "Flowers all year"
+   ],
+   "about": "Firecracker flower in English, Kanakambara in Kannada and Aboli in Konkani and Marathi. Its orange and coral blooms are strung into garlands across the coast.",
+   "spec": [
+    [
+     "Light",
+     "Bright morning sun, with cover from harsh afternoon sun."
+    ],
+    [
+     "Water",
+     "Thoroughly, whenever the top few inches of soil are dry. Under-watering harms it."
+    ],
+    [
+     "Soil",
+     "Fertile, well-drained red loam, pH 6 to 7.5."
+    ],
+    [
+     "Climate",
+     "Warm and humid, 20 to 30 degrees C. It suits Mangaluru."
+    ],
+    [
+     "Feed",
+     "Liquid fertiliser every two weeks in the growing season."
+    ]
+   ],
+   "category": "flower"
+  },
+  {
    "name": "Udupi Mallige",
    "kn": "ಮಲ್ಲಿಗೆ",
    "latin": "Jasminum sambac",
@@ -35,39 +475,8 @@
      "Watch out",
      "Waterlogged roots in heavy rain. Raise pots on bricks."
     ]
-   ]
-  },
-  {
-   "name": "Aboli",
-   "kn": "ಕನಕಾಂಬರ",
-   "latin": "Crossandra infundibuliformis",
-   "tags": [
-    "Udupi favourite",
-    "Flowers all year"
    ],
-   "about": "Firecracker flower in English, Kanakambara in Kannada and Aboli in Konkani and Marathi. Its orange and coral blooms are strung into garlands across the coast.",
-   "spec": [
-    [
-     "Light",
-     "Bright morning sun, with cover from harsh afternoon sun."
-    ],
-    [
-     "Water",
-     "Thoroughly, whenever the top few inches of soil are dry. Under-watering harms it."
-    ],
-    [
-     "Soil",
-     "Fertile, well-drained red loam, pH 6 to 7.5."
-    ],
-    [
-     "Climate",
-     "Warm and humid, 20 to 30 degrees C. It suits Mangaluru."
-    ],
-    [
-     "Feed",
-     "Liquid fertiliser every two weeks in the growing season."
-    ]
-   ]
+   "category": "flower"
   },
   {
    "name": "Hibiscus",
@@ -99,70 +508,239 @@
      "Prune",
      "Trim leggy stems after a flush of flowers."
     ]
-   ]
+   ],
+   "category": "flower"
   },
   {
-   "name": "Tulsi",
-   "kn": "ತುಳಸಿ",
-   "latin": "Ocimum tenuiflorum",
+   "name": "Canna lily",
+   "kn": "",
+   "latin": "Canna indica",
    "tags": [
-    "Sacred",
-    "Herb",
-    "Easy"
+    "Monsoon proof",
+    "Flowering"
    ],
-   "about": "Holy basil, native to India and kept in a raised tulasi katte outside many coastal homes. It is a leafy herb as much as a sacred plant.",
+   "about": "A sturdy flowering plant that handles the monsoon better than almost any other. A good choice for a bed that stays wet.",
    "spec": [
     [
      "Light",
-     "Full sun or partial sun."
+     "Full sun for the most flowers."
     ],
     [
      "Water",
-     "Light watering, like a shower. Daily in summer, every other day in cooler weather. Do not flood the pot."
+     "Generous in dry spells. It copes with heavy rain."
     ],
     [
      "Soil",
-     "Porous, well-drained, with added organic manure."
+     "Rich soil that drains, with compost worked in."
     ],
     [
      "Prune",
-     "Pinch the growing tip for a bushier plant and remove flower heads early to keep it leafy."
+     "Cut spent flower stalks and old leaves at the base."
+    ]
+   ],
+   "category": "flower"
+  },
+  {
+   "category": "indoor",
+   "name": "Money plant",
+   "kn": "ಮನಿ ಪ್ಲಾಂಟ್",
+   "latin": "Epipremnum aureum",
+   "tags": [
+    "Indoor",
+    "Climber",
+    "Easy"
+   ],
+   "about": "The most common indoor creeper in Indian homes. It grows in a glass of water or in soil, tolerates low light, and can be trained up a post or let to trail from a shelf.",
+   "spec": [
+    [
+     "Light",
+     "Bright indirect light; it copes with low light but grows slowly."
     ],
     [
-     "Watch out",
-     "Mealybugs, aphids, mites and whitefly. Spray a neem-based solution."
+     "Water",
+     "When the top 2 to 3 cm of soil is dry; refresh the water weekly if grown in a glass."
+    ],
+    [
+     "Soil",
+     "Ordinary potting mix with sand for drainage."
+    ],
+    [
+     "Grow more",
+     "A cutting with a node roots in water in two weeks."
+    ],
+    [
+     "Note",
+     "Mildly toxic if chewed; keep away from pets and small children."
     ]
    ]
   },
   {
-   "name": "Curry leaf",
-   "kn": "ಕರಿಬೇವು",
-   "latin": "Murraya koenigii",
+   "category": "indoor",
+   "name": "Snake plant",
+   "kn": "",
+   "latin": "Dracaena trifasciata",
    "tags": [
-    "Kitchen garden",
-    "Evergreen"
+    "Indoor",
+    "Nearly unkillable",
+    "Low water"
    ],
-   "about": "The kitchen tree behind every tempering. It loves warmth, so it settles in easily on the coast and needs no protection from cold.",
+   "about": "Upright, sword-shaped leaves with pale bands. It survives low light and neglect, and the most common way to kill it is to water it too much.",
    "spec": [
     [
      "Light",
-     "Full sun."
+     "Anything from shade to bright light; avoid harsh midday sun."
     ],
     [
      "Water",
-     "Deeply but not often. Let the top 3 to 5 cm dry between waterings to avoid root rot."
+     "Only when the soil is dry all the way down; in the monsoon, rarely."
     ],
     [
      "Soil",
-     "Well-drained soil that is rich in compost."
+     "Gritty, fast-draining mix."
     ],
     [
-     "Feed",
-     "Compost or organic manure every two to three months. Nitrogen-rich feed gives lush leaves."
+     "Grow more",
+     "Divide the clump or root leaf sections."
     ],
     [
-     "Harvest",
-     "Pick leaves regularly from the tips so it keeps branching."
+     "Watch out",
+     "Soft, mushy leaf bases mean root rot from overwatering."
+    ]
+   ]
+  },
+  {
+   "category": "indoor",
+   "name": "Peace lily",
+   "kn": "",
+   "latin": "Spathiphyllum wallisii",
+   "tags": [
+    "Indoor",
+    "White flowers",
+    "Shade lover"
+   ],
+   "about": "Glossy dark leaves and white, hood-shaped flowers. It tells you when it is thirsty by drooping and recovers within hours after watering.",
+   "spec": [
+    [
+     "Light",
+     "Bright shade or indirect light. Direct sun scorches the leaves."
+    ],
+    [
+     "Water",
+     "Keep the soil lightly moist, never soggy."
+    ],
+    [
+     "Soil",
+     "Rich, airy mix with compost."
+    ],
+    [
+     "Air",
+     "It likes humidity, which coastal homes have."
+    ],
+    [
+     "Note",
+     "Toxic if eaten; keep out of reach of pets and children."
+    ]
+   ]
+  },
+  {
+   "category": "indoor",
+   "name": "Ficus bonsai",
+   "kn": "",
+   "latin": "Ficus microcarpa",
+   "tags": [
+    "Bonsai",
+    "Beginner friendly",
+    "Needs shaping"
+   ],
+   "about": "A good first bonsai for a warm, humid place. Ficus microcarpa grows thick aerial roots and a swollen trunk, and it forgives mistakes in pruning and watering.",
+   "spec": [
+    [
+     "Light",
+     "Bright light, with morning sun if possible."
+    ],
+    [
+     "Water",
+     "When the top of the soil is just dry. Never let a shallow pot dry out fully."
+    ],
+    [
+     "Shape",
+     "Trim new shoots back to two leaves once they have grown six or more; wire branches gently."
+    ],
+    [
+     "Repot",
+     "Every two years, trimming a third of the roots, using a gritty bonsai mix."
+    ],
+    [
+     "Watch out",
+     "Leaf drop after a move is normal; keep the position steady."
+    ]
+   ]
+  },
+  {
+   "category": "indoor",
+   "name": "Spider plant",
+   "kn": "",
+   "latin": "Chlorophytum comosum",
+   "tags": [
+    "Indoor",
+    "Hanging basket",
+    "Makes babies"
+   ],
+   "about": "Arching green-and-white leaves and long stems that carry tiny plantlets. A cheerful plant for a hanging basket on a covered balcony.",
+   "spec": [
+    [
+     "Light",
+     "Bright indirect light."
+    ],
+    [
+     "Water",
+     "Moderate. The thick roots store water, so let the top inch dry."
+    ],
+    [
+     "Soil",
+     "Light, well-drained potting mix."
+    ],
+    [
+     "Grow more",
+     "Pin a plantlet into a small pot while still attached, then cut the stem when it roots."
+    ],
+    [
+     "Watch out",
+     "Brown leaf tips often mean dry air, too much sun or mineral buildup in the water."
+    ]
+   ]
+  },
+  {
+   "category": "indoor",
+   "name": "Boston fern",
+   "kn": "ಜರೀಗಿಡ",
+   "latin": "Nephrolepis exaltata",
+   "tags": [
+    "Indoor",
+    "Loves humidity",
+    "Hanging"
+   ],
+   "about": "A feathery fern that is happiest in warm, humid air. On the coast it does best in a shaded balcony and sulks in an air-conditioned room.",
+   "spec": [
+    [
+     "Light",
+     "Bright shade; no direct sun."
+    ],
+    [
+     "Water",
+     "Keep the mix evenly moist but not soggy."
+    ],
+    [
+     "Soil",
+     "Light, peaty or coco mix rich in organic matter."
+    ],
+    [
+     "Air",
+     "Give it airflow; in wet weather watch for fungal spots."
+    ],
+    [
+     "Prune",
+     "Cut brown fronds at the base to make room for new growth."
     ]
    ]
   },
@@ -192,33 +770,108 @@
      "Air",
      "Give it airflow and watch for fungal spots in wet weather."
     ]
-   ]
+   ],
+   "category": "indoor"
   },
   {
-   "name": "Canna lily",
+   "category": "indoor",
+   "name": "ZZ plant",
    "kn": "",
-   "latin": "Canna indica",
+   "latin": "Zamioculcas zamiifolia",
    "tags": [
-    "Monsoon proof",
-    "Flowering"
+    "Indoor",
+    "Low light",
+    "Drought proof"
    ],
-   "about": "A sturdy flowering plant that handles the monsoon better than almost any other. A good choice for a bed that stays wet.",
+   "about": "Glossy, upright leaves from thick underground rhizomes that store water. It is one of the most tolerant houseplants of low light and missed waterings.",
    "spec": [
     [
      "Light",
-     "Full sun for the most flowers."
+     "Low to bright indirect light."
     ],
     [
      "Water",
-     "Generous in dry spells. It copes with heavy rain."
+     "Every two to three weeks, only when the soil is dry."
     ],
     [
      "Soil",
-     "Rich soil that drains, with compost worked in."
+     "Very well-drained mix with sand or perlite."
+    ],
+    [
+     "Grow more",
+     "Divide the rhizomes or root a leaf; it is slow but sure."
+    ],
+    [
+     "Note",
+     "All parts are toxic if eaten; wash hands after handling."
+    ]
+   ]
+  },
+  {
+   "category": "indoor",
+   "name": "Jade bonsai",
+   "kn": "",
+   "latin": "Crassula ovata",
+   "tags": [
+    "Bonsai",
+    "Succulent",
+    "Low water"
+   ],
+   "about": "The jade plant makes a quick, tree-like bonsai because its stems thicken into a woody trunk. It stores water in its fat leaves, so it needs far less watering than most bonsai.",
+   "spec": [
+    [
+     "Light",
+     "Bright light, some direct sun; shade it from fierce afternoon sun."
+    ],
+    [
+     "Water",
+     "Let the soil dry fully, then water well. In the monsoon keep it under cover."
+    ],
+    [
+     "Soil",
+     "Fast-draining gritty mix in a shallow pot."
+    ],
+    [
+     "Shape",
+     "Pinch the tips to build branches; leaf cuttings root easily."
+    ],
+    [
+     "Watch out",
+     "Soft, wrinkled or rotting stems mean it has been kept too wet."
+    ]
+   ]
+  },
+  {
+   "category": "indoor",
+   "name": "Bougainvillea bonsai",
+   "kn": "",
+   "latin": "Bougainvillea glabra",
+   "tags": [
+    "Bonsai",
+    "Flowering",
+    "Full sun"
+   ],
+   "about": "A bonsai that flowers: papery pink, magenta or white bracts cover the tree after a dry spell. It enjoys heat and sun, so it suits an open terrace in Mangaluru.",
+   "spec": [
+    [
+     "Light",
+     "Full sun, at least six hours."
+    ],
+    [
+     "Water",
+     "Water well, then let it dry slightly. Slight dryness triggers flowering."
     ],
     [
      "Prune",
-     "Cut spent flower stalks and old leaves at the base."
+     "After each flush of colour, cut shoots back to two or three leaves; wear gloves, as it has thorns."
+    ],
+    [
+     "Repot",
+     "Every two to three years in a gritty bonsai mix; handle the roots gently."
+    ],
+    [
+     "Watch out",
+     "Too much feed gives leaves but no colour; ease off nitrogen."
     ]
    ]
   }
@@ -230,5 +883,6 @@
   "Sow spinach, amaranth and fenugreek, which enjoy the humidity.",
   "Shield young plants from strong wind and heavy downpours.",
   "Mix coarse sand into laterite soil so roots do not sit wet."
- ]
+ ],
+ "note": "Each day shows one herb, one flower and one indoor or garden plant (every third or fourth indoor pick is a bonsai). Plants rotate in the order listed within each category. Add more over time; keep facts general and safe, and mark toxic plants."
 }

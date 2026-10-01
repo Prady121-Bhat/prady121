@@ -11,7 +11,7 @@ A daily paper for the Mangaluru and Udupi coast, built from data files by `build
 
 ## Pages
 
-Public: 1 Front page, 2 Coast & Local, 3 Coast Feature, 4 Kannada Kadambari, 5 English Serial, 6 Puzzles I (Sudoku, cryptogram), 7 Puzzles II (crossword, word search), 8 Garden (3 plants), 9 Tales (ONE comic tale a day, alternating Panchatantra and Jataka), 10 Sports (last page).
+Public: 1 Front page, 2 Coast & Local, 3 World (global news), 4 Coast Feature, 5 Kannada Kadambari, 6 English Serial, 7 Puzzles I (Sudoku, cryptogram), 8 Puzzles II (Kannada crossword, word search), 9 Garden (a herb, a flower and an indoor or bonsai plant), 10 Tales (ONE comic tale a day, alternating Panchatantra and Jataka), 11 Sports (last page).
 Private adds Desk and Classifieds as pages 2 and 3. Jokes (English and Kannada) sit between pages.
 
 ## Files
@@ -19,8 +19,9 @@ Private adds Desk and Classifieds as pages 2 and 3. Jokes (English and Kannada) 
 - `build_paper.py` builds everything. `paper.css` and `paper.js` are inlined into the page.
 - `content/news.json`: the day's lead story, local stories, briefly, coming up, sports, helplines. **Refreshed daily from web-search results with a source for every item.**
 - `content/serial_kn.json` (Kannada novel 'ಸಮುದ್ರ ನಿಲಯ') and `content/serial_en.json` (English mystery 'The Tide Ledger'): original fiction, one episode a day (episode 1 on 2026-09-30). Each file has a `bible` with cast, setting and the plan for the next episodes. **Append the next episode each day** (`n`, `title`, `recap` of the previous episode, `text` paragraphs). 14 episodes are written for each (so new ones are needed from 14 Oct). Episodes are LONG, written like a printed novel chapter for elders: English 850-1,100 words, Kannada about 2,800-3,800 characters, 8-14 paragraphs, a paragraph that is exactly `***` makes a scene break. Earlier episodes stay in an archive on the page.
+- `content/world.json`: the World page (lead story, 8 to 10 items by region: Middle East, Europe, Asia, Economy, UN, Space, Science, plus briefly). **Refreshed daily from web-search results with a source and URL for every item; set `date`.** Say 'reports say' for secondary sources, avoid graphic detail, and never state a number that is not in a source.
 - `content/features.json`: seven feature articles, one per weekday, each with Commons photo search terms.
-- `content/garden.json`: seven plants (3 shown a day, rotating) and monthly tips.
+- `content/garden.json`: 26 plants in three categories (`category`: herb 8, flower 8, indoor 10 including 3 bonsai) and monthly tips. Each day shows one of each: herb index = day number, flower = day + 3, indoor = day + 5 (modulo the group size), so about every third indoor pick is a bonsai. Add more plants over time, keep facts general and mark toxic plants.
 - `content/jokes.json`, `content/crossword_words.json`, `content/wordsearch_sets.json`, `content/proverbs.json`: banks used by the puzzles and joke breaks. Add more over time.
 - `content/private.json`: Desk and Classifieds (private edition only). Refresh from Gmail when the connector is available.
 - `puzzles.py` (Sudoku with a unique solution, KANNADA crossword (one akshara per square, words and clues from `content/crossword_words_kn.json`; add more words over time), word search, cryptogram; seeded by date and SAVED to `content/puzzles/<date>.json` so the next day's page can print the answers; the page itself never contains today's answers), `comics.py` (SVG comic panels with lighting filters, 7 Panchatantra + 6 Jataka episodes), `astro.py` (sunrise, sunset, moon phase, calculated), `weather.py` (Open-Meteo), `photos.py` (Wikimedia Commons photos with cache and fallback), `build_notices.py` (approved reader notices, config).
