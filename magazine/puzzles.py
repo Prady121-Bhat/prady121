@@ -84,7 +84,7 @@ def make_sudoku(day, level):
 
 
 # ---------------------------------------------------------------- crossword
-N = 11
+N = 13
 # one crossword square holds one akshara (a consonant with its vowel sign, or a conjunct such as ಲ್ಲು or ಕ್ಷ)
 _AKS = re.compile("(?:[\u0C95-\u0CB9](?:\u0CCD[\u0C95-\u0CB9])*[\u0CBE-\u0CCC]?[\u0C82\u0C83]?|[\u0C85-\u0C94][\u0C82\u0C83]?)")
 
@@ -158,19 +158,19 @@ def make_crossword(day):
     bank = {}
     for a, clue in load("crossword_words_kn.json"):
         t = aksharas(a)
-        if "".join(t) == a and 2 <= len(t) <= 7:
+        if "".join(t) == a and 2 <= len(t) <= 8:
             bank.setdefault(t, (a, clue))
     answers = sorted(bank)
     rng = random.Random(day.toordinal() * 104729 + 5)
     best = None
-    for attempt in range(160):
+    for attempt in range(70):
         pool = answers[:]
         rng.shuffle(pool)
-        seeds = [a for a in pool[:50] if 5 <= len(a) <= 7] or [a for a in pool if len(a) >= 4]
+        seeds = [a for a in pool[:60] if 5 <= len(a) <= 8] or [a for a in pool if len(a) >= 4]
         seed = rng.choice(seeds)
-        rest = [a for a in pool if a != seed][:70]
+        rest = [a for a in pool if a != seed]
         grid, placed = _build_cross([seed] + rest, rng)
-        score = len(placed) * 10 + sum(1 for r in grid for ch in r if ch) // 3
+        score = len(placed) * 10 + sum(1 for r in grid for ch in r if ch) // 3 + sum(1 for p in placed if len(p[0]) >= 4) * 3
         if best is None or score > best[0]:
             best = (score, grid, placed)
     _, grid, placed = best
