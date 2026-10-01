@@ -222,6 +222,11 @@ def pz_json(pid, obj):
     return f'<script type="application/json" id="{pid}">{body}</script>'
 
 
+def cw_cells(cw):
+    """Crossword cells as a list of rows of strings, "" for a black square. Older saved days used a string per row with '.'."""
+    return [[("" if ch == "." else ch) for ch in row] if isinstance(row, str) else list(row) for row in cw["grid"]]
+
+
 def yesterday_block(day):
     """Yesterday's answers, printed at the end of the puzzle pages. Answers appear only the day after."""
     y = day - datetime.timedelta(days=1)
@@ -231,7 +236,7 @@ def yesterday_block(day):
     pz = puzzles.get(y, save=False)
     su, cw, ws, cr = pz["sudoku"], pz["crossword"], pz["wordsearch"], pz["cryptogram"]
     sg = "".join("<tr>" + "".join("<td>" + su["solution"][r * 9 + c] + "</td>" for c in range(9)) + "</tr>" for r in range(9))
-    cg = "".join("<tr>" + "".join('<td class="b"></td>' if ch == "." else "<td>" + ch + "</td>" for ch in row) + "</tr>" for row in cw["grid"])
+    cg = "".join("<tr>" + "".join("<td>" + E(ch) + "</td>" if ch else '<td class="b"></td>' for ch in row) + "</tr>" for row in cw_cells(cw))
     hit = set()
     for w in ws["words"]:
         for k in range(len(w["w"])):
@@ -252,7 +257,7 @@ def puzzle_pages(P, pz):
     day = P.day.isoformat()
     su, cw, ws, cr = pz["sudoku"], pz["crossword"], pz["wordsearch"], pz["cryptogram"]
     # Only what a printed puzzle shows goes into the page: no solutions, no answers, no word positions.
-    mask = ["".join("." if ch == "." else "#" for ch in row) for row in cw["grid"]]
+    mask = ["".join("#" if ch else "." for ch in row) for row in cw_cells(cw)]
     strip = lambda items: [{k: v for k, v in w.items() if k != "ans"} for w in items]
     p1 = (
         f'<section class="puz"><h3>Sudoku <span class="lvl">{su["level"]}</span></h3>'
@@ -265,13 +270,13 @@ def puzzle_pages(P, pz):
         'Write your guess above each coded letter. The answer is in tomorrow\'s paper.</p>'
         '<div id="cryptogram"></div>'
         + pz_json("pz-cryptogram", dict(cipher=cr["cipher"], day=day)) + '</section>')
-    across = "".join(f'<li data-w="A,{w["r"]},{w["c"]}"><b>{w["n"]}</b><span>{E(w["clue"])} ({w["len"]})</span></li>' for w in cw["across"])
-    down = "".join(f'<li data-w="D,{w["r"]},{w["c"]}"><b>{w["n"]}</b><span>{E(w["clue"])} ({w["len"]})</span></li>' for w in cw["down"])
+    across = "".join(f'<li data-w="A,{w["r"]},{w["c"]}"><b>{w["n"]}</b><span>{E(w["clue"])} ({w["len"]} ಅಕ್ಷರ)</span></li>' for w in cw["across"])
+    down = "".join(f'<li data-w="D,{w["r"]},{w["c"]}"><b>{w["n"]}</b><span>{E(w["clue"])} ({w["len"]} ಅಕ್ಷರ)</span></li>' for w in cw["down"])
     p2 = (
-        '<section class="puz"><h3>Mini crossword <span class="lvl">Coast &amp; India</span></h3>'
-        '<p class="how">Tap a square and type. Tap the same square again to turn the direction from across to down. The answers are in tomorrow\'s paper.</p>'
+        '<section class="puz"><h3><span lang="kn">ಪದಬಂಧ</span> <span class="lvl">Kannada crossword</span></h3>'
+        '<p class="how" lang="kn">ಚೌಕದ ಮೇಲೆ ಒತ್ತಿ, ನಿಮ್ಮ ಫೋನಿನ ಕನ್ನಡ ಕೀಬೋರ್ಡ್‌ನಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ. ಒಂದು ಚೌಕಕ್ಕೆ ಒಂದು ಅಕ್ಷರ (ಉದಾಹರಣೆಗೆ ಮೀ, ಲ್ಲು, ಕ್ಷ). ಅದೇ ಚೌಕವನ್ನು ಮತ್ತೆ ಒತ್ತಿದರೆ ದಿಕ್ಕು ಅಡ್ಡದಿಂದ ಕೆಳಕ್ಕೆ ಬದಲಾಗುತ್ತದೆ. ಉತ್ತರಗಳು ನಾಳೆಯ ಪತ್ರಿಕೆಯಲ್ಲಿ.</p>'
         '<div id="crossword"></div><div class="pbtns" id="cw-btns"></div>'
-        f'<div class="clues"><div><h4>Across</h4><ul>{across}</ul></div><div><h4>Down</h4><ul>{down}</ul></div></div>'
+        f'<div class="clues" lang="kn"><div><h4>ಎಡದಿಂದ ಬಲಕ್ಕೆ</h4><ul>{across}</ul></div><div><h4>ಮೇಲಿನಿಂದ ಕೆಳಕ್ಕೆ</h4><ul>{down}</ul></div></div>'
         + pz_json("pz-crossword", dict(rows=cw["rows"], cols=cw["cols"], grid=mask, across=strip(cw["across"]), down=strip(cw["down"]), day=day)) + '</section>'
         f'<section class="puz"><h3>Word search <span class="lvl">{E(ws["title"])}</span></h3>'
         f'<p class="how">Find these {len(ws["words"])} words in the grid. Words run across, down or diagonally{", and this weekend some run backwards too" if ws["hard"] else ""}. '

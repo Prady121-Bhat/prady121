@@ -19,7 +19,7 @@ ALIASES = dict(
     text=("text", "details", "description", "more details", "notice details"),
     place=("place", "where", "location", "village", "town"),
     date_from=("date_from", "date", "when", "from", "event date", "date of event"),
-    date_to=("date_to", "to", "until", "last date", "show until"),
+    date_to=("date_to", "to", "until", "last date", "last day", "show until"),
     approved=("approved", "ok", "editor", "editor approval"),
 )
 TEMPLATE = ("Kullangal Vaarte notice\nWhat:\nWhere:\nWhen (date and time):\nContact for questions (optional):")

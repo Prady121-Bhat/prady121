@@ -135,7 +135,9 @@
   /* ================= CROSSWORD ================= */
   (function () {
     var host = $('#crossword'), d = data('pz-crossword'); if (!host || !d) return;
-    var R = d.rows, C = d.cols, g = d.grid, key = 'kv-cross-' + d.day;
+    var R = d.rows, C = d.cols, g = d.grid, key = 'kv-cwk-' + d.day;
+    /* one square holds one Kannada akshara; a trailing virama is kept while a conjunct is being typed */
+    var AKI = /[\u0C95-\u0CB9](?:\u0CCD[\u0C95-\u0CB9])*[\u0CBE-\u0CCC\u0CCD]?[\u0C82\u0C83]?|[\u0C85-\u0C94][\u0C82\u0C83]?/g, pushing = false;
     var saved = []; try { saved = JSON.parse(store(key) || '[]') || []; } catch (e) { saved = []; }
     var num = {}; d.across.concat(d.down).forEach(function (w) { num[w.r + ',' + w.c] = w.n; });
     var isBlock = function (r, c) { return r < 0 || c < 0 || r >= R || c >= C || g[r][c] === '.'; };
@@ -144,7 +146,7 @@
     for (var r = 0; r < R; r++) for (var c = 0; c < C; c++) {
       var cell = el('div', 'cwc' + (isBlock(r, c) ? ' blk' : ''));
       if (!isBlock(r, c)) {
-        var inp = el('input'); inp.type = 'text'; inp.maxLength = 1; inp.autocomplete = 'off'; inp.autocapitalize = 'characters'; inp.spellcheck = false;
+        var inp = el('input'); inp.type = 'text'; inp.lang = 'kn'; inp.autocomplete = 'off'; inp.autocapitalize = 'none'; inp.setAttribute('autocorrect', 'off'); inp.spellcheck = false;
         inp.setAttribute('aria-label', 'Row ' + (r + 1) + ' column ' + (c + 1)); inp.setAttribute('data-r', r); inp.setAttribute('data-c', c);
         inp.value = saved[r * C + c] || ''; cell.appendChild(inp); inputs[r + ',' + c] = inp;
         if (num[r + ',' + c]) cell.appendChild(el('i', '', String(num[r + ',' + c])));
@@ -163,12 +165,17 @@
     function save() { var arr = []; for (var r = 0; r < R; r++) for (var c = 0; c < C; c++) arr.push(inputs[r + ',' + c] ? inputs[r + ',' + c].value : ''); store(key, JSON.stringify(arr)); }
     Object.keys(inputs).forEach(function (k) {
       var inp = inputs[k], r = +inp.getAttribute('data-r'), c = +inp.getAttribute('data-c');
-      inp.addEventListener('focus', function () { act.r = r; act.c = c; mark(r, c); inp.select(); });
+      inp.addEventListener('focus', function () { act.r = r; act.c = c; mark(r, c); if (!pushing) inp.select(); });
       inp.addEventListener('click', function () { if (inp.getAttribute('data-was') === '1') { act.dir = act.dir === 'A' ? 'D' : 'A'; mark(r, c); } inp.setAttribute('data-was', '1'); });
       inp.addEventListener('blur', function () { inp.setAttribute('data-was', '0'); });
       inp.addEventListener('input', function () {
-        var v = (inp.value || '').replace(/[^a-zA-Z]/g, '').slice(-1).toUpperCase(); inp.value = v; save();
-        if (v) { var n = nextCell(r, c, 1); if (n) inputs[n[0] + ',' + n[1]].focus(); }
+        var parts = (inp.value || '').replace(/[^\u0C80-\u0CFF]/g, '').match(AKI) || [];
+        inp.value = parts[0] || '';
+        if (parts.length > 1) {   /* typing carries on into the next square, like writing a word along the boxes */
+          var n = nextCell(r, c, 1);
+          if (n) { var t = inputs[n[0] + ',' + n[1]]; t.value = parts[1]; pushing = true; t.focus(); pushing = false; try { t.setSelectionRange(t.value.length, t.value.length); } catch (x) { } t.dispatchEvent(new Event('input')); }
+        }
+        save();
       });
       inp.addEventListener('keydown', function (e) {
         if (e.key === 'Backspace' && !inp.value) { var p = nextCell(r, c, -1); if (p) inputs[p[0] + ',' + p[1]].focus(); e.preventDefault(); }

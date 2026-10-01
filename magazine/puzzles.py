@@ -3,9 +3,9 @@
 
 Everything is generated from the date, so the same date always gives the same puzzles.
 Sudoku puzzles have exactly one solution (checked). Crosswords use the clue bank in
-content/crossword_words.json and only English answers of A to Z.
+content/crossword_words_kn.json: Kannada answers and clues, one akshara per square.
 """
-import datetime, json, os, random, string
+import re, datetime, json, os, random, string
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -85,10 +85,16 @@ def make_sudoku(day, level):
 
 # ---------------------------------------------------------------- crossword
 N = 11
+# one crossword square holds one akshara (a consonant with its vowel sign, or a conjunct such as ಲ್ಲು or ಕ್ಷ)
+_AKS = re.compile("(?:[\u0C95-\u0CB9](?:\u0CCD[\u0C95-\u0CB9])*[\u0CBE-\u0CCC]?[\u0C82\u0C83]?|[\u0C85-\u0C94][\u0C82\u0C83]?)")
+
+
+def aksharas(word):
+    return tuple(_AKS.findall(word))
 
 
 def _fits(grid, word, r, c, dr, dc):
-    """True if the word can be placed; returns crossing count or -1."""
+    """Crossing count if the word can be placed (word = tuple of aksharas); -1 or -2 if not."""
     er, ec = r + dr * (len(word) - 1), c + dc * (len(word) - 1)
     if r < 0 or c < 0 or er >= N or ec >= N:
         return -1
@@ -107,7 +113,7 @@ def _fits(grid, word, r, c, dr, dc):
                 return -1
             cross += 1
         else:
-            # a new letter must not touch a letter sideways (perpendicular neighbours must be empty)
+            # a new akshara must not touch another sideways (perpendicular neighbours must be empty)
             for ar, ac in ((rr + dc, cc + dr), (rr - dc, cc - dr)):
                 if 0 <= ar < N and 0 <= ac < N and grid[ar][ac]:
                     return -1
@@ -123,45 +129,48 @@ def _build_cross(words, rng):
     for k, ch in enumerate(first):
         grid[r0][c0 + k] = ch
     placed.append((first, r0, c0, 0, 1))
-    for w in words[1:]:
-        best = []
-        for dr, dc in ((0, 1), (1, 0)):
-            for r in range(N):
-                for c in range(N):
-                    x = _fits(grid, w, r, c, dr, dc)
-                    if x > 0:
-                        # do not extend an existing word in the same direction
-                        best.append((x, r, c, dr, dc))
-        if best:
-            rng.shuffle(best)
-            best.sort(key=lambda t: -t[0])
-            x, r, c, dr, dc = best[0]
-            for k, ch in enumerate(w):
-                grid[r + dr * k][c + dc * k] = ch
-            placed.append((w, r, c, dr, dc))
+    left = list(words[1:])
+    for _ in range(3):  # a word that found no crossing early may fit once more words are down
+        again = []
+        for w in left:
+            best = []
+            for dr, dc in ((0, 1), (1, 0)):
+                for r in range(N):
+                    for c in range(N):
+                        x = _fits(grid, w, r, c, dr, dc)
+                        if x > 0:
+                            best.append((x, r, c, dr, dc))
+            if best:
+                rng.shuffle(best)
+                best.sort(key=lambda t: -t[0])
+                x, r, c, dr, dc = best[0]
+                for k, ch in enumerate(w):
+                    grid[r + dr * k][c + dc * k] = ch
+                placed.append((w, r, c, dr, dc))
+            else:
+                again.append(w)
+        left = again
     return grid, placed
 
 
 def make_crossword(day):
+    """Kannada crossword: words and clues in Kannada from content/crossword_words_kn.json."""
     bank = {}
-    for a, clue in load("crossword_words.json"):
-        if 3 <= len(a) <= 9:
-            bank.setdefault(a, clue)
+    for a, clue in load("crossword_words_kn.json"):
+        t = aksharas(a)
+        if "".join(t) == a and 2 <= len(t) <= 7:
+            bank.setdefault(t, (a, clue))
     answers = sorted(bank)
     rng = random.Random(day.toordinal() * 104729 + 5)
     best = None
-    for attempt in range(220):
+    for attempt in range(160):
         pool = answers[:]
         rng.shuffle(pool)
-        long_first = sorted(pool[:60], key=lambda a: -len(a))
-        seed = rng.choice([a for a in long_first if 6 <= len(a) <= 9])
-        rest = [a for a in pool if a != seed][:60]
+        seeds = [a for a in pool[:50] if 5 <= len(a) <= 7] or [a for a in pool if len(a) >= 4]
+        seed = rng.choice(seeds)
+        rest = [a for a in pool if a != seed][:70]
         grid, placed = _build_cross([seed] + rest, rng)
         score = len(placed) * 10 + sum(1 for r in grid for ch in r if ch) // 3
-        rows = [i for i in range(N) if any(grid[i])]
-        cols = [j for j in range(N) if any(grid[i][j] for i in range(N))]
-        if not rows or not cols:
-            continue
         if best is None or score > best[0]:
             best = (score, grid, placed)
     _, grid, placed = best
@@ -170,7 +179,6 @@ def make_crossword(day):
     r0, r1, c0, c1 = rows[0], rows[-1], cols[0], cols[-1]
     g = [[grid[i][j] for j in range(c0, c1 + 1)] for i in range(r0, r1 + 1)]
     H, W = len(g), len(g[0])
-    starts = {}
     n = 0
     across, down = [], []
     for i in range(H):
@@ -181,22 +189,22 @@ def make_crossword(day):
             sd = (i == 0 or not g[i - 1][j]) and i + 1 < H and g[i + 1][j]
             if sa or sd:
                 n += 1
-                starts[(i, j)] = n
                 if sa:
-                    w = ""
+                    t = []
                     k = j
                     while k < W and g[i][k]:
-                        w += g[i][k]; k += 1
-                    across.append(dict(n=n, r=i, c=j, len=len(w), ans=w, clue=bank.get(w, "")))
+                        t.append(g[i][k]); k += 1
+                    t = tuple(t)
+                    across.append(dict(n=n, r=i, c=j, len=len(t), ans="".join(t), clue=bank.get(t, ("", ""))[1]))
                 if sd:
-                    w = ""
+                    t = []
                     k = i
                     while k < H and g[k][j]:
-                        w += g[k][j]; k += 1
-                    down.append(dict(n=n, r=i, c=j, len=len(w), ans=w, clue=bank.get(w, "")))
-    # incidental runs of letters that are not in the bank would have no clue; drop such words from the clue list check
+                        t.append(g[k][j]); k += 1
+                    t = tuple(t)
+                    down.append(dict(n=n, r=i, c=j, len=len(t), ans="".join(t), clue=bank.get(t, ("", ""))[1]))
     ok = all(x["clue"] for x in across + down)
-    return dict(rows=H, cols=W, grid=["".join(ch or "." for ch in row) for row in g], across=across, down=down, clean=ok)
+    return dict(lang="kn", rows=H, cols=W, grid=[[ch or "" for ch in row] for row in g], across=across, down=down, clean=ok)
 
 
 # ---------------------------------------------------------------- word search
@@ -302,6 +310,6 @@ if __name__ == "__main__":
     print(s["level"], sum(1 for ch in s["puzzle"] if ch != "0"), "clues")
     cw = p["crossword"]
     print("crossword", cw["rows"], "x", cw["cols"], "across", len(cw["across"]), "down", len(cw["down"]), "clean", cw["clean"])
-    print("\n".join(cw["grid"]))
+    print("\n".join(" ".join(c or "·" for c in row) for row in cw["grid"]))
     print(p["wordsearch"]["title"], [w["w"] for w in p["wordsearch"]["words"]])
     print(p["cryptogram"])
