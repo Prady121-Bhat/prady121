@@ -386,3 +386,5 @@ JATAKA = [
 # the paper is printed in Kannada: swap in the Kannada text (comics_kn.py keeps the translations)
 import comics_kn
 comics_kn.localise(PANCHATANTRA, JATAKA)
+# the paper is purely vegetarian: the tale of the crane eating fish is left out of the daily rotation
+JATAKA[:] = [e for e in JATAKA if e["title"] != "ಬಕ ಮತ್ತು ಏಡಿ"]

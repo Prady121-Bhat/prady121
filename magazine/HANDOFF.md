@@ -45,6 +45,8 @@ Readers fill the owner's free **Google Form** (or send a WhatsApp message with t
 
 ## Decisions and limits
 
+- **A purely vegetarian paper (owner's rule).** Never print non-vegetarian food, recipes, fish or meat markets, or jokes about them. Recipes never use onion or garlic. The Food feature is about Udupi vegetarian cuisine, the Sea feature about Maravanthe, the crane-and-fish Jataka tale is left out of the rotation, and puzzle word banks avoid fish and meat words. The serial's village is a fishing village (boats, nets, fishermen as livelihood); the owner has been told and may ask to change that.
+
 - Canva image credits are tiny. Canva is used for **one illustration a day at most, for the feature article only**: if `content/feature-<date>.jpg` exists it is shown with a Kannada label; otherwise a Commons photo is used. The daily routine has no Canva connector yet.
 - Comics are original SVG drawings (painted panels were tested and rejected).
 - Only web search reaches the news sites (direct fetches are blocked). Facts come from search-result summaries: state only what is clear, cite the source, drop anything contradictory or unclear.
