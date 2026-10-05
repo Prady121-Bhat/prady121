@@ -11,7 +11,7 @@ A daily paper for the Mangaluru and Udupi coast, **printed entirely in Kannada**
 
 ## Pages
 
-Public: 1 ಮುಖಪುಟ (front), 2 ಕರಾವಳಿ ಮತ್ತು ಸ್ಥಳೀಯ (coast and local), 3 ಜಗತ್ತು (world), 4 ಕರಾವಳಿ ವಿಶೇಷ (feature), 5 ಕನ್ನಡ ಕಾದಂಬರಿ (serial), 6 ಒಗಟುಗಳು ೧ (Sudoku, codeword), 7 ಒಗಟುಗಳು ೨ (Kannada crossword, Kannada word search), 8 ತೋಟ (a herb, a flower and an indoor or bonsai plant), 9 ಕತೆಗಳು (ONE comic tale a day, Panchatantra and Jataka alternately), 10 ಕ್ರೀಡೆ (sports, last page).
+Public: 1 ಮುಖಪುಟ (front), 2 ಕರಾವಳಿ ಮತ್ತು ಸ್ಥಳೀಯ (coast and local), 3 ಜಗತ್ತು (world), 4 ಕರಾವಳಿ ವಿಶೇಷ (feature), 5 ಕನ್ನಡ ಕಾದಂಬರಿ (serial), 6 ಒಗಟುಗಳು ೧ (Sudoku, codeword), 7 ಒಗಟುಗಳು ೨ (Kannada crossword, Kannada word search), 8 ತೋಟ (a herb, a flower and an indoor or bonsai plant), 9 ಅಡುಗೆಮನೆ (one vegetarian recipe a day, NO onion or garlic), 10 ಕತೆಗಳು (ONE comic tale a day, Panchatantra and Jataka alternately), 11 ಕ್ರೀಡೆ (sports, last page).
 Private adds ಡೆಸ್ಕ್ and ಪ್ರಕಟಣೆಗಳು (classifieds) as pages 2 and 3. A Kannada joke sits between some pages. The English serial was removed.
 
 ## Files
@@ -19,6 +19,7 @@ Private adds ಡೆಸ್ಕ್ and ಪ್ರಕಟಣೆಗಳು (classifieds)
 - `build_paper.py` builds everything (all page labels are Kannada strings in this file). `paper.css` and `paper.js` are inlined into the page. `comics_kn.py` holds the Kannada text of the 13 comic tales (`comics.py` keeps the drawings and calls it).
 - `content/news.json` (coast news, sports, helplines, coming up) and `content/world.json` (World page): **refreshed daily from web-search results, written in Kannada, with a source name and URL for every item; set `date`.** Never state a number or fact that is not in a source; say 'ವರದಿಗಳ ಪ್ರಕಾರ' for secondary sources.
 - `content/serial_kn.json`: Kannada novel 'ಸಮುದ್ರ ನಿಲಯ', one episode a day (episode 1 on 2026-09-30), 14 written (new ones needed from 14 Oct). Episodes are long (about 2,800 to 3,800 characters, 8 to 14 paragraphs, `***` paragraph = scene break). Each file has a `bible` with cast, setting and the plan. Append `{n, title, recap, text}`.
+- `content/recipes.json`: 15 Kannada vegetarian recipes (name, kind, serves, time, intro, ingredients, steps, tip), one shown per day in list order (day number modulo 15). Rules: pure vegetarian, never onion or garlic (asafoetida is fine), simple reliable measures, no health claims. Add more over time.
 - `content/features.json`: seven Kannada feature articles, one per weekday (`theme` is the English key for photo search, `theme_kn` is shown), with Commons photo search terms.
 - `content/garden.json`: 26 plants in three categories (`category`: herb 8, flower 8, indoor 10 including 3 bonsai with `bonsai: true`). `key` is the English name (used for photo search and the photo cache), `name` the Kannada name. One of each category is shown daily (index = day number, +3 for flowers, +5 for indoor).
 - `content/jokes.json` (Kannada only, rotates 4 a day), `content/crossword_words_kn.json` (word, Kannada clue), `content/wordsearch_sets_kn.json`, `content/proverbs_kn.json` (sayings for the codeword puzzle): banks used by the puzzles and joke breaks. Add more over time.

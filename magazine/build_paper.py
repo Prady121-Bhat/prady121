@@ -43,9 +43,9 @@ def kd(x):
 PAGE_COLOURS = dict(front=("#c4361f", "#fff"), desk=("#6b6f76", "#fff"), classifieds=("#8a5a00", "#fff"), local=("#0b7a75", "#fff"),
                     feature=("#e0a100", "#15171c"), kadambari=("#8e2c6b", "#fff"),
                     world=("#5b3fa8", "#fff"), puz1=("#1f7a3a", "#fff"), puz2=("#d2571a", "#fff"), garden=("#4d7a1b", "#fff"),
-                    tales=("#c72a66", "#fff"), sports=("#0f5fa8", "#fff"))
+                    tales=("#c72a66", "#fff"), sports=("#0f5fa8", "#fff"), kitchen=("#a0522d", "#fff"))
 SHORT = dict(front="ಮುಖಪುಟ", desk="ಡೆಸ್ಕ್", classifieds="ಪ್ರಕಟಣೆ", local="ಸ್ಥಳೀಯ", world="ಜಗತ್ತು", feature="ವಿಶೇಷ", kadambari="ಕಾದಂಬರಿ",
-             puz1="ಒಗಟು ೧", puz2="ಒಗಟು ೨", garden="ತೋಟ", tales="ಕತೆ", sports="ಕ್ರೀಡೆ")
+             puz1="ಒಗಟು ೧", puz2="ಒಗಟು ೨", garden="ತೋಟ", kitchen="ಅಡುಗೆ", tales="ಕತೆ", sports="ಕ್ರೀಡೆ")
 # English names are used only to search Wikimedia Commons for a photograph of each plant
 PLANT_TERMS = {
     "Udupi Mallige": ["Jasminum sambac flower", "Jasminum sambac"],
@@ -322,6 +322,23 @@ def garden_page(P, garden):
             f'<div class="month"><h3 class="sub">ಈ ತಿಂಗಳು ತೋಟದಲ್ಲಿ</h3><p class="prog" id="garden-prog"></p><ul id="garden-list">{month}</ul></div>')
 
 
+def recipe_page(P, rec):
+    """One vegetarian recipe a day without onion or garlic, in the order of the list."""
+    items = rec["recipes"]
+    r = items[(P.day - LAUNCH).days % len(items)]
+    nxt = items[((P.day - LAUNCH).days + 1) % len(items)]
+    ing = "".join(f"<li>{E(x)}</li>" for x in r["ingredients"])
+    steps = "".join(f"<li>{E(x)}</li>" for x in r["steps"])
+    return (f'<article class="recipe" lang="kn"><p class="deck" style="margin-bottom:14px">ಶುದ್ಧ ಸಸ್ಯಾಹಾರ, ಈರುಳ್ಳಿ ಮತ್ತು ಬೆಳ್ಳುಳ್ಳಿ ಇಲ್ಲದ ಅಡುಗೆ: ಪ್ರತಿದಿನ ಒಂದು.</p>'
+            f'<span class="kicker">{E(r["kind"])} &middot; ಇಂದಿನ ಅಡುಗೆ</span><h3 class="hl1" style="margin-top:8px">{E(r["name"])}</h3>'
+            f'<p class="deck">{E(r["intro"])}</p>'
+            f'<div class="rmeta"><span><b>ಪ್ರಮಾಣ</b>{E(r["serves"])}</span><span><b>ಸಮಯ</b>{E(r["time"])}</span><span class="nog"><b>ಈರುಳ್ಳಿ-ಬೆಳ್ಳುಳ್ಳಿ</b>ಇಲ್ಲ</span></div>'
+            f'<h4 class="sub" style="margin-top:20px">ಬೇಕಾದ ಸಾಮಗ್ರಿ</h4><ul class="ingr">{ing}</ul>'
+            f'<h4 class="sub" style="margin-top:20px">ಮಾಡುವ ವಿಧಾನ</h4><ol class="steps">{steps}</ol>'
+            f'<p class="moral"><span class="lab">ಸಲಹೆ</span> {E(r["tip"])}</p>'
+            f'<p class="wxsrc" style="margin-top:14px">ನಾಳೆಯ ಅಡುಗೆ: {E(nxt["name"])}. ಇಂಗು ಇಷ್ಟವಿಲ್ಲದಿದ್ದರೆ ಬಿಡಬಹುದು; ಇಂಗಿನ ಪುಡಿಯಲ್ಲಿ ಕೆಲವೊಮ್ಮೆ ಗೋಧಿ ಹಿಟ್ಟು ಬೆರೆತಿರುತ್ತದೆ, ಲೇಬಲ್ ನೋಡಿ. ಅಡುಗೆಗಳು ಸಾಂಪ್ರದಾಯಿಕ ವಿಧಾನಗಳನ್ನು ಆಧರಿಸಿ ನಮ್ಮದೇ ಮಾತುಗಳಲ್ಲಿ ಬರೆದವು; ಅಳತೆಗಳನ್ನು ನಿಮ್ಮ ರುಚಿಗೆ ತಕ್ಕಂತೆ ಹೊಂದಿಸಿ.</p></article>')
+
+
 def plate_html(key):
     meta = json.load(open(os.path.join(HERE, "tales_assets", "meta.json")))
     keys = ["tortoise1", "tortoise2"] if key == "tortoise" else ["camel"]
@@ -408,6 +425,7 @@ def assemble(day, private, ctx):
     P.add("puz1", "ಒಗಟುಗಳು ೧", p1, "ಸುಡೋಕು ಮತ್ತು ಗಾದೆ ಸಂಕೇತ")
     P.add("puz2", "ಒಗಟುಗಳು ೨", p2, "ಕನ್ನಡ ಪದಬಂಧ ಮತ್ತು ಪದ ಹುಡುಕಾಟ")
     P.add("garden", "ತೋಟ", garden_page(P, garden), "ಪ್ರತಿದಿನ ಒಂದು ಗಿಡಮೂಲಿಕೆ, ಒಂದು ಹೂವು, ಒಂದು ಒಳಾಂಗಣ ಅಥವಾ ಬೋನ್ಸಾಯ್ ಗಿಡ")
+    P.add("kitchen", "ಅಡುಗೆಮನೆ", recipe_page(P, ctx["recipes"]), f"ಇಂದಿನ ಅಡುಗೆ: {ctx['recipe_name']} (ಈರುಳ್ಳಿ-ಬೆಳ್ಳುಳ್ಳಿ ಇಲ್ಲದ ಸಸ್ಯಾಹಾರ)")
     P.add("tales", "ಕತೆಗಳು", tales_html, f"ಇಂದು: {t1}")
     P.add("sports", "ಕ್ರೀಡೆ", sports_page(news), "ಕ್ರಿಕೆಟ್, ದೊಡ್ಡ ಕ್ರೀಡಾಕೂಟಗಳು ಮತ್ತು ಸ್ಥಳೀಯ ಕ್ರೀಡೆ")
     P.pages[0]["body"] = front_page(P, news, wx, sun, moon, priv if private else None)
@@ -449,7 +467,7 @@ def main():
             outs["public"] = args[i + 1]; i += 2
         else:
             day = datetime.date.fromisoformat(a); i += 1
-    ctx = dict(news=load("news.json"), garden=load("garden.json"), jokes=load("jokes.json"), feats=load("features.json"), priv=load("private.json"), world=load("world.json"))
+    ctx = dict(news=load("news.json"), garden=load("garden.json"), jokes=load("jokes.json"), feats=load("features.json"), priv=load("private.json"), world=load("world.json"), recipes=load("recipes.json"))
     ctx["pz"] = puzzles.get(day)
     ctx["pz_pages"] = puzzle_pages(Paper(day, False), ctx["pz"])
     ctx["wx"] = weather.forecast()
@@ -462,6 +480,7 @@ def main():
         print(f"WARNING: content/news.json is dated {ctx['news']['date']}, not {day}. Refresh the news first.", file=sys.stderr)
     if ctx["world"]["date"] != day.isoformat():
         print(f"WARNING: content/world.json is dated {ctx['world']['date']}, not {day}. Refresh the world news first.", file=sys.stderr)
+    ctx["recipe_name"] = ctx["recipes"]["recipes"][(day - LAUNCH).days % len(ctx["recipes"]["recipes"])]["name"]
     tp = Paper(day, False)
     ctx["tales"] = tales_page(tp)
     ctx["feature"] = feature_page(tp, ctx["feats"])

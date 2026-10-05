@@ -358,6 +358,20 @@ details.arch details .story-text { margin-top: 0; padding-bottom: 14px; }
   .panel svg rect[filter] { display: none; }
 }
 
+/* Recipes */
+.rmeta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.rmeta span { border: 1px solid var(--ink); padding: 7px 10px; font: 400 .95rem/1.3 var(--label); }
+.rmeta b { display: block; font: 800 .72rem/1.2 var(--label); color: var(--pc); }
+.rmeta .nog { background: var(--pc); color: #fff; border-color: var(--pc); }
+.rmeta .nog b { color: #fff; }
+.ingr { margin-top: 8px; columns: 1; }
+.ingr li { padding: 9px 4px 9px 26px; border-top: 1px solid var(--hair); position: relative; break-inside: avoid; }
+.ingr li::before { content: ""; position: absolute; left: 4px; top: 1.05em; width: 9px; height: 9px; border: 2px solid var(--pc); border-radius: 50%; }
+.steps { margin-top: 8px; counter-reset: st; }
+.steps li { counter-increment: st; padding: 12px 4px 12px 44px; border-top: 1px solid var(--hair); position: relative; font-size: 1.08rem; line-height: 1.7; }
+.steps li::before { content: counter(st, kannada); position: absolute; left: 4px; top: .7rem; width: 30px; height: 30px; display: grid; place-items: center; background: var(--pc); color: #fff; border-radius: 50%; font: 800 .95rem/1 var(--kn); }
+@media (min-width: 640px) { .ingr { columns: 2; column-gap: 28px; } }
+
 /* The paper is Kannada only: letter-spacing would pull apart conjuncts and vowel signs, so it is switched off everywhere. */
 body * { letter-spacing: 0 !important; text-transform: none !important; }
 .yest .wsg td { font: 700 .7rem/1 var(--kn); width: 1.9rem; height: 1.7rem; overflow: hidden; }
