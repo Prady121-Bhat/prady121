@@ -76,6 +76,7 @@ img, svg { max-width: 100%; }
 .pf a { font: 800 .9rem/1.2 var(--label); letter-spacing: .1em; text-transform: uppercase; text-decoration: none; color: var(--pc); padding: 8px 0; }
 .pf a:hover { text-decoration: underline; }
 .pf .pg { color: var(--ink2); font: 700 .75rem/1 var(--label); letter-spacing: .12em; text-transform: uppercase; align-self: center; }
+.pf .turn { color: var(--ink2); font: italic 600 .95rem/1.2 var(--head); align-self: center; }
 
 /* Type */
 .hl1 { font: 900 clamp(1.9rem, 7.2vw, 3.3rem)/1.04 var(--head); letter-spacing: -.02em; text-wrap: balance; }

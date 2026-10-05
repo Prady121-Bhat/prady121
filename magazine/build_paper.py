@@ -87,7 +87,7 @@ class Paper:
         for i, p in enumerate(self.pages):
             col, fg = PAGE_COLOURS[p["key"]]
             nxt = self.pages[i + 1] if i + 1 < n else None
-            foot = (f'<a href="#p-{nxt["key"]}">ಪುಟ {kd(i + 2)}ಕ್ಕೆ ತಿರುಗಿಸಿ: {E(nxt["title"])} &rarr;</a>' if nxt else '<a href="#top">ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ &uarr;</a>')
+            foot = (f'<span class="turn">ಮುಂದಿನ ಪುಟ {kd(i + 2)}: {E(nxt["title"])}</span>' if nxt else '<span class="turn">ಇಂದಿನ ಸಂಚಿಕೆ ಮುಗಿಯಿತು</span>')
             out.append(
                 f'<section class="page{" gold" if p["key"] == "feature" else ""}" id="p-{p["key"]}" style="--pc:{col};--pcfg:{fg}" aria-labelledby="h-{p["key"]}">'
                 f'<header class="ph"><span class="pn" aria-hidden="true">{i + 1}</span>'
@@ -445,9 +445,6 @@ def assemble(day, private, ctx):
         '<div class="knname" lang="kn">ಕುಲ್ಲಂಗಾಲ್ ವಾರ್ತೆ</div>'
         '<p class="slogan">ಕರಾವಳಿಯ ಸುದ್ದಿ, ಕತೆ, ಒಗಟು ಮತ್ತು ತೋಟ: ಬೆಳಗಿನ ಓದಿಗೆ ಪುಟಗಳ ಪತ್ರಿಕೆ</p>'
         f'<div class="dateline lab"><span lang="kn">{kn_date(day)}</span><span>{kd(n)} ಪುಟಗಳು, ಸುಮಾರು ಮೂವತ್ತು ನಿಮಿಷದ ಓದು</span></div></header>\n'
-        f'<nav class="nav" aria-label="ಪುಟಗಳು" lang="kn"><div class="wrap nav-in"><div class="pills">{P.pills()}</div>'
-        '<div class="tools"><button class="tbtn" id="size-down" type="button" aria-label="ಅಕ್ಷರ ಚಿಕ್ಕದು">ಅ&minus;</button><button class="tbtn" id="size-up" type="button" aria-label="ಅಕ್ಷರ ದೊಡ್ಡದು">ಅ+</button>'
-        f'<a class="btn share" id="wa-share" href="#" target="_blank" rel="noopener" data-url="{PUBLIC_URL}">ವಾಟ್ಸ್‌ಆ್ಯಪ್</a></div></div></nav>\n'
         f'<main lang="kn">{P.render_pages()}</main>\n'
         '<footer class="wrap colo" lang="kn"><b>ಕುಲ್ಲಂಗಾಲ್ ವಾರ್ತೆ</b>'
         f'<p>ಸಂಚಿಕೆ {kd(edno)}, {E(kn_date(day))}ರಂದು ತಯಾರಿಸಿದ್ದು. ಸುದ್ದಿ ಮತ್ತು ಕ್ರೀಡೆಯ ವಿವರಗಳು ಪ್ರತಿ ಸುದ್ದಿಯ ಕೆಳಗೆ ಹೆಸರಿಸಿದ ಮೂಲಗಳಿಂದ ವೆಬ್ ಹುಡುಕಾಟದ ಮೂಲಕ ಸಂಗ್ರಹಿಸಿ ನಮ್ಮದೇ ಮಾತುಗಳಲ್ಲಿ ಬರೆದವು. ಹವಾಮಾನ Open-Meteo.com ನಿಂದ (CC BY 4.0). ಸೂರ್ಯೋದಯ, ಸೂರ್ಯಾಸ್ತ ಮತ್ತು ಚಂದ್ರನ ಕಲೆ ಲೆಕ್ಕಾಚಾರದ್ದು. ಗಿಡ ಮತ್ತು ವಿಶೇಷ ಲೇಖನದ ಛಾಯಾಚಿತ್ರಗಳು ವಿಕಿಮೀಡಿಯಾ ಕಾಮನ್ಸ್‌ನಿಂದ, ಶ್ರೇಯಸ್ಸು ಪ್ರತಿ ಚಿತ್ರದ ಕೆಳಗಿದೆ. ಕಾದಂಬರಿ, ಒಗಟುಗಳು, ಕತೆಗಳ ರೇಖಾಚಿತ್ರಗಳು ಮತ್ತು ಹಾಸ್ಯಗಳನ್ನು ಈ ಪತ್ರಿಕೆಗಾಗಿಯೇ ಬರೆದು ರಚಿಸಲಾಗಿದೆ; ಕಾದಂಬರಿಯ ಎಲ್ಲ ವ್ಯಕ್ತಿಗಳು ಮತ್ತು ಸಂಸ್ಥೆಗಳು ಕಾಲ್ಪನಿಕ. ಕತೆಗಳ ಪುಟದ ಹಳೆಯ ಚಿತ್ರಗಳ ಶ್ರೇಯಸ್ಸು ಅವುಗಳ ಕೆಳಗಿದೆ. ಭಗವದ್ಗೀತೆಯ ಶ್ಲೋಕಗಳ ಮೂಲ ಪಾಠ ಪ್ರಚಲಿತ ಪಾಠದಂತೆ; ಪದಾರ್ಥ, ಅನುವಾದ, ವಿವರಣೆ ಮತ್ತು ಸಂಸ್ಕೃತ ಪಾಠಗಳನ್ನು ಈ ಪತ್ರಿಕೆಗಾಗಿ ಬರೆಯಲಾಗಿದೆ.</p>'
