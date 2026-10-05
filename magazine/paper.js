@@ -20,7 +20,7 @@
 
   /* ---- share (shareable edition link only) ---- */
   var wa = $('#wa-share');
-  if (wa) wa.href = 'https://wa.me/?text=' + encodeURIComponent('Kullangal Vaarte, the daily paper of the Mangaluru and Udupi coast: ' + wa.getAttribute('data-url'));
+  if (wa) wa.href = 'https://wa.me/?text=' + encodeURIComponent('ಕುಲ್ಲಂಗಾಲ್ ವಾರ್ತೆ, ಮಂಗಳೂರು-ಉಡುಪಿ ಕರಾವಳಿಯ ದಿನಪತ್ರಿಕೆ: ' + wa.getAttribute('data-url'));
 
   /* ---- page nav highlight ---- */
   var pills = $$('.pill');
@@ -42,8 +42,8 @@
     var items = $$('.story', list), places = [];
     items.forEach(function (li) { var p = li.getAttribute('data-place'); if (p && places.indexOf(p) < 0) places.push(p); });
     if (places.length > 1) {
-      var bar = el('div', 'chips'); bar.setAttribute('role', 'group'); bar.setAttribute('aria-label', 'Filter stories by place');
-      ['All'].concat(places).forEach(function (name, i) {
+      var bar = el('div', 'chips'); bar.setAttribute('role', 'group'); bar.setAttribute('aria-label', 'ಊರಿನ ಪ್ರಕಾರ ಸುದ್ದಿ ಆಯ್ಕೆ');
+      ['ಎಲ್ಲ'].concat(places).forEach(function (name, i) {
         var b = el('button', 'chip', name); b.type = 'button'; b.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
         b.onclick = function () {
           $$('.chip', bar).forEach(function (c) { c.setAttribute('aria-pressed', c === b ? 'true' : 'false'); });
@@ -61,7 +61,7 @@
     var gkey = 'kv-garden-' + (document.body.getAttribute('data-month') || 'm');
     var gdone = {}; try { gdone = JSON.parse(store(gkey) || '{}') || {}; } catch (e) { gdone = {}; }
     var prog = $('#garden-prog');
-    var upd = function () { var n = 0; gl.forEach(function (li, i) { if (gdone[i]) n++; }); if (prog) prog.textContent = n + ' of ' + gl.length + ' done this month'; };
+    var upd = function () { var n = 0; gl.forEach(function (li, i) { if (gdone[i]) n++; }); if (prog) prog.textContent = 'ಈ ತಿಂಗಳು ' + n + ' / ' + gl.length + ' ಕೆಲಸ ಮುಗಿದಿದೆ'; };
     gl.forEach(function (li, i) {
       var text = li.textContent; li.textContent = ''; li.className = 'check' + (gdone[i] ? ' done' : '');
       var cb = el('input'); cb.type = 'checkbox'; cb.id = 'gc' + i; cb.checked = !!gdone[i];
@@ -76,18 +76,18 @@
   var cp = $('#copy-tpl');
   if (cp) cp.onclick = function () {
     var t = $('#tpl-text').textContent;
-    try { navigator.clipboard.writeText(t).then(function () { cp.textContent = 'Copied'; }, function () { cp.textContent = 'Select the text and copy'; }); }
-    catch (e) { cp.textContent = 'Select the text and copy'; }
+    try { navigator.clipboard.writeText(t).then(function () { cp.textContent = 'ನಕಲಾಯಿತು'; }, function () { cp.textContent = 'ಪಠ್ಯ ಆಯ್ದು ನಕಲಿಸಿ'; }); }
+    catch (e) { cp.textContent = 'ಪಠ್ಯ ಆಯ್ದು ನಕಲಿಸಿ'; }
   };
 
   /* ---- button helper ---- */
   function btn(label, fn, cls) { var b = el('button', 'btn' + (cls ? ' ' + cls : ''), label); b.type = 'button'; b.onclick = fn; return b; }
   /* "Rub out all": two taps, like deciding to scrub the whole page. Nothing else is offered: no hints, no checking. */
   function rubber(fn) {
-    var b = btn('Rub out all', function () {
-      if (b.getAttribute('data-arm') === '1') { fn(); b.textContent = 'Rub out all'; b.setAttribute('data-arm', '0'); return; }
-      b.setAttribute('data-arm', '1'); b.textContent = 'Tap again to rub out';
-      setTimeout(function () { b.setAttribute('data-arm', '0'); b.textContent = 'Rub out all'; }, 3500);
+    var b = btn('ಎಲ್ಲ ಅಳಿಸಿ', function () {
+      if (b.getAttribute('data-arm') === '1') { fn(); b.textContent = 'ಎಲ್ಲ ಅಳಿಸಿ'; b.setAttribute('data-arm', '0'); return; }
+      b.setAttribute('data-arm', '1'); b.textContent = 'ಅಳಿಸಲು ಮತ್ತೆ ಒತ್ತಿ';
+      setTimeout(function () { b.setAttribute('data-arm', '0'); b.textContent = 'ಎಲ್ಲ ಅಳಿಸಿ'; }, 3500);
     });
     return b;
   }
@@ -100,14 +100,14 @@
     var host = $('#sudoku'), d = data('pz-sudoku'); if (!host || !d) return;
     var giv = d.puzzle.split('').map(Number), key = 'kv-sudoku-' + d.day, val = giv.slice(), sel = -1, cells = [];
     try { var sv = JSON.parse(store(key) || 'null'); if (sv && sv.length === 81) val = sv.map(function (v, i) { return giv[i] ? giv[i] : v; }); } catch (e) {}
-    var grid = el('div', 'sud'); grid.setAttribute('role', 'grid'); grid.setAttribute('aria-label', 'Sudoku grid');
+    var grid = el('div', 'sud'); grid.setAttribute('role', 'grid'); grid.setAttribute('aria-label', 'ಸುಡೋಕು ಜಾಲ');
     for (var i = 0; i < 81; i++) (function (i) {
       var c = el('button', 'sc'); c.type = 'button'; c.onclick = function () { sel = i; paint(); }; cells.push(c); grid.appendChild(c);
     })(i);
     host.appendChild(grid);
     var pad = el('div', 'pad');
-    for (var n = 1; n <= 9; n++) (function (n) { var b = el('button', '', String(n)); b.type = 'button'; b.setAttribute('aria-label', 'Write ' + n); b.onclick = function () { put(n); }; pad.appendChild(b); })(n);
-    var er = el('button', 'w', 'Erase'); er.type = 'button'; er.onclick = function () { put(0); }; pad.appendChild(er);
+    for (var n = 1; n <= 9; n++) (function (n) { var b = el('button', '', String(n)); b.type = 'button'; b.setAttribute('aria-label', n + ' ಬರೆಯಿರಿ'); b.onclick = function () { put(n); }; pad.appendChild(b); })(n);
+    var er = el('button', 'w', 'ಅಳಿಸಿ'); er.type = 'button'; er.onclick = function () { put(0); }; pad.appendChild(er);
     host.appendChild(pad);
     var pb = el('div', 'pbtns'); pb.appendChild(rubber(function () { val = giv.slice(); sel = -1; save(); paint(); })); host.appendChild(pb);
     function save() { store(key, JSON.stringify(val)); }
@@ -116,7 +116,7 @@
       cells.forEach(function (c, i) {
         var v = val[i]; c.textContent = v || '';
         c.className = 'sc' + (giv[i] ? ' g' : (v ? ' u' : '')) + (i === sel ? ' sel' : '');
-        c.setAttribute('aria-label', 'Row ' + (Math.floor(i / 9) + 1) + ' column ' + (i % 9 + 1) + (v ? ', ' + v : ', empty'));
+        c.setAttribute('aria-label', 'ಸಾಲು ' + (Math.floor(i / 9) + 1) + ' ಕಂಬ ' + (i % 9 + 1) + (v ? ', ' + v : ', ಖಾಲಿ'));
       });
     }
     grid.addEventListener('keydown', function (e) {
@@ -147,7 +147,7 @@
       var cell = el('div', 'cwc' + (isBlock(r, c) ? ' blk' : ''));
       if (!isBlock(r, c)) {
         var inp = el('input'); inp.type = 'text'; inp.lang = 'kn'; inp.autocomplete = 'off'; inp.autocapitalize = 'none'; inp.setAttribute('autocorrect', 'off'); inp.spellcheck = false;
-        inp.setAttribute('aria-label', 'Row ' + (r + 1) + ' column ' + (c + 1)); inp.setAttribute('data-r', r); inp.setAttribute('data-c', c);
+        inp.setAttribute('aria-label', 'ಸಾಲು ' + (r + 1) + ' ಕಂಬ ' + (c + 1)); inp.setAttribute('data-r', r); inp.setAttribute('data-c', c);
         inp.value = saved[r * C + c] || ''; cell.appendChild(inp); inputs[r + ',' + c] = inp;
         if (num[r + ',' + c]) cell.appendChild(el('i', '', String(num[r + ',' + c])));
       }
@@ -201,7 +201,7 @@
     var grid = el('div', 'ws'); grid.style.gridTemplateColumns = 'repeat(' + n + ', 1fr)';
     for (var i = 0; i < n * n; i++) (function (i) {
       var b = el('button', 'wc', d.grid[Math.floor(i / n)][i % n]); b.type = 'button';
-      b.setAttribute('aria-label', 'Row ' + (Math.floor(i / n) + 1) + ' column ' + (i % n + 1) + ' ' + b.textContent);
+      b.setAttribute('aria-label', 'ಸಾಲು ' + (Math.floor(i / n) + 1) + ' ಕಂಬ ' + (i % n + 1) + ' ' + b.textContent);
       b.onclick = function () { marks[i] = marks[i] ? 0 : 1; b.classList.toggle('mk', !!marks[i]); save(); };
       b.classList.toggle('mk', !!marks[i]); cells.push(b); grid.appendChild(b);
     })(i);
@@ -216,31 +216,37 @@
     pb.appendChild(rubber(function () { marks = {}; cut = {}; save(); cells.forEach(function (c) { c.classList.remove('mk'); }); $$('.wd', wl).forEach(function (s) { s.classList.remove('cut'); }); }));
   })();
 
-  /* ================= CRYPTOGRAM ================= */
+  /* ================= CODEWORD (Kannada saying) ================= */
   (function () {
     var host = $('#cryptogram'), d = data('pz-cryptogram'); if (!host || !d) return;
-    var key = 'kv-cry-' + d.day, guess = [];
-    try { guess = JSON.parse(store(key) || '[]') || []; } catch (e) { guess = []; }
-    var wrap = el('div', 'cry'), boxes = [], idx = 0;
-    d.cipher.split(' ').forEach(function (word) {
+    var AKI = /[\u0C95-\u0CB9](?:\u0CCD[\u0C95-\u0CB9])*[\u0CBE-\u0CCC\u0CCD]?[\u0C82\u0C83]?|[\u0C85-\u0C94][\u0C82\u0C83]?/g;
+    var key = 'kv-code-' + d.day, guess = {}, boxes = [], pushing = false;
+    try { guess = JSON.parse(store(key) || '{}') || {}; } catch (e) { guess = {}; }
+    var wrap = el('div', 'cry');
+    d.words.forEach(function (word) {
       var w = el('div', 'cw-word');
-      word.split('').forEach(function (ch) {
-        if (/[A-Z]/.test(ch)) {
-          var my = idx++, c = el('div', 'cl'), inp = el('input'); inp.type = 'text'; inp.maxLength = 1; inp.autocomplete = 'off'; inp.autocapitalize = 'characters'; inp.spellcheck = false;
-          inp.setAttribute('aria-label', 'Letter ' + (my + 1) + ', coded as ' + ch); inp.value = guess[my] || '';
-          c.appendChild(inp); c.appendChild(el('small', '', ch)); boxes.push(inp); w.appendChild(c);
-          inp.addEventListener('focus', function () { inp.select(); });
+      word.forEach(function (code) {
+        var c = el('div', 'cl'), given = d.given[String(code)];
+        if (given) { c.className = 'cl gv'; c.appendChild(el('span', 'gl', given)); }
+        else {
+          var my = boxes.length, inp = el('input'); inp.type = 'text'; inp.lang = 'kn'; inp.autocomplete = 'off'; inp.autocapitalize = 'none'; inp.spellcheck = false;
+          inp.setAttribute('aria-label', 'ಸಂಖ್ಯೆ ' + code + 'ಕ್ಕೆ ಅಕ್ಷರ'); inp.value = guess[my] || '';
+          boxes.push(inp); c.appendChild(inp);
+          inp.addEventListener('focus', function () { if (!pushing) inp.select(); });
           inp.addEventListener('input', function () {
-            var v = (inp.value || '').replace(/[^a-zA-Z]/g, '').slice(-1).toUpperCase(); inp.value = v; guess[my] = v; store(key, JSON.stringify(guess));
-            if (v && boxes[my + 1]) boxes[my + 1].focus();
+            var parts = (inp.value || '').replace(/[^\u0C80-\u0CFF]/g, '').match(AKI) || [];
+            inp.value = parts[0] || ''; guess[my] = inp.value;
+            if (parts.length > 1 && boxes[my + 1]) { var t = boxes[my + 1]; t.value = parts[1]; guess[my + 1] = parts[1]; pushing = true; t.focus(); pushing = false; try { t.setSelectionRange(t.value.length, t.value.length); } catch (x) { } }
+            store(key, JSON.stringify(guess));
           });
           inp.addEventListener('keydown', function (e) { if (e.key === 'Backspace' && !inp.value && boxes[my - 1]) { boxes[my - 1].focus(); e.preventDefault(); } });
-        } else w.appendChild(el('span', 'punct', ch));
+        }
+        c.appendChild(el('small', '', String(code))); w.appendChild(c);
       });
       wrap.appendChild(w);
     });
     host.appendChild(wrap);
     var pb = el('div', 'pbtns'); host.appendChild(pb);
-    pb.appendChild(rubber(function () { guess = []; store(key, '[]'); boxes.forEach(function (b) { b.value = ''; }); }));
+    pb.appendChild(rubber(function () { guess = {}; store(key, '{}'); boxes.forEach(function (b) { b.value = ''; }); }));
   })();
 })();

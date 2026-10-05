@@ -1,52 +1,54 @@
-# Kullangal Vaarte: how it works now
+# ಕುಲ್ಲಂಗಾಲ್ ವಾರ್ತೆ (Kullangal Vaarte): how it works now
 
-A daily paper for the Mangaluru and Udupi coast, built from data files by `build_paper.py`. White paper only (no dark mode). Numbered pages, mobile first.
+A daily paper for the Mangaluru and Udupi coast, **printed entirely in Kannada** (no English text on the pages, except photo credits, Latin plant names, licence names and the Open-Meteo name). Built from data files by `build_paper.py`. White paper only (no dark mode). Numbered pages, mobile first. Everything the editor writes into `content/` must be in Kannada.
 
 ## Editions
 
 - Private (inbox and jobs, never share): https://claude.ai/artifact/4jg9ZRexvuGqbmXzrsmt2d , file `kullangal-vaarte.html`
 - Shareable: https://claude.ai/artifact/7voAxG4qkUxsec11FZmraw , file `public-edition.html`
-- Both are built together by `python3 build_paper.py [YYYY-MM-DD]`. The build refuses to write the shareable file if any private text leaked into it.
+- Both are built together by `python3 build_paper.py [YYYY-MM-DD]`. The build refuses to write the shareable file if any private text (English or Kannada) leaked into it.
 - Publish with the Artifact tool to the same URLs (read the artifact first).
 
 ## Pages
 
-Public: 1 Front page, 2 Coast & Local, 3 World (global news), 4 Coast Feature, 5 Kannada Kadambari, 6 English Serial, 7 Puzzles I (Sudoku, cryptogram), 8 Puzzles II (Kannada crossword, word search), 9 Garden (a herb, a flower and an indoor or bonsai plant), 10 Tales (ONE comic tale a day, alternating Panchatantra and Jataka), 11 Sports (last page).
-Private adds Desk and Classifieds as pages 2 and 3. Jokes (English and Kannada) sit between pages.
+Public: 1 ಮುಖಪುಟ (front), 2 ಕರಾವಳಿ ಮತ್ತು ಸ್ಥಳೀಯ (coast and local), 3 ಜಗತ್ತು (world), 4 ಕರಾವಳಿ ವಿಶೇಷ (feature), 5 ಕನ್ನಡ ಕಾದಂಬರಿ (serial), 6 ಒಗಟುಗಳು ೧ (Sudoku, codeword), 7 ಒಗಟುಗಳು ೨ (Kannada crossword, Kannada word search), 8 ತೋಟ (a herb, a flower and an indoor or bonsai plant), 9 ಕತೆಗಳು (ONE comic tale a day, Panchatantra and Jataka alternately), 10 ಕ್ರೀಡೆ (sports, last page).
+Private adds ಡೆಸ್ಕ್ and ಪ್ರಕಟಣೆಗಳು (classifieds) as pages 2 and 3. A Kannada joke sits between some pages. The English serial was removed.
 
 ## Files
 
-- `build_paper.py` builds everything. `paper.css` and `paper.js` are inlined into the page.
-- `content/news.json`: the day's lead story, local stories, briefly, coming up, sports, helplines. **Refreshed daily from web-search results with a source for every item.**
-- `content/serial_kn.json` (Kannada novel 'ಸಮುದ್ರ ನಿಲಯ') and `content/serial_en.json` (English mystery 'The Tide Ledger'): original fiction, one episode a day (episode 1 on 2026-09-30). Each file has a `bible` with cast, setting and the plan for the next episodes. **Append the next episode each day** (`n`, `title`, `recap` of the previous episode, `text` paragraphs). 14 episodes are written for each (so new ones are needed from 14 Oct). Episodes are LONG, written like a printed novel chapter for elders: English 850-1,100 words, Kannada about 2,800-3,800 characters, 8-14 paragraphs, a paragraph that is exactly `***` makes a scene break. Earlier episodes stay in an archive on the page.
-- `content/world.json`: the World page (lead story, 8 to 10 items by region: Middle East, Europe, Asia, Economy, UN, Space, Science, plus briefly). **Refreshed daily from web-search results with a source and URL for every item; set `date`.** Say 'reports say' for secondary sources, avoid graphic detail, and never state a number that is not in a source.
-- `content/features.json`: seven feature articles, one per weekday, each with Commons photo search terms.
-- `content/garden.json`: 26 plants in three categories (`category`: herb 8, flower 8, indoor 10 including 3 bonsai) and monthly tips. Each day shows one of each: herb index = day number, flower = day + 3, indoor = day + 5 (modulo the group size), so about every third indoor pick is a bonsai. Add more plants over time, keep facts general and mark toxic plants.
-- `content/jokes.json`, `content/crossword_words.json`, `content/wordsearch_sets.json`, `content/proverbs.json`: banks used by the puzzles and joke breaks. Add more over time.
-- `content/private.json`: Desk and Classifieds (private edition only). Refresh from Gmail when the connector is available.
-- `puzzles.py` (Sudoku with a unique solution, KANNADA crossword (one akshara per square, words and clues from `content/crossword_words_kn.json`; add more words over time), word search, cryptogram; seeded by date and SAVED to `content/puzzles/<date>.json` so the next day's page can print the answers; the page itself never contains today's answers), `comics.py` (SVG comic panels with lighting filters, 7 Panchatantra + 6 Jataka episodes), `astro.py` (sunrise, sunset, moon phase, calculated), `weather.py` (Open-Meteo), `photos.py` (Wikimedia Commons photos with cache and fallback), `build_notices.py` (approved reader notices, config).
+- `build_paper.py` builds everything (all page labels are Kannada strings in this file). `paper.css` and `paper.js` are inlined into the page. `comics_kn.py` holds the Kannada text of the 13 comic tales (`comics.py` keeps the drawings and calls it).
+- `content/news.json` (coast news, sports, helplines, coming up) and `content/world.json` (World page): **refreshed daily from web-search results, written in Kannada, with a source name and URL for every item; set `date`.** Never state a number or fact that is not in a source; say 'ವರದಿಗಳ ಪ್ರಕಾರ' for secondary sources.
+- `content/serial_kn.json`: Kannada novel 'ಸಮುದ್ರ ನಿಲಯ', one episode a day (episode 1 on 2026-09-30), 14 written (new ones needed from 14 Oct). Episodes are long (about 2,800 to 3,800 characters, 8 to 14 paragraphs, `***` paragraph = scene break). Each file has a `bible` with cast, setting and the plan. Append `{n, title, recap, text}`.
+- `content/features.json`: seven Kannada feature articles, one per weekday (`theme` is the English key for photo search, `theme_kn` is shown), with Commons photo search terms.
+- `content/garden.json`: 26 plants in three categories (`category`: herb 8, flower 8, indoor 10 including 3 bonsai with `bonsai: true`). `key` is the English name (used for photo search and the photo cache), `name` the Kannada name. One of each category is shown daily (index = day number, +3 for flowers, +5 for indoor).
+- `content/jokes.json` (Kannada only, rotates 4 a day), `content/crossword_words_kn.json` (word, Kannada clue), `content/wordsearch_sets_kn.json`, `content/proverbs_kn.json` (sayings for the codeword puzzle): banks used by the puzzles and joke breaks. Add more over time.
+- `content/private.json`: Desk and Classifieds (private edition only, written in Kannada). Refresh from Gmail when the connector is available.
+- `puzzles.py` (Sudoku with a unique solution, Kannada crossword, Kannada word search, codeword; seeded by date and SAVED to `content/puzzles/<date>.json`), `comics.py`, `astro.py` (sunrise, sunset, moon phase, calculated), `weather.py` (Open-Meteo, descriptions in Kannada), `photos.py` (Wikimedia Commons photos with cache and fallback), `build_notices.py` (approved reader notices).
 - `kullangal_config.json` (form_url, whatsapp_number, sheet_csv_url: **still empty**, the owner supplies them) and `kullangal_notices.json` (approved notices).
-- `content/cache/`: today's downloaded photos. The `*-seed.json` files are the last good real photos and are used if Commons refuses (HTTP 429).
+- `content/cache/`: downloaded photos. The `*-seed.json` files are the last good real photos and are used if Commons refuses (HTTP 429).
 
-## Decisions and limits
+## Kannada puzzles
 
-- Canva image credits are tiny (about three images a day) and the Canva connector only returns thumbnails; full size needs a design plus export. So Canva is used for **one illustration a day at most, for the feature article only** (never news, sports or the comic panels): if `content/feature-<date>.jpg` exists it is shown with the label "Illustration made with Canva AI"; otherwise a Commons photo is used. The daily routine has no Canva connector yet, so it uses Commons photos.
-- Painted comic panels were tested (Pollinations and Canva) and rejected: Pollinations gave wrong animals and watermarks; Canva quality is good but the quota is far too small for 52 panels. Comics stay SVG, with shading filters added.
-- Only web search reaches the news sites (direct fetches of daijiworld, mangaloretoday, deccanherald and others are blocked). News facts therefore come from search result summaries: state only what is clear, cite the source, drop anything contradictory or unclear, and never put a number in the paper that is not in a source.
-- Reader posts: the artifact `db` capability cannot be written by people who open a public link. News from readers comes through a Google Form or WhatsApp message to the editor; approved items go into `kullangal_notices.json` (or a published Sheet CSV, which needs docs.google.com allowed).
-- No Gmail connector in the routine, so Desk, Classifieds and email do not refresh. Do not send email or messages to anyone without asking the owner.
-- WhatsApp cannot be automated for free; the owner posts the shareable link or the PDF by hand.
-- Wikimedia rate-limits (HTTP 429). `photos.py` retries and falls back to cached photos.
-- Shell: `pip install pillow` if `PIL` is missing (needed by `photos.py`).
+- One crossword square, word-search square or codeword box holds one **akshara** (consonant with its vowel sign, or a conjunct such as ಲ್ಲು, ಕ್ಷ). `puzzles.aksharas(word)` splits a word; always check new bank words with it.
+- Crossword: 13 x 13 search, about 20 entries, indirect clues (general knowledge). Word search: 12 x 12 of aksharas, weekends add reversed words. Codeword ("ಗಾದೆ ಸಂಕೇತ"): a Kannada saying with every akshara replaced by a number; a few aksharas are given.
+- Typing in the boxes uses the phone's Kannada keyboard; typing carries on into the next box.
 
 ## Pencil-and-paper rule (answers next day only)
 
-- Today's page has no check, hint, solve or auto-fill. Readers pencil in squares (progress is kept on their own device) and can rub out. The page JSON holds only the puzzle, never the solution.
-- The page shows **yesterday's** answers (Sudoku, crossword, word search with the words marked, cryptogram) from `content/puzzles/<yesterday>.json`. Always commit `content/puzzles/`; never edit an earlier day's file.
+- Today's page has no check, hint, solve or auto-fill. Readers pencil in squares (progress is kept on their own device) and can rub out ("ಎಲ್ಲ ಅಳಿಸಿ"). The page JSON holds only the puzzle, never the solution.
+- The page shows **yesterday's** answers from `content/puzzles/<yesterday>.json`. If there was no edition yesterday, the page says so. Always commit `content/puzzles/`; never edit an earlier day's file.
 
 ## Reader notices (events, lost and found, road works, temple/school notices, shop openings, club and school results)
 
-How it works: readers fill the owner's free **Google Form** (or send a WhatsApp message with the template). The Form's response Sheet gets a column `approved`; the editor types `yes` for notices that may print. The sheet is published to the web as CSV and the link goes in `kullangal_config.json` as `sheet_csv_url` (and `form_url`, `whatsapp_number`). The 06:29 IST build reads the approved rows whose date includes today (ISO or d/m/yyyy dates, Google Form question text as column heads is understood), so a notice sent by 8 pm the evening before is in the next morning's paper. Anything not approved is never printed. The routine's environment must allow `docs.google.com`.
-Until the owner creates the form, the box on the Coast & Local page says the form is not open yet and does not promise "by 8 pm". Notices can also be typed by hand into `kullangal_notices.json`.
+Readers fill the owner's free **Google Form** (or send a WhatsApp message with the template). The Form's response Sheet gets a column `approved` (or `ಅನುಮೋದನೆ`); the editor types `yes` (or `ಹೌದು`) for notices that may print. The sheet is published to the web as CSV and the link goes in `kullangal_config.json` as `sheet_csv_url` (and `form_url`, `whatsapp_number`). The 06:29 IST build reads approved rows whose date includes today, understands English or Kannada question headings and ISO or d/m/yyyy dates, so a notice sent by 8 pm the evening before is in the next morning's paper. Nothing unapproved is ever printed. The routine's environment must allow `docs.google.com`. Step-by-step owner checklist: `NOTICES-SETUP.md`. Until the form exists, the box on the local page says the section is not open yet.
 
-Step-by-step owner checklist for the Form, Sheet and config: `NOTICES-SETUP.md`.
+## Decisions and limits
+
+- Canva image credits are tiny. Canva is used for **one illustration a day at most, for the feature article only**: if `content/feature-<date>.jpg` exists it is shown with a Kannada label; otherwise a Commons photo is used. The daily routine has no Canva connector yet.
+- Comics are original SVG drawings (painted panels were tested and rejected).
+- Only web search reaches the news sites (direct fetches are blocked). Facts come from search-result summaries: state only what is clear, cite the source, drop anything contradictory or unclear.
+- Reader posts: the artifact `db` capability cannot be written by people who open a public link, so notices come through the Form or WhatsApp.
+- No Gmail connector in the routine, so Desk, Classifieds and email do not refresh. Do not send email or messages to anyone without asking the owner. WhatsApp cannot be automated; the owner posts the shareable link or the PDF by hand.
+- Wikimedia rate-limits (HTTP 429). `photos.py` retries and falls back to cached photos; a plant with no photo simply shows without one.
+- The routine run on 2026-10-01 06:29 IST did nothing because the routine has no repository attached (`sources: []`); the owner must add `Prady121-Bhat/prady121` as its source in the routine's settings.
+- Shell: `pip install pillow` if `PIL` is missing (needed by `photos.py`).

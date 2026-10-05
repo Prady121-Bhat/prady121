@@ -134,4 +134,4 @@ def photo_for(key, terms, day, files=None):
 
 
 def credit_html(p):
-    return (f'Photo: {html.escape(p["artist"])}, <a href="{p["page"]}" target="_blank" rel="noopener">Wikimedia Commons</a>, {html.escape(p["lic"])}')
+    return (f'ಚಿತ್ರ: {html.escape(p["artist"])}, <a href="{p["page"]}" target="_blank" rel="noopener">ವಿಕಿಮೀಡಿಯಾ ಕಾಮನ್ಸ್</a>, {html.escape(p["lic"])}')

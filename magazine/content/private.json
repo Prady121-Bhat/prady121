@@ -1,20 +1,71 @@
 {
- "desk_note": "Private edition only. Written from the owner's Gmail on 30 Sep 2026 and kept as-is until the Gmail connector is available again. Never copied into the shareable edition.",
- "notice": {"title":"Payment declined for miniTV","text":"Google Play could not charge your GPay UPI on 29 or 30 September. Change the payment method or the subscription will be cancelled."},
+ "desk_note": "ಖಾಸಗಿ ಆವೃತ್ತಿ ಮಾತ್ರ. ಮಾಲೀಕರ ಜಿಮೇಲ್‌ನಿಂದ 30 ಸೆಪ್ಟೆಂಬರ್ 2026ರಂದು ಬರೆದದ್ದು; ಜಿಮೇಲ್ ಸಂಪರ್ಕ ಮತ್ತೆ ಲಭ್ಯವಾಗುವವರೆಗೆ ಹಾಗೆಯೇ ಇರುತ್ತದೆ. ಹಂಚಿಕೊಳ್ಳಬಹುದಾದ ಆವೃತ್ತಿಗೆ ಎಂದೂ ನಕಲಾಗುವುದಿಲ್ಲ.",
+ "notice": {
+  "title": "ಮಿನಿಟಿವಿ ಚಂದಾ ಪಾವತಿ ವಿಫಲ",
+  "text": "ಸೆಪ್ಟೆಂಬರ್ 29 ಮತ್ತು 30ರಂದು ನಿಮ್ಮ ಜಿಪೇ ಯುಪಿಐ ಮೂಲಕ ಗೂಗಲ್ ಪ್ಲೇ ಹಣ ಕಡಿತ ಮಾಡಲಾಗಲಿಲ್ಲ. ಪಾವತಿ ವಿಧಾನ ಬದಲಿಸಿ, ಇಲ್ಲದಿದ್ದರೆ ಚಂದಾ ರದ್ದಾಗುತ್ತದೆ."
+ },
  "desk": [
-  {"tag":"Action","act":true,"title":"Payment declined for miniTV","text":"Google Play could not charge your GPay UPI for the Amazon India Shop, Pay, miniTV subscription. It failed on 29 and again on 30 September. Change the payment method or the subscription will be cancelled.","link":"Open in Gmail","url":"https://mail.google.com/mail/?authuser=pradyumnabhat45@gmail.com#all/thread-f:1877740725386204878|msg-f:1877740725386204878"},
-  {"tag":"Waiting on you","act":false,"title":"Outskill course dashboard invite","text":"You are enrolled and the invite to the course dashboard is waiting to be accepted. The WhatsApp community was full when you tried, and GrowthSchool support says it has passed that to the relevant team.","link":"Open the invite","url":"https://mail.google.com/mail/?authuser=pradyumnabhat45@gmail.com#all/thread-f:1877680645821394311|msg-f:1877680645821394311"},
-  {"tag":"Heads up","act":false,"title":"Google noted Claude's Gmail access","text":"A security alert says you allowed Claude for Gmail to reach some account data. That matches the connection you made today. If it wasn't you, review permissions in your Google Account.","link":"Open the alert","url":"https://mail.google.com/mail/?authuser=pradyumnabhat45@gmail.com#all/thread-f:1877754278499591340|msg-f:1877754278499591340"}
+  {
+   "tag": "ಕ್ರಮ ಬೇಕು",
+   "act": true,
+   "title": "ಮಿನಿಟಿವಿ ಚಂದಾ ಪಾವತಿ ವಿಫಲ",
+   "text": "ಅಮೆಜಾನ್ ಇಂಡಿಯಾ ಶಾಪ್, ಪೇ, ಮಿನಿಟಿವಿ ಚಂದಾಕ್ಕೆ ನಿಮ್ಮ ಜಿಪೇ ಯುಪಿಐ ಮೂಲಕ ಗೂಗಲ್ ಪ್ಲೇ ಹಣ ಕಡಿತ ಮಾಡಲಾಗಲಿಲ್ಲ; ಸೆಪ್ಟೆಂಬರ್ 29 ಮತ್ತು 30ರಂದು ವಿಫಲವಾಯಿತು. ಪಾವತಿ ವಿಧಾನ ಬದಲಿಸಿ, ಇಲ್ಲದಿದ್ದರೆ ಚಂದಾ ರದ್ದಾಗುತ್ತದೆ.",
+   "link": "ಜಿಮೇಲ್‌ನಲ್ಲಿ ತೆರೆಯಿರಿ",
+   "url": "https://mail.google.com/mail/?authuser=pradyumnabhat45@gmail.com#all/thread-f:1877740725386204878|msg-f:1877740725386204878"
+  },
+  {
+   "tag": "ನಿಮ್ಮ ಉತ್ತರ ಕಾಯುತ್ತಿದೆ",
+   "act": false,
+   "title": "ಔಟ್‌ಸ್ಕಿಲ್ ಕೋರ್ಸ್ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ ಆಹ್ವಾನ",
+   "text": "ನೀವು ನೋಂದಾಯಿಸಿದ್ದೀರಿ; ಕೋರ್ಸ್ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್‌ನ ಆಹ್ವಾನ ಸ್ವೀಕಾರಕ್ಕೆ ಕಾಯುತ್ತಿದೆ. ನೀವು ಪ್ರಯತ್ನಿಸಿದಾಗ ವಾಟ್ಸ್‌ಆ್ಯಪ್ ಸಮುದಾಯ ತುಂಬಿತ್ತು; ಗ್ರೋತ್‌ಸ್ಕೂಲ್ ಬೆಂಬಲ ತಂಡ ವಿಷಯವನ್ನು ಸಂಬಂಧಿತ ತಂಡಕ್ಕೆ ತಲುಪಿಸಿದೆ ಎಂದು ತಿಳಿಸಿದೆ.",
+   "link": "ಆಹ್ವಾನ ತೆರೆಯಿರಿ",
+   "url": "https://mail.google.com/mail/?authuser=pradyumnabhat45@gmail.com#all/thread-f:1877680645821394311|msg-f:1877680645821394311"
+  },
+  {
+   "tag": "ಗಮನಕ್ಕೆ",
+   "act": false,
+   "title": "ಕ್ಲೌಡ್‌ನ ಜಿಮೇಲ್ ಪ್ರವೇಶವನ್ನು ಗೂಗಲ್ ಗುರುತಿಸಿದೆ",
+   "text": "ಜಿಮೇಲ್‌ಗಾಗಿ ಕ್ಲೌಡ್‌ಗೆ ಖಾತೆಯ ಕೆಲವು ಮಾಹಿತಿ ನೋಡಲು ಅನುಮತಿ ನೀಡಿದ್ದೀರಿ ಎಂದು ಭದ್ರತಾ ಎಚ್ಚರಿಕೆ ಹೇಳುತ್ತದೆ. ಅದು ನೀವು ಇಂದು ಮಾಡಿದ ಸಂಪರ್ಕಕ್ಕೆ ಹೊಂದುತ್ತದೆ. ನೀವು ಮಾಡಿರದಿದ್ದರೆ ಗೂಗಲ್ ಖಾತೆಯ ಅನುಮತಿಗಳನ್ನು ಪರಿಶೀಲಿಸಿ.",
+   "link": "ಎಚ್ಚರಿಕೆ ತೆರೆಯಿರಿ",
+   "url": "https://mail.google.com/mail/?authuser=pradyumnabhat45@gmail.com#all/thread-f:1877754278499591340|msg-f:1877754278499591340"
+  }
  ],
  "also": [
-  {"title":"Hacktoberfest starts Thursday","tag":"DEV","text":"The DEV newsletter lists events near you for 1 October."},
-  {"title":"Claude 101 and GPT-6 Astra workshops","tag":"Zoom","text":"Both ran yesterday. Registrations are confirmed in your mail."},
-  {"title":"Mann Ki Baat highlights","tag":"Newsletter","text":"Stories of change from across India."}
+  {
+   "title": "ಗುರುವಾರದಿಂದ ಹ್ಯಾಕ್ಟೋಬರ್‌ಫೆಸ್ಟ್ ಆರಂಭ",
+   "tag": "ಡಿಇವಿ",
+   "text": "ಡಿಇವಿ ಸುದ್ದಿಪತ್ರ ಅಕ್ಟೋಬರ್ 1ರಂದು ನಿಮ್ಮ ಹತ್ತಿರದ ಕಾರ್ಯಕ್ರಮಗಳ ಪಟ್ಟಿ ನೀಡಿದೆ."
+  },
+  {
+   "title": "ಕ್ಲೌಡ್ 101 ಮತ್ತು ಜಿಪಿಟಿ-6 ಆಸ್ಟ್ರಾ ಕಾರ್ಯಾಗಾರಗಳು",
+   "tag": "ಜೂಮ್",
+   "text": "ಎರಡೂ ನಿನ್ನೆ ನಡೆದವು. ನೋಂದಣಿ ದೃಢೀಕರಣ ನಿಮ್ಮ ಮೇಲ್‌ನಲ್ಲಿದೆ."
+  },
+  {
+   "title": "ಮನ್ ಕೀ ಬಾತ್ ಮುಖ್ಯಾಂಶಗಳು",
+   "tag": "ಸುದ್ದಿಪತ್ರ",
+   "text": "ದೇಶದಾದ್ಯಂತದ ಬದಲಾವಣೆಯ ಕತೆಗಳು."
+  }
  ],
- "cleanup": {"n":"290+","text":"old promotional threads moved to Trash today. They stay recoverable for 30 days."},
+ "cleanup": {
+  "n": "290+",
+  "text": "ಹಳೆಯ ಪ್ರಚಾರ ಮೇಲ್‌ಗಳನ್ನು ಇಂದು ಕಸದ ಬುಟ್ಟಿಗೆ ಸರಿಸಲಾಗಿದೆ. ಅವು 30 ದಿನ ಮರುಪಡೆಯಲು ಲಭ್ಯ."
+ },
  "classifieds": [
-  {"title":"QA Automation Test Engineer","text":"Toyota Automated Logistics, plus an on-site fresher role at JobBricks.","from":"via LinkedIn"},
-  {"title":"Founding Voice AI Engineer","text":"Libera, one of nine new matches this week.","from":"via Wellfound"},
-  {"title":"Jr. Product Engineer","text":"Venh Technologies, Pune, up to 8 LPA.","from":"via Cutshort"}
+  {
+   "title": "ಕ್ಯೂಎ ಆಟೋಮೇಷನ್ ಟೆಸ್ಟ್ ಎಂಜಿನಿಯರ್",
+   "text": "ಟೊಯೊಟಾ ಆಟೋಮೇಟೆಡ್ ಲಾಜಿಸ್ಟಿಕ್ಸ್; ಜೊತೆಗೆ ಜಾಬ್‌ಬ್ರಿಕ್ಸ್‌ನಲ್ಲಿ ಫ್ರೆಶರ್‌ಗೆ ಕಚೇರಿ ಹುದ್ದೆ.",
+   "from": "ಲಿಂಕ್ಡ್‌ಇನ್ ಮೂಲಕ"
+  },
+  {
+   "title": "ಸ್ಥಾಪಕ ವಾಯ್ಸ್ ಎಐ ಎಂಜಿನಿಯರ್",
+   "text": "ಲಿಬೆರಾ; ಈ ವಾರದ ಒಂಬತ್ತು ಹೊಸ ಹೊಂದಾಣಿಕೆಗಳಲ್ಲಿ ಒಂದು.",
+   "from": "ವೆಲ್ಫೌಂಡ್ ಮೂಲಕ"
+  },
+  {
+   "title": "ಜೂನಿಯರ್ ಪ್ರಾಡಕ್ಟ್ ಎಂಜಿನಿಯರ್",
+   "text": "ವೆನ್ಹ್ ಟೆಕ್ನಾಲಜೀಸ್, ಪುಣೆ; ವರ್ಷಕ್ಕೆ 8 ಲಕ್ಷ ರೂಪಾಯಿವರೆಗೆ.",
+   "from": "ಕಟ್‌ಶಾರ್ಟ್ ಮೂಲಕ"
+  }
  ]
 }

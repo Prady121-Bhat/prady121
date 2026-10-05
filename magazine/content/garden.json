@@ -1,888 +1,914 @@
 {
  "plants": [
   {
-   "name": "Tulsi",
-   "kn": "ತುಳಸಿ",
+   "key": "Tulsi",
+   "category": "herb",
+   "name": "ತುಳಸಿ",
    "latin": "Ocimum tenuiflorum",
    "tags": [
-    "Sacred",
-    "Herb",
-    "Easy"
+    "ಪವಿತ್ರ",
+    "ಗಿಡಮೂಲಿಕೆ",
+    "ಸುಲಭ"
    ],
-   "about": "Holy basil, native to India and kept in a raised tulasi katte outside many coastal homes. It is a leafy herb as much as a sacred plant.",
+   "about": "ಭಾರತದ ಮೂಲದ ಪವಿತ್ರ ತುಳಸಿ. ಕರಾವಳಿಯ ಅನೇಕ ಮನೆಗಳ ಹೊರಗೆ ತುಳಸಿ ಕಟ್ಟೆಯಲ್ಲಿ ಬೆಳೆಸುತ್ತಾರೆ. ಇದು ಪವಿತ್ರ ಸಸ್ಯವಷ್ಟೇ ಅಲ್ಲ, ಎಲೆಗಳ ಗಿಡಮೂಲಿಕೆಯೂ ಹೌದು.",
    "spec": [
     [
-     "Light",
-     "Full sun or partial sun."
+     "ಬೆಳಕು",
+     "ಪೂರ್ಣ ಬಿಸಿಲು ಅಥವಾ ಭಾಗಶಃ ಬಿಸಿಲು."
     ],
     [
-     "Water",
-     "Light watering, like a shower. Daily in summer, every other day in cooler weather. Do not flood the pot."
+     "ನೀರು",
+     "ಸಿಂಪಡಿಸಿದಂತೆ ಹಗುರ ನೀರು. ಬೇಸಿಗೆಯಲ್ಲಿ ದಿನವೂ, ತಂಪು ಕಾಲದಲ್ಲಿ ಒಂದು ದಿನ ಬಿಟ್ಟು ಒಂದು ದಿನ. ಕುಂಡದಲ್ಲಿ ನೀರು ನಿಲ್ಲಬಾರದು."
     ],
     [
-     "Soil",
-     "Porous, well-drained, with added organic manure."
+     "ಮಣ್ಣು",
+     "ಸರಂಧ್ರ, ನೀರು ಬಸಿದುಹೋಗುವ ಮಣ್ಣು; ಸಾವಯವ ಗೊಬ್ಬರ ಸೇರಿಸಿ."
     ],
     [
-     "Prune",
-     "Pinch the growing tip for a bushier plant and remove flower heads early to keep it leafy."
+     "ಕತ್ತರಿಸುವಿಕೆ",
+     "ಚಿಗುರಿನ ತುದಿ ಚಿವುಟಿದರೆ ಗಿಡ ಪೊದೆಯಾಗುತ್ತದೆ; ಹೂಗೊಂಚಲನ್ನು ಬೇಗ ತೆಗೆದರೆ ಎಲೆ ಹೆಚ್ಚು ಬರುತ್ತದೆ."
     ],
     [
-     "Watch out",
-     "Mealybugs, aphids, mites and whitefly. Spray a neem-based solution."
+     "ಎಚ್ಚರ",
+     "ಹಿಟ್ಟು ತಿಗಣೆ, ಗಿಡಹೇನು, ನುಸಿ, ಬಿಳಿನೊಣ. ಬೇವಿನ ಆಧಾರಿತ ದ್ರಾವಣ ಸಿಂಪಡಿಸಿ."
     ]
    ],
-   "category": "herb"
+   "bonsai": false
   },
   {
-   "name": "Curry leaf",
-   "kn": "ಕರಿಬೇವು",
+   "key": "Curry leaf",
+   "category": "herb",
+   "name": "ಕರಿಬೇವು",
    "latin": "Murraya koenigii",
    "tags": [
-    "Kitchen garden",
-    "Evergreen"
+    "ಅಡುಗೆ ತೋಟ",
+    "ಸದಾ ಹಸಿರು"
    ],
-   "about": "The kitchen tree behind every tempering. It loves warmth, so it settles in easily on the coast and needs no protection from cold.",
+   "about": "ಪ್ರತಿ ಒಗ್ಗರಣೆಯ ಹಿಂದಿನ ಅಡುಗೆಮನೆ ಮರ. ಇದು ಬೆಚ್ಚನೆಯ ವಾತಾವರಣ ಇಷ್ಟಪಡುವುದರಿಂದ ಕರಾವಳಿಯಲ್ಲಿ ಸುಲಭವಾಗಿ ಬೆಳೆಯುತ್ತದೆ; ಚಳಿಯಿಂದ ರಕ್ಷಣೆ ಬೇಕಿಲ್ಲ.",
    "spec": [
     [
-     "Light",
-     "Full sun."
+     "ಬೆಳಕು",
+     "ಪೂರ್ಣ ಬಿಸಿಲು."
     ],
     [
-     "Water",
-     "Deeply but not often. Let the top 3 to 5 cm dry between waterings to avoid root rot."
+     "ನೀರು",
+     "ಆಳವಾಗಿ ಆದರೆ ಆಗಾಗ ಅಲ್ಲ. ಬೇರು ಕೊಳೆಯದಂತೆ ಮೇಲಿನ 3-5 ಸೆಂ.ಮೀ. ಮಣ್ಣು ಒಣಗಲು ಬಿಡಿ."
     ],
     [
-     "Soil",
-     "Well-drained soil that is rich in compost."
+     "ಮಣ್ಣು",
+     "ಕಾಂಪೋಸ್ಟ್ ಸಮೃದ್ಧ, ನೀರು ಬಸಿಯುವ ಮಣ್ಣು."
     ],
     [
-     "Feed",
-     "Compost or organic manure every two to three months. Nitrogen-rich feed gives lush leaves."
+     "ಗೊಬ್ಬರ",
+     "ಎರಡು-ಮೂರು ತಿಂಗಳಿಗೊಮ್ಮೆ ಕಾಂಪೋಸ್ಟ್ ಅಥವಾ ಸಾವಯವ ಗೊಬ್ಬರ. ಸಾರಜನಕ ಹೆಚ್ಚಿರುವ ಗೊಬ್ಬರ ಎಲೆಗಳನ್ನು ಹಸಿರಾಗಿಸುತ್ತದೆ."
     ],
     [
-     "Harvest",
-     "Pick leaves regularly from the tips so it keeps branching."
+     "ಕೊಯ್ಲು",
+     "ಗಿಡ ಕವಲೊಡೆಯುವಂತೆ ತುದಿಗಳಿಂದ ಎಲೆಗಳನ್ನು ಆಗಾಗ ಕೊಯ್ಯಿರಿ."
     ]
    ],
-   "category": "herb"
+   "bonsai": false
   },
   {
+   "key": "Mint",
    "category": "herb",
-   "name": "Mint",
-   "kn": "ಪುದೀನ",
+   "name": "ಪುದೀನ",
    "latin": "Mentha spicata",
    "tags": [
-    "Herb",
-    "Spreads fast",
-    "Pot only"
+    "ಗಿಡಮೂಲಿಕೆ",
+    "ವೇಗವಾಗಿ ಹರಡುತ್ತದೆ",
+    "ಕುಂಡದಲ್ಲೇ ಬೆಳೆಸಿ"
    ],
-   "about": "Spearmint, the herb behind chutneys, buttermilk and pulao. It spreads by runners, so keep it in its own pot or it will take over the bed. On the coast it grows nonstop in the monsoon.",
+   "about": "ಚಟ್ನಿ, ಮಜ್ಜಿಗೆ ಮತ್ತು ಪುಲಾವ್ ಹಿಂದಿನ ಸುಗಂಧದ ಸೊಪ್ಪು. ಇದು ಬೇರುಕಾಂಡಗಳ ಮೂಲಕ ಹರಡುವುದರಿಂದ ತನ್ನದೇ ಕುಂಡದಲ್ಲಿ ಇರಿಸಿ, ಇಲ್ಲದಿದ್ದರೆ ಇಡೀ ಪಾತಿಯನ್ನು ಆವರಿಸುತ್ತದೆ. ಕರಾವಳಿಯಲ್ಲಿ ಮಳೆಗಾಲದಲ್ಲಿ ಇದು ನಿಲ್ಲದೆ ಬೆಳೆಯುತ್ತದೆ.",
    "spec": [
     [
-     "Light",
-     "Bright light with some shade from the hot afternoon sun."
+     "ಬೆಳಕು",
+     "ಪ್ರಕಾಶಮಾನ ಬೆಳಕು; ಮಧ್ಯಾಹ್ನದ ಉರಿಬಿಸಿಲಿನಿಂದ ಸ್ವಲ್ಪ ನೆರಳು."
     ],
     [
-     "Water",
-     "Keep the soil evenly moist; it sulks if it dries out completely."
+     "ನೀರು",
+     "ಮಣ್ಣು ಸಮವಾಗಿ ತೇವವಿರಲಿ; ಪೂರ್ತಿ ಒಣಗಿದರೆ ಗಿಡ ಸೊರಗುತ್ತದೆ."
     ],
     [
-     "Soil",
-     "Rich, loose soil with compost, in a pot with drainage holes."
+     "ಮಣ್ಣು",
+     "ಕಾಂಪೋಸ್ಟ್ ಸೇರಿಸಿದ ಸಡಿಲ ಮಣ್ಣು, ಬಸಿಯುವ ರಂಧ್ರಗಳಿರುವ ಕುಂಡದಲ್ಲಿ."
     ],
     [
-     "Pinch",
-     "Nip the tips often for a bushy plant and to stop flowering."
+     "ಚಿವುಟುವಿಕೆ",
+     "ತುದಿಗಳನ್ನು ಆಗಾಗ ಚಿವುಟಿದರೆ ಗಿಡ ದಟ್ಟವಾಗುತ್ತದೆ ಮತ್ತು ಹೂ ಬಿಡುವುದು ತಪ್ಪುತ್ತದೆ."
     ],
     [
-     "Grow more",
-     "A stem cutting in a glass of water roots in about a week."
+     "ಹೊಸ ಗಿಡ",
+     "ಕಾಂಡದ ತುಂಡನ್ನು ಲೋಟದ ನೀರಿನಲ್ಲಿಟ್ಟರೆ ಸುಮಾರು ಒಂದು ವಾರದಲ್ಲಿ ಬೇರು ಬರುತ್ತದೆ."
     ]
-   ]
+   ],
+   "bonsai": false
   },
   {
+   "key": "Coriander",
    "category": "herb",
-   "name": "Coriander",
-   "kn": "ಕೊತ್ತಂಬರಿ",
+   "name": "ಕೊತ್ತಂಬರಿ",
    "latin": "Coriandrum sativum",
    "tags": [
-    "Herb",
-    "Cool season",
-    "Sow from seed"
+    "ಗಿಡಮೂಲಿಕೆ",
+    "ಚಳಿಗಾಲದ ಬೆಳೆ",
+    "ಬೀಜದಿಂದ ಬಿತ್ತಿ"
    ],
-   "about": "Fresh coriander leaves flavour almost every coastal kitchen. It prefers cooler months, so on the coast it does best from October to February and runs to seed in hot weather.",
+   "about": "ಕರಾವಳಿಯ ಬಹುತೇಕ ಅಡುಗೆಮನೆಗಳಲ್ಲಿ ತಾಜಾ ಕೊತ್ತಂಬರಿ ಸೊಪ್ಪು ಬೇಕೇ ಬೇಕು. ಇದಕ್ಕೆ ತಂಪು ತಿಂಗಳು ಇಷ್ಟ; ಕರಾವಳಿಯಲ್ಲಿ ಅಕ್ಟೋಬರ್‌ನಿಂದ ಫೆಬ್ರವರಿ ವರೆಗೆ ಚೆನ್ನಾಗಿ ಬೆಳೆಯುತ್ತದೆ, ಬಿಸಿಲು ಹೆಚ್ಚಿದಾಗ ಬೀಜ ಕಟ್ಟುತ್ತದೆ.",
    "spec": [
     [
-     "Sow",
-     "Scatter split seeds straight into the pot or bed. Coriander dislikes being transplanted."
+     "ಬಿತ್ತನೆ",
+     "ಒಡೆದ ಬೀಜಗಳನ್ನು ನೇರವಾಗಿ ಕುಂಡ ಅಥವಾ ಪಾತಿಯಲ್ಲಿ ಚೆಲ್ಲಿ. ಕೊತ್ತಂಬರಿಯನ್ನು ಬೇರೆಡೆ ನಾಟಿ ಮಾಡಬಾರದು."
     ],
     [
-     "Light",
-     "Morning sun; light shade in the afternoon."
+     "ಬೆಳಕು",
+     "ಬೆಳಗಿನ ಬಿಸಿಲು; ಮಧ್ಯಾಹ್ನ ಲಘು ನೆರಳು."
     ],
     [
-     "Water",
-     "Light, regular watering. Never let the pot sit in standing water."
+     "ನೀರು",
+     "ಹಗುರ, ನಿಯಮಿತ ನೀರು. ಕುಂಡ ನೀರಿನಲ್ಲಿ ನಿಲ್ಲಬಾರದು."
     ],
     [
-     "Soil",
-     "Loose, well-drained soil with compost."
+     "ಮಣ್ಣು",
+     "ಕಾಂಪೋಸ್ಟ್ ಸೇರಿಸಿದ ಸಡಿಲ, ಬಸಿಯುವ ಮಣ್ಣು."
     ],
     [
-     "Harvest",
-     "First cuttings in four to six weeks. Sow a fresh pot every two weeks for a steady supply."
+     "ಕೊಯ್ಲು",
+     "ನಾಲ್ಕರಿಂದ ಆರು ವಾರಗಳಲ್ಲಿ ಮೊದಲ ಕೊಯ್ಲು. ನಿರಂತರ ಸೊಪ್ಪಿಗಾಗಿ ಎರಡು ವಾರಕ್ಕೊಮ್ಮೆ ಹೊಸ ಕುಂಡದಲ್ಲಿ ಬಿತ್ತಿ."
     ]
-   ]
+   ],
+   "bonsai": false
   },
   {
+   "key": "Lemongrass",
    "category": "herb",
-   "name": "Lemongrass",
-   "kn": "ನಿಂಬೆ ಹುಲ್ಲು",
+   "name": "ನಿಂಬೆ ಹುಲ್ಲು",
    "latin": "Cymbopogon citratus",
    "tags": [
-    "Herb",
-    "Tea plant",
-    "Easy"
+    "ಗಿಡಮೂಲಿಕೆ",
+    "ಚಹಾ ಗಿಡ",
+    "ಸುಲಭ"
    ],
-   "about": "A tall, scented grass that gives tea and many curries their lemony smell. It loves warm, wet weather, which makes it a good match for Mangaluru and Udupi.",
+   "about": "ಎತ್ತರದ ಸುಗಂಧ ಹುಲ್ಲು; ಚಹಾ ಮತ್ತು ಅನೇಕ ಪಲ್ಯಗಳಿಗೆ ನಿಂಬೆಯ ಸುವಾಸನೆ ಕೊಡುತ್ತದೆ. ಬೆಚ್ಚಗಿನ, ತೇವದ ಹವೆ ಇಷ್ಟಪಡುವುದರಿಂದ ಮಂಗಳೂರು ಮತ್ತು ಉಡುಪಿಗೆ ಸರಿಹೊಂದುತ್ತದೆ.",
    "spec": [
     [
-     "Light",
-     "Full sun."
+     "ಬೆಳಕು",
+     "ಪೂರ್ಣ ಬಿಸಿಲು."
     ],
     [
-     "Water",
-     "Generous in the monsoon; regular in dry weather."
+     "ನೀರು",
+     "ಮಳೆಗಾಲದಲ್ಲಿ ಹೇರಳ; ಒಣ ಹವೆಯಲ್ಲಿ ನಿಯಮಿತ."
     ],
     [
-     "Soil",
-     "Any fertile, well-drained soil; a large pot or a corner of the garden."
+     "ಮಣ್ಣು",
+     "ಫಲವತ್ತಾದ, ನೀರು ಬಸಿಯುವ ಯಾವುದೇ ಮಣ್ಣು; ದೊಡ್ಡ ಕುಂಡ ಅಥವಾ ತೋಟದ ಮೂಲೆ."
     ],
     [
-     "Harvest",
-     "Cut the thick lower stalks at the base and leave the rest to grow."
+     "ಕೊಯ್ಲು",
+     "ದಪ್ಪ ಕೆಳಭಾಗದ ಕಡ್ಡಿಗಳನ್ನು ಬುಡದಿಂದ ಕತ್ತರಿಸಿ; ಉಳಿದದ್ದು ಬೆಳೆಯಲಿ."
     ],
     [
-     "Grow more",
-     "Divide a clump or root a stalk bought from the market."
+     "ಹೊಸ ಗಿಡ",
+     "ಗೆಡ್ಡೆಯನ್ನು ವಿಭಜಿಸಿ ಅಥವಾ ಮಾರುಕಟ್ಟೆಯಿಂದ ತಂದ ಕಡ್ಡಿಗೆ ಬೇರು ಬರಿಸಿ."
     ]
-   ]
+   ],
+   "bonsai": false
   },
   {
+   "key": "Aloe vera",
    "category": "herb",
-   "name": "Aloe vera",
-   "kn": "ಲೋಳೆಸರ",
+   "name": "ಲೋಳೆಸರ",
    "latin": "Aloe vera",
    "tags": [
-    "Succulent herb",
-    "Low water",
-    "Easy"
+    "ರಸಭರಿತ ಸಸ್ಯ",
+    "ಕಡಿಮೆ ನೀರು",
+    "ಸುಲಭ"
    ],
-   "about": "A fleshy plant whose clear gel is used on the skin in many homes. It stores water in its leaves, so it needs far less care than most herbs, but it rots in constant wet.",
+   "about": "ದಪ್ಪ ಎಲೆಗಳ ಸಸ್ಯ; ಅದರ ಪಾರದರ್ಶಕ ಜೆಲ್ ಅನ್ನು ಅನೇಕ ಮನೆಗಳಲ್ಲಿ ಚರ್ಮಕ್ಕೆ ಬಳಸುತ್ತಾರೆ. ಎಲೆಗಳಲ್ಲಿ ನೀರು ಸಂಗ್ರಹಿಸುವುದರಿಂದ ಹೆಚ್ಚಿನ ಗಿಡಮೂಲಿಕೆಗಳಿಗಿಂತ ಕಡಿಮೆ ಆರೈಕೆ ಸಾಕು; ಆದರೆ ನಿರಂತರ ತೇವದಲ್ಲಿ ಕೊಳೆಯುತ್ತದೆ.",
    "spec": [
     [
-     "Light",
-     "Bright light or full sun."
+     "ಬೆಳಕು",
+     "ಪ್ರಕಾಶಮಾನ ಬೆಳಕು ಅಥವಾ ಪೂರ್ಣ ಬಿಸಿಲು."
     ],
     [
-     "Water",
-     "Only when the soil is dry right through. In heavy rain move the pot under cover."
+     "ನೀರು",
+     "ಮಣ್ಣು ಪೂರ್ತಿ ಒಣಗಿದಾಗ ಮಾತ್ರ. ಭಾರಿ ಮಳೆಯಲ್ಲಿ ಕುಂಡವನ್ನು ಛಾವಣಿಯ ಕೆಳಗೆ ಇಡಿ."
     ],
     [
-     "Soil",
-     "Gritty, fast-draining mix with coarse sand."
+     "ಮಣ್ಣು",
+     "ಒರಟು ಮರಳು ಸೇರಿಸಿದ, ಬೇಗ ಬಸಿಯುವ ಮಿಶ್ರಣ."
     ],
     [
-     "Use",
-     "Test a little gel on the inside of your arm first; the yellow sap near the skin can irritate."
+     "ಬಳಕೆ",
+     "ಮೊದಲು ಸ್ವಲ್ಪ ಜೆಲ್ ಅನ್ನು ತೋಳಿನ ಒಳಭಾಗದಲ್ಲಿ ಹಚ್ಚಿ ನೋಡಿ; ಚರ್ಮದ ಬಳಿಯ ಹಳದಿ ರಸ ಕಿರಿಕಿರಿ ಉಂಟುಮಾಡಬಹುದು."
     ],
     [
-     "Grow more",
-     "Separate the small pups at the base and pot them up."
+     "ಹೊಸ ಗಿಡ",
+     "ಬುಡದ ಸಣ್ಣ ಮರಿಗಳನ್ನು ಬೇರ್ಪಡಿಸಿ ಬೇರೆ ಕುಂಡದಲ್ಲಿ ನೆಡಿ."
     ]
-   ]
+   ],
+   "bonsai": false
   },
   {
+   "key": "Brahmi",
    "category": "herb",
-   "name": "Brahmi",
-   "kn": "ಬ್ರಾಹ್ಮಿ",
+   "name": "ಬ್ರಾಹ್ಮಿ",
    "latin": "Bacopa monnieri",
    "tags": [
-    "Herb",
-    "Loves wet soil",
-    "Creeper"
+    "ಗಿಡಮೂಲಿಕೆ",
+    "ತೇವ ಮಣ್ಣು ಇಷ್ಟ",
+    "ಹರಡುವ ಬಳ್ಳಿ"
    ],
-   "about": "A small creeping herb of damp ground that is used in traditional Ayurvedic preparations. It is one of the few herbs that is happiest when its roots stay wet, so it suits a tray or a pot kept standing in a shallow dish of water.",
+   "about": "ತೇವದ ನೆಲದ ಪುಟ್ಟ ಹರಡುವ ಗಿಡಮೂಲಿಕೆ; ಸಾಂಪ್ರದಾಯಿಕ ಆಯುರ್ವೇದ ತಯಾರಿಕೆಗಳಲ್ಲಿ ಬಳಕೆಯಾಗುತ್ತದೆ. ಬೇರು ಸದಾ ತೇವವಿದ್ದಾಗ ಸಂತೋಷವಾಗಿರುವ ಕೆಲವೇ ಗಿಡಮೂಲಿಕೆಗಳಲ್ಲಿ ಇದೂ ಒಂದು; ಆದ್ದರಿಂದ ಆಳವಿಲ್ಲದ ತಟ್ಟೆ ಅಥವಾ ನೀರಿನ ತಟ್ಟೆಯಲ್ಲಿ ನಿಲ್ಲಿಸಿದ ಕುಂಡ ಇದಕ್ಕೆ ಸೂಕ್ತ.",
    "spec": [
     [
-     "Light",
-     "Sun or partial shade."
+     "ಬೆಳಕು",
+     "ಬಿಸಿಲು ಅಥವಾ ಭಾಗಶಃ ನೆರಳು."
     ],
     [
-     "Water",
-     "Keep constantly moist; a saucer of water under the pot is fine for this plant."
+     "ನೀರು",
+     "ಸದಾ ತೇವವಿರಲಿ; ಕುಂಡದ ಕೆಳಗೆ ನೀರಿನ ತಟ್ಟೆ ಇಡುವುದು ಈ ಗಿಡಕ್ಕೆ ಸರಿ."
     ],
     [
-     "Soil",
-     "Loamy, rich in compost."
+     "ಮಣ್ಣು",
+     "ಕಾಂಪೋಸ್ಟ್ ಸಮೃದ್ಧ ಜೇಡಿ-ಮರಳು ಮಣ್ಣು."
     ],
     [
-     "Spread",
-     "Stems root where they touch the soil. Trim to keep it tidy."
+     "ಹರಡುವಿಕೆ",
+     "ಕಾಂಡಗಳು ಮಣ್ಣಿಗೆ ತಾಗಿದಲ್ಲೆಲ್ಲ ಬೇರು ಬಿಡುತ್ತವೆ. ಅಚ್ಚುಕಟ್ಟಾಗಿಡಲು ಕತ್ತರಿಸಿ."
     ],
     [
-     "Note",
-     "Check with a qualified practitioner before using any herb as medicine."
+     "ಗಮನಿಸಿ",
+     "ಯಾವುದೇ ಗಿಡಮೂಲಿಕೆಯನ್ನು ಔಷಧವಾಗಿ ಬಳಸುವ ಮೊದಲು ಅರ್ಹ ವೈದ್ಯರನ್ನು ಕೇಳಿ."
     ]
-   ]
+   ],
+   "bonsai": false
   },
   {
+   "key": "Doddapatre",
    "category": "herb",
-   "name": "Doddapatre",
-   "kn": "ದೊಡ್ಡಪತ್ರೆ",
+   "name": "ದೊಡ್ಡಪತ್ರೆ",
    "latin": "Coleus amboinicus",
    "tags": [
-    "Herb",
-    "Aromatic",
-    "Cuttings"
+    "ಗಿಡಮೂಲಿಕೆ",
+    "ಪರಿಮಳದ ಎಲೆ",
+    "ಕಡ್ಡಿಯಿಂದ ಹೊಸ ಗಿಡ"
    ],
-   "about": "Indian borage, a thick, soft, strongly scented leaf used in tambuli, bajji and home remedies across Karnataka. It is one of the easiest herbs to grow, rooting from a leaf or stem cutting.",
+   "about": "ದಪ್ಪ, ಮೃದು, ಘಮಘಮಿಸುವ ಎಲೆ; ಕರ್ನಾಟಕದಾದ್ಯಂತ ತಂಬುಳಿ, ಬಜ್ಜಿ ಮತ್ತು ಮನೆಮದ್ದುಗಳಲ್ಲಿ ಬಳಸುತ್ತಾರೆ. ಎಲೆ ಅಥವಾ ಕಾಂಡದ ತುಂಡಿನಿಂದಲೇ ಬೇರು ಬರುವುದರಿಂದ ಇದು ಅತಿ ಸುಲಭದ ಗಿಡಮೂಲಿಕೆಗಳಲ್ಲಿ ಒಂದು.",
    "spec": [
     [
-     "Light",
-     "Bright light; a little shade in harsh afternoon sun."
+     "ಬೆಳಕು",
+     "ಪ್ರಕಾಶಮಾನ ಬೆಳಕು; ಮಧ್ಯಾಹ್ನದ ಉರಿಬಿಸಿಲಿನಲ್ಲಿ ಸ್ವಲ್ಪ ನೆರಳು."
     ],
     [
-     "Water",
-     "When the top of the soil is dry. The fleshy leaves store water."
+     "ನೀರು",
+     "ಮೇಲಿನ ಮಣ್ಣು ಒಣಗಿದಾಗ. ತಿರುಳಿನ ಎಲೆಗಳು ನೀರು ಸಂಗ್ರಹಿಸಿಕೊಳ್ಳುತ್ತವೆ."
     ],
     [
-     "Soil",
-     "Well-drained mix in a pot or bed."
+     "ಮಣ್ಣು",
+     "ಕುಂಡ ಅಥವಾ ಪಾತಿಯಲ್ಲಿ ಚೆನ್ನಾಗಿ ಬಸಿಯುವ ಮಿಶ್ರಣ."
     ],
     [
-     "Grow more",
-     "Push a cutting into moist soil; it roots in a couple of weeks."
+     "ಹೊಸ ಗಿಡ",
+     "ಕಡ್ಡಿಯನ್ನು ತೇವ ಮಣ್ಣಿನಲ್ಲಿ ಚುಚ್ಚಿದರೆ ಎರಡು ವಾರಗಳಲ್ಲಿ ಬೇರು ಬರುತ್ತದೆ."
     ],
     [
-     "Prune",
-     "Pinch the tips for a bushier plant."
+     "ಕತ್ತರಿಸುವಿಕೆ",
+     "ತುದಿ ಚಿವುಟಿದರೆ ಗಿಡ ದಟ್ಟವಾಗುತ್ತದೆ."
     ]
-   ]
+   ],
+   "bonsai": false
   },
   {
+   "key": "Marigold",
    "category": "flower",
-   "name": "Marigold",
-   "kn": "ಚೆಂಡು ಹೂ",
+   "name": "ಚೆಂಡು ಹೂ",
    "latin": "Tagetes erecta",
    "tags": [
-    "Flower",
-    "Festival garlands",
-    "Sow from seed"
+    "ಹೂವು",
+    "ಹಬ್ಬದ ಹಾರ",
+    "ಬೀಜದಿಂದ ಬಿತ್ತಿ"
    ],
-   "about": "The orange and yellow pom-pom flower of Ganesh Chaturthi, Dasara and Deepavali garlands. It is often planted among vegetables because its flowers draw pollinators.",
+   "about": "ಗಣೇಶ ಚತುರ್ಥಿ, ದಸರಾ ಮತ್ತು ದೀಪಾವಳಿಯ ಹಾರಗಳ ಕಿತ್ತಳೆ-ಹಳದಿ ಹೂವು. ಇದರ ಹೂವುಗಳು ಪರಾಗಸ್ಪರ್ಶಿ ಕೀಟಗಳನ್ನು ಸೆಳೆಯುವುದರಿಂದ ತರಕಾರಿ ಗಿಡಗಳ ನಡುವೆ ಇದನ್ನು ಹೆಚ್ಚಾಗಿ ನೆಡುತ್ತಾರೆ.",
    "spec": [
     [
-     "Sow",
-     "Seed at the end of the monsoon for flowers in about two months."
+     "ಬಿತ್ತನೆ",
+     "ಮಳೆಗಾಲದ ಕೊನೆಯಲ್ಲಿ ಬೀಜ ಬಿತ್ತಿದರೆ ಸುಮಾರು ಎರಡು ತಿಂಗಳಲ್ಲಿ ಹೂವು."
     ],
     [
-     "Light",
-     "Full sun, at least five to six hours."
+     "ಬೆಳಕು",
+     "ಪೂರ್ಣ ಬಿಸಿಲು, ಕನಿಷ್ಠ ಐದರಿಂದ ಆರು ಗಂಟೆ."
     ],
     [
-     "Water",
-     "At the base, not over the flowers, to avoid mould in humid weather."
+     "ನೀರು",
+     "ಹೂವಿನ ಮೇಲೆ ಅಲ್ಲ, ಬುಡಕ್ಕೆ ಹಾಕಿ; ತೇವ ಹವೆಯಲ್ಲಿ ಶಿಲೀಂಧ್ರ ತಪ್ಪುತ್ತದೆ."
     ],
     [
-     "Soil",
-     "Well-drained garden soil with compost."
+     "ಮಣ್ಣು",
+     "ಕಾಂಪೋಸ್ಟ್ ಸೇರಿಸಿದ, ನೀರು ಬಸಿಯುವ ತೋಟದ ಮಣ್ಣು."
     ],
     [
-     "Prune",
-     "Pinch young plants once for more branches and pick spent flowers to keep it blooming."
+     "ಕತ್ತರಿಸುವಿಕೆ",
+     "ಎಳೆಯ ಗಿಡವನ್ನು ಒಮ್ಮೆ ಚಿವುಟಿದರೆ ಹೆಚ್ಚು ಕೊಂಬೆ ಬರುತ್ತದೆ; ಬಾಡಿದ ಹೂವು ತೆಗೆದರೆ ಹೂ ಬಿಡುವುದು ಮುಂದುವರಿಯುತ್ತದೆ."
     ]
-   ]
+   ],
+   "bonsai": false
   },
   {
+   "key": "Rose",
    "category": "flower",
-   "name": "Rose",
-   "kn": "ಗುಲಾಬಿ",
+   "name": "ಗುಲಾಬಿ",
    "latin": "Rosa species",
    "tags": [
-    "Flower",
-    "Needs attention",
-    "Fragrant"
+    "ಹೂವು",
+    "ಗಮನ ಬೇಕು",
+    "ಪರಿಮಳ"
    ],
-   "about": "Roses can do well in pots on the coast if they get sun, air and good drainage. The humid monsoon invites black spot, so airflow and clean leaves matter more than anything else.",
+   "about": "ಬಿಸಿಲು, ಗಾಳಿ ಮತ್ತು ಒಳ್ಳೆಯ ನೀರಿನ ಬಸಿವು ಇದ್ದರೆ ಗುಲಾಬಿ ಕರಾವಳಿಯಲ್ಲಿ ಕುಂಡದಲ್ಲಿ ಚೆನ್ನಾಗಿ ಬೆಳೆಯಬಲ್ಲದು. ತೇವದ ಮಳೆಗಾಲದಲ್ಲಿ ಕಪ್ಪು ಚುಕ್ಕೆ ರೋಗ ಬರುವುದರಿಂದ ಗಾಳಿಯಾಡುವಿಕೆ ಮತ್ತು ಸ್ವಚ್ಛ ಎಲೆಗಳು ಎಲ್ಲಕ್ಕಿಂತ ಮುಖ್ಯ.",
    "spec": [
     [
-     "Light",
-     "Five to six hours of direct sun."
+     "ಬೆಳಕು",
+     "ಐದರಿಂದ ಆರು ಗಂಟೆ ನೇರ ಬಿಸಿಲು."
     ],
     [
-     "Water",
-     "Deeply at the base, then let the top soil dry. Avoid wetting leaves."
+     "ನೀರು",
+     "ಬುಡಕ್ಕೆ ಆಳವಾಗಿ ಹಾಕಿ, ನಂತರ ಮೇಲಿನ ಮಣ್ಣು ಒಣಗಲು ಬಿಡಿ. ಎಲೆ ಒದ್ದೆ ಮಾಡಬೇಡಿ."
     ],
     [
-     "Soil",
-     "Rich, loose, well-drained mix with plenty of compost, in a pot at least 30 cm deep."
+     "ಮಣ್ಣು",
+     "ಸಾಕಷ್ಟು ಕಾಂಪೋಸ್ಟ್ ಇರುವ ಸಡಿಲ, ಬಸಿಯುವ ಮಿಶ್ರಣ; ಕನಿಷ್ಠ 30 ಸೆಂ.ಮೀ. ಆಳದ ಕುಂಡ."
     ],
     [
-     "Prune",
-     "Cut back hard after the rains, around October, and remove dead or crossing stems."
+     "ಕತ್ತರಿಸುವಿಕೆ",
+     "ಮಳೆಗಾಲದ ನಂತರ, ಅಕ್ಟೋಬರ್ ಸುಮಾರಿಗೆ, ಗಟ್ಟಿಯಾಗಿ ಕತ್ತರಿಸಿ; ಒಣ ಅಥವಾ ಅಡ್ಡಬಂದ ಕಡ್ಡಿ ತೆಗೆಯಿರಿ."
     ],
     [
-     "Watch out",
-     "Spots on leaves: remove them and spray a neem solution; give the plant more air."
+     "ಎಚ್ಚರ",
+     "ಎಲೆಗಳ ಮೇಲೆ ಚುಕ್ಕೆ: ಅವನ್ನು ತೆಗೆದು ಬೇವಿನ ದ್ರಾವಣ ಸಿಂಪಡಿಸಿ; ಗಿಡಕ್ಕೆ ಹೆಚ್ಚು ಗಾಳಿ ಸಿಗುವಂತೆ ಮಾಡಿ."
     ]
-   ]
+   ],
+   "bonsai": false
   },
   {
+   "key": "Ixora",
    "category": "flower",
-   "name": "Ixora",
-   "kn": "",
+   "name": "ಇಕ್ಸೋರಾ",
    "latin": "Ixora coccinea",
    "tags": [
-    "Flower",
-    "Butterfly plant",
-    "Evergreen"
+    "ಹೂವು",
+    "ಚಿಟ್ಟೆ ಗಿಡ",
+    "ಸದಾ ಹಸಿರು"
    ],
-   "about": "A compact evergreen shrub with round clusters of red, orange or yellow flowers all year in warm places. The acidic laterite soil of the coast suits it naturally.",
+   "about": "ಕೆಂಪು, ಕಿತ್ತಳೆ ಅಥವಾ ಹಳದಿ ಬಣ್ಣದ ದುಂಡನೆಯ ಹೂಗೊಂಚಲುಗಳ ಸಣ್ಣ ಸದಾಹಸಿರು ಪೊದೆ. ಬೆಚ್ಚನೆಯ ಪ್ರದೇಶಗಳಲ್ಲಿ ವರ್ಷವಿಡೀ ಹೂ ಬಿಡುತ್ತದೆ. ಕರಾವಳಿಯ ಹುಳಿ ಗುಣದ ಜಂಬಿಟ್ಟಿಗೆ ಮಣ್ಣು ಇದಕ್ಕೆ ಸಹಜವಾಗಿ ಒಗ್ಗುತ್ತದೆ.",
    "spec": [
     [
-     "Light",
-     "Full sun to light shade; the more sun, the more flowers."
+     "ಬೆಳಕು",
+     "ಪೂರ್ಣ ಬಿಸಿಲಿನಿಂದ ಲಘು ನೆರಳಿನವರೆಗೆ; ಬಿಸಿಲು ಹೆಚ್ಚಿದಷ್ಟೂ ಹೂವು ಹೆಚ್ಚು."
     ],
     [
-     "Water",
-     "Regular. It does not like to dry out completely."
+     "ನೀರು",
+     "ನಿಯಮಿತವಾಗಿ. ಪೂರ್ತಿ ಒಣಗಿದರೆ ಇದಕ್ಕೆ ಇಷ್ಟವಿಲ್ಲ."
     ],
     [
-     "Soil",
-     "Slightly acidic, well-drained soil with compost; laterite suits it."
+     "ಮಣ್ಣು",
+     "ಸ್ವಲ್ಪ ಹುಳಿ ಗುಣದ, ಬಸಿಯುವ ಮಣ್ಣು ಮತ್ತು ಕಾಂಪೋಸ್ಟ್; ಜಂಬಿಟ್ಟಿಗೆ ಮಣ್ಣು ಸೂಕ್ತ."
     ],
     [
-     "Prune",
-     "Shape it lightly after a flush of flowers."
+     "ಕತ್ತರಿಸುವಿಕೆ",
+     "ಹೂ ಬಿಟ್ಟ ಮೇಲೆ ಲಘುವಾಗಿ ಆಕಾರ ಕೊಡಿ."
     ],
     [
-     "Watch out",
-     "Yellowing leaves between the veins can mean the soil is too alkaline."
+     "ಎಚ್ಚರ",
+     "ನರಗಳ ನಡುವೆ ಎಲೆ ಹಳದಿಯಾದರೆ ಮಣ್ಣು ಹೆಚ್ಚು ಕ್ಷಾರೀಯವಿರಬಹುದು."
     ]
-   ]
+   ],
+   "bonsai": false
   },
   {
+   "key": "Periwinkle",
    "category": "flower",
-   "name": "Periwinkle",
-   "kn": "ಸದಾಪುಷ್ಪ",
+   "name": "ಸದಾಪುಷ್ಪ",
    "latin": "Catharanthus roseus",
    "tags": [
-    "Flower",
-    "Hardy",
-    "Low care"
+    "ಹೂವು",
+    "ಗಟ್ಟಿ ಗಿಡ",
+    "ಕಡಿಮೆ ಆರೈಕೆ"
    ],
-   "about": "Sadapushpa, the 'ever-blooming flower', thrives in heat and in poor soil and flowers nearly every day. Handle it with care: all parts of the plant are poisonous if eaten.",
+   "about": "ಸದಾಪುಷ್ಪ, ಅಂದರೆ ‘ಸದಾ ಅರಳುವ ಹೂವು’, ಬಿಸಿಲು ಮತ್ತು ಕಳಪೆ ಮಣ್ಣಿನಲ್ಲೂ ಬೆಳೆದು ಬಹುತೇಕ ದಿನವೂ ಹೂ ಬಿಡುತ್ತದೆ. ಎಚ್ಚರ: ಗಿಡದ ಎಲ್ಲ ಭಾಗಗಳು ತಿಂದರೆ ವಿಷಕಾರಿ.",
    "spec": [
     [
-     "Light",
-     "Full sun, five or more hours."
+     "ಬೆಳಕು",
+     "ಪೂರ್ಣ ಬಿಸಿಲು, ಐದು ಗಂಟೆಗೂ ಹೆಚ್ಚು."
     ],
     [
-     "Water",
-     "Sparingly; it dislikes wet roots. In heavy rain keep it in a pot with a gap under it."
+     "ನೀರು",
+     "ಮಿತವಾಗಿ; ಒದ್ದೆ ಬೇರು ಇಷ್ಟವಿಲ್ಲ. ಭಾರಿ ಮಳೆಯಲ್ಲಿ ಕುಂಡದ ಕೆಳಗೆ ಅಂತರವಿರಲಿ."
     ],
     [
-     "Soil",
-     "Any soil with good drainage."
+     "ಮಣ್ಣು",
+     "ಚೆನ್ನಾಗಿ ಬಸಿಯುವ ಯಾವುದೇ ಮಣ್ಣು."
     ],
     [
-     "Care",
-     "Pinch the tips while young. Keep children and pets from chewing it."
+     "ಆರೈಕೆ",
+     "ಎಳೆಯದಿದ್ದಾಗ ತುದಿ ಚಿವುಟಿ. ಮಕ್ಕಳು ಮತ್ತು ಸಾಕುಪ್ರಾಣಿಗಳು ಅಗಿಯದಂತೆ ನೋಡಿಕೊಳ್ಳಿ."
     ],
     [
-     "Seeds",
-     "It self-seeds; pot up the seedlings that appear."
+     "ಬೀಜ",
+     "ತಾನೇ ಬೀಜ ಉದುರಿಸಿ ಹುಟ್ಟುತ್ತದೆ; ಮೊಳಕೆಗಳನ್ನು ಬೇರೆ ಕುಂಡಕ್ಕೆ ವರ್ಗಾಯಿಸಿ."
     ]
-   ]
+   ],
+   "bonsai": false
   },
   {
-   "name": "Aboli",
-   "kn": "ಕನಕಾಂಬರ",
+   "key": "Aboli",
+   "category": "flower",
+   "name": "ಕನಕಾಂಬರ",
    "latin": "Crossandra infundibuliformis",
    "tags": [
-    "Udupi favourite",
-    "Flowers all year"
+    "ಉಡುಪಿಯ ಇಷ್ಟದ ಹೂ",
+    "ವರ್ಷವಿಡೀ ಹೂವು"
    ],
-   "about": "Firecracker flower in English, Kanakambara in Kannada and Aboli in Konkani and Marathi. Its orange and coral blooms are strung into garlands across the coast.",
+   "about": "ಇಂಗ್ಲಿಷ್‌ನಲ್ಲಿ ಫೈರ್‌ಕ್ರ್ಯಾಕರ್ ಹೂವು, ಕನ್ನಡದಲ್ಲಿ ಕನಕಾಂಬರ, ಕೊಂಕಣಿ-ಮರಾಠಿಯಲ್ಲಿ ಅಬೋಲಿ. ಇದರ ಕಿತ್ತಳೆ-ಹವಳದ ಬಣ್ಣದ ಹೂವುಗಳನ್ನು ಕರಾವಳಿಯಲ್ಲಿ ಹಾರಗಳಾಗಿ ಕಟ್ಟುತ್ತಾರೆ.",
    "spec": [
     [
-     "Light",
-     "Bright morning sun, with cover from harsh afternoon sun."
+     "ಬೆಳಕು",
+     "ಬೆಳಗಿನ ಪ್ರಕಾಶಮಾನ ಬಿಸಿಲು; ಮಧ್ಯಾಹ್ನದ ಉರಿಬಿಸಿಲಿನಿಂದ ರಕ್ಷಣೆ."
     ],
     [
-     "Water",
-     "Thoroughly, whenever the top few inches of soil are dry. Under-watering harms it."
+     "ನೀರು",
+     "ಮೇಲಿನ ಕೆಲವು ಇಂಚು ಮಣ್ಣು ಒಣಗಿದಾಗಲೆಲ್ಲ ಚೆನ್ನಾಗಿ. ನೀರು ಕಡಿಮೆಯಾದರೆ ಗಿಡಕ್ಕೆ ಹಾನಿ."
     ],
     [
-     "Soil",
-     "Fertile, well-drained red loam, pH 6 to 7.5."
+     "ಮಣ್ಣು",
+     "ಫಲವತ್ತಾದ, ಬಸಿಯುವ ಕೆಂಪು ಗೋಡು ಮಣ್ಣು, pH 6ರಿಂದ 7.5."
     ],
     [
-     "Climate",
-     "Warm and humid, 20 to 30 degrees C. It suits Mangaluru."
+     "ವಾತಾವರಣ",
+     "ಬೆಚ್ಚಗಿನ, ತೇವದ ಹವೆ, 20ರಿಂದ 30 ಡಿಗ್ರಿ ಸೆ. ಮಂಗಳೂರಿಗೆ ಸರಿಹೊಂದುತ್ತದೆ."
     ],
     [
-     "Feed",
-     "Liquid fertiliser every two weeks in the growing season."
+     "ಗೊಬ್ಬರ",
+     "ಬೆಳವಣಿಗೆಯ ಕಾಲದಲ್ಲಿ ಎರಡು ವಾರಕ್ಕೊಮ್ಮೆ ದ್ರವ ಗೊಬ್ಬರ."
     ]
    ],
-   "category": "flower"
+   "bonsai": false
   },
   {
-   "name": "Udupi Mallige",
-   "kn": "ಮಲ್ಲಿಗೆ",
+   "key": "Udupi Mallige",
+   "category": "flower",
+   "name": "ಉಡುಪಿ ಮಲ್ಲಿಗೆ",
    "latin": "Jasminum sambac",
    "tags": [
-    "Local pride",
-    "GI tagged",
-    "Fragrant"
+    "ಸ್ಥಳೀಯ ಹೆಮ್ಮೆ",
+    "ಜಿಐ ಟ್ಯಾಗ್",
+    "ಪರಿಮಳ"
    ],
-   "about": "Also called Shankarpura mallige, after the villages near Udupi where it is grown in home gardens. The laterite soil and humid air of this coast give it a strong scent, white colour and large flowers, which is why it carries a Geographical Indication tag. Buds open within five to six hours, so they are picked and strung before they bloom.",
+   "about": "ಶಂಕರಪುರ ಮಲ್ಲಿಗೆ ಎಂದೂ ಕರೆಯುತ್ತಾರೆ; ಉಡುಪಿ ಬಳಿಯ ಅದೇ ಹೆಸರಿನ ಊರುಗಳ ಮನೆತೋಟಗಳಲ್ಲಿ ಬೆಳೆಯುತ್ತಾರೆ. ಈ ಕರಾವಳಿಯ ಜಂಬಿಟ್ಟಿಗೆ ಮಣ್ಣು ಮತ್ತು ತೇವದ ಗಾಳಿ ಇದಕ್ಕೆ ಗಾಢ ಪರಿಮಳ, ಬಿಳಿ ಬಣ್ಣ ಮತ್ತು ದೊಡ್ಡ ಹೂವು ನೀಡುತ್ತವೆ; ಅದಕ್ಕಾಗಿಯೇ ಇದಕ್ಕೆ ಭೌಗೋಳಿಕ ಸೂಚಕ (ಜಿಐ) ಮಾನ್ಯತೆ ಇದೆ. ಮೊಗ್ಗುಗಳು ಐದಾರು ಗಂಟೆಯಲ್ಲಿ ಅರಳುವುದರಿಂದ ಅರಳುವ ಮೊದಲೇ ಕೊಯ್ದು ಕಟ್ಟುತ್ತಾರೆ.",
    "spec": [
     [
-     "Light",
-     "Full sun for steady flowering."
+     "ಬೆಳಕು",
+     "ನಿರಂತರ ಹೂವಿಗಾಗಿ ಪೂರ್ಣ ಬಿಸಿಲು."
     ],
     [
-     "Water",
-     "Regular, but never standing in water. Let excess rain drain away."
+     "ನೀರು",
+     "ನಿಯಮಿತ, ಆದರೆ ನೀರಲ್ಲಿ ನಿಲ್ಲಬಾರದು. ಹೆಚ್ಚುವರಿ ಮಳೆನೀರು ಬಸಿದುಹೋಗಲಿ."
     ],
     [
-     "Soil",
-     "Rich, well-drained laterite soil suits it best."
+     "ಮಣ್ಣು",
+     "ಸಮೃದ್ಧ, ಬಸಿಯುವ ಜಂಬಿಟ್ಟಿಗೆ ಮಣ್ಣು ಅತ್ಯುತ್ತಮ."
     ],
     [
-     "Feed",
-     "Organic manure through the growing months."
+     "ಗೊಬ್ಬರ",
+     "ಬೆಳೆಯುವ ತಿಂಗಳುಗಳಲ್ಲಿ ಸಾವಯವ ಗೊಬ್ಬರ."
     ],
     [
-     "Harvest",
-     "Wrap the flowers in banana leaf and sprinkle with water. They keep for up to 10 days, though the scent fades."
+     "ಕೊಯ್ಲು",
+     "ಹೂಗಳನ್ನು ಬಾಳೆ ಎಲೆಯಲ್ಲಿ ಸುತ್ತಿ ನೀರು ಚಿಮುಕಿಸಿ. ಹತ್ತು ದಿನದವರೆಗೆ ಉಳಿಯುತ್ತವೆ, ಆದರೆ ಪರಿಮಳ ಕಡಿಮೆಯಾಗುತ್ತದೆ."
     ],
     [
-     "Watch out",
-     "Waterlogged roots in heavy rain. Raise pots on bricks."
+     "ಎಚ್ಚರ",
+     "ಭಾರಿ ಮಳೆಯಲ್ಲಿ ಬೇರು ನೀರಲ್ಲಿ ಮುಳುಗುವುದು. ಕುಂಡಗಳನ್ನು ಇಟ್ಟಿಗೆಗಳ ಮೇಲೆ ಎತ್ತರಿಸಿ."
     ]
    ],
-   "category": "flower"
+   "bonsai": false
   },
   {
-   "name": "Hibiscus",
-   "kn": "ದಾಸವಾಳ",
+   "key": "Hibiscus",
+   "category": "flower",
+   "name": "ದಾಸವಾಳ",
    "latin": "Hibiscus rosa-sinensis",
    "tags": [
-    "Blooms most of the year",
-    "Easy"
+    "ಬಹುತೇಕ ವರ್ಷವಿಡೀ ಹೂವು",
+    "ಸುಲಭ"
    ],
-   "about": "The coast's everyday flower, seen on temple offerings and garden fences. It blooms through most of the year in warm, humid weather and grows well in pots or beds.",
+   "about": "ದೇವರ ಪೂಜೆ ಮತ್ತು ತೋಟದ ಬೇಲಿಗಳಲ್ಲಿ ಕಾಣುವ ಕರಾವಳಿಯ ದಿನನಿತ್ಯದ ಹೂವು. ಬೆಚ್ಚನೆಯ, ತೇವದ ಹವೆಯಲ್ಲಿ ಬಹುತೇಕ ವರ್ಷವಿಡೀ ಅರಳುತ್ತದೆ; ಕುಂಡ ಅಥವಾ ಪಾತಿ ಎರಡರಲ್ಲೂ ಚೆನ್ನಾಗಿ ಬೆಳೆಯುತ್ತದೆ.",
    "spec": [
     [
-     "Light",
-     "Full sun, five to six hours. It drops buds in deep shade."
+     "ಬೆಳಕು",
+     "ಪೂರ್ಣ ಬಿಸಿಲು, ಐದಾರು ಗಂಟೆ. ಗಾಢ ನೆರಳಿನಲ್ಲಿ ಮೊಗ್ಗು ಉದುರುತ್ತದೆ."
     ],
     [
-     "Water",
-     "When the top inch is dry. In heavy rain, let it dry between waterings."
+     "ನೀರು",
+     "ಮೇಲಿನ ಇಂಚು ಮಣ್ಣು ಒಣಗಿದಾಗ. ಭಾರಿ ಮಳೆಯಲ್ಲಿ ನೀರು ಹಾಕುವ ನಡುವೆ ಒಣಗಲು ಬಿಡಿ."
     ],
     [
-     "Soil",
-     "Well-drained. Mix coarse sand into lateritic garden soil."
+     "ಮಣ್ಣು",
+     "ಬಸಿಯುವ ಮಣ್ಣು. ಜಂಬಿಟ್ಟಿಗೆ ತೋಟದ ಮಣ್ಣಿಗೆ ಒರಟು ಮರಳು ಸೇರಿಸಿ."
     ],
     [
-     "Feed",
-     "A light feed every two to three weeks while it flowers."
+     "ಗೊಬ್ಬರ",
+     "ಹೂ ಬಿಡುವ ಕಾಲದಲ್ಲಿ ಎರಡು-ಮೂರು ವಾರಕ್ಕೊಮ್ಮೆ ಲಘು ಗೊಬ್ಬರ."
     ],
     [
-     "Prune",
-     "Trim leggy stems after a flush of flowers."
+     "ಕತ್ತರಿಸುವಿಕೆ",
+     "ಹೂವಿನ ಒಂದು ಸುತ್ತಿನ ನಂತರ ಉದ್ದ ಬೆಳೆದ ಕೊಂಬೆಗಳನ್ನು ಕತ್ತರಿಸಿ."
     ]
    ],
-   "category": "flower"
+   "bonsai": false
   },
   {
-   "name": "Canna lily",
-   "kn": "",
+   "key": "Canna lily",
+   "category": "flower",
+   "name": "ಕ್ಯಾನಾ ಲಿಲಿ",
    "latin": "Canna indica",
    "tags": [
-    "Monsoon proof",
-    "Flowering"
+    "ಮಳೆಗೆ ಜಗ್ಗದ",
+    "ಹೂವು"
    ],
-   "about": "A sturdy flowering plant that handles the monsoon better than almost any other. A good choice for a bed that stays wet.",
+   "about": "ಮಳೆಗಾಲವನ್ನು ಬಹುತೇಕ ಎಲ್ಲ ಗಿಡಗಳಿಗಿಂತ ಚೆನ್ನಾಗಿ ತಡೆದುಕೊಳ್ಳುವ ಗಟ್ಟಿ ಹೂಗಿಡ. ತೇವವಾಗಿಯೇ ಇರುವ ಪಾತಿಗೆ ಉತ್ತಮ ಆಯ್ಕೆ.",
    "spec": [
     [
-     "Light",
-     "Full sun for the most flowers."
+     "ಬೆಳಕು",
+     "ಹೆಚ್ಚು ಹೂವಿಗಾಗಿ ಪೂರ್ಣ ಬಿಸಿಲು."
     ],
     [
-     "Water",
-     "Generous in dry spells. It copes with heavy rain."
+     "ನೀರು",
+     "ಒಣ ಅವಧಿಯಲ್ಲಿ ಹೇರಳ. ಭಾರಿ ಮಳೆಯನ್ನು ತಡೆದುಕೊಳ್ಳುತ್ತದೆ."
     ],
     [
-     "Soil",
-     "Rich soil that drains, with compost worked in."
+     "ಮಣ್ಣು",
+     "ಕಾಂಪೋಸ್ಟ್ ಬೆರೆಸಿದ, ಬಸಿಯುವ ಫಲವತ್ತಾದ ಮಣ್ಣು."
     ],
     [
-     "Prune",
-     "Cut spent flower stalks and old leaves at the base."
+     "ಕತ್ತರಿಸುವಿಕೆ",
+     "ಬಾಡಿದ ಹೂದಂಟು ಮತ್ತು ಹಳೆಯ ಎಲೆಗಳನ್ನು ಬುಡದಲ್ಲಿ ಕತ್ತರಿಸಿ."
     ]
    ],
-   "category": "flower"
+   "bonsai": false
   },
   {
+   "key": "Money plant",
    "category": "indoor",
-   "name": "Money plant",
-   "kn": "ಮನಿ ಪ್ಲಾಂಟ್",
+   "name": "ಮನಿ ಪ್ಲಾಂಟ್",
    "latin": "Epipremnum aureum",
    "tags": [
-    "Indoor",
-    "Climber",
-    "Easy"
+    "ಒಳಾಂಗಣ",
+    "ಬಳ್ಳಿ",
+    "ಸುಲಭ"
    ],
-   "about": "The most common indoor creeper in Indian homes. It grows in a glass of water or in soil, tolerates low light, and can be trained up a post or let to trail from a shelf.",
+   "about": "ಭಾರತದ ಮನೆಗಳಲ್ಲಿ ಅತಿ ಸಾಮಾನ್ಯ ಒಳಾಂಗಣ ಬಳ್ಳಿ. ಲೋಟದ ನೀರಿನಲ್ಲೂ, ಮಣ್ಣಿನಲ್ಲೂ ಬೆಳೆಯುತ್ತದೆ; ಕಡಿಮೆ ಬೆಳಕನ್ನು ತಡೆದುಕೊಳ್ಳುತ್ತದೆ; ಕಂಬಕ್ಕೆ ಹಬ್ಬಿಸಬಹುದು ಅಥವಾ ಕಪಾಟಿನಿಂದ ಇಳಿಬಿಡಬಹುದು.",
    "spec": [
     [
-     "Light",
-     "Bright indirect light; it copes with low light but grows slowly."
+     "ಬೆಳಕು",
+     "ಪರೋಕ್ಷ ಪ್ರಕಾಶಮಾನ ಬೆಳಕು; ಕಡಿಮೆ ಬೆಳಕಿನಲ್ಲೂ ಬದುಕುತ್ತದೆ, ಆದರೆ ನಿಧಾನವಾಗಿ ಬೆಳೆಯುತ್ತದೆ."
     ],
     [
-     "Water",
-     "When the top 2 to 3 cm of soil is dry; refresh the water weekly if grown in a glass."
+     "ನೀರು",
+     "ಮೇಲಿನ 2-3 ಸೆಂ.ಮೀ. ಮಣ್ಣು ಒಣಗಿದಾಗ; ಲೋಟದ ನೀರಿನಲ್ಲಿ ಬೆಳೆಸಿದರೆ ವಾರಕ್ಕೊಮ್ಮೆ ನೀರು ಬದಲಿಸಿ."
     ],
     [
-     "Soil",
-     "Ordinary potting mix with sand for drainage."
+     "ಮಣ್ಣು",
+     "ಸಾಮಾನ್ಯ ಕುಂಡದ ಮಿಶ್ರಣ, ನೀರು ಬಸಿಯಲು ಮರಳು ಸೇರಿಸಿ."
     ],
     [
-     "Grow more",
-     "A cutting with a node roots in water in two weeks."
+     "ಹೊಸ ಗಿಡ",
+     "ಗಂಟು ಇರುವ ಕಡ್ಡಿ ನೀರಿನಲ್ಲಿ ಎರಡು ವಾರದಲ್ಲಿ ಬೇರು ಬಿಡುತ್ತದೆ."
     ],
     [
-     "Note",
-     "Mildly toxic if chewed; keep away from pets and small children."
+     "ಗಮನಿಸಿ",
+     "ಅಗಿದರೆ ಸ್ವಲ್ಪ ವಿಷಕಾರಿ; ಸಾಕುಪ್ರಾಣಿ ಮತ್ತು ಚಿಕ್ಕ ಮಕ್ಕಳಿಂದ ದೂರವಿಡಿ."
     ]
-   ]
+   ],
+   "bonsai": false
   },
   {
+   "key": "Snake plant",
    "category": "indoor",
-   "name": "Snake plant",
-   "kn": "",
+   "name": "ಸ್ನೇಕ್ ಪ್ಲಾಂಟ್",
    "latin": "Dracaena trifasciata",
    "tags": [
-    "Indoor",
-    "Nearly unkillable",
-    "Low water"
+    "ಒಳಾಂಗಣ",
+    "ಸುಲಭವಾಗಿ ಸಾಯುವುದಿಲ್ಲ",
+    "ಕಡಿಮೆ ನೀರು"
    ],
-   "about": "Upright, sword-shaped leaves with pale bands. It survives low light and neglect, and the most common way to kill it is to water it too much.",
+   "about": "ತಿಳಿ ಪಟ್ಟೆಗಳಿರುವ ಕತ್ತಿಯಾಕಾರದ, ನೇರವಾಗಿ ನಿಲ್ಲುವ ಎಲೆಗಳ ಗಿಡ. ಕಡಿಮೆ ಬೆಳಕು ಮತ್ತು ನಿರ್ಲಕ್ಷ್ಯವನ್ನು ತಡೆದುಕೊಳ್ಳುತ್ತದೆ; ಇದನ್ನು ಕೊಲ್ಲುವ ಸಾಮಾನ್ಯ ದಾರಿ ಎಂದರೆ ಹೆಚ್ಚು ನೀರು ಹಾಕುವುದು.",
    "spec": [
     [
-     "Light",
-     "Anything from shade to bright light; avoid harsh midday sun."
+     "ಬೆಳಕು",
+     "ನೆರಳಿನಿಂದ ಪ್ರಕಾಶಮಾನ ಬೆಳಕಿನವರೆಗೆ ಯಾವುದೂ ಸರಿ; ಮಧ್ಯಾಹ್ನದ ಉರಿಬಿಸಿಲು ಬೇಡ."
     ],
     [
-     "Water",
-     "Only when the soil is dry all the way down; in the monsoon, rarely."
+     "ನೀರು",
+     "ಮಣ್ಣು ಕೆಳಗಿನವರೆಗೆ ಒಣಗಿದಾಗ ಮಾತ್ರ; ಮಳೆಗಾಲದಲ್ಲಿ ತೀರಾ ಅಪರೂಪ."
     ],
     [
-     "Soil",
-     "Gritty, fast-draining mix."
+     "ಮಣ್ಣು",
+     "ಒರಟು ಕಣದ, ಬೇಗ ಬಸಿಯುವ ಮಿಶ್ರಣ."
     ],
     [
-     "Grow more",
-     "Divide the clump or root leaf sections."
+     "ಹೊಸ ಗಿಡ",
+     "ಗೆಡ್ಡೆ ವಿಭಜಿಸಿ ಅಥವಾ ಎಲೆಯ ತುಂಡುಗಳಿಗೆ ಬೇರು ಬರಿಸಿ."
     ],
     [
-     "Watch out",
-     "Soft, mushy leaf bases mean root rot from overwatering."
+     "ಎಚ್ಚರ",
+     "ಎಲೆಯ ಬುಡ ಮೆತ್ತಗಾಗಿ ಕೊಳೆತರೆ ಹೆಚ್ಚು ನೀರಿನಿಂದ ಬೇರು ಕೊಳೆತಿದೆ ಎಂದರ್ಥ."
     ]
-   ]
+   ],
+   "bonsai": false
   },
   {
+   "key": "Peace lily",
    "category": "indoor",
-   "name": "Peace lily",
-   "kn": "",
+   "name": "ಪೀಸ್ ಲಿಲಿ",
    "latin": "Spathiphyllum wallisii",
    "tags": [
-    "Indoor",
-    "White flowers",
-    "Shade lover"
+    "ಒಳಾಂಗಣ",
+    "ಬಿಳಿ ಹೂವು",
+    "ನೆರಳು ಇಷ್ಟ"
    ],
-   "about": "Glossy dark leaves and white, hood-shaped flowers. It tells you when it is thirsty by drooping and recovers within hours after watering.",
+   "about": "ಹೊಳೆಯುವ ಗಾಢ ಹಸಿರು ಎಲೆ ಮತ್ತು ಹುಡ್‌ನಂತಹ ಬಿಳಿ ಹೂವು. ಬಾಯಾರಿದಾಗ ಬಾಡಿ ತಿಳಿಸುತ್ತದೆ; ನೀರು ಹಾಕಿದ ಕೆಲವೇ ಗಂಟೆಗಳಲ್ಲಿ ಚೇತರಿಸಿಕೊಳ್ಳುತ್ತದೆ.",
    "spec": [
     [
-     "Light",
-     "Bright shade or indirect light. Direct sun scorches the leaves."
+     "ಬೆಳಕು",
+     "ನೆರಳಿನ ಪ್ರಕಾಶಮಾನ ಅಥವಾ ಪರೋಕ್ಷ ಬೆಳಕು. ನೇರ ಬಿಸಿಲು ಎಲೆ ಸುಡುತ್ತದೆ."
     ],
     [
-     "Water",
-     "Keep the soil lightly moist, never soggy."
+     "ನೀರು",
+     "ಮಣ್ಣು ಲಘುವಾಗಿ ತೇವವಿರಲಿ, ಒದ್ದೆಯಾಗಿರಬಾರದು."
     ],
     [
-     "Soil",
-     "Rich, airy mix with compost."
+     "ಮಣ್ಣು",
+     "ಕಾಂಪೋಸ್ಟ್ ಇರುವ ಸಡಿಲ ಮಿಶ್ರಣ."
     ],
     [
-     "Air",
-     "It likes humidity, which coastal homes have."
+     "ಗಾಳಿ",
+     "ತೇವಾಂಶ ಇಷ್ಟ; ಕರಾವಳಿಯ ಮನೆಗಳಲ್ಲಿ ಅದು ಸಿಗುತ್ತದೆ."
     ],
     [
-     "Note",
-     "Toxic if eaten; keep out of reach of pets and children."
+     "ಗಮನಿಸಿ",
+     "ತಿಂದರೆ ವಿಷಕಾರಿ; ಸಾಕುಪ್ರಾಣಿ ಮತ್ತು ಮಕ್ಕಳ ಕೈಗೆ ಸಿಗದಂತೆ ಇಡಿ."
     ]
-   ]
+   ],
+   "bonsai": false
   },
   {
+   "key": "Ficus bonsai",
    "category": "indoor",
-   "name": "Ficus bonsai",
-   "kn": "",
+   "name": "ಫಿಕಸ್ ಬೋನ್ಸಾಯ್",
    "latin": "Ficus microcarpa",
    "tags": [
-    "Bonsai",
-    "Beginner friendly",
-    "Needs shaping"
+    "ಬೋನ್ಸಾಯ್",
+    "ಆರಂಭಿಕರಿಗೆ ಸುಲಭ",
+    "ಆಕಾರ ಕೊಡಬೇಕು"
    ],
-   "about": "A good first bonsai for a warm, humid place. Ficus microcarpa grows thick aerial roots and a swollen trunk, and it forgives mistakes in pruning and watering.",
+   "about": "ಬೆಚ್ಚನೆಯ, ತೇವದ ಸ್ಥಳದಲ್ಲಿ ಮೊದಲ ಬೋನ್ಸಾಯ್ ಆಗಿ ಒಳ್ಳೆಯದು. ಫಿಕಸ್ ಮೈಕ್ರೋಕಾರ್ಪಾ ದಪ್ಪ ಗಾಳಿಬೇರುಗಳನ್ನೂ ಊದಿಕೊಂಡ ಕಾಂಡವನ್ನೂ ಬೆಳೆಸುತ್ತದೆ; ಕತ್ತರಿಸುವಿಕೆ ಮತ್ತು ನೀರಿನ ತಪ್ಪುಗಳನ್ನು ಕ್ಷಮಿಸುತ್ತದೆ.",
    "spec": [
     [
-     "Light",
-     "Bright light, with morning sun if possible."
+     "ಬೆಳಕು",
+     "ಪ್ರಕಾಶಮಾನ ಬೆಳಕು; ಸಾಧ್ಯವಾದರೆ ಬೆಳಗಿನ ಬಿಸಿಲು."
     ],
     [
-     "Water",
-     "When the top of the soil is just dry. Never let a shallow pot dry out fully."
+     "ನೀರು",
+     "ಮೇಲಿನ ಮಣ್ಣು ಈಗಷ್ಟೇ ಒಣಗಿದಾಗ. ಆಳವಿಲ್ಲದ ಕುಂಡ ಪೂರ್ತಿ ಒಣಗಲು ಬಿಡಬೇಡಿ."
     ],
     [
-     "Shape",
-     "Trim new shoots back to two leaves once they have grown six or more; wire branches gently."
+     "ಆಕಾರ",
+     "ಹೊಸ ಚಿಗುರು ಆರು ಅಥವಾ ಹೆಚ್ಚು ಎಲೆ ಬೆಳೆದ ಮೇಲೆ ಎರಡು ಎಲೆ ಉಳಿಸಿ ಕತ್ತರಿಸಿ; ಕೊಂಬೆಗಳಿಗೆ ನಿಧಾನವಾಗಿ ತಂತಿ ಸುತ್ತಿ."
     ],
     [
-     "Repot",
-     "Every two years, trimming a third of the roots, using a gritty bonsai mix."
+     "ಕುಂಡ ಬದಲಾವಣೆ",
+     "ಎರಡು ವರ್ಷಕ್ಕೊಮ್ಮೆ, ಬೇರಿನ ಮೂರನೇ ಒಂದು ಭಾಗ ಕತ್ತರಿಸಿ, ಒರಟು ಬೋನ್ಸಾಯ್ ಮಿಶ್ರಣದಲ್ಲಿ."
     ],
     [
-     "Watch out",
-     "Leaf drop after a move is normal; keep the position steady."
+     "ಎಚ್ಚರ",
+     "ಸ್ಥಳ ಬದಲಿಸಿದಾಗ ಎಲೆ ಉದುರುವುದು ಸಹಜ; ಇಟ್ಟ ಜಾಗ ಸ್ಥಿರವಾಗಿರಲಿ."
     ]
-   ]
+   ],
+   "bonsai": true
   },
   {
+   "key": "Spider plant",
    "category": "indoor",
-   "name": "Spider plant",
-   "kn": "",
+   "name": "ಸ್ಪೈಡರ್ ಪ್ಲಾಂಟ್",
    "latin": "Chlorophytum comosum",
    "tags": [
-    "Indoor",
-    "Hanging basket",
-    "Makes babies"
+    "ಒಳಾಂಗಣ",
+    "ನೇತಾಡುವ ಬುಟ್ಟಿ",
+    "ಮರಿಗಳನ್ನು ಕೊಡುತ್ತದೆ"
    ],
-   "about": "Arching green-and-white leaves and long stems that carry tiny plantlets. A cheerful plant for a hanging basket on a covered balcony.",
+   "about": "ಬಾಗಿದ ಹಸಿರು-ಬಿಳಿ ಎಲೆಗಳು ಮತ್ತು ಪುಟ್ಟ ಮರಿ ಗಿಡಗಳನ್ನು ಹೊತ್ತ ಉದ್ದ ದಂಟುಗಳು. ಮುಚ್ಚಿದ ಬಾಲ್ಕನಿಯಲ್ಲಿ ನೇತಾಡುವ ಬುಟ್ಟಿಗೆ ಸಂತೋಷ ಕೊಡುವ ಗಿಡ.",
    "spec": [
     [
-     "Light",
-     "Bright indirect light."
+     "ಬೆಳಕು",
+     "ಪರೋಕ್ಷ ಪ್ರಕಾಶಮಾನ ಬೆಳಕು."
     ],
     [
-     "Water",
-     "Moderate. The thick roots store water, so let the top inch dry."
+     "ನೀರು",
+     "ಮಧ್ಯಮ. ದಪ್ಪ ಬೇರುಗಳು ನೀರು ಸಂಗ್ರಹಿಸುವುದರಿಂದ ಮೇಲಿನ ಇಂಚು ಒಣಗಲು ಬಿಡಿ."
     ],
     [
-     "Soil",
-     "Light, well-drained potting mix."
+     "ಮಣ್ಣು",
+     "ಹಗುರ, ಬಸಿಯುವ ಕುಂಡದ ಮಿಶ್ರಣ."
     ],
     [
-     "Grow more",
-     "Pin a plantlet into a small pot while still attached, then cut the stem when it roots."
+     "ಹೊಸ ಗಿಡ",
+     "ಮರಿ ಗಿಡವನ್ನು ದಂಟಿಗೆ ಅಂಟಿಕೊಂಡಿರುವಾಗಲೇ ಪುಟ್ಟ ಕುಂಡದಲ್ಲಿ ಒತ್ತಿ; ಬೇರು ಬಂದ ಮೇಲೆ ದಂಟು ಕತ್ತರಿಸಿ."
     ],
     [
-     "Watch out",
-     "Brown leaf tips often mean dry air, too much sun or mineral buildup in the water."
+     "ಎಚ್ಚರ",
+     "ಎಲೆ ತುದಿ ಕಂದು ಬಣ್ಣವಾದರೆ ಹೆಚ್ಚಾಗಿ ಒಣ ಗಾಳಿ, ಹೆಚ್ಚು ಬಿಸಿಲು ಅಥವಾ ನೀರಿನ ಲವಣ ಸಂಗ್ರಹ ಕಾರಣ."
     ]
-   ]
+   ],
+   "bonsai": false
   },
   {
+   "key": "Boston fern",
    "category": "indoor",
-   "name": "Boston fern",
-   "kn": "ಜರೀಗಿಡ",
+   "name": "ಬೋಸ್ಟನ್ ಜರೀಗಿಡ",
    "latin": "Nephrolepis exaltata",
    "tags": [
-    "Indoor",
-    "Loves humidity",
-    "Hanging"
+    "ಒಳಾಂಗಣ",
+    "ತೇವಾಂಶ ಇಷ್ಟ",
+    "ನೇತಾಡುವ ಗಿಡ"
    ],
-   "about": "A feathery fern that is happiest in warm, humid air. On the coast it does best in a shaded balcony and sulks in an air-conditioned room.",
+   "about": "ಬೆಚ್ಚನೆಯ, ತೇವದ ಗಾಳಿಯಲ್ಲಿ ಹೆಚ್ಚು ಸಂತೋಷವಾಗಿರುವ ಗರಿಯಂತಹ ಜರೀಗಿಡ. ಕರಾವಳಿಯಲ್ಲಿ ನೆರಳಿನ ಬಾಲ್ಕನಿಯಲ್ಲಿ ಚೆನ್ನಾಗಿರುತ್ತದೆ; ಹವಾನಿಯಂತ್ರಿತ ಕೋಣೆಯಲ್ಲಿ ಸೊರಗುತ್ತದೆ.",
    "spec": [
     [
-     "Light",
-     "Bright shade; no direct sun."
+     "ಬೆಳಕು",
+     "ನೆರಳಿನ ಪ್ರಕಾಶಮಾನ ಬೆಳಕು; ನೇರ ಬಿಸಿಲು ಬೇಡ."
     ],
     [
-     "Water",
-     "Keep the mix evenly moist but not soggy."
+     "ನೀರು",
+     "ಮಣ್ಣು ಸಮವಾಗಿ ತೇವವಿರಲಿ, ಆದರೆ ಒದ್ದೆಯಾಗಿರಬಾರದು."
     ],
     [
-     "Soil",
-     "Light, peaty or coco mix rich in organic matter."
+     "ಮಣ್ಣು",
+     "ಸಾವಯವ ಸಮೃದ್ಧ, ಹಗುರ ಕೋಕೋ ಅಥವಾ ಪೀಟ್ ಮಿಶ್ರಣ."
     ],
     [
-     "Air",
-     "Give it airflow; in wet weather watch for fungal spots."
+     "ಗಾಳಿ",
+     "ಗಾಳಿಯಾಡಲು ಬಿಡಿ; ಮಳೆಯ ವಾತಾವರಣದಲ್ಲಿ ಶಿಲೀಂಧ್ರ ಚುಕ್ಕೆಗಳ ಮೇಲೆ ಗಮನವಿರಲಿ."
     ],
     [
-     "Prune",
-     "Cut brown fronds at the base to make room for new growth."
+     "ಕತ್ತರಿಸುವಿಕೆ",
+     "ಹೊಸ ಚಿಗುರಿಗೆ ಜಾಗ ಸಿಗಲು ಕಂದು ಬಣ್ಣದ ಗರಿಗಳನ್ನು ಬುಡದಲ್ಲಿ ಕತ್ತರಿಸಿ."
     ]
-   ]
+   ],
+   "bonsai": false
   },
   {
-   "name": "Monstera",
-   "kn": "",
+   "key": "Monstera",
+   "category": "indoor",
+   "name": "ಮಾನ್ಸ್ಟೆರಾ",
    "latin": "Monstera deliciosa",
    "tags": [
-    "Indoor",
-    "Loves humidity"
+    "ಒಳಾಂಗಣ",
+    "ತೇವಾಂಶ ಇಷ್ಟ"
    ],
-   "about": "The split-leaf climber that enjoys Mangaluru's humid air. It grows impressively through the monsoon months.",
+   "about": "ಸೀಳಿದ ಎಲೆಗಳ ಬಳ್ಳಿ; ಮಂಗಳೂರಿನ ತೇವದ ಗಾಳಿಯನ್ನು ಇಷ್ಟಪಡುತ್ತದೆ. ಮಳೆಗಾಲದ ತಿಂಗಳುಗಳಲ್ಲಿ ಅದ್ಭುತವಾಗಿ ಬೆಳೆಯುತ್ತದೆ.",
    "spec": [
     [
-     "Light",
-     "Bright spot, away from direct afternoon sun."
+     "ಬೆಳಕು",
+     "ಪ್ರಕಾಶಮಾನ ಜಾಗ; ಮಧ್ಯಾಹ್ನದ ನೇರ ಬಿಸಿಲು ಬೇಡ."
     ],
     [
-     "Water",
-     "Moderate. Water only when the top of the soil starts to dry."
+     "ನೀರು",
+     "ಮಧ್ಯಮ. ಮೇಲಿನ ಮಣ್ಣು ಒಣಗತೊಡಗಿದಾಗ ಮಾತ್ರ ನೀರು ಹಾಕಿ."
     ],
     [
-     "Soil",
-     "Mix in coarse sand or perlite for drainage."
+     "ಮಣ್ಣು",
+     "ಬಸಿಯಲು ಒರಟು ಮರಳು ಅಥವಾ ಪರ್ಲೈಟ್ ಬೆರೆಸಿ."
     ],
     [
-     "Air",
-     "Give it airflow and watch for fungal spots in wet weather."
+     "ಗಾಳಿ",
+     "ಗಾಳಿಯಾಡಲು ಬಿಡಿ; ಒದ್ದೆ ವಾತಾವರಣದಲ್ಲಿ ಶಿಲೀಂಧ್ರ ಚುಕ್ಕೆಗಳ ಮೇಲೆ ಗಮನವಿರಲಿ."
     ]
    ],
-   "category": "indoor"
+   "bonsai": false
   },
   {
+   "key": "ZZ plant",
    "category": "indoor",
-   "name": "ZZ plant",
-   "kn": "",
+   "name": "ಝಡ್‌ಝಡ್ ಗಿಡ",
    "latin": "Zamioculcas zamiifolia",
    "tags": [
-    "Indoor",
-    "Low light",
-    "Drought proof"
+    "ಒಳಾಂಗಣ",
+    "ಕಡಿಮೆ ಬೆಳಕು",
+    "ಬರ ತಡೆಯುತ್ತದೆ"
    ],
-   "about": "Glossy, upright leaves from thick underground rhizomes that store water. It is one of the most tolerant houseplants of low light and missed waterings.",
+   "about": "ನೀರು ಸಂಗ್ರಹಿಸುವ ದಪ್ಪ ಭೂಗತ ಕಾಂಡಗಳಿಂದ ಹೊರಬರುವ ಹೊಳೆಯುವ, ನೇರ ಎಲೆಗಳು. ಕಡಿಮೆ ಬೆಳಕು ಮತ್ತು ನೀರು ಹಾಕದ ದಿನಗಳನ್ನು ಅತಿ ಚೆನ್ನಾಗಿ ತಡೆದುಕೊಳ್ಳುವ ಒಳಾಂಗಣ ಗಿಡಗಳಲ್ಲಿ ಒಂದು.",
    "spec": [
     [
-     "Light",
-     "Low to bright indirect light."
+     "ಬೆಳಕು",
+     "ಕಡಿಮೆಯಿಂದ ಪ್ರಕಾಶಮಾನ ಪರೋಕ್ಷ ಬೆಳಕಿನವರೆಗೆ."
     ],
     [
-     "Water",
-     "Every two to three weeks, only when the soil is dry."
+     "ನೀರು",
+     "ಎರಡು-ಮೂರು ವಾರಕ್ಕೊಮ್ಮೆ, ಮಣ್ಣು ಒಣಗಿದಾಗ ಮಾತ್ರ."
     ],
     [
-     "Soil",
-     "Very well-drained mix with sand or perlite."
+     "ಮಣ್ಣು",
+     "ಮರಳು ಅಥವಾ ಪರ್ಲೈಟ್ ಸೇರಿಸಿದ, ಚೆನ್ನಾಗಿ ಬಸಿಯುವ ಮಿಶ್ರಣ."
     ],
     [
-     "Grow more",
-     "Divide the rhizomes or root a leaf; it is slow but sure."
+     "ಹೊಸ ಗಿಡ",
+     "ಗೆಡ್ಡೆ ವಿಭಜಿಸಿ ಅಥವಾ ಎಲೆಗೆ ಬೇರು ಬರಿಸಿ; ನಿಧಾನ, ಆದರೆ ಖಚಿತ."
     ],
     [
-     "Note",
-     "All parts are toxic if eaten; wash hands after handling."
+     "ಗಮನಿಸಿ",
+     "ಎಲ್ಲ ಭಾಗಗಳು ತಿಂದರೆ ವಿಷಕಾರಿ; ಮುಟ್ಟಿದ ಮೇಲೆ ಕೈ ತೊಳೆಯಿರಿ."
     ]
-   ]
+   ],
+   "bonsai": false
   },
   {
+   "key": "Jade bonsai",
    "category": "indoor",
-   "name": "Jade bonsai",
-   "kn": "",
+   "name": "ಜೇಡ್ ಬೋನ್ಸಾಯ್",
    "latin": "Crassula ovata",
    "tags": [
-    "Bonsai",
-    "Succulent",
-    "Low water"
+    "ಬೋನ್ಸಾಯ್",
+    "ರಸಭರಿತ ಸಸ್ಯ",
+    "ಕಡಿಮೆ ನೀರು"
    ],
-   "about": "The jade plant makes a quick, tree-like bonsai because its stems thicken into a woody trunk. It stores water in its fat leaves, so it needs far less watering than most bonsai.",
+   "about": "ಜೇಡ್ ಗಿಡದ ಕಾಂಡಗಳು ದಪ್ಪವಾಗಿ ಮರದಂತಾಗುವುದರಿಂದ ಅದು ಬೇಗನೆ ಮರದಂತಹ ಬೋನ್ಸಾಯ್ ಆಗುತ್ತದೆ. ದಪ್ಪ ಎಲೆಗಳಲ್ಲಿ ನೀರು ಸಂಗ್ರಹಿಸುವುದರಿಂದ ಹೆಚ್ಚಿನ ಬೋನ್ಸಾಯ್‌ಗಳಿಗಿಂತ ಬಹಳ ಕಡಿಮೆ ನೀರು ಸಾಕು.",
    "spec": [
     [
-     "Light",
-     "Bright light, some direct sun; shade it from fierce afternoon sun."
+     "ಬೆಳಕು",
+     "ಪ್ರಕಾಶಮಾನ ಬೆಳಕು, ಸ್ವಲ್ಪ ನೇರ ಬಿಸಿಲು; ಮಧ್ಯಾಹ್ನದ ತೀವ್ರ ಬಿಸಿಲಿನಿಂದ ನೆರಳು ಕೊಡಿ."
     ],
     [
-     "Water",
-     "Let the soil dry fully, then water well. In the monsoon keep it under cover."
+     "ನೀರು",
+     "ಮಣ್ಣು ಪೂರ್ತಿ ಒಣಗಲು ಬಿಟ್ಟು, ನಂತರ ಚೆನ್ನಾಗಿ ನೀರು ಹಾಕಿ. ಮಳೆಗಾಲದಲ್ಲಿ ಛಾವಣಿಯ ಕೆಳಗೆ ಇಡಿ."
     ],
     [
-     "Soil",
-     "Fast-draining gritty mix in a shallow pot."
+     "ಮಣ್ಣು",
+     "ಆಳವಿಲ್ಲದ ಕುಂಡದಲ್ಲಿ ಬೇಗ ಬಸಿಯುವ ಒರಟು ಮಿಶ್ರಣ."
     ],
     [
-     "Shape",
-     "Pinch the tips to build branches; leaf cuttings root easily."
+     "ಆಕಾರ",
+     "ತುದಿ ಚಿವುಟಿ ಕೊಂಬೆ ಬೆಳೆಸಿ; ಎಲೆಯ ಕಡ್ಡಿಗಳಿಗೂ ಸುಲಭವಾಗಿ ಬೇರು ಬರುತ್ತದೆ."
     ],
     [
-     "Watch out",
-     "Soft, wrinkled or rotting stems mean it has been kept too wet."
+     "ಎಚ್ಚರ",
+     "ಮೆತ್ತಗಾದ, ಸುಕ್ಕಾದ ಅಥವಾ ಕೊಳೆತ ಕಾಂಡ ಎಂದರೆ ಹೆಚ್ಚು ನೀರು ಹಾಕಿದ್ದೀರಿ ಎಂದರ್ಥ."
     ]
-   ]
+   ],
+   "bonsai": true
   },
   {
+   "key": "Bougainvillea bonsai",
    "category": "indoor",
-   "name": "Bougainvillea bonsai",
-   "kn": "",
+   "name": "ಬೊಗನ್‌ವಿಲ್ಲಾ ಬೋನ್ಸಾಯ್",
    "latin": "Bougainvillea glabra",
    "tags": [
-    "Bonsai",
-    "Flowering",
-    "Full sun"
+    "ಬೋನ್ಸಾಯ್",
+    "ಹೂ ಬಿಡುತ್ತದೆ",
+    "ಪೂರ್ಣ ಬಿಸಿಲು"
    ],
-   "about": "A bonsai that flowers: papery pink, magenta or white bracts cover the tree after a dry spell. It enjoys heat and sun, so it suits an open terrace in Mangaluru.",
+   "about": "ಹೂ ಬಿಡುವ ಬೋನ್ಸಾಯ್: ಒಣ ಅವಧಿಯ ನಂತರ ಗುಲಾಬಿ, ಕೆನ್ನೀಲಿ ಅಥವಾ ಬಿಳಿ ಬಣ್ಣದ ಕಾಗದದಂತಹ ಹೂದಳಗಳು ಮರವನ್ನು ಆವರಿಸುತ್ತವೆ. ಬಿಸಿಲು ಮತ್ತು ಶಾಖ ಇಷ್ಟಪಡುವುದರಿಂದ ಮಂಗಳೂರಿನ ತೆರೆದ ಮಾಳಿಗೆಗೆ ಸರಿಹೊಂದುತ್ತದೆ.",
    "spec": [
     [
-     "Light",
-     "Full sun, at least six hours."
+     "ಬೆಳಕು",
+     "ಪೂರ್ಣ ಬಿಸಿಲು, ಕನಿಷ್ಠ ಆರು ಗಂಟೆ."
     ],
     [
-     "Water",
-     "Water well, then let it dry slightly. Slight dryness triggers flowering."
+     "ನೀರು",
+     "ಚೆನ್ನಾಗಿ ನೀರು ಹಾಕಿ, ನಂತರ ಸ್ವಲ್ಪ ಒಣಗಲು ಬಿಡಿ. ಸ್ವಲ್ಪ ಒಣಗುವುದು ಹೂ ಬಿಡಲು ಪ್ರೇರಣೆ ನೀಡುತ್ತದೆ."
     ],
     [
-     "Prune",
-     "After each flush of colour, cut shoots back to two or three leaves; wear gloves, as it has thorns."
+     "ಕತ್ತರಿಸುವಿಕೆ",
+     "ಬಣ್ಣದ ಒಂದು ಸುತ್ತಿನ ನಂತರ ಚಿಗುರುಗಳನ್ನು ಎರಡು-ಮೂರು ಎಲೆ ಉಳಿಸಿ ಕತ್ತರಿಸಿ; ಮುಳ್ಳುಗಳಿರುವುದರಿಂದ ಕೈಗವಸು ಧರಿಸಿ."
     ],
     [
-     "Repot",
-     "Every two to three years in a gritty bonsai mix; handle the roots gently."
+     "ಕುಂಡ ಬದಲಾವಣೆ",
+     "ಎರಡು-ಮೂರು ವರ್ಷಕ್ಕೊಮ್ಮೆ ಒರಟು ಬೋನ್ಸಾಯ್ ಮಿಶ್ರಣದಲ್ಲಿ; ಬೇರುಗಳನ್ನು ನಿಧಾನವಾಗಿ ಮುಟ್ಟಿ."
     ],
     [
-     "Watch out",
-     "Too much feed gives leaves but no colour; ease off nitrogen."
+     "ಎಚ್ಚರ",
+     "ಹೆಚ್ಚು ಗೊಬ್ಬರ ಹಾಕಿದರೆ ಎಲೆ ಮಾತ್ರ ಬಂದು ಬಣ್ಣ ಬರುವುದಿಲ್ಲ; ಸಾರಜನಕ ಕಡಿಮೆ ಮಾಡಿ."
     ]
-   ]
+   ],
+   "bonsai": true
   }
  ],
  "month": [
-  "Check every pot has drainage holes, and clear the saucers after rain.",
-  "Mulch bare soil to stop splash and keep roots steady.",
-  "Give ferns and balcony plants airflow to avoid fungus.",
-  "Sow spinach, amaranth and fenugreek, which enjoy the humidity.",
-  "Shield young plants from strong wind and heavy downpours.",
-  "Mix coarse sand into laterite soil so roots do not sit wet."
+  "ಪ್ರತಿ ಕುಂಡಕ್ಕೂ ಬಸಿಯುವ ರಂಧ್ರಗಳಿವೆಯೇ ಎಂದು ನೋಡಿ; ಮಳೆಯ ನಂತರ ತಟ್ಟೆಗಳಲ್ಲಿ ನಿಂತ ನೀರು ತೆಗೆಯಿರಿ.",
+  "ಖಾಲಿ ಮಣ್ಣಿನ ಮೇಲೆ ಹೊದಿಕೆ (ಮಲ್ಚ್) ಹಾಕಿ; ಮಳೆ ಸಿಡಿಯುವುದು ತಪ್ಪುತ್ತದೆ, ಬೇರು ಸ್ಥಿರವಾಗಿರುತ್ತದೆ.",
+  "ಜರೀಗಿಡ ಮತ್ತು ಬಾಲ್ಕನಿ ಗಿಡಗಳಿಗೆ ಗಾಳಿಯಾಡಲು ಬಿಡಿ; ಶಿಲೀಂಧ್ರ ತಪ್ಪುತ್ತದೆ.",
+  "ತೇವಾಂಶ ಇಷ್ಟಪಡುವ ಪಾಲಕ್, ದಂಟು ಮತ್ತು ಮೆಂತ್ಯ ಬಿತ್ತಿ.",
+  "ಎಳೆಯ ಗಿಡಗಳನ್ನು ಬಲವಾದ ಗಾಳಿ ಮತ್ತು ಭಾರಿ ಮಳೆಯಿಂದ ರಕ್ಷಿಸಿ.",
+  "ಜಂಬಿಟ್ಟಿಗೆ ಮಣ್ಣಿಗೆ ಒರಟು ಮರಳು ಬೆರೆಸಿ; ಬೇರು ನೀರಲ್ಲಿ ನಿಲ್ಲುವುದು ತಪ್ಪುತ್ತದೆ."
  ],
- "note": "Each day shows one herb, one flower and one indoor or garden plant (every third or fourth indoor pick is a bonsai). Plants rotate in the order listed within each category. Add more over time; keep facts general and safe, and mark toxic plants."
+ "note": "ಕನ್ನಡದಲ್ಲಿ ಬರೆಯಿರಿ. ಪ್ರತಿದಿನ ಒಂದು ಗಿಡಮೂಲಿಕೆ, ಒಂದು ಹೂವು ಮತ್ತು ಒಂದು ಒಳಾಂಗಣ ಅಥವಾ ಬೋನ್ಸಾಯ್ ಗಿಡ. `key` ಇಂಗ್ಲಿಷ್ ಹೆಸರು (ಫೋಟೋ ಹುಡುಕಾಟಕ್ಕಾಗಿ), `name` ಕನ್ನಡ ಹೆಸರು, `bonsai` ಸರಿ/ತಪ್ಪು."
 }

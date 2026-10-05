@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build Kullangal Vaarte from data files.
+"""ಕುಲ್ಲಂಗಾಲ್ ವಾರ್ತೆ (Kullangal Vaarte): the whole paper is printed in Kannada. Built from data files.
 
 Usage: build_paper.py [YYYY-MM-DD] [--private FILE] [--public FILE]
 
@@ -30,12 +30,23 @@ def rd(name):
 
 KN_DIGITS = str.maketrans("0123456789", "೦೧೨೩೪೫೬೭೮೯")
 KN_DAYS = ["ಸೋಮವಾರ", "ಮಂಗಳವಾರ", "ಬುಧವಾರ", "ಗುರುವಾರ", "ಶುಕ್ರವಾರ", "ಶನಿವಾರ", "ಭಾನುವಾರ"]
+KN_DAYS_SHORT = ["ಸೋಮ", "ಮಂಗಳ", "ಬುಧ", "ಗುರು", "ಶುಕ್ರ", "ಶನಿ", "ಭಾನು"]
 KN_MONTHS = ["ಜನವರಿ", "ಫೆಬ್ರವರಿ", "ಮಾರ್ಚ್", "ಏಪ್ರಿಲ್", "ಮೇ", "ಜೂನ್", "ಜುಲೈ", "ಆಗಸ್ಟ್", "ಸೆಪ್ಟೆಂಬರ್", "ಅಕ್ಟೋಬರ್", "ನವೆಂಬರ್", "ಡಿಸೆಂಬರ್"]
+LEVELS = {"Easy": "ಸುಲಭ", "Medium": "ಮಧ್ಯಮ", "Hard": "ಕಠಿಣ"}
+
+
+def kd(x):
+    """Kannada digits."""
+    return str(x).translate(KN_DIGITS)
+
 
 PAGE_COLOURS = dict(front=("#c4361f", "#fff"), desk=("#6b6f76", "#fff"), classifieds=("#8a5a00", "#fff"), local=("#0b7a75", "#fff"),
-                    feature=("#e0a100", "#15171c"), kadambari=("#8e2c6b", "#fff"), serial=("#2f4fb0", "#fff"),
+                    feature=("#e0a100", "#15171c"), kadambari=("#8e2c6b", "#fff"),
                     world=("#5b3fa8", "#fff"), puz1=("#1f7a3a", "#fff"), puz2=("#d2571a", "#fff"), garden=("#4d7a1b", "#fff"),
                     tales=("#c72a66", "#fff"), sports=("#0f5fa8", "#fff"))
+SHORT = dict(front="ಮುಖಪುಟ", desk="ಡೆಸ್ಕ್", classifieds="ಪ್ರಕಟಣೆ", local="ಸ್ಥಳೀಯ", world="ಜಗತ್ತು", feature="ವಿಶೇಷ", kadambari="ಕಾದಂಬರಿ",
+             puz1="ಒಗಟು ೧", puz2="ಒಗಟು ೨", garden="ತೋಟ", tales="ಕತೆ", sports="ಕ್ರೀಡೆ")
+# English names are used only to search Wikimedia Commons for a photograph of each plant
 PLANT_TERMS = {
     "Udupi Mallige": ["Jasminum sambac flower", "Jasminum sambac"],
     "Aboli": ["Crossandra infundibuliformis flower", "Crossandra infundibuliformis"],
@@ -48,11 +59,11 @@ PLANT_TERMS = {
 
 
 def kn_date(d):
-    return f"{KN_DAYS[d.weekday()]}, {str(d.day).translate(KN_DIGITS)} {KN_MONTHS[d.month - 1]} {str(d.year).translate(KN_DIGITS)}"
+    return f"{KN_DAYS[d.weekday()]}, {kd(d.day)} {KN_MONTHS[d.month - 1]} {kd(d.year)}"
 
 
-def en_date(d):
-    return d.strftime("%A, %-d %B %Y")
+def kn_date_short(d):
+    return f"{kd(d.day)} {KN_MONTHS[d.month - 1]}"
 
 
 def sources(items):
@@ -66,8 +77,8 @@ class Paper:
     def __init__(self, day, private):
         self.day, self.private, self.pages = day, private, []
 
-    def add(self, key, en, kn, body, blurb=""):
-        self.pages.append(dict(key=key, en=en, kn=kn, body=body, blurb=blurb))
+    def add(self, key, title, body, blurb=""):
+        self.pages.append(dict(key=key, title=title, body=body, blurb=blurb))
 
     def render_pages(self):
         out = []
@@ -75,14 +86,14 @@ class Paper:
         for i, p in enumerate(self.pages):
             col, fg = PAGE_COLOURS[p["key"]]
             nxt = self.pages[i + 1] if i + 1 < n else None
-            foot = (f'<a href="#p-{nxt["key"]}">Turn to page {i + 2}: {E(nxt["en"])} &rarr;</a>' if nxt else '<a href="#top">Back to the front page &uarr;</a>')
+            foot = (f'<a href="#p-{nxt["key"]}">ಪುಟ {kd(i + 2)}ಕ್ಕೆ ತಿರುಗಿಸಿ: {E(nxt["title"])} &rarr;</a>' if nxt else '<a href="#top">ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ &uarr;</a>')
             out.append(
                 f'<section class="page{" gold" if p["key"] == "feature" else ""}" id="p-{p["key"]}" style="--pc:{col};--pcfg:{fg}" aria-labelledby="h-{p["key"]}">'
                 f'<header class="ph"><span class="pn" aria-hidden="true">{i + 1}</span>'
-                f'<div class="pt"><span class="pk">Page {i + 1} of {n}</span><h2 id="h-{p["key"]}">{E(p["en"])}</h2><span class="pkn" lang="kn">{p["kn"]}</span></div>'
-                f'<span class="pd">{E(en_date(self.day))}</span></header>'
+                f'<div class="pt"><span class="pk">ಪುಟ {kd(i + 1)} / {kd(n)}</span><h2 id="h-{p["key"]}">{E(p["title"])}</h2></div>'
+                f'<span class="pd">{E(kn_date(self.day))}</span></header>'
                 f'<div class="wrap"><div class="pb">{p["body"]}</div>'
-                f'<footer class="pf">{foot}<span class="pg">Kullangal Vaarte &middot; {i + 1}/{n}</span></footer></div></section>'
+                f'<footer class="pf">{foot}<span class="pg">ಕುಲ್ಲಂಗಾಲ್ ವಾರ್ತೆ &middot; {kd(i + 1)}/{kd(n)}</span></footer></div></section>'
                 + self.joke_after.get(p["key"], ""))
         return "".join(out)
 
@@ -92,52 +103,48 @@ class Paper:
         o = []
         for i, p in enumerate(self.pages):
             col, fg = PAGE_COLOURS[p["key"]]
-            short = {"Coast & Local": "Local", "Coast Feature": "Feature", "Kannada Kadambari": "ಕಾದಂಬರಿ", "English Serial": "Serial"}.get(p["en"], p["en"])
-            o.append(f'<a class="pill" href="#p-{p["key"]}" style="--c:{col};--cf:{fg}"><b>{i + 1}</b>{E(short)}</a>')
+            o.append(f'<a class="pill" href="#p-{p["key"]}" style="--c:{col};--cf:{fg}"><b>{kd(i + 1)}</b>{E(SHORT[p["key"]])}</a>')
         return "".join(o)
 
 
 # ------------------------------------------------------------------ jokes
 def joke_break(day, k, jokes):
-    idx = (day - LAUNCH).days * 3 + k
-    en, kn = jokes["en"][idx % len(jokes["en"])], jokes["kn"][idx % len(jokes["kn"])]
-    return ('<div class="wrap"><aside class="joke" aria-label="A joke to break the pages">'
-            '<h3>Take a break <span class="kn" lang="kn">ನಗು</span></h3><div class="jj">'
-            f'<div><span class="jl">In English</span><p>{E(en)}</p></div>'
-            f'<div><span class="jl">ಕನ್ನಡದಲ್ಲಿ</span><p class="kn" lang="kn">{E(kn)}</p></div></div></aside></div>')
+    idx = (day - LAUNCH).days * 4 + k
+    kn = jokes["kn"][idx % len(jokes["kn"])]
+    return ('<div class="wrap"><aside class="joke" aria-label="ಪುಟಗಳ ನಡುವೆ ಒಂದು ಹಾಸ್ಯ">'
+            f'<h3>ಸ್ವಲ್ಪ ನಗೋಣ</h3><div class="jj"><div><p class="kn" lang="kn">{E(kn)}</p></div></div></aside></div>')
 
 
 # ------------------------------------------------------------------ pages
 def front_page(P, news, wx, sun, moon, priv):
     lead = news["lead"]
-    day = P.day
     tiles = []
     if wx:
         t = wx[0]
-        tiles.append(f'<div><span class="lab">Weather today</span><div class="v">{t["hi"]}&deg; / {t["lo"]}&deg;</div><div class="n">{E(t["sky"])}, rain chance {t["pop"]}%</div></div>')
-        tiles.append(f'<div><span class="lab">Wind</span><div class="v">{t["wind"]} km/h</div><div class="n">Highest gust of the day, 10 m up</div></div>')
+        tiles.append(f'<div><span class="lab">ಇಂದಿನ ಹವಾಮಾನ</span><div class="v">{t["hi"]}&deg; / {t["lo"]}&deg;</div><div class="n">{E(t["sky"])}, ಮಳೆಯ ಸಾಧ್ಯತೆ {t["pop"]}%</div></div>')
+        tiles.append(f'<div><span class="lab">ಗಾಳಿ</span><div class="v">{t["wind"]} ಕಿ.ಮೀ./ಗಂ</div><div class="n">ದಿನದ ಗರಿಷ್ಠ ವೇಗ</div></div>')
     else:
-        tiles.append('<div><span class="lab">Weather today</span><div class="v">Not fetched</div><div class="n">Forecast unavailable this morning</div></div>')
-        tiles.append('<div><span class="lab">Wind</span><div class="v">&ndash;</div><div class="n">&nbsp;</div></div>')
-    tiles.append(f'<div><span class="lab">Sunrise</span><div class="v">{sun[0]}</div><div class="n">Mangaluru, calculated</div></div>')
-    tiles.append(f'<div><span class="lab">Sunset</span><div class="v">{sun[1]}</div><div class="n">Day length {int(sun[2] // 60)} h {int(sun[2] % 60)} min</div></div>')
-    tiles.append(f'<div><span class="lab">Moon</span><div class="v">{moon[1]}%</div><div class="n">{E(moon[0])}, calculated</div></div>')
+        tiles.append('<div><span class="lab">ಇಂದಿನ ಹವಾಮಾನ</span><div class="v">ಸಿಕ್ಕಿಲ್ಲ</div><div class="n">ಇಂದು ಬೆಳಗ್ಗೆ ಮುನ್ಸೂಚನೆ ಲಭ್ಯವಾಗಲಿಲ್ಲ</div></div>')
+        tiles.append('<div><span class="lab">ಗಾಳಿ</span><div class="v">&ndash;</div><div class="n">&nbsp;</div></div>')
+    tiles.append(f'<div><span class="lab">ಸೂರ್ಯೋದಯ</span><div class="v">{sun[0]}</div><div class="n">ಮಂಗಳೂರು, ಲೆಕ್ಕಾಚಾರದ್ದು</div></div>')
+    tiles.append(f'<div><span class="lab">ಸೂರ್ಯಾಸ್ತ</span><div class="v">{sun[1]}</div><div class="n">ಹಗಲು {int(sun[2] // 60)} ಗಂಟೆ {int(sun[2] % 60)} ನಿಮಿಷ</div></div>')
+    tiles.append(f'<div><span class="lab">ಚಂದ್ರ</span><div class="v">{moon[1]}%</div><div class="n">{E(moon[0])}, ಲೆಕ್ಕಾಚಾರದ್ದು</div></div>')
     idx = []
     for i, p in enumerate(P.pages):
         col, fg = PAGE_COLOURS[p["key"]]
-        idx.append(f'<li><span class="num" style="--c:{col};--cf:{fg}">{i + 1}</span><div><a href="#p-{p["key"]}">{E(p["en"])}</a><span class="d">{E(p["blurb"])}</span></div></li>')
+        idx.append(f'<li><span class="num" style="--c:{col};--cf:{fg}">{kd(i + 1)}</span><div><a href="#p-{p["key"]}">{E(p["title"])}</a><span class="d">{E(p["blurb"])}</span></div></li>')
     alert = ""
     if priv:
-        alert = (f'<div class="alert"><span class="kicker">Notice to the reader</span><p><b>{E(priv["notice"]["title"])}.</b> {E(priv["notice"]["text"])} '
-                 f'<a href="#p-desk">Read on the Desk page</a></p></div>')
+        alert = (f'<div class="alert"><span class="kicker">ಓದುಗರ ಗಮನಕ್ಕೆ</span><p><b>{E(priv["notice"]["title"])}.</b> {E(priv["notice"]["text"])} '
+                 f'<a href="#p-desk">ಡೆಸ್ಕ್ ಪುಟದಲ್ಲಿ ಓದಿ</a></p></div>')
     body = "".join(f"<p>{E(x)}</p>" for x in lead["body"])
     briefs = "".join(f"<li>{E(b)}</li>" for b in news["briefly"])
     return (alert + f'<div class="glance">{"".join(tiles)}</div>'
             '<div class="cols2" style="margin-top:26px"><div>'
             f'<span class="kicker">{E(lead["kicker"])}</span><h3 class="hl1" style="margin-top:8px">{E(lead["headline"])}</h3>'
             f'<p class="deck">{E(lead["deck"])}</p><div class="body drop rule">{body}</div>{sources(lead["sources"])}</div>'
-            f'<aside><h3 class="sub">Inside today</h3><ul class="index">{"".join(idx)}</ul>'
-            f'<div class="rule"><h3 class="sub">Briefly</h3><ul class="brief">{briefs}</ul></div></aside></div>')
+            f'<aside><h3 class="sub">ಇಂದಿನ ಸಂಚಿಕೆಯಲ್ಲಿ</h3><ul class="index">{"".join(idx)}</ul>'
+            f'<div class="rule"><h3 class="sub">ಸಂಕ್ಷಿಪ್ತವಾಗಿ</h3><ul class="brief">{briefs}</ul></div></aside></div>')
 
 
 def local_page(P, news, wx, sun, moon, cfg, notices_items):
@@ -148,23 +155,25 @@ def local_page(P, news, wx, sun, moon, cfg, notices_items):
                        f'<p>{E(s["text"])}</p><p class="meta">{E(s["age"])}{link}</p></li>')
     if wx:
         rows = "".join(
-            f'<tr><td class="dd">{"Today" if i == 0 else E(d["date"].strftime("%a %-d %b"))}</td><td class="tt">{d["hi"]}&deg;<small> / {d["lo"]}&deg;</small></td>'
-            f'<td class="cc"><b>{E(d["sky"])}</b><br>Rain chance {d["pop"]}%, {d["mm"]:g} mm</td></tr>' for i, d in enumerate(wx))
-        wxbox = (f'<table class="wx">{rows}</table><p class="wxsrc">High / low in &deg;C. Model forecast from <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a> '
-                 f'for 12.91&deg;N 74.86&deg;E, fetched {E(datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=5, minutes=30))).strftime("%-d %B %Y, %H:%M"))} India time. A forecast, not an observation.</p>')
+            f'<tr><td class="dd">{"ಇಂದು" if i == 0 else E(KN_DAYS_SHORT[d["date"].weekday()] + " " + kd(d["date"].day) + " " + KN_MONTHS[d["date"].month - 1][:3])}</td>'
+            f'<td class="tt">{d["hi"]}&deg;<small> / {d["lo"]}&deg;</small></td>'
+            f'<td class="cc"><b>{E(d["sky"])}</b><br>ಮಳೆಯ ಸಾಧ್ಯತೆ {d["pop"]}%, {d["mm"]:g} ಮಿ.ಮೀ.</td></tr>' for i, d in enumerate(wx))
+        now = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=5, minutes=30)))
+        wxbox = (f'<table class="wx">{rows}</table><p class="wxsrc">ಗರಿಷ್ಠ / ಕನಿಷ್ಠ ತಾಪಮಾನ &deg;ಸೆ.ನಲ್ಲಿ. <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a> ನ ಮಾದರಿ ಮುನ್ಸೂಚನೆ, '
+                 f'12.91&deg;ಉ 74.86&deg;ಪೂ ಸ್ಥಳಕ್ಕೆ, {E(kd(now.day) + " " + KN_MONTHS[now.month - 1] + " " + kd(now.year) + ", " + kd(now.strftime("%H:%M")))} (ಭಾರತೀಯ ಕಾಲಮಾನ) ಪಡೆದದ್ದು. ಇದು ಮುನ್ಸೂಚನೆ, ವೀಕ್ಷಣೆಯಲ್ಲ.</p>')
     else:
-        wxbox = '<p class="empty">The five-day forecast could not be fetched this morning. Source: <a href="https://open-meteo.com/">Open-Meteo.com</a>.</p>'
+        wxbox = '<p class="empty">ಐದು ದಿನದ ಮುನ್ಸೂಚನೆ ಇಂದು ಬೆಳಗ್ಗೆ ಲಭ್ಯವಾಗಲಿಲ್ಲ. ಮೂಲ: <a href="https://open-meteo.com/">Open-Meteo.com</a>.</p>'
     up = "".join(f'<li><b>{E(u["when"])}</b><span>{E(u["what"])}</span></li>' for u in news["coming_up"])
     nums = "".join(f'<div><b>{E(n)}</b><span>{E(t)}</span></div>' for n, t in news["helplines"])
-    by8 = " Send it by 8 pm and it can go in tomorrow's paper." if bn.is_open(cfg) else ""
-    notes = (f'<div class="notes"><div><span class="kicker">Kullangal &amp; nearby &middot; notices for the day</span>{bn.notices_html(notices_items)}</div>'
-             f'<aside class="sendbox"><h3 class="hl3">Send us your news</h3><p>Events, lost and found, road works, temple and school notices, shop openings, club and school sports results.{by8}</p>{bn.send_html(cfg)}</aside></div>')
+    by8 = " ರಾತ್ರಿ 8ರ ಒಳಗೆ ಕಳುಹಿಸಿದರೆ ನಾಳೆಯ ಪತ್ರಿಕೆಯಲ್ಲಿ ಬರಬಹುದು." if bn.is_open(cfg) else ""
+    notes = (f'<div class="notes"><div><span class="kicker">ಕುಲ್ಲಂಗಾಲ್ ಮತ್ತು ಸುತ್ತಮುತ್ತ &middot; ಇಂದಿನ ಪ್ರಕಟಣೆಗಳು</span>{bn.notices_html(notices_items)}</div>'
+             f'<aside class="sendbox"><h3 class="hl3">ನಿಮ್ಮ ಸುದ್ದಿ ನಮಗೆ ಕಳುಹಿಸಿ</h3><p>ಕಾರ್ಯಕ್ರಮಗಳು, ಕಳೆದುಹೋದ-ಸಿಕ್ಕಿದ ವಸ್ತುಗಳು, ರಸ್ತೆ ಕಾಮಗಾರಿ, ದೇವಸ್ಥಾನ ಮತ್ತು ಶಾಲೆಯ ಪ್ರಕಟಣೆಗಳು, ಅಂಗಡಿ ಉದ್ಘಾಟನೆ, ಕ್ಲಬ್ ಮತ್ತು ಶಾಲಾ ಕ್ರೀಡಾ ಫಲಿತಾಂಶಗಳು.{by8}</p>{bn.send_html(cfg)}</aside></div>')
     return ('<div class="cols2"><div>'
-            f'<h3 class="sub">More stories from the coast</h3><ul id="story-list">{"".join(stories)}</ul></div>'
-            f'<aside><h3 class="sub">Five days ahead in Mangaluru</h3>{wxbox}'
-            f'<p class="wxsrc" style="margin-top:6px">Sunrise {sun[0]}, sunset {sun[1]} (calculated). Moon: {E(moon[0])}, {moon[1]}% lit (calculated).</p>'
-            f'<div class="rule"><h3 class="sub">Coming up</h3><ul class="up">{up}</ul>{sources(news.get("coming_up_sources"))}</div>'
-            f'<div class="rule"><h3 class="sub">Numbers worth keeping</h3><div class="nums">{nums}</div></div></aside></div>{notes}')
+            f'<h3 class="sub">ಕರಾವಳಿಯ ಇನ್ನಷ್ಟು ಸುದ್ದಿ</h3><ul id="story-list">{"".join(stories)}</ul></div>'
+            f'<aside><h3 class="sub">ಮಂಗಳೂರಿನಲ್ಲಿ ಮುಂದಿನ ಐದು ದಿನ</h3>{wxbox}'
+            f'<p class="wxsrc" style="margin-top:6px">ಸೂರ್ಯೋದಯ {sun[0]}, ಸೂರ್ಯಾಸ್ತ {sun[1]} (ಲೆಕ್ಕಾಚಾರ). ಚಂದ್ರ: {E(moon[0])}, {moon[1]}% ಬೆಳಗಿದೆ (ಲೆಕ್ಕಾಚಾರ).</p>'
+            f'<div class="rule"><h3 class="sub">ಮುಂದಿನ ದಿನಗಳಲ್ಲಿ</h3><ul class="up">{up}</ul>{sources(news.get("coming_up_sources"))}</div>'
+            f'<div class="rule"><h3 class="sub">ನೆನಪಿಟ್ಟುಕೊಳ್ಳಬೇಕಾದ ಸಂಖ್ಯೆಗಳು</h3><div class="nums">{nums}</div></div></aside></div>{notes}')
 
 
 def feature_page(P, feats, cache_ok=True):
@@ -174,16 +183,16 @@ def feature_page(P, feats, cache_ok=True):
     fig = ""
     if os.path.exists(img):
         uri = "data:image/jpeg;base64," + base64.b64encode(open(img, "rb").read()).decode()
-        fig = f'<figure class="fig"><img src="{uri}" alt="Illustration for {E(f["title"], quote=True)}" width="800" height="600"><figcaption>Illustration made with Canva AI. It is a picture, not a photograph.</figcaption></figure>'
+        fig = f'<figure class="fig"><img src="{uri}" alt="{E(f["title"], quote=True)} ಲೇಖನದ ಚಿತ್ರ" width="800" height="600"><figcaption>ಕ್ಯಾನ್ವಾ ಎಐ ಬಳಸಿ ರಚಿಸಿದ ಚಿತ್ರ. ಇದು ಛಾಯಾಚಿತ್ರವಲ್ಲ, ಚಿತ್ರ.</figcaption></figure>'
     else:
         ph = photos.photo_for("feature-" + f["theme"], f["terms"], day, f.get("files")) if cache_ok else None
         if ph:
-            fig = (f'<figure class="fig"><img src="{ph["uri"]}" alt="{E(f["title"], quote=True)}, photograph" width="800" height="600" loading="lazy">'
+            fig = (f'<figure class="fig"><img src="{ph["uri"]}" alt="{E(f["title"], quote=True)}, ಛಾಯಾಚಿತ್ರ" width="800" height="600" loading="lazy">'
                    f'<figcaption>{photos.credit_html(ph)}</figcaption></figure>')
     body = "".join(f"<p>{E(x)}</p>" for x in f["body"])
-    return (f'<div class="feat">{fig}<div><span class="kicker">{E(f["theme"])} &middot; a coast feature</span><h3 class="hl1" style="margin-top:8px">{E(f["title"])}</h3>'
+    return (f'<div class="feat">{fig}<div><span class="kicker">{E(f["theme_kn"])} &middot; ಕರಾವಳಿ ವಿಶೇಷ</span><h3 class="hl1" style="margin-top:8px">{E(f["title"])}</h3>'
             f'<div class="body drop rule">{body}</div>{sources(f["sources"])}</div></div>'
-            '<p class="wxsrc" style="margin-top:20px">One feature every day, on a different subject each weekday: food, art, places, tradition, the sea, nature and temples.</p>')
+            '<p class="wxsrc" style="margin-top:20px">ಪ್ರತಿದಿನ ಒಂದು ವಿಶೇಷ ಲೇಖನ; ವಾರದ ಪ್ರತಿ ದಿನ ಬೇರೆ ವಿಷಯ: ಆಹಾರ, ಕಲೆ, ಸ್ಥಳ, ಸಂಪ್ರದಾಯ, ಕಡಲು, ಪ್ರಕೃತಿ ಮತ್ತು ದೇವಾಲಯ.</p>')
 
 
 def render_paras(texts):
@@ -191,30 +200,24 @@ def render_paras(texts):
     return "".join('<p class="sb" aria-hidden="true">* * *</p>' if t.strip() == "***" else "<p>" + E(t) + "</p>" for t in texts)
 
 
-def serial_page(P, name, lang):
-    s = load(f"serial_{name}.json")
+def serial_page(P):
+    s = load("serial_kn.json")
     eps = s["episodes"]
     idx = (P.day - LAUNCH).days + 1
     latest = max(1, min(idx, len(eps)))
     e = eps[latest - 1]
-    kn = lang == "kn"
-    paras = render_paras(e["text"])
-    recap_lab = "ಹಿಂದಿನ ಸಂಚಿಕೆಯಲ್ಲಿ" if kn else "Previously"
-    recap = f'<div class="recap"><b>{recap_lab}</b>{E(e["recap"])}</div>' if latest > 1 else ""
-    ep_lab = f"ಸಂಚಿಕೆ {str(e['n']).translate(KN_DIGITS)}" if kn else f"Episode {e['n']}"
-    nxt = ("ಮುಂದಿನ ಸಂಚಿಕೆ ನಾಳೆ ಇದೇ ಪುಟದಲ್ಲಿ." if idx <= len(eps) else "ಹೊಸ ಸಂಚಿಕೆ ಶೀಘ್ರದಲ್ಲೇ ಬರಲಿದೆ.") if kn else \
-          ("The next episode arrives tomorrow on this page." if idx <= len(eps) else "The next episode is on its way.")
+    recap = f'<div class="recap"><b>ಹಿಂದಿನ ಸಂಚಿಕೆಯಲ್ಲಿ</b>{E(e["recap"])}</div>' if latest > 1 else ""
+    nxt = "ಮುಂದಿನ ಸಂಚಿಕೆ ನಾಳೆ ಇದೇ ಪುಟದಲ್ಲಿ." if idx <= len(eps) else "ಹೊಸ ಸಂಚಿಕೆ ಶೀಘ್ರದಲ್ಲೇ ಬರಲಿದೆ."
     arch = ""
     if latest > 1:
         items = "".join(
-            f'<details><summary>{"ಸಂಚಿಕೆ " + str(x["n"]).translate(KN_DIGITS) if kn else "Episode " + str(x["n"])}: {E(x["title"])}</summary>'
-            f'<div class="story-text {"kn" if kn else "en"}"{" lang=kn" if kn else ""}>{render_paras(x["text"])}</div></details>'
+            f'<details><summary>ಸಂಚಿಕೆ {kd(x["n"])}: {E(x["title"])}</summary><div class="story-text kn" lang="kn">{render_paras(x["text"])}</div></details>'
             for x in reversed(eps[:latest - 1]))
-        arch = f'<details class="arch"><summary>{"ಹಿಂದಿನ ಸಂಚಿಕೆಗಳು" if kn else "Earlier episodes"} ({latest - 1})</summary>{items}</details>'
-    return (f'<div class="ser"><span class="epi">{ep_lab} &middot; {E(s["title"])}</span>'
-            f'<h3 class="ser-title"{" lang=kn" if kn else ""}>{E(e["title"])}</h3>{recap}'
-            f'<div class="story-text {"kn" if kn else "en"}"{" lang=kn" if kn else ""}>{paras}</div>'
-            f'<p class="next"{" lang=kn" if kn else ""}>{nxt}</p><p class="blurb"{" lang=kn" if kn else ""}>{E(s["blurb"])}</p>{arch}</div>')
+        arch = f'<details class="arch"><summary>ಹಿಂದಿನ ಸಂಚಿಕೆಗಳು ({kd(latest - 1)})</summary>{items}</details>'
+    return (f'<div class="ser" lang="kn"><span class="epi">ಸಂಚಿಕೆ {kd(e["n"])} &middot; {E(s["title"])}</span>'
+            f'<h3 class="ser-title">{E(e["title"])}</h3>{recap}'
+            f'<div class="story-text kn">{render_paras(e["text"])}</div>'
+            f'<p class="next">{nxt}</p><p class="blurb">{E(s["blurb"])}</p>{arch}</div>')
 
 
 def pz_json(pid, obj):
@@ -230,27 +233,33 @@ def cw_cells(cw):
 def yesterday_block(day):
     """Yesterday's answers, printed at the end of the puzzle pages. Answers appear only the day after."""
     y = day - datetime.timedelta(days=1)
+    head = '<section class="yest"><h3>ನಿನ್ನೆಯ ಉತ್ತರಗಳು</h3>'
     if y < LAUNCH:
-        return ('<section class="yest"><h3>Yesterday\'s answers</h3><p class="muted">This is the first edition, so there are no answers to print yet. '
-                'Tomorrow\'s paper carries the answers to today\'s puzzles.</p></section>')
+        return head + '<p class="muted">ಇದು ಮೊದಲ ಸಂಚಿಕೆ, ಆದ್ದರಿಂದ ಮುದ್ರಿಸಲು ಉತ್ತರಗಳಿಲ್ಲ. ಇಂದಿನ ಒಗಟುಗಳ ಉತ್ತರ ನಾಳೆಯ ಪತ್ರಿಕೆಯಲ್ಲಿ ಬರುತ್ತದೆ.</p></section>'
+    if not puzzles.exists(y):
+        return head + (f'<p class="muted">{E(kn_date(y))}ರಂದು ಪತ್ರಿಕೆ ಪ್ರಕಟವಾಗಿರಲಿಲ್ಲ, ಆದ್ದರಿಂದ ಮುದ್ರಿಸಲು ಉತ್ತರಗಳಿಲ್ಲ. '
+                       'ಇಂದಿನ ಒಗಟುಗಳ ಉತ್ತರ ನಾಳೆಯ ಪತ್ರಿಕೆಯಲ್ಲಿ ಬರುತ್ತದೆ.</p></section>')
     pz = puzzles.get(y, save=False)
     su, cw, ws, cr = pz["sudoku"], pz["crossword"], pz["wordsearch"], pz["cryptogram"]
+    out = head + f'<p class="muted">{E(kn_date(y))}. ನಿಮ್ಮ ಉತ್ತರಗಳನ್ನು ಇವುಗಳೊಂದಿಗೆ ಹೋಲಿಸಿ ನೋಡಿ.</p>'
     sg = "".join("<tr>" + "".join("<td>" + su["solution"][r * 9 + c] + "</td>" for c in range(9)) + "</tr>" for r in range(9))
+    out += f'<p class="sub2">ಸುಡೋಕು</p><table class="grid9">{sg}</table>'
     cg = "".join("<tr>" + "".join("<td>" + E(ch) + "</td>" if ch else '<td class="b"></td>' for ch in row) + "</tr>" for row in cw_cells(cw))
-    hit = set()
-    for w in ws["words"]:
-        for k in range(len(w["w"])):
-            hit.add((w["r"] + w["dr"] * k, w["c"] + w["dc"] * k))
-    wg = "".join("<tr>" + "".join(('<td class="h">' if (r, c) in hit else "<td>") + ch + "</td>" for c, ch in enumerate(row)) + "</tr>" for r, row in enumerate(ws["grid"]))
     acr = "".join(f'<li><b>{w["n"]}.</b> {E(w["ans"])}</li>' for w in cw["across"])
     dwn = "".join(f'<li><b>{w["n"]}.</b> {E(w["ans"])}</li>' for w in cw["down"])
-    who = f' <span class="muted">Attributed to {E(cr["who"])}.</span>' if cr["who"] else ""
-    return (f'<section class="yest"><h3>Yesterday\'s answers</h3><p class="muted">{E(y.strftime("%A, %-d %B"))}. Check your work against these.</p>'
-            f'<p class="sub2">Sudoku</p><table class="grid9">{sg}</table>'
-            f'<p class="sub2">Crossword, across</p><ul class="ans">{acr}</ul><p class="sub2">Crossword, down</p><ul class="ans">{dwn}</ul>'
-            f'<table class="grid9 cwg">{cg}</table>'
-            f'<p class="sub2">Word search: {E(ws["title"])}</p><table class="grid9 wsg">{wg}</table>'
-            f'<p class="sub2">Cryptogram</p><p class="quote">{E(cr["plain"].capitalize())}</p>{who}</section>')
+    out += (f'<p class="sub2">ಪದಬಂಧ: ಎಡದಿಂದ ಬಲಕ್ಕೆ</p><ul class="ans">{acr}</ul><p class="sub2">ಪದಬಂಧ: ಮೇಲಿನಿಂದ ಕೆಳಕ್ಕೆ</p><ul class="ans">{dwn}</ul>'
+            f'<table class="grid9 cwg">{cg}</table>')
+    if ws.get("lang") == "kn":
+        hit = set()
+        for w in ws["words"]:
+            for k in range(w["n"]):
+                hit.add((w["r"] + w["dr"] * k, w["c"] + w["dc"] * k))
+        wg = "".join("<tr>" + "".join(('<td class="h">' if (r, c) in hit else "<td>") + E(ch) + "</td>" for c, ch in enumerate(row)) + "</tr>" for r, row in enumerate(ws["grid"]))
+        out += f'<p class="sub2">ಪದ ಹುಡುಕಾಟ: {E(ws["title"])}</p><table class="grid9 wsg">{wg}</table>'
+    if cr.get("lang") == "kn":
+        who = f' <span class="muted">— {E(cr["who"])}</span>' if cr.get("who") else ""
+        out += f'<p class="sub2">ಗಾದೆ ಸಂಕೇತ</p><p class="quote">{E(cr["plain"])}</p>{who}'
+    return out + "</section>"
 
 
 def puzzle_pages(P, pz):
@@ -260,34 +269,36 @@ def puzzle_pages(P, pz):
     mask = ["".join("#" if ch else "." for ch in row) for row in cw_cells(cw)]
     strip = lambda items: [{k: v for k, v in w.items() if k != "ans"} for w in items]
     p1 = (
-        f'<section class="puz"><h3>Sudoku <span class="lvl">{su["level"]}</span></h3>'
-        '<p class="how">Fill every row, column and 3 by 3 box with the digits 1 to 9, once each. Tap a square, then write a number. '
-        'Like a printed puzzle, it will not check your work or give hints. Your pencil marks stay on this device. The answer is in tomorrow\'s paper.</p>'
+        f'<section class="puz"><h3>ಸುಡೋಕು <span class="lvl">{E(LEVELS.get(su["level"], su["level"]))}</span></h3>'
+        '<p class="how">ಪ್ರತಿ ಸಾಲು, ಕಂಬ ಮತ್ತು 3×3 ಪೆಟ್ಟಿಗೆಯಲ್ಲಿ 1ರಿಂದ 9ರ ಅಂಕೆಗಳು ಒಮ್ಮೆಯೇ ಬರುವಂತೆ ತುಂಬಿ. ಚೌಕದ ಮೇಲೆ ಒತ್ತಿ, ಸಂಖ್ಯೆ ಬರೆಯಿರಿ. '
+        'ಮುದ್ರಿತ ಒಗಟಿನಂತೆ ಇದು ನಿಮ್ಮ ಉತ್ತರ ಪರಿಶೀಲಿಸುವುದಿಲ್ಲ, ಸುಳಿವೂ ಕೊಡುವುದಿಲ್ಲ. ನಿಮ್ಮ ಪೆನ್ಸಿಲ್ ಗುರುತುಗಳು ಈ ಸಾಧನದಲ್ಲೇ ಉಳಿಯುತ್ತವೆ. ಉತ್ತರ ನಾಳೆಯ ಪತ್ರಿಕೆಯಲ್ಲಿ.</p>'
         '<div id="sudoku"></div>'
         + pz_json("pz-sudoku", dict(puzzle=su["puzzle"], day=day)) + '</section>'
-        '<section class="puz"><h3>Cryptogram <span class="lvl">Decode</span></h3>'
-        '<p class="how">Every letter of a well-known saying has been swapped for another letter, always the same swap, and no letter stands for itself. '
-        'Write your guess above each coded letter. The answer is in tomorrow\'s paper.</p>'
+        '<section class="puz"><h3>ಗಾದೆ ಸಂಕೇತ <span class="lvl">ಬಿಡಿಸಿ</span></h3>'
+        '<p class="how">ಒಂದು ಪ್ರಸಿದ್ಧ ಗಾದೆಯ ಪ್ರತಿ ಅಕ್ಷರದ ಬದಲು ಒಂದು ಸಂಖ್ಯೆ ಇದೆ; ಒಂದೇ ಅಕ್ಷರಕ್ಕೆ ಯಾವಾಗಲೂ ಒಂದೇ ಸಂಖ್ಯೆ. ಕೆಲವು ಅಕ್ಷರಗಳನ್ನು ಕೊಟ್ಟಿದೆ. '
+        'ಉಳಿದವನ್ನು ಸಂಖ್ಯೆಯ ಮೇಲಿರುವ ಖಾಲಿ ಚೌಕದಲ್ಲಿ ಬರೆಯಿರಿ (ಒಂದು ಚೌಕಕ್ಕೆ ಒಂದು ಅಕ್ಷರ, ಉದಾಹರಣೆಗೆ ಮಾ, ಲ್ಲಿ, ಕ್ಷ). ಉತ್ತರ ನಾಳೆಯ ಪತ್ರಿಕೆಯಲ್ಲಿ.</p>'
         '<div id="cryptogram"></div>'
-        + pz_json("pz-cryptogram", dict(cipher=cr["cipher"], day=day)) + '</section>')
-    across = "".join(f'<li data-w="A,{w["r"]},{w["c"]}"><b>{w["n"]}</b><span>{E(w["clue"])} ({w["len"]} ಅಕ್ಷರ)</span></li>' for w in cw["across"])
-    down = "".join(f'<li data-w="D,{w["r"]},{w["c"]}"><b>{w["n"]}</b><span>{E(w["clue"])} ({w["len"]} ಅಕ್ಷರ)</span></li>' for w in cw["down"])
+        + pz_json("pz-cryptogram", dict(words=cr["words"], given=cr["given"], day=day)) + '</section>')
+    unit = "ಅಕ್ಷರ"
+    across = "".join(f'<li data-w="A,{w["r"]},{w["c"]}"><b>{w["n"]}</b><span>{E(w["clue"])} ({w["len"]} {unit})</span></li>' for w in cw["across"])
+    down = "".join(f'<li data-w="D,{w["r"]},{w["c"]}"><b>{w["n"]}</b><span>{E(w["clue"])} ({w["len"]} {unit})</span></li>' for w in cw["down"])
+    back = ", ಈ ವಾರಾಂತ್ಯ ಕೆಲವು ಹಿಂದಕ್ಕೂ ಇರುತ್ತವೆ" if ws["hard"] else ""
     p2 = (
-        '<section class="puz"><h3><span lang="kn">ಪದಬಂಧ</span> <span class="lvl">Kannada crossword</span></h3>'
+        '<section class="puz"><h3>ಪದಬಂಧ <span class="lvl">ಕಠಿಣ</span></h3>'
         '<p class="how" lang="kn">ಚೌಕದ ಮೇಲೆ ಒತ್ತಿ, ನಿಮ್ಮ ಫೋನಿನ ಕನ್ನಡ ಕೀಬೋರ್ಡ್‌ನಲ್ಲಿ ಉತ್ತರ ಬರೆಯಿರಿ. ಒಂದು ಚೌಕಕ್ಕೆ ಒಂದು ಅಕ್ಷರ (ಉದಾಹರಣೆಗೆ ಮೀ, ಲ್ಲು, ಕ್ಷ). ಅದೇ ಚೌಕವನ್ನು ಮತ್ತೆ ಒತ್ತಿದರೆ ದಿಕ್ಕು ಅಡ್ಡದಿಂದ ಕೆಳಕ್ಕೆ ಬದಲಾಗುತ್ತದೆ. ಉತ್ತರಗಳು ನಾಳೆಯ ಪತ್ರಿಕೆಯಲ್ಲಿ.</p>'
         '<div id="crossword"></div><div class="pbtns" id="cw-btns"></div>'
         f'<div class="clues" lang="kn"><div><h4>ಎಡದಿಂದ ಬಲಕ್ಕೆ</h4><ul>{across}</ul></div><div><h4>ಮೇಲಿನಿಂದ ಕೆಳಕ್ಕೆ</h4><ul>{down}</ul></div></div>'
         + pz_json("pz-crossword", dict(rows=cw["rows"], cols=cw["cols"], grid=mask, across=strip(cw["across"]), down=strip(cw["down"]), day=day)) + '</section>'
-        f'<section class="puz"><h3>Word search <span class="lvl">{E(ws["title"])}</span></h3>'
-        f'<p class="how">Find these {len(ws["words"])} words in the grid. Words run across, down or diagonally{", and this weekend some run backwards too" if ws["hard"] else ""}. '
-        'Tap letters to mark them with a highlighter, and tap a word in the list to cross it off. Nothing is checked for you.</p>'
+        f'<section class="puz"><h3>ಪದ ಹುಡುಕಾಟ <span class="lvl">{E(ws["title"])}</span></h3>'
+        f'<p class="how">ಈ {kd(len(ws["words"]))} ಪದಗಳನ್ನು ಜಾಲದಲ್ಲಿ ಹುಡುಕಿ. ಪದಗಳು ಅಡ್ಡ, ಕೆಳಕ್ಕೆ ಅಥವಾ ಓರೆಯಾಗಿ ಇರುತ್ತವೆ{back}. ಒಂದು ಚೌಕದಲ್ಲಿ ಒಂದು ಅಕ್ಷರ ಇದೆ. '
+        'ಅಕ್ಷರಗಳ ಮೇಲೆ ಒತ್ತಿ ಹೈಲೈಟರ್‌ನಂತೆ ಗುರುತಿಸಿ; ಪಟ್ಟಿಯಲ್ಲಿನ ಪದದ ಮೇಲೆ ಒತ್ತಿ ಕಾಟು ಹಾಕಿ. ಏನನ್ನೂ ಪರಿಶೀಲಿಸುವುದಿಲ್ಲ.</p>'
         '<div id="wordsearch"></div>'
         + pz_json("pz-wordsearch", dict(size=ws["size"], grid=ws["grid"], words=[{"w": w["w"]} for w in ws["words"]], day=day)) + '</section>'
         + yesterday_block(P.day))
     return p1, p2
 
 
-GARDEN_KINDS = (("herb", "Herb of the day", 0), ("flower", "Flower of the day", 3), ("indoor", "Indoor and garden plant", 5))
+GARDEN_KINDS = (("herb", "ಇಂದಿನ ಗಿಡಮೂಲಿಕೆ", 0), ("flower", "ಇಂದಿನ ಹೂವು", 3), ("indoor", "ಒಳಾಂಗಣ ಮತ್ತು ತೋಟದ ಗಿಡ", 5))
 
 
 def garden_page(P, garden):
@@ -297,19 +308,18 @@ def garden_page(P, garden):
     for cat, label, off in GARDEN_KINDS:
         grp = [p for p in garden["plants"] if p.get("category") == cat]
         p = grp[(d + off) % len(grp)]
-        picks.append((("Bonsai of the day" if "Bonsai" in p["tags"] else label), p))
+        picks.append(("ಇಂದಿನ ಬೋನ್ಸಾಯ್" if p.get("bonsai") else label, p))
     cards = []
     for k, (label, p) in enumerate(picks):
-        ph = photos.photo_for(p["name"], PLANT_TERMS.get(p["name"], [p["latin"]]), P.day)
-        fig = (f'<figure class="fig"><img src="{ph["uri"]}" alt="{E(p["name"], quote=True)}, photograph" width="800" height="600" loading="lazy"><figcaption>{photos.credit_html(ph)}</figcaption></figure>' if ph else "")
-        kn = f'<span class="knn" lang="kn">{E(p["kn"])}</span>' if p["kn"] else ""
+        ph = photos.photo_for(p["key"], PLANT_TERMS.get(p["key"], [p["latin"]]), P.day)
+        fig = (f'<figure class="fig"><img src="{ph["uri"]}" alt="{E(p["name"], quote=True)}, ಛಾಯಾಚಿತ್ರ" width="800" height="600" loading="lazy"><figcaption>{photos.credit_html(ph)}</figcaption></figure>' if ph else "")
         tags = "".join(f"<span>{E(t)}</span>" for t in p["tags"])
         spec = "".join(f"<dt>{E(a)}</dt><dd>{E(b)}</dd>" for a, b in p["spec"])
-        cards.append(f'<article class="plant{" first" if k == 0 else ""}">{fig}<div><span class="kicker">{E(label)}</span><h3>{E(p["name"])}</h3><div class="names">{kn}<span class="lat">{E(p["latin"])}</span></div>'
+        cards.append(f'<article class="plant{" first" if k == 0 else ""}">{fig}<div><span class="kicker">{E(label)}</span><h3>{E(p["name"])}</h3><div class="names"><span class="lat">{E(p["latin"])}</span></div>'
                      f'<div class="tags">{tags}</div><p class="about">{E(p["about"])}</p><dl class="spec">{spec}</dl></div></article>')
     month = "".join(f"<li>{E(x)}</li>" for x in garden["month"])
-    return (f'<p class="deck" style="margin-bottom:22px">Every day a herb, a flower and an indoor or garden plant (now and then a bonsai), chosen for a home on the coast: laterite soil, salty air and months of rain.</p><div class="plants">{"".join(cards)}</div>'
-            f'<div class="month"><h3 class="sub">This month in the garden</h3><p class="prog" id="garden-prog"></p><ul id="garden-list">{month}</ul></div>')
+    return (f'<p class="deck" style="margin-bottom:22px">ಪ್ರತಿದಿನ ಒಂದು ಗಿಡಮೂಲಿಕೆ, ಒಂದು ಹೂವು ಮತ್ತು ಒಂದು ಒಳಾಂಗಣ ಅಥವಾ ತೋಟದ ಗಿಡ (ಆಗಾಗ ಬೋನ್ಸಾಯ್): ಜಂಬಿಟ್ಟಿಗೆ ಮಣ್ಣು, ಉಪ್ಪುಗಾಳಿ ಮತ್ತು ತಿಂಗಳುಗಟ್ಟಲೆ ಮಳೆಯ ಕರಾವಳಿ ಮನೆಗೆ ಹೊಂದುವಂತೆ ಆಯ್ದದ್ದು.</p><div class="plants">{"".join(cards)}</div>'
+            f'<div class="month"><h3 class="sub">ಈ ತಿಂಗಳು ತೋಟದಲ್ಲಿ</h3><p class="prog" id="garden-prog"></p><ul id="garden-list">{month}</ul></div>')
 
 
 def plate_html(key):
@@ -319,11 +329,11 @@ def plate_html(key):
     for k in keys:
         m = meta[k]
         data = base64.b64encode(open(os.path.join(HERE, "tales_assets", k + ".jpg"), "rb").read()).decode()
-        who = m["artist"] or ("The Metropolitan Museum of Art" if k == "camel" else "Unknown")
+        who = m["artist"] or ("ದಿ ಮೆಟ್ರೋಪಾಲಿಟನ್ ಮ್ಯೂಸಿಯಂ ಆಫ್ ಆರ್ಟ್" if k == "camel" else "ಅಜ್ಞಾತ")
         if k.startswith("tortoise"):
-            who = "Ellsworth Young, 1912"
-        figs.append(f'<figure class="plate"><img src="data:image/jpeg;base64,{data}" alt="Historic illustration for this tale" loading="lazy" width="{m["size"][0]}" height="{m["size"][1]}">'
-                    f'<figcaption>Old illustration: {E(who)}, <a href="{m["page"]}" target="_blank" rel="noopener">Wikimedia Commons</a>, {E(m["lic"])}</figcaption></figure>')
+            who = "ಎಲ್ಸ್‌ವರ್ತ್ ಯಂಗ್, 1912"
+        figs.append(f'<figure class="plate"><img src="data:image/jpeg;base64,{data}" alt="ಈ ಕತೆಯ ಹಳೆಯ ಚಿತ್ರ" loading="lazy" width="{m["size"][0]}" height="{m["size"][1]}">'
+                    f'<figcaption>ಹಳೆಯ ಚಿತ್ರ: {E(who)}, <a href="{m["page"]}" target="_blank" rel="noopener">ವಿಕಿಮೀಡಿಯಾ ಕಾಮನ್ಸ್</a>, {E(m["lic"])}</figcaption></figure>')
     return "".join(figs)
 
 
@@ -331,15 +341,15 @@ def tales_page(P):
     """One tale a day, Panchatantra and Jataka on alternate days."""
     day = (P.day - LAUNCH).days
     series = comics.PANCHATANTRA if day % 2 == 0 else comics.JATAKA
-    label = "Panchatantra" if day % 2 == 0 else "Jataka tales"
+    label = "ಪಂಚತಂತ್ರ" if day % 2 == 0 else "ಜಾತಕ ಕತೆಗಳು"
     ep = series[(day // 2) % len(series)]
-    panels = "".join(f'<figure class="panel">{comics.panel(p)}<figcaption><b>{i}</b>{E(p["cap"])}</figcaption></figure>' for i, p in enumerate(ep["panels"], 1))
+    panels = "".join(f'<figure class="panel">{comics.panel(p)}<figcaption><b>{kd(i)}</b>{E(p["cap"])}</figcaption></figure>' for i, p in enumerate(ep["panels"], 1))
     plate = plate_html(ep["plate"]) if ep["plate"] else ""
-    art = (f'<article class="tale"><span class="kicker">{E(label)} &middot; today\'s tale</span><h3 class="hl2" style="margin-top:6px">{E(ep["title"])}</h3>'
-           f'<div class="panels">{panels}</div><p class="moral"><span class="lab">Moral</span> {E(ep["moral"])}</p>{plate}</article>')
-    other = "Jataka" if day % 2 == 0 else "Panchatantra"
-    return (comics.COMIC_DEFS + f'<p class="deck" style="margin-bottom:20px">One old Indian tale a day, drawn as four panels with the moral at the end. Tomorrow: a {other} tale. '
-            'The stories are traditional and retold here in original words; the drawings are original.</p>'
+    art = (f'<article class="tale"><span class="kicker">{E(label)} &middot; ಇಂದಿನ ಕತೆ</span><h3 class="hl2" style="margin-top:6px">{E(ep["title"])}</h3>'
+           f'<div class="panels">{panels}</div><p class="moral"><span class="lab">ನೀತಿ</span> {E(ep["moral"])}</p>{plate}</article>')
+    other = "ಜಾತಕ" if day % 2 == 0 else "ಪಂಚತಂತ್ರದ"
+    return (comics.COMIC_DEFS + f'<p class="deck" style="margin-bottom:20px">ಪ್ರತಿದಿನ ಒಂದು ಹಳೆಯ ಭಾರತೀಯ ಕತೆ, ನಾಲ್ಕು ಚಿತ್ರಗಳಲ್ಲಿ, ಕೊನೆಯಲ್ಲಿ ನೀತಿಯೊಂದಿಗೆ. ನಾಳೆ: {other} ಕತೆ. '
+            'ಕತೆಗಳು ಸಾಂಪ್ರದಾಯಿಕವಾದವು, ಇಲ್ಲಿ ನಮ್ಮದೇ ಮಾತುಗಳಲ್ಲಿ ಮರುಹೇಳಲಾಗಿದೆ; ಚಿತ್ರಗಳು ಮೂಲ ರಚನೆ.</p>'
             f'<div class="tales">{art}</div>'), ep["title"], None
 
 
@@ -351,9 +361,9 @@ def world_page(world):
     brief = "".join(f"<li>{E(x)}</li>" for x in world.get("briefly", []))
     return (f'<span class="kicker">{E(ld["region"])}</span><h3 class="hl1" style="margin:8px 0 0">{E(ld["headline"])}</h3><p class="deck">{E(ld["deck"])}</p>'
             f'<div class="body drop rule">{body}</div>{sources(ld["sources"])}'
-            f'<div class="rule"><h3 class="sub">Around the world</h3><div class="sp">{cards}</div></div>'
-            + (f'<div class="rule"><h3 class="sub">Briefly</h3><ul class="brief">{brief}</ul></div>' if brief else "")
-            + '<p class="wxsrc" style="margin-top:18px">World news is gathered from the sources named under each item by web search and rewritten in our own words. Where reports differ or are secondary, the text says so.</p>')
+            f'<div class="rule"><h3 class="sub">ಜಗತ್ತಿನ ಸುತ್ತ</h3><div class="sp">{cards}</div></div>'
+            + (f'<div class="rule"><h3 class="sub">ಸಂಕ್ಷಿಪ್ತವಾಗಿ</h3><ul class="brief">{brief}</ul></div>' if brief else "")
+            + '<p class="wxsrc" style="margin-top:18px">ವಿಶ್ವ ಸುದ್ದಿಯನ್ನು ಪ್ರತಿ ಸುದ್ದಿಯ ಕೆಳಗೆ ಹೆಸರಿಸಿದ ಮೂಲಗಳಿಂದ ವೆಬ್ ಹುಡುಕಾಟದ ಮೂಲಕ ಸಂಗ್ರಹಿಸಿ ನಮ್ಮದೇ ಮಾತುಗಳಲ್ಲಿ ಬರೆಯಲಾಗಿದೆ. ವರದಿಗಳು ಭಿನ್ನವಾಗಿದ್ದರೆ ಅಥವಾ ದ್ವಿತೀಯ ಮೂಲದ್ದಾದರೆ ಪಠ್ಯದಲ್ಲೇ ಹೇಳಲಾಗಿದೆ.</p>')
 
 
 def sports_page(news):
@@ -361,7 +371,7 @@ def sports_page(news):
     cards = "".join(f'<article><span class="sport">{E(i["sport"])}</span><h3>{E(i["title"])}</h3><p>{E(i["text"])}</p>'
                     f'<p class="src"><a href="{E(i["url"], quote=True)}" target="_blank" rel="noopener">{E(i["source"])}</a></p></article>' for i in sp["items"])
     return (f'<h3 class="hl1" style="margin-bottom:22px">{E(sp["headline"])}</h3><div class="sp">{cards}</div>'
-            f'<div class="rule"><h3 class="sub">Local sports</h3><p>{E(sp["local"])}</p></div>')
+            f'<div class="rule"><h3 class="sub">ಸ್ಥಳೀಯ ಕ್ರೀಡೆ</h3><p>{E(sp["local"])}</p></div>')
 
 
 def desk_pages(priv):
@@ -369,10 +379,10 @@ def desk_pages(priv):
         f'<article><span class="tag{" act" if n["act"] else ""}">{E(n["tag"])}</span><h3 class="hl2">{E(n["title"])}</h3><p>{E(n["text"])}</p>'
         f'<a class="more" href="{E(n["url"], quote=True)}" target="_blank" rel="noopener">{E(n["link"])}</a></article>' for n in priv["desk"])
     also = "".join(f'<li><b>{E(a["title"])}</b><small>{E(a["tag"])}</small><p>{E(a["text"])}</p></li>' for a in priv["also"])
-    desk = (f'<div class="desk">{notices}</div><div class="cols2" style="margin-top:26px"><div><h3 class="sub">Also received</h3><ul class="rows">{also}</ul></div>'
-            f'<aside><h3 class="sub">Housekeeping</h3><p><b class="hl2">{E(priv["cleanup"]["n"])}</b> {E(priv["cleanup"]["text"])}</p></aside></div>'
-            '<p class="wxsrc">Private page: this edition is not for sharing. It is built from your inbox as of the last time the Gmail connector was available.</p>')
-    ads = "".join(f'<div class="ad"><span class="lab">Wanted</span><h3>{E(a["title"])}</h3><p>{E(a["text"])}</p><span class="lab" style="color:#565b63">{E(a["from"])}</span></div>' for a in priv["classifieds"])
+    desk = (f'<div class="desk">{notices}</div><div class="cols2" style="margin-top:26px"><div><h3 class="sub">ಇವೂ ಬಂದಿವೆ</h3><ul class="rows">{also}</ul></div>'
+            f'<aside><h3 class="sub">ಮನೆಗೆಲಸ</h3><p><b class="hl2">{E(priv["cleanup"]["n"])}</b> {E(priv["cleanup"]["text"])}</p></aside></div>'
+            '<p class="wxsrc">ಖಾಸಗಿ ಪುಟ: ಈ ಆವೃತ್ತಿಯನ್ನು ಹಂಚಿಕೊಳ್ಳಬಾರದು. ಜಿಮೇಲ್ ಸಂಪರ್ಕ ಕೊನೆಯ ಬಾರಿ ಲಭ್ಯವಿದ್ದಾಗಿನ ನಿಮ್ಮ ಇನ್‌ಬಾಕ್ಸ್‌ನಿಂದ ಇದನ್ನು ತಯಾರಿಸಲಾಗಿದೆ.</p>')
+    ads = "".join(f'<div class="ad"><span class="lab">ಬೇಕಾಗಿದ್ದಾರೆ</span><h3>{E(a["title"])}</h3><p>{E(a["text"])}</p><span class="lab" style="color:#565b63">{E(a["from"])}</span></div>' for a in priv["classifieds"])
     return desk, f'<div class="ads">{ads}</div>'
 
 
@@ -386,44 +396,43 @@ def assemble(day, private, ctx):
     p1, p2 = ctx["pz_pages"]
     n_days = (day - LAUNCH).days
     # page order; front page needs the index, so add pages first with placeholders
-    P.add("front", "Front page", "ಮುಖಪುಟ", "", "The day's lead story, weather, sun and moon")
+    P.add("front", "ಮುಖಪುಟ", "", "ದಿನದ ಮುಖ್ಯ ಸುದ್ದಿ, ಹವಾಮಾನ, ಸೂರ್ಯ ಮತ್ತು ಚಂದ್ರ")
     if private:
         desk, ads = desk_pages(priv)
-        P.add("desk", "Desk", "ಡೆಸ್ಕ್", desk, "Your inbox, edited (private)")
-        P.add("classifieds", "Classifieds", "ಪ್ರಕಟಣೆಗಳು", ads, "Situations vacant matched to you (private)")
-    P.add("local", "Coast & Local", "ಕರಾವಳಿ ಮತ್ತು ಸ್ಥಳೀಯ", local_page(P, news, wx, sun, moon, cfg, notices_items), "More stories, five-day weather, notices, useful numbers")
-    P.add("world", "World", "ಜಗತ್ತು", world_page(ctx["world"]), "The day's world news: lead story, regions, economy, space and science")
-    P.add("feature", "Coast Feature", "ವಿಶೇಷ ಲೇಖನ", ctx["feature"], "One feature a day: food, art, places, tradition, sea, nature, temples")
-    P.add("kadambari", "Kannada Kadambari", "ಕನ್ನಡ ಕಾದಂಬರಿ", serial_page(P, "kn", "kn"), "ಸಮುದ್ರ ನಿಲಯ: ಧಾರಾವಾಹಿ ಕಾದಂಬರಿ, ಪ್ರತಿದಿನ ಒಂದು ಸಂಚಿಕೆ")
-    P.add("serial", "English Serial", "ಇಂಗ್ಲಿಷ್ ಕಾದಂಬರಿ", serial_page(P, "en", "en"), "The Tide Ledger: a coastal mystery, one episode a day")
-    P.add("puz1", "Puzzles I", "ಒಗಟುಗಳು ೧", p1, "Sudoku and a cryptogram")
-    P.add("puz2", "Puzzles II", "ಒಗಟುಗಳು ೨", p2, "A mini crossword and a word search")
-    P.add("garden", "Garden", "ತೋಟ", garden_page(P, garden), "A herb, a flower and an indoor or bonsai plant, every day")
-    P.add("tales", "Tales", "ಕತೆಗಳು", tales_html, f"Today: {t1}")
-    P.add("sports", "Sports", "ಕ್ರೀಡೆ", sports_page(news), "Cricket, the Asian Games, hockey and kabaddi")
+        P.add("desk", "ಡೆಸ್ಕ್", desk, "ನಿಮ್ಮ ಇನ್‌ಬಾಕ್ಸ್, ಸಂಪಾದಿತ (ಖಾಸಗಿ)")
+        P.add("classifieds", "ಪ್ರಕಟಣೆಗಳು", ads, "ನಿಮಗೆ ಹೊಂದುವ ಉದ್ಯೋಗಗಳು (ಖಾಸಗಿ)")
+    P.add("local", "ಕರಾವಳಿ ಮತ್ತು ಸ್ಥಳೀಯ", local_page(P, news, wx, sun, moon, cfg, notices_items), "ಇನ್ನಷ್ಟು ಸುದ್ದಿ, ಐದು ದಿನದ ಹವಾಮಾನ, ಪ್ರಕಟಣೆಗಳು, ಬೇಕಾದ ಸಂಖ್ಯೆಗಳು")
+    P.add("world", "ಜಗತ್ತು", world_page(ctx["world"]), "ದಿನದ ವಿಶ್ವ ಸುದ್ದಿ: ಮುಖ್ಯ ಸುದ್ದಿ, ಪ್ರದೇಶಗಳು, ಅರ್ಥವ್ಯವಸ್ಥೆ, ಬಾಹ್ಯಾಕಾಶ ಮತ್ತು ವಿಜ್ಞಾನ")
+    P.add("feature", "ಕರಾವಳಿ ವಿಶೇಷ", ctx["feature"], "ಪ್ರತಿದಿನ ಒಂದು ವಿಶೇಷ: ಆಹಾರ, ಕಲೆ, ಸ್ಥಳ, ಸಂಪ್ರದಾಯ, ಕಡಲು, ಪ್ರಕೃತಿ, ದೇವಾಲಯ")
+    P.add("kadambari", "ಕನ್ನಡ ಕಾದಂಬರಿ", serial_page(P), "ಸಮುದ್ರ ನಿಲಯ: ಧಾರಾವಾಹಿ ಕಾದಂಬರಿ, ಪ್ರತಿದಿನ ಒಂದು ಸಂಚಿಕೆ")
+    P.add("puz1", "ಒಗಟುಗಳು ೧", p1, "ಸುಡೋಕು ಮತ್ತು ಗಾದೆ ಸಂಕೇತ")
+    P.add("puz2", "ಒಗಟುಗಳು ೨", p2, "ಕನ್ನಡ ಪದಬಂಧ ಮತ್ತು ಪದ ಹುಡುಕಾಟ")
+    P.add("garden", "ತೋಟ", garden_page(P, garden), "ಪ್ರತಿದಿನ ಒಂದು ಗಿಡಮೂಲಿಕೆ, ಒಂದು ಹೂವು, ಒಂದು ಒಳಾಂಗಣ ಅಥವಾ ಬೋನ್ಸಾಯ್ ಗಿಡ")
+    P.add("tales", "ಕತೆಗಳು", tales_html, f"ಇಂದು: {t1}")
+    P.add("sports", "ಕ್ರೀಡೆ", sports_page(news), "ಕ್ರಿಕೆಟ್, ದೊಡ್ಡ ಕ್ರೀಡಾಕೂಟಗಳು ಮತ್ತು ಸ್ಥಳೀಯ ಕ್ರೀಡೆ")
     P.pages[0]["body"] = front_page(P, news, wx, sun, moon, priv if private else None)
-    P.joke_after = {"local": joke_break(day, 0, jokes), "serial": joke_break(day, 1, jokes), "puz2": joke_break(day, 2, jokes), "garden": joke_break(day, 3, jokes)}
+    P.joke_after = {"local": joke_break(day, 0, jokes), "kadambari": joke_break(day, 1, jokes), "puz2": joke_break(day, 2, jokes), "garden": joke_break(day, 3, jokes)}
     n = len(P.pages)
     css, js = rd("paper.css"), rd("paper.js")
     edno = n_days + 1
     doc = (
-        '<title>Kullangal Vaarte</title>\n'
+        '<title>ಕುಲ್ಲಂಗಾಲ್ ವಾರ್ತೆ</title>\n'
         '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
-        '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,800;9..144,900&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Archivo+Narrow:wght@500;700&family=Noto+Serif+Kannada:wght@400;600;800&family=Noto+Sans+Kannada:wght@400;700&display=swap">\n'
+        '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Noto+Serif+Kannada:wght@400;600;800&family=Noto+Sans+Kannada:wght@400;700;900&display=swap">\n'
         f'<style>{css}</style>\n'
-        f'<div id="top"></div><header class="wrap mast"><div class="top lab"><span>Vol. I &middot; No. {edno}</span><span>Mangaluru &middot; Udupi &middot; Kundapura</span><span>Daily edition</span></div>'
-        '<div class="knname" lang="kn">ಕುಲ್ಲಂಗಾಲ್ ವಾರ್ತೆ</div><div class="enname">Kullangal Vaarte</div>'
-        '<p class="slogan">The coast, in Kannada and English, in a morning read of numbered pages</p>'
-        f'<div class="dateline lab"><span>{E(en_date(day))}</span><span lang="kn">{kn_date(day)}</span><span>{n} pages, about twenty minutes</span></div></header>\n'
-        f'<nav class="nav" aria-label="Pages"><div class="wrap nav-in"><div class="pills">{P.pills()}</div>'
-        '<div class="tools"><button class="tbtn" id="size-down" type="button" aria-label="Smaller text">A&minus;</button><button class="tbtn" id="size-up" type="button" aria-label="Larger text">A+</button>'
-        f'<a class="btn share" id="wa-share" href="#" target="_blank" rel="noopener" data-url="{PUBLIC_URL}">WhatsApp</a></div></div></nav>\n'
-        f'<main>{P.render_pages()}</main>\n'
-        '<footer class="wrap colo"><b>Kullangal Vaarte</b>'
-        f'<p>Edition No. {edno}, built {E(en_date(day))}. News and sports facts come from the sources named under each item, gathered by web search and rewritten in our own words. Weather is from Open-Meteo.com (CC BY 4.0). Sunrise, sunset and moon phase are calculated. Plant and feature photographs are from Wikimedia Commons with credits under each. The two serial novels, the puzzles, the comic drawings and the jokes are written or made for this paper; all people and companies in the serials are invented. Old illustrations on the Tales page are credited under them.</p>'
-        '<p>A new edition replaces this one each morning.</p></footer>\n'
+        f'<div id="top"></div><header class="wrap mast" lang="kn"><div class="top lab"><span>ಸಂಪುಟ ೧ &middot; ಸಂಚಿಕೆ {kd(edno)}</span><span>ಮಂಗಳೂರು &middot; ಉಡುಪಿ &middot; ಕುಂದಾಪುರ</span><span>ದಿನಪತ್ರಿಕೆ</span></div>'
+        '<div class="knname" lang="kn">ಕುಲ್ಲಂಗಾಲ್ ವಾರ್ತೆ</div>'
+        '<p class="slogan">ಕರಾವಳಿಯ ಸುದ್ದಿ, ಕತೆ, ಒಗಟು ಮತ್ತು ತೋಟ: ಬೆಳಗಿನ ಓದಿಗೆ ಪುಟಗಳ ಪತ್ರಿಕೆ</p>'
+        f'<div class="dateline lab"><span lang="kn">{kn_date(day)}</span><span>{kd(n)} ಪುಟಗಳು, ಸುಮಾರು ಇಪ್ಪತ್ತು ನಿಮಿಷದ ಓದು</span></div></header>\n'
+        f'<nav class="nav" aria-label="ಪುಟಗಳು" lang="kn"><div class="wrap nav-in"><div class="pills">{P.pills()}</div>'
+        '<div class="tools"><button class="tbtn" id="size-down" type="button" aria-label="ಅಕ್ಷರ ಚಿಕ್ಕದು">ಅ&minus;</button><button class="tbtn" id="size-up" type="button" aria-label="ಅಕ್ಷರ ದೊಡ್ಡದು">ಅ+</button>'
+        f'<a class="btn share" id="wa-share" href="#" target="_blank" rel="noopener" data-url="{PUBLIC_URL}">ವಾಟ್ಸ್‌ಆ್ಯಪ್</a></div></div></nav>\n'
+        f'<main lang="kn">{P.render_pages()}</main>\n'
+        '<footer class="wrap colo" lang="kn"><b>ಕುಲ್ಲಂಗಾಲ್ ವಾರ್ತೆ</b>'
+        f'<p>ಸಂಚಿಕೆ {kd(edno)}, {E(kn_date(day))}ರಂದು ತಯಾರಿಸಿದ್ದು. ಸುದ್ದಿ ಮತ್ತು ಕ್ರೀಡೆಯ ವಿವರಗಳು ಪ್ರತಿ ಸುದ್ದಿಯ ಕೆಳಗೆ ಹೆಸರಿಸಿದ ಮೂಲಗಳಿಂದ ವೆಬ್ ಹುಡುಕಾಟದ ಮೂಲಕ ಸಂಗ್ರಹಿಸಿ ನಮ್ಮದೇ ಮಾತುಗಳಲ್ಲಿ ಬರೆದವು. ಹವಾಮಾನ Open-Meteo.com ನಿಂದ (CC BY 4.0). ಸೂರ್ಯೋದಯ, ಸೂರ್ಯಾಸ್ತ ಮತ್ತು ಚಂದ್ರನ ಕಲೆ ಲೆಕ್ಕಾಚಾರದ್ದು. ಗಿಡ ಮತ್ತು ವಿಶೇಷ ಲೇಖನದ ಛಾಯಾಚಿತ್ರಗಳು ವಿಕಿಮೀಡಿಯಾ ಕಾಮನ್ಸ್‌ನಿಂದ, ಶ್ರೇಯಸ್ಸು ಪ್ರತಿ ಚಿತ್ರದ ಕೆಳಗಿದೆ. ಕಾದಂಬರಿ, ಒಗಟುಗಳು, ಕತೆಗಳ ರೇಖಾಚಿತ್ರಗಳು ಮತ್ತು ಹಾಸ್ಯಗಳನ್ನು ಈ ಪತ್ರಿಕೆಗಾಗಿಯೇ ಬರೆದು ರಚಿಸಲಾಗಿದೆ; ಕಾದಂಬರಿಯ ಎಲ್ಲ ವ್ಯಕ್ತಿಗಳು ಮತ್ತು ಸಂಸ್ಥೆಗಳು ಕಾಲ್ಪನಿಕ. ಕತೆಗಳ ಪುಟದ ಹಳೆಯ ಚಿತ್ರಗಳ ಶ್ರೇಯಸ್ಸು ಅವುಗಳ ಕೆಳಗಿದೆ.</p>'
+        '<p>ಪ್ರತಿದಿನ ಬೆಳಗ್ಗೆ ಹೊಸ ಸಂಚಿಕೆ ಈ ಸಂಚಿಕೆಯ ಸ್ಥಾನ ಪಡೆಯುತ್ತದೆ.</p></footer>\n'
         f'<script>{js}</script>')
-    doc = doc.replace("<main>", '<main data-month="' + day.strftime("%Y-%m") + '">')
+    doc = doc.replace("<main", '<main data-month="' + day.strftime("%Y-%m") + '"', 1)
     return doc, t1, t2
 
 
@@ -460,7 +469,8 @@ def main():
         doc, t1, t2 = assemble(day, private, ctx)
         path = outs["private" if private else "public"]
         if not private:
-            bad = [w for w in ("mail.google", "gmail", "@gmail", "miniTV", "Payment declined", "Outskill", "pradyumna") if w.lower() in doc.lower()]
+            words = ("mail.google", "gmail", "@gmail", "miniTV", "Payment declined", "Outskill", "pradyumna", "ಮಿನಿಟಿವಿ", "ಔಟ್‌ಸ್ಕಿಲ್", "ಜಿಮೇಲ್", "ಜಿಪೇ", "ಲಿಬೆರಾ", "ವೆನ್ಹ್")
+            bad = [w for w in words if w.lower() in doc.lower()]
             assert not bad, f"private content leaked into the shareable edition: {bad}"
         open(path, "w", encoding="utf-8").write(doc)
         print(("private" if private else "public"), path, round(len(doc) / 1e6, 2), "MB")

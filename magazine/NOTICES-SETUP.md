@@ -2,28 +2,28 @@
 
 Goal: readers send events, lost and found, road works, temple and school notices, shop openings, club and school results. You approve what is printed. The paper picks the approved ones up in the next morning's build (06:29 IST), so something sent by 8 pm the evening before can go in tomorrow's paper.
 
-Nothing here costs money. Nothing is printed unless you type `yes` in the `approved` column.
+Nothing here costs money. Nothing is printed unless you type `ಹೌದು` (or `yes`) in the approval column.
 
 ## 1. Make the Google Form (5 minutes, on forms.google.com)
 
-Questions, all "Short answer" unless noted:
+The paper is in Kannada, so write the Form in Kannada. Use these question titles (the paper recognises them, and also the English ones: heading, details, place, date):
 
-| Question | Type | Required |
-|---|---|---|
-| Heading (for example "Lost: brown umbrella") | Short answer | yes |
-| Details (what, where, time, who to call) | Paragraph | yes |
-| Place (village or town) | Short answer | yes |
-| Date of the event, or the first day it should appear | Date | yes |
-| Last day it should appear (optional) | Date | no |
-| Your name and phone number (for the editor only, never printed) | Short answer | no |
+| Question (Kannada) | Meaning | Type | Required |
+|---|---|---|---|
+| ಶೀರ್ಷಿಕೆ (ಉದಾಹರಣೆಗೆ: ಕಳೆದುಹೋಗಿದೆ: ಕಂದು ಬಣ್ಣದ ಕೊಡೆ) | heading | Short answer | yes |
+| ವಿವರಗಳು (ಏನು, ಎಲ್ಲಿ, ಯಾವ ಸಮಯ, ಯಾರನ್ನು ಸಂಪರ್ಕಿಸಬೇಕು) | details | Paragraph | yes |
+| ಸ್ಥಳ (ಊರು) | place | Short answer | yes |
+| ದಿನಾಂಕ (ಕಾರ್ಯಕ್ರಮದ ದಿನ ಅಥವಾ ಪ್ರಕಟವಾಗಬೇಕಾದ ಮೊದಲ ದಿನ) | date | Date | yes |
+| ಕೊನೆಯ ದಿನ (ಐಚ್ಛಿಕ) | last day | Date | no |
+| ನಿಮ್ಮ ಹೆಸರು ಮತ್ತು ಫೋನ್ ಸಂಖ್ಯೆ (ಸಂಪಾದಕರಿಗೆ ಮಾತ್ರ, ಮುದ್ರಿಸುವುದಿಲ್ಲ) | contact, never printed | Short answer | no |
 
-Do not make a question for the name or phone that the paper reads. The paper only reads heading, details, place and the dates.
+The paper reads only the heading, details, place and the dates; the name and phone question is never read or printed.
 
 Settings: turn off "Collect email addresses" if you do not want them. Copy the form link (Send, then the link icon). That is `form_url`.
 
 ## 2. Add the approval column
 
-In the Form, open Responses, then "Link to Sheets" to create the response Sheet. In the Sheet, add one more column at the right and call it `approved`. For each row you accept, type `yes` in that column. Rows that stay empty are never printed.
+In the Form, open Responses, then "Link to Sheets" to create the response Sheet. In the Sheet, add one more column at the right and call it `ಅನುಮೋದನೆ` (or `approved`). For each row you accept, type `ಹೌದು` (or `yes`) in that column. Rows that stay empty are never printed.
 
 ## 3. Publish the Sheet as CSV
 

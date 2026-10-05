@@ -85,7 +85,7 @@ img, svg { max-width: 100%; }
 .body p + p { margin-top: .85em; }
 .drop > p:first-child::first-letter { font: 900 3.9em/.8 var(--head); float: left; padding: 6px 8px 0 0; color: var(--pc); }
 .src { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; margin-top: 12px; padding-top: 8px; border-top: 1px solid var(--hair); }
-.src::before { content: "Sources"; font: 700 .7rem/1 var(--label); letter-spacing: .16em; text-transform: uppercase; color: var(--ink2); }
+.src::before { content: "ಮೂಲಗಳು"; font: 700 .7rem/1 var(--label); letter-spacing: .16em; text-transform: uppercase; color: var(--ink2); }
 .src a { font: 600 .85rem/1.2 var(--label); letter-spacing: .06em; text-transform: uppercase; }
 .cols2 { display: grid; gap: 26px; }
 .rule { border-top: 1px solid var(--ink); padding-top: 14px; margin-top: 22px; }
@@ -213,15 +213,16 @@ details.arch details .story-text { margin-top: 0; padding-bottom: 14px; }
 .clues li { display: grid; grid-template-columns: 2ch minmax(0, 1fr); gap: 8px; padding: 6px 4px; font-size: .98rem; line-height: 1.35; cursor: pointer; }
 .clues li b { font: 800 .9rem/1.4 var(--head); }
 .ws { display: grid; margin: 14px auto 8px; width: min(100%, 26rem); border: 2px solid var(--ink); touch-action: manipulation; }
-.wc { aspect-ratio: 1; display: grid; place-items: center; font: 700 clamp(.85rem, 4.2vw, 1.25rem)/1 var(--head); background: #fff; cursor: pointer; padding: 0; border: 0; color: var(--ink); border-radius: 0; user-select: none; }
+.wc { aspect-ratio: 1; display: grid; place-items: center; font: 700 clamp(.68rem, 3.2vw, 1rem)/1 var(--kn); background: #fff; cursor: pointer; padding: 0; border: 0; color: var(--ink); border-radius: 0; user-select: none; overflow: hidden; }
 .wc.mk { background: #ffe58a; box-shadow: inset 0 0 0 2px #e0a100; border-radius: 50%; }
 .wlist { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 10px; justify-content: center; }
 .wd { font: 700 .95rem/1.3 var(--label); letter-spacing: .08em; background: none; border: 0; padding: 8px 4px; min-height: 40px; cursor: pointer; color: var(--ink); }
 .wd.cut { text-decoration: line-through; color: var(--ink2); }
 .cry { margin: 14px 0 6px; display: flex; flex-wrap: wrap; gap: 14px 16px; }
 .cw-word { display: flex; gap: 3px; }
-.cl { display: grid; grid-template-rows: auto auto; justify-items: center; width: 1.7rem; }
-.cl input { width: 1.7rem; height: 2.1rem; text-align: center; text-transform: uppercase; font: 800 1.15rem/1 var(--head); border: 0; border-bottom: 2px solid var(--ink); background: transparent; padding: 0; border-radius: 0; color: var(--ink); }
+.cl { display: grid; grid-template-rows: auto auto; justify-items: center; width: 2.3rem; }
+.cl.gv .gl { display: grid; place-items: center; width: 2.3rem; height: 2.3rem; font: 800 1.15rem/1 var(--kn); color: var(--pc); border-bottom: 2px solid var(--ink); background: color-mix(in srgb, var(--pc) 8%, #fff); }
+.cl input { width: 2.3rem; height: 2.3rem; text-align: center; font: 800 1.15rem/1.3 var(--kn); border: 0; border-bottom: 2px solid var(--ink); background: transparent; padding: 0; border-radius: 0; color: var(--ink); }
 .cl input:focus { background: color-mix(in srgb, var(--pc) 18%, #fff); outline: none; }
 .cl small { font: 700 .72rem/1.5 var(--label); color: var(--ink2); }
 .cl.pn small { visibility: hidden; }
@@ -356,3 +357,10 @@ details.arch details .story-text { margin-top: 0; padding-bottom: 14px; }
   .panel svg [filter] { filter: none !important; }
   .panel svg rect[filter] { display: none; }
 }
+
+/* The paper is Kannada only: letter-spacing would pull apart conjuncts and vowel signs, so it is switched off everywhere. */
+body * { letter-spacing: 0 !important; text-transform: none !important; }
+.yest .wsg td { font: 700 .7rem/1 var(--kn); width: 1.9rem; height: 1.7rem; overflow: hidden; }
+.yest .cwg td { font: 700 .72rem/1 var(--kn); width: 1.7rem; }
+.yest .grid9 td { font-family: var(--kn); }
+.pk { font-size: .8rem !important; }

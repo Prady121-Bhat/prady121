@@ -213,30 +213,33 @@ DIRS_HARD = DIRS_EASY + [(0, -1), (-1, 0), (-1, -1), (1, -1)]
 
 
 def make_wordsearch(day):
-    sets = load("wordsearch_sets.json")
+    """Kannada word search: every square holds one akshara; words are placed across, down or diagonally (and backwards at weekends)."""
+    sets = load("wordsearch_sets_kn.json")
     s = sets[day.toordinal() % len(sets)]
     rng = random.Random(day.toordinal() * 31337 + 1)
     size = 12
     hard = day.weekday() >= 4
     dirs = DIRS_HARD if hard else DIRS_EASY
-    words = [w for w in s["words"] if len(w) <= size]
+    words = [(w, aksharas(w)) for w in s["words"]]
+    words = [(w, t) for w, t in words if "".join(t) == w and len(t) <= size]
     rng.shuffle(words)
-    words = sorted(words[:10], key=lambda w: -len(w))
+    words = sorted(words[:10], key=lambda p: -len(p[1]))
+    pool = sorted({a for st in sets for w in st["words"] for a in aksharas(w)})
     for attempt in range(200):
         grid = [[""] * size for _ in range(size)]
         placed, ok = [], True
-        for w in words:
+        for w, t in words:
             done = False
             for _ in range(300):
                 dr, dc = rng.choice(dirs)
                 r, c = rng.randrange(size), rng.randrange(size)
-                er, ec = r + dr * (len(w) - 1), c + dc * (len(w) - 1)
+                er, ec = r + dr * (len(t) - 1), c + dc * (len(t) - 1)
                 if not (0 <= er < size and 0 <= ec < size):
                     continue
-                if all(grid[r + dr * k][c + dc * k] in ("", w[k]) for k in range(len(w))):
-                    for k in range(len(w)):
-                        grid[r + dr * k][c + dc * k] = w[k]
-                    placed.append(dict(w=w, r=r, c=c, dr=dr, dc=dc))
+                if all(grid[r + dr * k][c + dc * k] in ("", t[k]) for k in range(len(t))):
+                    for k in range(len(t)):
+                        grid[r + dr * k][c + dc * k] = t[k]
+                    placed.append(dict(w=w, r=r, c=c, dr=dr, dc=dc, n=len(t)))
                     done = True
                     break
             if not done:
@@ -244,29 +247,28 @@ def make_wordsearch(day):
                 break
         if ok:
             break
-    letters = string.ascii_uppercase
     for i in range(size):
         for j in range(size):
             if not grid[i][j]:
-                grid[i][j] = rng.choice(letters)
-    return dict(title=s["title"], size=size, grid=["".join(r) for r in grid], words=placed, hard=hard)
+                grid[i][j] = rng.choice(pool)
+    return dict(lang="kn", title=s["title"], size=size, grid=grid, words=placed, hard=hard)
 
 
-# ---------------------------------------------------------------- cryptogram
+# ---------------------------------------------------------------- codeword (Kannada saying)
 def make_cryptogram(day):
-    items = load("proverbs.json")
+    """A Kannada saying with every akshara replaced by a number (the same akshara always gets the same number).
+    A few aksharas are given as a start. The solver writes the aksharas under the numbers."""
+    items = [it for it in load("proverbs_kn.json") if len(aksharas(it[0].replace(" ", ""))) >= 10]
     text, who = items[day.toordinal() % len(items)]
     rng = random.Random(day.toordinal() * 65537 + 3)
-    letters = list(string.ascii_uppercase)
-    while True:
-        perm = letters[:]
-        rng.shuffle(perm)
-        if all(a != b for a, b in zip(letters, perm)):
-            break
-    m = dict(zip(letters, perm))
-    plain = text.upper()
-    cipher = "".join(m.get(ch, ch) for ch in plain)
-    return dict(plain=plain, cipher=cipher, who=who)
+    words = [aksharas(w) for w in text.split(" ")]
+    distinct = sorted({a for w in words for a in w})
+    codes = list(range(1, len(distinct) + 1))
+    rng.shuffle(codes)
+    m = dict(zip(distinct, codes))
+    given_n = max(2, len(distinct) // 5)
+    given = {str(m[a]): a for a in rng.sample(distinct, given_n)}
+    return dict(lang="kn", plain=text, who=who, words=[[m[a] for a in w] for w in words], given=given)
 
 
 def level_for(day):
@@ -276,6 +278,10 @@ def level_for(day):
 def make_all(day):
     return dict(sudoku=make_sudoku(day, level_for(day)), crossword=make_crossword(day),
                 wordsearch=make_wordsearch(day), cryptogram=make_cryptogram(day))
+
+
+def exists(day):
+    return os.path.exists(os.path.join(HERE, "content", "puzzles", day.isoformat() + ".json"))
 
 
 def get(day, save=True):

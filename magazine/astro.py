@@ -29,8 +29,8 @@ def moon(day):
     now = datetime.datetime(day.year, day.month, day.day, 6, 0)
     age = ((now - base).total_seconds() / 86400) % 29.530588853
     frac = (1 - math.cos(2 * math.pi * age / 29.530588853)) / 2
-    names = [(1.85, "New moon"), (5.53, "Waxing crescent"), (9.22, "First quarter"), (12.91, "Waxing gibbous"),
-             (16.61, "Full moon"), (20.30, "Waning gibbous"), (23.99, "Last quarter"), (27.68, "Waning crescent"), (99, "New moon")]
+    names = [(1.85, "ಅಮಾವಾಸ್ಯೆ"), (5.53, "ಬೆಳೆಯುತ್ತಿರುವ ಚಂದ್ರ, ಚಿಕ್ಕ ಕಲೆ"), (9.22, "ಬೆಳೆಯುತ್ತಿರುವ ಅರ್ಧ ಚಂದ್ರ"), (12.91, "ಬೆಳೆಯುತ್ತಿರುವ ಚಂದ್ರ, ದೊಡ್ಡ ಕಲೆ"),
+             (16.61, "ಹುಣ್ಣಿಮೆ"), (20.30, "ಕ್ಷೀಣಿಸುತ್ತಿರುವ ಚಂದ್ರ, ದೊಡ್ಡ ಕಲೆ"), (23.99, "ಕ್ಷೀಣಿಸುತ್ತಿರುವ ಅರ್ಧ ಚಂದ್ರ"), (27.68, "ಕ್ಷೀಣಿಸುತ್ತಿರುವ ಚಂದ್ರ, ಚಿಕ್ಕ ಕಲೆ"), (99, "ಅಮಾವಾಸ್ಯೆ")]
     name = next(n for lim, n in names if age < lim)
     return name, round(frac * 100), round(age, 1)
 

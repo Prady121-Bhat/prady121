@@ -4,9 +4,9 @@ import datetime, json, sys, time, urllib.request
 
 URL = ("https://api.open-meteo.com/v1/forecast?latitude=12.9141&longitude=74.856&timezone=Asia%2FKolkata&forecast_days=5"
        "&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_speed_10m_max")
-WMO = {0: "Clear", 1: "Mostly clear", 2: "Partly cloudy", 3: "Overcast", 45: "Fog", 48: "Fog", 51: "Light drizzle", 53: "Drizzle",
-       55: "Heavy drizzle", 61: "Light rain", 63: "Rain", 65: "Heavy rain", 80: "Light showers", 81: "Showers", 82: "Heavy showers",
-       95: "Thunderstorm", 96: "Thunderstorm, hail", 99: "Thunderstorm, hail"}
+WMO = {0: "ಶುಭ್ರ ಆಕಾಶ", 1: "ಬಹುತೇಕ ಶುಭ್ರ", 2: "ಭಾಗಶಃ ಮೋಡ", 3: "ಮೋಡ ಕವಿದಿದೆ", 45: "ಮಂಜು", 48: "ಮಂಜು", 51: "ಹಗುರ ಸಿಂಚನ", 53: "ಸಿಂಚನ",
+       55: "ಭಾರಿ ಸಿಂಚನ", 61: "ಹಗುರ ಮಳೆ", 63: "ಮಳೆ", 65: "ಭಾರಿ ಮಳೆ", 80: "ಹಗುರ ಮಳೆ ಸರಿ", 81: "ಮಳೆ ಸರಿ", 82: "ಭಾರಿ ಮಳೆ ಸರಿ",
+       95: "ಗುಡುಗು ಸಹಿತ ಮಳೆ", 96: "ಗುಡುಗು, ಆಲಿಕಲ್ಲು", 99: "ಗುಡುಗು, ಆಲಿಕಲ್ಲು"}
 
 
 def forecast(tries=5):
@@ -17,7 +17,7 @@ def forecast(tries=5):
             days = []
             for k, iso in enumerate(d["time"]):
                 days.append(dict(date=datetime.date.fromisoformat(iso), hi=round(d["temperature_2m_max"][k]), lo=round(d["temperature_2m_min"][k]),
-                                 sky=WMO.get(d["weather_code"][k], "Weather code %d" % d["weather_code"][k]),
+                                 sky=WMO.get(d["weather_code"][k], "ಹವಾಮಾನ ಸಂಕೇತ %d" % d["weather_code"][k]),
                                  pop=d["precipitation_probability_max"][k], mm=d["precipitation_sum"][k], wind=round(d["wind_speed_10m_max"][k])))
             return days
         except Exception as e:

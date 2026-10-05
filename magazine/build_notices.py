@@ -10,19 +10,19 @@ import csv, datetime, html, io, json, os, re, sys, urllib.parse, urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 E = html.escape
-EMPTY = "No reader notices today. If something is happening in Kullangal or nearby, send it in."
-NOT_OPEN = ("Reader notices are not open yet. Until the form is ready the editor cannot take notices, "
-            "so please do not send them anywhere for now.")
+EMPTY = "ಇಂದು ಓದುಗರ ಪ್ರಕಟಣೆಗಳಿಲ್ಲ. ಕುಲ್ಲಂಗಾಲ್ ಅಥವಾ ಹತ್ತಿರ ಏನಾದರೂ ನಡೆಯುತ್ತಿದ್ದರೆ ನಮಗೆ ತಿಳಿಸಿ."
+NOT_OPEN = ("ಓದುಗರ ಪ್ರಕಟಣೆಗಳ ವಿಭಾಗ ಇನ್ನೂ ತೆರೆದಿಲ್ಲ. ಫಾರ್ಮ್ ಸಿದ್ಧವಾಗುವವರೆಗೆ ಸಂಪಾದಕರು ಪ್ರಕಟಣೆಗಳನ್ನು ಸ್ವೀಕರಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ; "
+            "ಸದ್ಯಕ್ಕೆ ಎಲ್ಲಿಗೂ ಕಳುಹಿಸಬೇಡಿ.")
 # Google Form columns carry the question text; these aliases map them to our fields
 ALIASES = dict(
-    title=("title", "heading", "what", "notice", "headline"),
-    text=("text", "details", "description", "more details", "notice details"),
-    place=("place", "where", "location", "village", "town"),
-    date_from=("date_from", "date", "when", "from", "event date", "date of event"),
-    date_to=("date_to", "to", "until", "last date", "last day", "show until"),
-    approved=("approved", "ok", "editor", "editor approval"),
+    title=("title", "heading", "what", "notice", "headline", "ಶೀರ್ಷಿಕೆ", "ತಲೆಬರಹ", "ಏನು ನಡೆಯುತ್ತಿದೆ"),
+    text=("text", "details", "description", "more details", "notice details", "ವಿವರ", "ವಿವರಗಳು"),
+    place=("place", "where", "location", "village", "town", "ಸ್ಥಳ", "ಊರು", "ಎಲ್ಲಿ"),
+    date_from=("date_from", "date", "when", "from", "event date", "date of event", "ದಿನಾಂಕ", "ಯಾವಾಗ", "ಆರಂಭದ ದಿನ"),
+    date_to=("date_to", "to", "until", "last date", "last day", "show until", "ಕೊನೆಯ ದಿನ", "ಕೊನೆಯ ದಿನಾಂಕ"),
+    approved=("approved", "ok", "editor", "editor approval", "ಅನುಮೋದನೆ", "ಒಪ್ಪಿಗೆ"),
 )
-TEMPLATE = ("Kullangal Vaarte notice\nWhat:\nWhere:\nWhen (date and time):\nContact for questions (optional):")
+TEMPLATE = ("ಕುಲ್ಲಂಗಾಲ್ ವಾರ್ತೆ ಪ್ರಕಟಣೆ\nಏನು:\nಎಲ್ಲಿ:\nಯಾವಾಗ (ದಿನಾಂಕ, ಸಮಯ):\nವಿಚಾರಿಸಲು ಸಂಪರ್ಕ (ಐಚ್ಛಿಕ):")
 
 
 def load_json(name):
@@ -33,7 +33,7 @@ def load_json(name):
 
 
 def truthy(v):
-    return str(v).strip().lower() in ("1", "true", "yes", "y", "approved")
+    return str(v).strip().lower() in ("1", "true", "yes", "y", "approved", "ಹೌದು", "ಸರಿ", "ಒಪ್ಪಿಗೆ")
 
 
 def day(v):
@@ -101,12 +101,12 @@ def is_open(cfg):
 def send_html(cfg):
     btns = []
     if str(cfg.get("form_url", "")).startswith("https://"):
-        btns.append(f'<a class="btn pri" href="{E(cfg["form_url"], quote=True)}" target="_blank" rel="noopener">Fill the form</a>')
+        btns.append(f'<a class="btn pri" href="{E(cfg["form_url"], quote=True)}" target="_blank" rel="noopener">ಫಾರ್ಮ್ ತುಂಬಿ</a>')
     num = re.sub(r"\D", "", cfg.get("whatsapp_number") or "")
     if num:
-        btns.append(f'<a class="btn" href="https://wa.me/{num}?text={urllib.parse.quote(TEMPLATE)}" target="_blank" rel="noopener">Send on WhatsApp</a>')
+        btns.append(f'<a class="btn" href="https://wa.me/{num}?text={urllib.parse.quote(TEMPLATE)}" target="_blank" rel="noopener">ವಾಟ್ಸ್‌ಆ್ಯಪ್‌ನಲ್ಲಿ ಕಳುಹಿಸಿ</a>')
     if not btns:
         return f'<p class="empty">{E(NOT_OPEN)}</p>'
     return ('<pre id="tpl-text">' + E(TEMPLATE) + '</pre><div class="btns">' + "".join(btns)
-            + '<button class="btn" type="button" id="copy-tpl">Copy the template</button></div>'
-            '<p class="prog">Every notice is read by the editor before it is printed.</p>')
+            + '<button class="btn" type="button" id="copy-tpl">ಮಾದರಿ ನಕಲಿಸಿ</button></div>'
+            '<p class="prog">ಪ್ರತಿ ಪ್ರಕಟಣೆಯನ್ನು ಸಂಪಾದಕರು ಓದಿ ಒಪ್ಪಿದ ಮೇಲೆಯೇ ಮುದ್ರಿಸಲಾಗುತ್ತದೆ.</p>')

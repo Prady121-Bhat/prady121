@@ -233,7 +233,7 @@ def panel(scene, uid=""):
             parts.append(tree(x, y, s, fruit)); continue
         if item[0] == "text":
             _, x, y, t = item
-            parts.append(f'<text x="{x}" y="{y}" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="28" fill="#D32F2F" stroke="#fff" stroke-width="3" paint-order="stroke" transform="rotate(-6 {x} {y})">{E(t)}</text>'); continue
+            parts.append(f'<text x="{x}" y="{y}" font-family="Noto Sans Kannada, Arial Black, sans-serif" font-weight="900" font-size="28" fill="#D32F2F" stroke="#fff" stroke-width="3" paint-order="stroke" transform="rotate(-6 {x} {y})">{E(t)}</text>'); continue
         if item[0] == "water":
             _, y = item
             parts.append(f'<rect y="{y}" width="400" height="{300-y}" fill="url(#water)" opacity=".94"/>' + ''.join(f'<path d="M{x} {y+10+k*9} q12 -5 24 0 t24 0" fill="none" stroke="#fff" stroke-width="1.8" opacity=".55" stroke-linecap="round"/>' for k, x in enumerate((10, 120, 250, 60, 190, 320)))); continue
@@ -381,3 +381,8 @@ JATAKA = [
        items=[("crane", 170, 245, 1.4, False), ("crab", 240, 200, .9, False)]),
  ]),
 ]
+
+
+# the paper is printed in Kannada: swap in the Kannada text (comics_kn.py keeps the translations)
+import comics_kn
+comics_kn.localise(PANCHATANTRA, JATAKA)
