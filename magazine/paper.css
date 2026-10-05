@@ -378,3 +378,24 @@ body * { letter-spacing: 0 !important; text-transform: none !important; }
 .yest .cwg td { font: 700 .72rem/1 var(--kn); width: 1.7rem; }
 .yest .grid9 td { font-family: var(--kn); }
 .pk { font-size: .8rem !important; }
+/* Bhagavad Gita and Sanskrit pages */
+.shloka { margin: 14px 0 6px; padding: 18px 14px; text-align: center; border: 2px solid var(--pc); background: color-mix(in srgb, var(--pc) 7%, #fff); }
+.shloka .gl { display: block; font: 800 clamp(1.15rem, 5vw, 1.55rem)/1.7 var(--kn); color: var(--ink); text-wrap: balance; }
+.spk { font: italic 600 .95rem/1.4 var(--head); color: var(--ink2); text-align: center; margin-bottom: 18px; }
+.wtab { width: 100%; border-collapse: collapse; margin: 4px 0 18px; }
+.wtab td { padding: 6px 8px; border-bottom: 1px solid var(--hair); vertical-align: top; font: 500 1rem/1.5 var(--kn); }
+.wtab td.sa { width: 42%; font-weight: 800; color: var(--pc); }
+.gita .tr { font: 600 1.1rem/1.65 var(--kn); border-left: 4px solid var(--pc); padding-left: 12px; margin-bottom: 18px; }
+.gita .exp p { font: 400 1.05rem/1.75 var(--kn); margin-bottom: 12px; }
+.sa { font-family: var(--kn); font-weight: 800; }
+.sanskrit .lesson p { font: 400 1.05rem/1.75 var(--kn); margin-bottom: 12px; }
+.sanskrit .lesson p.sloka { font-weight: 800; text-align: center; font-size: 1.2rem; line-height: 1.8; border: 2px solid var(--pc); padding: 14px 10px; background: color-mix(in srgb, var(--pc) 7%, #fff); }
+.stab-wrap { overflow-x: auto; margin: 10px 0 20px; }
+.stab { border-collapse: collapse; min-width: 100%; }
+.stab th { text-align: left; font: 800 .85rem/1.3 var(--kn); color: #fff; background: var(--pc); padding: 7px 10px; }
+.stab td { padding: 7px 10px; border-bottom: 1px solid var(--hair); font: 400 1rem/1.5 var(--kn); }
+.stab td .sa { font-size: 1.08rem; }
+.stab tbody tr:nth-child(even) td { background: color-mix(in srgb, var(--pc) 5%, #fff); }
+ol.sans { padding-left: 1.6em; list-style: kannada; }
+ol.sans li { font: 400 1.05rem/1.7 var(--kn); margin-bottom: 8px; }
+.yest ol.sans li { font-size: .98rem; }

@@ -9,7 +9,7 @@ The shareable edition never contains anything from content/private.json (checked
 """
 import datetime, html, json, os, re, sys, base64
 
-import astro, comics, photos, puzzles, weather
+import astro, comics, gita_sanskrit, photos, puzzles, weather
 import build_notices as bn
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -43,9 +43,10 @@ def kd(x):
 PAGE_COLOURS = dict(front=("#c4361f", "#fff"), desk=("#6b6f76", "#fff"), classifieds=("#8a5a00", "#fff"), local=("#0b7a75", "#fff"),
                     feature=("#e0a100", "#15171c"), kadambari=("#8e2c6b", "#fff"),
                     world=("#5b3fa8", "#fff"), puz1=("#1f7a3a", "#fff"), puz2=("#d2571a", "#fff"), garden=("#4d7a1b", "#fff"),
-                    tales=("#c72a66", "#fff"), sports=("#0f5fa8", "#fff"), kitchen=("#a0522d", "#fff"))
+                    tales=("#c72a66", "#fff"), sports=("#0f5fa8", "#fff"), kitchen=("#a0522d", "#fff"),
+                    gita=("#7b5a00", "#fff"), sanskrit=("#00698f", "#fff"))
 SHORT = dict(front="ಮುಖಪುಟ", desk="ಡೆಸ್ಕ್", classifieds="ಪ್ರಕಟಣೆ", local="ಸ್ಥಳೀಯ", world="ಜಗತ್ತು", feature="ವಿಶೇಷ", kadambari="ಕಾದಂಬರಿ",
-             puz1="ಒಗಟು ೧", puz2="ಒಗಟು ೨", garden="ತೋಟ", kitchen="ಅಡುಗೆ", tales="ಕತೆ", sports="ಕ್ರೀಡೆ")
+             puz1="ಒಗಟು ೧", puz2="ಒಗಟು ೨", garden="ತೋಟ", kitchen="ಅಡುಗೆ", gita="ಗೀತೆ", sanskrit="ಸಂಸ್ಕೃತ", tales="ಕತೆ", sports="ಕ್ರೀಡೆ")
 # English names are used only to search Wikimedia Commons for a photograph of each plant
 PLANT_TERMS = {
     "Udupi Mallige": ["Jasminum sambac flower", "Jasminum sambac"],
@@ -426,6 +427,8 @@ def assemble(day, private, ctx):
     P.add("puz2", "ಒಗಟುಗಳು ೨", p2, "ಕನ್ನಡ ಪದಬಂಧ ಮತ್ತು ಪದ ಹುಡುಕಾಟ")
     P.add("garden", "ತೋಟ", garden_page(P, garden), "ಪ್ರತಿದಿನ ಒಂದು ಗಿಡಮೂಲಿಕೆ, ಒಂದು ಹೂವು, ಒಂದು ಒಳಾಂಗಣ ಅಥವಾ ಬೋನ್ಸಾಯ್ ಗಿಡ")
     P.add("kitchen", "ಅಡುಗೆಮನೆ", recipe_page(P, ctx["recipes"]), f"ಇಂದಿನ ಅಡುಗೆ: {ctx['recipe_name']} (ಈರುಳ್ಳಿ-ಬೆಳ್ಳುಳ್ಳಿ ಇಲ್ಲದ ಸಸ್ಯಾಹಾರ)")
+    P.add("gita", "ಭಗವದ್ಗೀತೆ", gita_sanskrit.gita_page(day), f"ಇಂದಿನ ಶ್ಲೋಕ: {gita_sanskrit.gita_title(day)}, ಪದಾರ್ಥ, ಅನುವಾದ ಮತ್ತು ವಿವರಣೆ")
+    P.add("sanskrit", "ಸಂಸ್ಕೃತ ಕಲಿಕೆ", gita_sanskrit.sanskrit_page(day), f"ಇಂದಿನ {gita_sanskrit.lesson_title(day)}")
     P.add("tales", "ಕತೆಗಳು", tales_html, f"ಇಂದು: {t1}")
     P.add("sports", "ಕ್ರೀಡೆ", sports_page(news), "ಕ್ರಿಕೆಟ್, ದೊಡ್ಡ ಕ್ರೀಡಾಕೂಟಗಳು ಮತ್ತು ಸ್ಥಳೀಯ ಕ್ರೀಡೆ")
     P.pages[0]["body"] = front_page(P, news, wx, sun, moon, priv if private else None)
@@ -441,13 +444,13 @@ def assemble(day, private, ctx):
         f'<div id="top"></div><header class="wrap mast" lang="kn"><div class="top lab"><span>ಸಂಪುಟ ೧ &middot; ಸಂಚಿಕೆ {kd(edno)}</span><span>ಮಂಗಳೂರು &middot; ಉಡುಪಿ &middot; ಕುಂದಾಪುರ</span><span>ದಿನಪತ್ರಿಕೆ</span></div>'
         '<div class="knname" lang="kn">ಕುಲ್ಲಂಗಾಲ್ ವಾರ್ತೆ</div>'
         '<p class="slogan">ಕರಾವಳಿಯ ಸುದ್ದಿ, ಕತೆ, ಒಗಟು ಮತ್ತು ತೋಟ: ಬೆಳಗಿನ ಓದಿಗೆ ಪುಟಗಳ ಪತ್ರಿಕೆ</p>'
-        f'<div class="dateline lab"><span lang="kn">{kn_date(day)}</span><span>{kd(n)} ಪುಟಗಳು, ಸುಮಾರು ಇಪ್ಪತ್ತು ನಿಮಿಷದ ಓದು</span></div></header>\n'
+        f'<div class="dateline lab"><span lang="kn">{kn_date(day)}</span><span>{kd(n)} ಪುಟಗಳು, ಸುಮಾರು ಮೂವತ್ತು ನಿಮಿಷದ ಓದು</span></div></header>\n'
         f'<nav class="nav" aria-label="ಪುಟಗಳು" lang="kn"><div class="wrap nav-in"><div class="pills">{P.pills()}</div>'
         '<div class="tools"><button class="tbtn" id="size-down" type="button" aria-label="ಅಕ್ಷರ ಚಿಕ್ಕದು">ಅ&minus;</button><button class="tbtn" id="size-up" type="button" aria-label="ಅಕ್ಷರ ದೊಡ್ಡದು">ಅ+</button>'
         f'<a class="btn share" id="wa-share" href="#" target="_blank" rel="noopener" data-url="{PUBLIC_URL}">ವಾಟ್ಸ್‌ಆ್ಯಪ್</a></div></div></nav>\n'
         f'<main lang="kn">{P.render_pages()}</main>\n'
         '<footer class="wrap colo" lang="kn"><b>ಕುಲ್ಲಂಗಾಲ್ ವಾರ್ತೆ</b>'
-        f'<p>ಸಂಚಿಕೆ {kd(edno)}, {E(kn_date(day))}ರಂದು ತಯಾರಿಸಿದ್ದು. ಸುದ್ದಿ ಮತ್ತು ಕ್ರೀಡೆಯ ವಿವರಗಳು ಪ್ರತಿ ಸುದ್ದಿಯ ಕೆಳಗೆ ಹೆಸರಿಸಿದ ಮೂಲಗಳಿಂದ ವೆಬ್ ಹುಡುಕಾಟದ ಮೂಲಕ ಸಂಗ್ರಹಿಸಿ ನಮ್ಮದೇ ಮಾತುಗಳಲ್ಲಿ ಬರೆದವು. ಹವಾಮಾನ Open-Meteo.com ನಿಂದ (CC BY 4.0). ಸೂರ್ಯೋದಯ, ಸೂರ್ಯಾಸ್ತ ಮತ್ತು ಚಂದ್ರನ ಕಲೆ ಲೆಕ್ಕಾಚಾರದ್ದು. ಗಿಡ ಮತ್ತು ವಿಶೇಷ ಲೇಖನದ ಛಾಯಾಚಿತ್ರಗಳು ವಿಕಿಮೀಡಿಯಾ ಕಾಮನ್ಸ್‌ನಿಂದ, ಶ್ರೇಯಸ್ಸು ಪ್ರತಿ ಚಿತ್ರದ ಕೆಳಗಿದೆ. ಕಾದಂಬರಿ, ಒಗಟುಗಳು, ಕತೆಗಳ ರೇಖಾಚಿತ್ರಗಳು ಮತ್ತು ಹಾಸ್ಯಗಳನ್ನು ಈ ಪತ್ರಿಕೆಗಾಗಿಯೇ ಬರೆದು ರಚಿಸಲಾಗಿದೆ; ಕಾದಂಬರಿಯ ಎಲ್ಲ ವ್ಯಕ್ತಿಗಳು ಮತ್ತು ಸಂಸ್ಥೆಗಳು ಕಾಲ್ಪನಿಕ. ಕತೆಗಳ ಪುಟದ ಹಳೆಯ ಚಿತ್ರಗಳ ಶ್ರೇಯಸ್ಸು ಅವುಗಳ ಕೆಳಗಿದೆ.</p>'
+        f'<p>ಸಂಚಿಕೆ {kd(edno)}, {E(kn_date(day))}ರಂದು ತಯಾರಿಸಿದ್ದು. ಸುದ್ದಿ ಮತ್ತು ಕ್ರೀಡೆಯ ವಿವರಗಳು ಪ್ರತಿ ಸುದ್ದಿಯ ಕೆಳಗೆ ಹೆಸರಿಸಿದ ಮೂಲಗಳಿಂದ ವೆಬ್ ಹುಡುಕಾಟದ ಮೂಲಕ ಸಂಗ್ರಹಿಸಿ ನಮ್ಮದೇ ಮಾತುಗಳಲ್ಲಿ ಬರೆದವು. ಹವಾಮಾನ Open-Meteo.com ನಿಂದ (CC BY 4.0). ಸೂರ್ಯೋದಯ, ಸೂರ್ಯಾಸ್ತ ಮತ್ತು ಚಂದ್ರನ ಕಲೆ ಲೆಕ್ಕಾಚಾರದ್ದು. ಗಿಡ ಮತ್ತು ವಿಶೇಷ ಲೇಖನದ ಛಾಯಾಚಿತ್ರಗಳು ವಿಕಿಮೀಡಿಯಾ ಕಾಮನ್ಸ್‌ನಿಂದ, ಶ್ರೇಯಸ್ಸು ಪ್ರತಿ ಚಿತ್ರದ ಕೆಳಗಿದೆ. ಕಾದಂಬರಿ, ಒಗಟುಗಳು, ಕತೆಗಳ ರೇಖಾಚಿತ್ರಗಳು ಮತ್ತು ಹಾಸ್ಯಗಳನ್ನು ಈ ಪತ್ರಿಕೆಗಾಗಿಯೇ ಬರೆದು ರಚಿಸಲಾಗಿದೆ; ಕಾದಂಬರಿಯ ಎಲ್ಲ ವ್ಯಕ್ತಿಗಳು ಮತ್ತು ಸಂಸ್ಥೆಗಳು ಕಾಲ್ಪನಿಕ. ಕತೆಗಳ ಪುಟದ ಹಳೆಯ ಚಿತ್ರಗಳ ಶ್ರೇಯಸ್ಸು ಅವುಗಳ ಕೆಳಗಿದೆ. ಭಗವದ್ಗೀತೆಯ ಶ್ಲೋಕಗಳ ಮೂಲ ಪಾಠ ಪ್ರಚಲಿತ ಪಾಠದಂತೆ; ಪದಾರ್ಥ, ಅನುವಾದ, ವಿವರಣೆ ಮತ್ತು ಸಂಸ್ಕೃತ ಪಾಠಗಳನ್ನು ಈ ಪತ್ರಿಕೆಗಾಗಿ ಬರೆಯಲಾಗಿದೆ.</p>'
         '<p>ಪ್ರತಿದಿನ ಬೆಳಗ್ಗೆ ಹೊಸ ಸಂಚಿಕೆ ಈ ಸಂಚಿಕೆಯ ಸ್ಥಾನ ಪಡೆಯುತ್ತದೆ.</p></footer>\n'
         f'<script>{js}</script>')
     doc = doc.replace("<main", '<main data-month="' + day.strftime("%Y-%m") + '"', 1)
