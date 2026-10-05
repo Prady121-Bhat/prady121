@@ -50,17 +50,42 @@ def _load(name):
         return json.load(f)
 
 
-def verses():
-    return _load("gita_1.json") + _load("gita_2.json")
+CHAPTERS = ["ಅರ್ಜುನವಿಷಾದಯೋಗ", "ಸಾಂಖ್ಯಯೋಗ", "ಕರ್ಮಯೋಗ", "ಜ್ಞಾನಕರ್ಮಸಂನ್ಯಾಸಯೋಗ", "ಕರ್ಮಸಂನ್ಯಾಸಯೋಗ", "ಧ್ಯಾನಯೋಗ", "ಜ್ಞಾನವಿಜ್ಞಾನಯೋಗ",
+            "ಅಕ್ಷರಬ್ರಹ್ಮಯೋಗ", "ರಾಜವಿದ್ಯಾರಾಜಗುಹ್ಯಯೋಗ", "ವಿಭೂತಿಯೋಗ", "ವಿಶ್ವರೂಪದರ್ಶನಯೋಗ", "ಭಕ್ತಿಯೋಗ", "ಕ್ಷೇತ್ರಕ್ಷೇತ್ರಜ್ಞವಿಭಾಗಯೋಗ",
+            "ಗುಣತ್ರಯವಿಭಾಗಯೋಗ", "ಪುರುಷೋತ್ತಮಯೋಗ", "ದೈವಾಸುರಸಂಪದ್ವಿಭಾಗಯೋಗ", "ಶ್ರದ್ಧಾತ್ರಯವಿಭಾಗಯೋಗ", "ಮೋಕ್ಷಸಂನ್ಯಾಸಯೋಗ"]
+
+
+def verse_text():
+    """All 701 verses in order, as {ch, v, speaker, sa}: the Sanskrit text of the Gita (Devanagari)."""
+    return _load("gita_text.json")
+
+
+def study():
+    """Kannada study notes keyed 'ch.v' (content/gita/chNN.json), written a few days ahead of the paper."""
+    out = {}
+    d = os.path.join(HERE, "content", "gita")
+    for f in sorted(os.listdir(d)):
+        if f.endswith(".json"):
+            ch = int(f[2:4])
+            with open(os.path.join(d, f), encoding="utf-8") as fh:
+                for v, e in json.load(fh).items():
+                    out[f"{ch}.{v}"] = e
+    return out
+
+
+def verse_for(day):
+    vs = verse_text()
+    n = (day - START).days % len(vs)
+    return vs[n], vs[(n + 1) % len(vs)], n + 1
+
+
+def missing_study(day):
+    v, _, _ = verse_for(day)
+    return f"{v['ch']}.{v['v']}" not in study()
 
 
 def lessons():
     return _load("sanskrit_1.json") + _load("sanskrit_2.json")
-
-
-def verse_for(day):
-    v = verses()
-    return v[(day - START).days % len(v)], v[((day - START).days + 1) % len(v)]
 
 
 def lesson_for(day):
@@ -70,7 +95,7 @@ def lesson_for(day):
 
 
 def gita_title(day):
-    v, _ = verse_for(day)
+    v, _, n = verse_for(day)
     return f"ಅಧ್ಯಾಯ {kd(v['ch'])}, ಶ್ಲೋಕ {kd(v['v'])}"
 
 
@@ -80,21 +105,28 @@ def lesson_title(day):
 
 
 def gita_page(day):
-    v, nxt = verse_for(day)
-    lines = "".join(f'<span class="gl">{E(to_kn(l))}</span>' for l in v["sa"])
-    words = "".join(f'<tr><td class="sa" lang="sa">{E(to_kn(a))}</td><td>{E(b)}</td></tr>' for a, b in v["words"])
-    exp = "".join(f"<p>{E(t)}</p>" for t in v["exp"])
-    spk = "ಶ್ರೀಕೃಷ್ಣನು ಅರ್ಜುನನಿಗೆ ಹೇಳಿದ ಮಾತು" if v["speaker"] == "ಶ್ರೀಕೃಷ್ಣ" else "ಸಂಜಯನು ಧೃತರಾಷ್ಟ್ರನಿಗೆ ಹೇಳಿದ ಮಾತು"
-    return (f'<article class="gita" lang="kn"><p class="deck" style="margin-bottom:14px">ಪ್ರತಿದಿನ ಭಗವದ್ಗೀತೆಯ ಒಂದು ಶ್ಲೋಕ: ಮೂಲ ಪಾಠ, ಪದಾರ್ಥ, ಅನುವಾದ ಮತ್ತು ವಿವರಣೆ. '
-            'ಗೀತೆಯಲ್ಲಿ ಹದಿನೆಂಟು ಅಧ್ಯಾಯಗಳಿವೆ; ಕುರುಕ್ಷೇತ್ರದ ಯುದ್ಧಭೂಮಿಯಲ್ಲಿ ಕೃಷ್ಣ ಮತ್ತು ಅರ್ಜುನರ ಸಂವಾದ ಇದು.</p>'
-            f'<span class="kicker">ಅಧ್ಯಾಯ {kd(v["ch"])} &middot; ಶ್ಲೋಕ {kd(v["v"])} &middot; {E(v["name"])}</span>'
-            f'<div class="shloka" lang="sa">{lines}</div><p class="spk">{E(spk)}</p>'
-            f'<h4 class="sub">ಪದಾರ್ಥ</h4><table class="wtab"><tbody>{words}</tbody></table>'
-            f'<h4 class="sub">ಅನುವಾದ</h4><p class="tr">{E(v["tr"])}</p>'
-            f'<h4 class="sub">ವಿವರಣೆ</h4><div class="exp">{exp}</div>'
-            f'<p class="moral"><span class="lab">ಇಂದಿನ ಚಿಂತನೆ</span> {E(v["think"])}</p>'
-            f'<p class="wxsrc" style="margin-top:14px">ನಾಳೆಯ ಶ್ಲೋಕ: ಅಧ್ಯಾಯ {kd(nxt["ch"])}, ಶ್ಲೋಕ {kd(nxt["v"])}. ಮೂಲ ಪಾಠ ಪ್ರಚಲಿತ ಪಾಠದಂತೆ; ಪದಾರ್ಥ, ಅನುವಾದ ಮತ್ತು ವಿವರಣೆ ನಮ್ಮದೇ ಮಾತುಗಳಲ್ಲಿ. '
-            'ವ್ಯಾಖ್ಯಾನಕಾರರ ನಡುವೆ ಅರ್ಥಭೇದಗಳು ಇರಬಹುದು; ಹೆಚ್ಚಿನ ಅಧ್ಯಯನಕ್ಕೆ ಗುರುಗಳನ್ನು ಅಥವಾ ಮಾನ್ಯ ವ್ಯಾಖ್ಯಾನ ಗ್ರಂಥಗಳನ್ನು ನೋಡಿ.</p></article>')
+    v, nxt, n = verse_for(day)
+    total = len(verse_text())
+    key = f"{v['ch']}.{v['v']}"
+    st = study().get(key)
+    spk = f'<span class="gspk">{E(to_kn(v["speaker"]))}</span>' if v["speaker"] else ""
+    lines = "".join(f'<span class="gl">{E(to_kn(l))}{" |" if i == 0 else " ||"}</span>' for i, l in enumerate(v["sa"]))
+    head = (f'<p class="deck" style="margin-bottom:14px">ಭಗವದ್ಗೀತೆ ಮೊದಲಿನಿಂದ ಕೊನೆಯವರೆಗೆ, ಪ್ರತಿದಿನ ಒಂದು ಶ್ಲೋಕ: ಮೂಲ ಪಾಠ, ಪದಾರ್ಥ, ಅನುವಾದ ಮತ್ತು ವಿವರಣೆ. '
+            f'ಇಂದು {kd(n)}ನೆಯ ಶ್ಲೋಕ ({kd(total)} ರಲ್ಲಿ). ಕುರುಕ್ಷೇತ್ರದ ಯುದ್ಧಭೂಮಿಯಲ್ಲಿ ಕೃಷ್ಣ ಮತ್ತು ಅರ್ಜುನರ ಸಂವಾದ ಇದು.</p>'
+            f'<span class="kicker">ಅಧ್ಯಾಯ {kd(v["ch"])} &middot; ಶ್ಲೋಕ {kd(v["v"])} &middot; {E(CHAPTERS[v["ch"] - 1])}</span>'
+            f'<div class="shloka" lang="sa">{spk}{lines}</div>')
+    if st:
+        words = "".join(f'<tr><td class="sa" lang="sa">{E(to_kn(a))}</td><td>{E(b)}</td></tr>' for a, b in st["words"])
+        exp = "".join(f"<p>{E(t)}</p>" for t in st["exp"])
+        body = (f'<h4 class="sub">ಪದಾರ್ಥ</h4><table class="wtab"><tbody>{words}</tbody></table>'
+                f'<h4 class="sub">ಅನುವಾದ</h4><p class="tr">{E(st["tr"])}</p>'
+                f'<h4 class="sub">ವಿವರಣೆ</h4><div class="exp">{exp}</div>'
+                f'<p class="moral"><span class="lab">ಇಂದಿನ ಚಿಂತನೆ</span> {E(st["think"])}</p>')
+    else:
+        body = '<p class="tr">ಈ ಶ್ಲೋಕದ ಪದಾರ್ಥ ಮತ್ತು ವಿವರಣೆ ಇನ್ನೂ ಸಿದ್ಧವಾಗಿಲ್ಲ; ಅವು ಮುಂದಿನ ಸಂಚಿಕೆಗಳಲ್ಲಿ ಸೇರುತ್ತವೆ. ಮೂಲ ಶ್ಲೋಕವನ್ನು ಪಠಿಸಿ.</p>'
+    foot = (f'<p class="wxsrc" style="margin-top:14px">ನಾಳೆಯ ಶ್ಲೋಕ: ಅಧ್ಯಾಯ {kd(nxt["ch"])}, ಶ್ಲೋಕ {kd(nxt["v"])}. ಮೂಲ ಪಾಠ ಪ್ರಚಲಿತ ಪಾಠದಂತೆ (ಈ ಸಂಖ್ಯಾಕ್ರಮದಲ್ಲಿ ಒಟ್ಟು {kd(total)} ಶ್ಲೋಕಗಳು); ಪದಾರ್ಥ, ಅನುವಾದ ಮತ್ತು ವಿವರಣೆ ನಮ್ಮದೇ ಮಾತುಗಳಲ್ಲಿ. '
+            'ವ್ಯಾಖ್ಯಾನಕಾರರ ನಡುವೆ ಅರ್ಥಭೇದಗಳು ಇರಬಹುದು; ಹೆಚ್ಚಿನ ಅಧ್ಯಯನಕ್ಕೆ ಗುರುಗಳನ್ನು ಅಥವಾ ಮಾನ್ಯ ವ್ಯಾಖ್ಯಾನ ಗ್ರಂಥಗಳನ್ನು ನೋಡಿ.</p>')
+    return f'<article class="gita" lang="kn">{head}{body}{foot}</article>'
 
 
 def _table(t):

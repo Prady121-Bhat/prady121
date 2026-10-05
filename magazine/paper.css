@@ -382,7 +382,7 @@ body * { letter-spacing: 0 !important; text-transform: none !important; }
 /* Bhagavad Gita and Sanskrit pages */
 .shloka { margin: 14px 0 6px; padding: 18px 14px; text-align: center; border: 2px solid var(--pc); background: color-mix(in srgb, var(--pc) 7%, #fff); }
 .shloka .gl { display: block; font: 800 clamp(1.15rem, 5vw, 1.55rem)/1.7 var(--kn); color: var(--ink); text-wrap: balance; }
-.spk { font: italic 600 .95rem/1.4 var(--head); color: var(--ink2); text-align: center; margin-bottom: 18px; }
+.gspk { display: block; font: 700 .9rem/1.3 var(--kn); color: var(--ink2); margin-bottom: 8px; }
 .wtab { width: 100%; border-collapse: collapse; margin: 4px 0 18px; }
 .wtab td { padding: 6px 8px; border-bottom: 1px solid var(--hair); vertical-align: top; font: 500 1rem/1.5 var(--kn); }
 .wtab td.sa { width: 42%; font-weight: 800; color: var(--pc); }

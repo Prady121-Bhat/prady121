@@ -480,6 +480,8 @@ def main():
         print(f"WARNING: content/news.json is dated {ctx['news']['date']}, not {day}. Refresh the news first.", file=sys.stderr)
     if ctx["world"]["date"] != day.isoformat():
         print(f"WARNING: content/world.json is dated {ctx['world']['date']}, not {day}. Refresh the world news first.", file=sys.stderr)
+    if gita_sanskrit.missing_study(day):
+        print(f"WARNING: no Gita study notes yet for {gita_sanskrit.gita_title(day)} (content/gita/); the page shows the verse only. Write them.", file=sys.stderr)
     ctx["recipe_name"] = ctx["recipes"]["recipes"][(day - LAUNCH).days % len(ctx["recipes"]["recipes"])]["name"]
     tp = Paper(day, False)
     ctx["tales"] = tales_page(tp)
