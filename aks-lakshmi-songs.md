@@ -1,0 +1,220 @@
+# Aks & Lakshmi (@AksLakshmi): songs from the Videos tab
+
+Newest first, in channel order. "Lyrics & Meaning" tags and the "- Aks & Lakshmi" credit are trimmed. Guest artists are kept.
+
+## Songs
+
+- Om Jai Jagdish Hare Aarti
+- Sri Venkateshwara Stotram (Kamalakucha)
+- Vanamali Radha Ramana
+- Sri Hari Stotram (Jagajjalapalam) [short]
+- Devi Navaratna Malika (Navratri) [short]
+- Ya Devi Sarva Bhuteshu (Navratri Bhajan) [short]
+- Garuda Gamana Tava (Vishnu Stotram)
+- Swami Thinthakathom Ayyappa Thinthakathom
+- Ramachandraya Janaka (Ramachandraya Mangalam)
+- Veda Sara Shiva Stavaha
+- Raghukul Reet Sada Chali Aayi (Ayodhya Rama Temple Anthem, OM TV)
+- Guruvayurappan Pancharatnam (Narayana Narayana)
+- Shambo Mahadeva Sadashiva Ambuja Nayana Narayana
+- Pranamya Shirasa Devam (Sankata Nasana Ganapati Stotram)
+- Jaya Janardhana Krishna Radhika Pathe
+- Prabhu More Avagun Chit Na Dharo
+- Sarvamangala Mangalye
+- Kabir Ke Dohe (Hindi Bhajan)
+- Vina Venkatesam Nanatho
+- Rama Rama Chanting (108 Times)
+- Ramcharitmanas Song (Chaupai from Bal Kand)
+- Nis Din Barsat Nain Hamare [short]
+- Saraswati Namastubhyam Varade Kamarupini
+- Govind Damodar Stotram (Govinda Damodara Madhaveti)
+- Vignesham Bhajare Manasa (EDM Ganesh Mantra)
+- Where the Mind is Without Fear (Rabindranath Tagore)
+- Chandrachooda Shiva Shankara
+- Rangapura Vihara
+- Premi (Kabir Das Dohe)
+- Ugram Veeram Mahaa Vishnum
+- Bansidhara Kanhaiya
+- Nagendra Haraya Trilochanaya (Shiv Panchakshar Stotra)
+- Kasi Vishwanathashtakam
+- Vishnu Shatanama Stotram
+- Om Mantra in 12 Voices
+- Shiva Mangalashtakam
+- Kanna Kanna Vaa Manivanna Vaa
+- Krishnashtakam (Vasudeva Sutam Devam), ft. Flute Raman
+- Saraswati Namastubhyam (in Raga Saraswati)
+- Om Dum Durgayai Namaha (Durga Mantra)
+- Ajam Nirvikalpam (Ganapati Stavaha)
+- Ananda Sagara Muralidhara
+- Jo Naam Ka Pratap Hai, ft. Subu Narayanan
+- Sudarshana Ashtakam
+- Tapovan Shatakam
+- Navagraha Stotram (Japakusuma Sankasham)
+- Kaun Thagwa Nagariya Lutal Ho (Kabir Bhajan)
+- Lokah Samastah Sukhino Bhavantu
+- Prabhuji Tum Chandan Hum Pani, ft. Abhay Jodhpurkar
+- Atma Rama Ananda Ramana
+- Needu Charanamule, ft. Shravya Srinath
+- Rudrashtakam
+- Om Namah Shivaya (Mantra with Meaning)
+- Jai Jai Radha Raman Hari Bol
+- Moko Kahan Dhunde Re Bande (Kabir Bhajan)
+- Kanda Sashti Kavasam (Tamil & English Lyrics)
+- Guru Stotram (Akhanda Mandalakaram)
+- Kayena Vacha (Vishnu Mantra)
+- Hari Mhana Tumhi Govind Mhana, ft. Flute Raman
+- Man Mast Hua Phir Kya Bole (Kabir Bhajan)
+- Mahalakshmi Ashtakam (Namastestu Mahamaye)
+- Sriyah Kanthaya Kalyana (Sri Venkateswara Mangalasasanam)
+- Mahabharat Title Song (Orchestral Version), ft. ATLYS
+- Achyutashtakam (Achyutam Keshavam)
+- Sukhkarta Dukhharta (Jaidev Jaidev Jai Mangal Murti)
+- Mhara Re Giridhar Gopal
+- Shri Krishna Govinda Hare Murare (Learn to Sing Bhakti Music)
+- Manmohan Kanha Vinti Karu Din Rain
+- Jagajjalapalam Kachad Kanda Malam (Shree Hari Stotram)
+- Madhurashtakam (Adharam Madhuram)
+- Mahamrityunjaya Mantra 108 Times (Om Tryambakam Yajamahe)
+- Rama Nee Samanamevaru, ft. Pan V
+- Nirvana Shatakam
+- Ik Onkar Sat Gur Prasad, ft. Shruti Pathak
+- Margabandhu Stotram (Shambho Mahadeva Deva)
+- Bho Shambho
+- Shri Krishna Sharanam Mamah, ft. Prewien and Daniëlle
+- Mudakaratha Modakam (Ganesha Pancharatnam), ft. Subu Narayanan
+- Shyam Teri Bansi (Krishna Bhajan)
+- Guru Paduka Stotram
+- Chinna Chinna Muruga Muruga
+- Bhavani Ashtakam (Adi Shankaracharya)
+- Adiyogi Song (Kailash Kher)
+- Hari Sundar Nand Mukunda (Art of Living bhajan)
+- Om Namo Bhagavate Vasudevaya
+- Hanuman Chalisa (Fast Version)
+- Shri Ram Jai Ram Jai Jai Ram
+- Lingashtakam
+- Shiva Tandava Stotram
+- Sharada Bhujanga Stotram
+- Sai Ram Sai Shyam Sai Bhagwan
+- Karpur Gauram Karunavtaram
+- Tum Prem Ho Tum Preet Ho (Radha Krishna Title Song)
+- Namo Namo (Kedarnath cover), ft. Sanchit Malhotra
+- Govind Bolo Hari Gopal Bolo (Remix)
+- Mahalakshmi Stuti
+- Kamalambika Ashtakam
+- Annapurna Stotram
+- Jai Jai Shiv Shambho (Art of Living)
+- Shri Siddhivinayak Namo Namah
+- Choti Choti Gaiya Chote Chote Gwal
+- Guru Brahma Guru Vishnu
+- Ya Devi Sarva Bhuteshu (Devi Suktam)
+- Argala Devi Stotram (Durga Saptashati)
+- Hare Rama Hare Krishna (Mahamantra Song)
+- Kalabhairava Ashtakam
+- Ekadantaya Vakratundaya (Shree Ganeshay Dheemahi), ft. Praveen Prathapan
+- Gayatri Mantra (Om Bhur Bhuva Swaha)
+- Chethi Mandaram Thulasi
+- Sankat Mochan Naam Tiharo, ft. Sanchit Malhotra & Ajay Ravichandran
+- Thumak Chalat Ramchandra (Tulsidas Bhajan)
+- Srinivasa Govinda (Govinda Namavali)
+- Radha Kaise Na Jale (Lagaan cover)
+- Mast Qalandar (Remix)
+- Bhagavad Gita Rap (Vasudeva Sutam Devam)
+- Maha Mrtyunjaya Mantra
+- Alaipayuthey Kanna (Carnatic Fusion), ft. Ganesh Bharadwaj
+- Velava Velava Vel Muruga
+- Perfect Duet (Indian Bhakti Cover)
+- Mahishasura Mardini (Remix) (Aigiri Nandini)
+- Om Gam Ganapataye Namaha
+- Anbendra Mazhaiyile (Minsara Kanavu)
+- Mere Rashke Qamar / Mi Gente (Indian Sufi Cover)
+- EDM Vishnu Mantra (Lakshmi Narayana)
+- Havana (Indian Bhakti Cover)
+- Sri Ramachandra Kripalu Bhajamana, ft. Mahesh Raghvan
+- New Rules (Indian Bhakti Cover)
+- Ghoomar (Padmavati cover)
+- Despacito (Indian Bhakti Version)
+- Harivarasanam (Yesudas, Ayyappa Song)
+- Kanha (Shubh Mangal Saavdhan cover)
+- Vande Mataram (Acapella Version)
+- Achyutam Keshavam Krishna Damodaram (Art of Living)
+- Attention (Indian Cover Bhakti)
+- Krishna Nee Begane Baro (Carnatic Fusion), ft. Shriram Iyer
+- EDM Ganesh Mantra (Vignesham Bhajare Manasa)
+- Shape of You (Indian Bhakti Version)
+- Sumiran Karle Mere Mana, ft. Sagar Laud
+- Hind Mere Jind (Sachin: A Billion Dreams cover)
+- EDM Rama Bhajan (Ram Siya Ram)
+- Kannaa Nidurinchara (Baahubali 2 cover)
+- Dum Dum (Phillauri cover)
+- Durga Pancharatnam (Maha Periyava)
+- Devi Navaratna Malika Stotram (Hara Noopura)
+- Kamakshi Stotram
+- Jaya Bhagavati Devi Namo Varade (Bhagavati Stotram)
+- Abhirami Stotram
+- Shiva Manasa Pooja
+- O Paalanhaare (Lagaan)
+- O Re Rangreza (Jolly LLB 2 qawwali cover)
+- EDM Krishna Bhajan (Mukunda Murare Govinda Gopala)
+- EDM Krishna Bhajan (Radhe Govinda Bhaje)
+- Pyare Darshan Dijo (Meera Bhajan)
+- Vaishnav Jan To Tene Kahiye (Vaishnava Janato)
+- Maula Mere Lele Meri Jaan (Chak De India) x Vo Kala (Spiritual Mashups Ep03)
+- Tu Hai (Mohenjo Daro) x Vaishnava Janato (Spiritual Mashups Ep02)
+- Om Namo Narayanaya (Tamil, Purattasi Special)
+- Paarvai Ondre Podhume (Carnatic Music Fusion)
+- Tulsidas Dohe (Ramcharitmanas)
+- Om Shivoham (Naan Kadavul, Vijay Prakash)
+- Himadri Suthe Pahimam (Carnatic fusion on dulcimer)
+- Bruhi Mukundeti (MS Subbulakshmi, Carnatic fusion), ft. Jayanth & Sasi
+- Sur Niragas Ho (Shubh Nayana)
+- Maithreem Bhajata (MS Subbulakshmi), ft. Padmini Chandrashekar
+- Nami Danam Che Manzil Bood (Amir Khusrau)
+- Mohe Apne Hi Rang Mein Rang Le (Sufi Ghazal)
+- Interactive Bhajan (Live in LA)
+- Madhurashtakam (Live in LA)
+- Jaap Mare Ajapa Mare (Kabir Doha), ft. Vasanth S
+- Kahat Kabira: Dheere Re Mana
+- Nis Din Barsat Nain Hamare (Surdas Bhajan)
+- Mukunda Mala Stotram, ft. Sanchit Malhotra
+- Tari Aankh No Afini (Gujarati), ft. Shriram Iyer
+- Kahat Kabira: Bada Hua
+- Karpagame Kan Parai (Carnatic Fusion), ft. Jayanth Krishnamurthi
+- Gajananayutham Ganeshwaram (Carnatic Fusion), ft. Shriram Iyer
+- Payoji Maine Ram Ratan Dhan Payo (Meera Bai Bhajan)
+- Shree Maha Ganapathe Surapathe, ft. Shriram Iyer
+- Tamburi Meetidava (Purandara Dasa, Carnatic Fusion), ft. Vasanth S
+- Bilvashtakam, with Padmini Chandrashekar
+- Maiya Mori Main Nahin Maakhan Khayo, ft. Aditya Rao
+- Govardhana Giridhara (Carnatic Krishna Song), ft. Anjna Swaminathan
+- Yuva Rhythms Unplugged Sessions: Mhara Re
+- Yuva Rhythms Unplugged Sessions: Ankhini Mein
+- Ankhini Mein Base (Surdas Bhajan), Yuva Rhythms
+
+## Mashups, jukeboxes, medleys and compilations
+
+- 19 Devi Stotras and Bhajans (Navratri Songs Jukebox)
+- Ram Bhajan Medley (10 Popular Rama Songs on One Beat)
+- Bhajan Antakshari Mashup
+- Lord Shiva Songs, Mantras, Bhajans (Mahashivratri Jukebox)
+- Krishna Bhajan Mashup Part 2 (18 Soulful Bhajans in 5 Minutes)
+- Krishna Bhajan Mashup (25 Popular Krishna Songs in 6 Minutes)
+- 9 Health & Healing Mantras (Dhanvantri, Vaidyanatha, Devi, Krishna, Rama)
+
+## Not songs: shorts, promos, trailers, talks, ambient and channel posts
+
+- Ganpati Bappa Murti Making (Shri Siddhivinayak Mantra) [short]
+- Swaras for Sri Krishna #janmashtami [short]
+- Adi Shankaracharya's Life Story & Teachings
+- Behind the Music of Om Dum Durgayai Namaha
+- Aks & Lakshmi YouTube Channel Membership
+- Yoga Nidra (Online Concert Trailer)
+- Mindfulness Music for Work From Home (Aks)
+- Relaxing Music For Work From Home (Aks)
+- Be a Bhakti Patron (Patreon)
+- Hindu Hymns by Aks & Lakshmi
+- Aks & Lakshmi perform at Montreal 3rd Global Conference on World's Religions
+- The Sufi EP by Aks (Album Teaser)
+- Sevanjali 2014 Trailer (Live in LA)
+- Yuva Rhythms: "Madhurashtakam" Promo
+- Yuva Rhythms: "Gurustotram" Promo
+- Yuva Rhythms: "Ankhini Mein" Promo
